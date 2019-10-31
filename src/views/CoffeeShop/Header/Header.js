@@ -9,6 +9,7 @@ import Rating from "./Rating/Rating";
 const Header = props => {
   const [showRating, setShowRating] = useState(false);
 
+  const userId = useSelector(state => state.member.localId)
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
   const { header, name, address, rating } = coffeeShopData;
 
@@ -30,7 +31,8 @@ const Header = props => {
     //   (prev[2] + curr[2]) / ratingArr.length
     // ]);
 
-    const overallRating = ratingArr.reduce((prev, curr) => prev[2] + curr[2]) / ratingArr.length;
+    const overallRating =
+      ratingArr.reduce((prev, curr) => prev[2] + curr[2]) / ratingArr.length;
     const toScaleTen = overallRating * 2;
     return toScaleTen.toFixed(1);
   };
@@ -45,6 +47,7 @@ const Header = props => {
           close={ratingCancelHandler}
           ratingCoffeeShop={rating}
           coffeeShopId={props.coffeeShopId}
+          userId={userId}
         />
       ) : null}
       <Card cardType={classes.Header}>
@@ -55,11 +58,11 @@ const Header = props => {
         />
         <div className={classes.Desc}>
           <div>
-            <h1>{name}</h1>
-            <span>{address}</span>
+            <h1 className={classes.Name}>{name}</h1>
+            <span className={classes.Address}>{address}</span>
           </div>
-          <div className={classes.Rating}>
-            <div className={classes.RatingNumber}>
+          <div className={classes.Feedback}>
+            <div className={classes.Rating}>
               {coffeeShopRatingCalculation()}
             </div>
             <BtnMedium

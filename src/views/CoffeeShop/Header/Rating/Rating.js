@@ -1,15 +1,20 @@
-import React, { useState } from "react"; 
-import { useDispatch } from "react-redux"
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import Questionnaire from "../../../../components/Questionnaire/Questionnaire";
 import * as actions from "../../../../store/actions";
 
 const Rating = props => {
+  const { coffeeShopId, show, close, ratingCoffeeShop, userId } = props;
 
-  const [rating, setRating] = useState([0, 0, 0])
+  let initialValue = [0, 0, 0];
+  if (userId) initialValue = ratingCoffeeShop[userId];
+
+  const [rating, setRating] = useState(initialValue);
 
   const dispatch = useDispatch();
-  const submitRating = (rating, coffeeShopId) => dispatch(actions.setRating(rating, coffeeShopId))
+  const submitRating = (rating, coffeeShopId) =>
+    dispatch(actions.setRating(rating, coffeeShopId));
 
   const ratingQuestions = [
     "Taste and quality of product",
@@ -27,13 +32,13 @@ const Rating = props => {
 
   const submitRatingHandler = event => {
     event.preventDefault();
-    submitRating(rating, props.coffeeShopId)
-  }
+    submitRating(rating, coffeeShopId);
+  };
 
   return (
     <Questionnaire
-      show={props.show}
-      close={props.close}
+      show={show}
+      close={close}
       header="Rating"
       questions={ratingQuestions}
       label={label}
