@@ -2,12 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-import { BtnMedium } from "../../UI/Button/Button";
+import { BtnMedium, BtnSmall } from "../../UI/Button/Button";
 import classes from "./MainProfile.module.css";
 import * as actions from "../../../store/actions/member";
 
 const MainProfile = props => {
-
   const { name, email, photoURL, emailSent, emailVerified } = props.getUserData;
   const { editProfileClicked, editPasswordClicked, toBeOwner } = props;
 
@@ -16,9 +15,9 @@ const MainProfile = props => {
     props.history.push("/verificationOwner");
   };
 
-  const checkStatusHandler = () => {
-    props.history.push("/verificationOwner");
-  };
+  const checkStatusHandler = () => props.history.push("/verificationOwner");
+
+  const addCoffeeShop = () => props.history.push("/addCoffeeShop");
 
   let mainButton = null;
   if (emailVerified) {
@@ -26,11 +25,10 @@ const MainProfile = props => {
       <BtnMedium
         btnName="Add Coffee Shop"
         btnType="Green"
-        clicked={checkStatusHandler} 
+        clicked={addCoffeeShop}
       />
     ); // Change clicked to edit/add page
-    } 
-  else if (emailSent && !emailVerified) {
+  } else if (emailSent && !emailVerified) {
     mainButton = (
       <BtnMedium
         btnName="Check Status"
@@ -38,29 +36,29 @@ const MainProfile = props => {
         clicked={checkStatusHandler}
       />
     );
-  } else {
+  } else if (!emailSent) {
     mainButton = (
       <BtnMedium
         btnName="Verification"
         btnType="Green"
         clicked={toBeOwnerHandler}
       />
-    )
-  }
-
-  const addCoffeeShop = () => {
-    props.history.push("/addCoffeeShop")
+    );
   }
 
   return (
     <div className={classes.Profile}>
       <div className={classes.DivEdit}>
-        <button className={classes.TextGray} onClick={editProfileClicked}>
-          Edit Profile
-        </button>
-        <button className={classes.TextGray} onClick={editPasswordClicked}>
-          Edit Password
-        </button>
+        <BtnSmall
+          className={classes.BtnSmall}
+          btnName={"Edit Profile"}
+          clicked={editProfileClicked}
+        />
+        <BtnSmall
+          className={classes.BtnSmall}
+          btnName={"Edit Password"}
+          clicked={editPasswordClicked}
+        />
       </div>
       <div className={classes.DivProfile}>
         <span className={classes.Name}>{name}</span>

@@ -6,10 +6,15 @@
   align-items: center;
 }
 
+.BtnSmall {
+  font-size: 12px;
+  display: block;
+  margin: 7px auto;
+}
+
 .TextGray {
   color: #9d9d9d;
   font-size: 12px;
-  line-height: 16px;
   display: block;
   text-align: center;
   margin: 7px auto;
@@ -18,7 +23,6 @@
 .Name {
   font-weight: 600;
   font-size: 20px;
-  line-height: 27px;
   color: #219653;
   text-align: center;
   margin-bottom: 16px;

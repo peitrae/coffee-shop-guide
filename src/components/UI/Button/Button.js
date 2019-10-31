@@ -20,7 +20,7 @@ export const BtnLarge = props => {
 };
 
 export const BtnSmall = props => {
-  const btnSmall = [classes.ButtonSmall, classes[props.btnType]].join(" ");
+  const btnSmall = [classes.ButtonSmall, classes[props.btnType], [props.className]].join(" ");
   return (
     <button className={btnSmall} onClick={props.clicked}>
       {props.btnName}
