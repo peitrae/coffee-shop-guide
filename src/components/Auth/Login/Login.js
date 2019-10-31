@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Modal from "../../UI/Modal/Modal";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import { BtnMedium } from "../../UI/Button/Button";
 import classes from "./Login.module.css";
-
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -29,17 +28,10 @@ const Login = props => {
     password: ""
   });
 
-  const errorMessage = useSelector(state => state.member.error)
+  const errorMessage = useSelector(state => state.member.error);
+  const isAuthenticated = useSelector(state => state.member.token !== null);
 
-  const {
-    header,
-    isAuthenticated,
-    show,
-    close,
-    clicked,
-    signup,
-    submit
-  } = props;
+  const { header, show, close, clicked, signup, submit } = props;
 
   const inputChangeHandler = type => event => {
     setLogin({ ...login, [type]: event.target.value });
@@ -50,7 +42,7 @@ const Login = props => {
     submit(login.email, login.password);
   };
 
-  isAuthenticated && close();
+  if (isAuthenticated) close();
 
   return (
     <Modal
@@ -60,7 +52,7 @@ const Login = props => {
       clicked={clicked}
       modalType={classes.Login}
     >
-      {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
+      {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       <form className={classes.FormLogin} onSubmit={submitHandler}>
         <TextField
           id="email"
@@ -90,10 +82,4 @@ const Login = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.member.token !== null
-  };
-};
-
-export default connect(mapStateToProps)(Login);
+export default Login;

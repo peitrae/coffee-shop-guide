@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { connect, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Modal from "../../UI/Modal/Modal";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
@@ -31,7 +31,12 @@ const SignUp = props => {
     password: ""
   });
 
-  const errorMessage = useSelector(state => state.member.error)
+  const errorMessage = useSelector(state => state.member.error);
+  const isAuthenticated = useSelector(state => state.member.token !== null);
+
+  const dispatch = useDispatch();
+  const onSignUp = (email, password, name) =>
+    dispatch(actions.signUp(email, password, name));
 
   const inputChangeHandler = type => event => {
     setSignUp({ ...signUp, [type]: event.target.value });
@@ -39,10 +44,10 @@ const SignUp = props => {
 
   const submitHandler = event => {
     event.preventDefault();
-    props.onSignUp(signUp.email, signUp.password, signUp.name);
+    onSignUp(signUp.email, signUp.password, signUp.name);
   };
 
-  props.isAuthenticated && props.close();
+  if (isAuthenticated) props.close();
 
   return (
     <Modal
@@ -51,7 +56,7 @@ const SignUp = props => {
       close={props.close}
       modalType={classes.SignUp}
     >
-    {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
+      {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       <form className={classes.FormSignUp} onSubmit={submitHandler}>
         <TextField
           id="name"
@@ -91,20 +96,4 @@ const SignUp = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.member.token !== null
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onSignUp: (email, password, name) =>
-      dispatch(actions.signUp(email, password, name))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignUp);
+export default SignUp;
