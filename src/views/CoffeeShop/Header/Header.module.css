@@ -44,16 +44,12 @@
 .RatingNumber {
   background: #219653;
   border-radius: 4px;
-  width: 172px;
+  width: 130px;
   height: 65px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.RatingNumber span {
   font-size: 36px;
-  line-height: 49px;
   color: #F2F2F2;
-
+  font-weight: 700;
 }

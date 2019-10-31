@@ -10,7 +10,7 @@ const Header = props => {
   const [showRating, setShowRating] = useState(false);
 
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
-  const { header, name, address, rating} = coffeeShopData;
+  const { header, name, address, rating } = coffeeShopData;
 
   const ratingHandler = () => {
     setShowRating(true);
@@ -19,6 +19,23 @@ const Header = props => {
   const ratingCancelHandler = () => {
     setShowRating(false);
   };
+
+  const coffeeShopRatingCalculation = () => {
+    const ratingArr = [];
+    for (let key in rating) ratingArr.push(rating[key]);
+
+    // const avgByColumn = ratingArr.reduce((prev, curr) => [
+    //   (prev[0] + curr[0]) / ratingArr.length,
+    //   (prev[1] + curr[1]) / ratingArr.length,
+    //   (prev[2] + curr[2]) / ratingArr.length
+    // ]);
+
+    const overallRating = ratingArr.reduce((prev, curr) => prev[2] + curr[2]) / ratingArr.length;
+    const toScaleTen = overallRating * 2;
+    return toScaleTen.toFixed(1);
+  };
+
+  coffeeShopRatingCalculation();
 
   return (
     <React.Fragment>
@@ -43,11 +60,10 @@ const Header = props => {
           </div>
           <div className={classes.Rating}>
             <div className={classes.RatingNumber}>
-              <span>9.0</span>
-              <span>/10</span>
+              {coffeeShopRatingCalculation()}
             </div>
             <BtnMedium
-              btnName="Beri Penilaian"
+              btnName="Rate"
               btnType="GreenBorder"
               clicked={ratingHandler}
             />

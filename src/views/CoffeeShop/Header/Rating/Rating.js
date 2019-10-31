@@ -6,7 +6,7 @@ import * as actions from "../../../../store/actions";
 
 const Rating = props => {
 
-  const [ratingRadioValue, setRatingRadioValue] = useState([0, 0, 0])
+  const [rating, setRating] = useState([0, 0, 0])
 
   const dispatch = useDispatch();
   const submitRating = (rating, coffeeShopId) => dispatch(actions.setRating(rating, coffeeShopId))
@@ -25,7 +25,8 @@ const Rating = props => {
     { label: 5, value: 5 }
   ];
 
-  const submitRatingHandler = rating => {
+  const submitRatingHandler = event => {
+    event.preventDefault();
     submitRating(rating, props.coffeeShopId)
   }
 
@@ -36,7 +37,9 @@ const Rating = props => {
       header="Rating"
       questions={ratingQuestions}
       label={label}
-      submitAction={submitRatingHandler}
+      submitHandler={submitRatingHandler}
+      answers={rating}
+      setAnswers={setRating}
     />
   );
 };

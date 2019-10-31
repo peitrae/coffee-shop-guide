@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react"; 
 import { useDispatch} from "react-redux";
 
 import Questionnaire from "../../../components/Questionnaire/Questionnaire";
@@ -6,8 +6,10 @@ import * as actions from "../../../store/actions/member";
 
 const Preference = props => {
 
+  const [preference, setPreference] = useState([0, 0, 0, 0]);
+
   const dispatch = useDispatch();
-  const setPreference = preference =>
+  const setUserPreference = preference =>
     dispatch(actions.setPreference(preference));
 
   const preferenceQuestions = [
@@ -32,13 +34,20 @@ const Preference = props => {
     { label: "> 50K", value: 4 }
   ];
 
+  const submitHandler = event => {
+    event.preventDefault()
+    setUserPreference(preference);
+  };
+
   return (
     <Questionnaire
       questions={preferenceQuestions}
+      answers={preference}
+      setAnswers={setPreference}
       show={props.show}
       close={props.close}
       header="Your Preference"
-      submitAction={setPreference}
+      submitHandler={submitHandler}
       label={defaultLabelRadio}
       priceLabel={priceLabelRadio}
       typePrice={3} // questionnaireQuestions[3]

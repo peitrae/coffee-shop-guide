@@ -23,7 +23,7 @@ const MiniLists = props => {
       <Card cardType={classes.MiniLists}>
         <Spinner />
       </Card>
-    ); // Spinner
+    );
   }
 
   const toCoffeeShop = coffeeShopId =>

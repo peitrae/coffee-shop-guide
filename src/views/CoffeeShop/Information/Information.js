@@ -51,8 +51,8 @@ const Information = props => {
                 <th className={classes.TableHeader}>Facilities:</th>
                 <td>{coffeeShopData.facilities[0]}</td>
               </tr>
-              {coffeeShopData.facilities.slice(1).map(facility => (
-                <tr>
+              {coffeeShopData.facilities.slice(1).map((facility, index) => (
+                <tr key={index}>
                   <th></th>
                   <td>{facility}</td>
                 </tr>

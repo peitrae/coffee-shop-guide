@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import RadioButton from "../../UI/Button/RadioButton/RadioButton";
 import classes from "./Question.module.css";
