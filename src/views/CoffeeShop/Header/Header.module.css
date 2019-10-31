@@ -1,0 +1,59 @@
+.Header {
+  height: 379px;
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 0;
+}
+
+.Desc {
+  height: 45%;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Desc h1 {
+  font-size: 32px;
+  line-height: 40px;
+  color: #219653;
+  margin-bottom: 12px;
+  max-width: 480px;
+}
+
+.Desc span {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: bold;
+  color: #464646;
+}
+.ImgHeader {
+  width: 100%;
+  height: 206px;
+  border-radius: 4px 4px 0px 0px;
+  display: block;
+}
+
+.Rating {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.RatingNumber {
+  background: #219653;
+  border-radius: 4px;
+  width: 172px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.RatingNumber span {
+  font-size: 36px;
+  line-height: 49px;
+  color: #F2F2F2;
+
+}

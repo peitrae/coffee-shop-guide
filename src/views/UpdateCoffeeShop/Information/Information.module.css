@@ -1,0 +1,20 @@
+.Card {
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  .Card th{
+    text-align: left;
+    padding-top: 35px;
+    vertical-align: top;
+  }
+
+.TablePaddingHelper {
+  padding-left: 7px;
+}
+
+.ButtonPaddingHelper {
+  padding-left: 12px;
+}

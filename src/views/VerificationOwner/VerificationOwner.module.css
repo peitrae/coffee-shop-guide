@@ -27,7 +27,7 @@
 }
 
 .Desc {
-    width: 233px;
+  width: 233px;
   font-size: 14px;
   line-height: 19px;
   display: block;
@@ -36,11 +36,13 @@
   top: 54px;
   position: relative;
   margin: auto;
-
 }
 
 .Btn {
   position: absolute;
+  display: flex;
+  justify-content: space-around;
+  width: 208px;
   left: 50%;
   transform: translateX(-50%);
   bottom: 48px;

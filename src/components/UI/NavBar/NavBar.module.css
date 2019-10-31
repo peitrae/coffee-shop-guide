@@ -1,14 +1,21 @@
-.Header {
+.Toolbar {
+    z-index: 1000;
     position: fixed;
     width: 100%;
     height: 68px;
+    box-shadow: none;
+}
+
+.Header {
+    width: 100%;
+    height: 100%;
     background: none;
 }
 
 .NavButton{
     position: absolute;
     top: 50%;
-    left: 94%;
-    transform: translate(-94%, -50%);
+    right: 0;
+    transform: translate(-50%, -50%);
     cursor: pointer;
 }

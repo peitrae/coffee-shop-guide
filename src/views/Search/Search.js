@@ -1,39 +1,106 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import Filter from "../../components/Filter/Filter";
-import BestRecommendation from "../../components/BestRecommendation/BestRecommendation";
-import Blank from "../../components/Blank/Blank";
-import style from "./Search.module.css";
-import RecommendationLists from "../../components/RecommendationLists/RecommendationLists";
+import profileMatching from "../../profileMatching";
+import Filter from "./Filter/Filter";
+import BestRecommendation from "./BestRecommendation/BestRecommendation";
+import RecommendationLists from "./RecommendationLists/RecommendationLists";
+import classes from "./Search.module.css";
+import * as actions from "../../store/actions";
+import Card from "../../components/UI/Card/Card";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 const Search = props => {
+  const userPreference = useSelector(state => state.member.preference);
+  const rawCoffeeShopList = useSelector(state => state.allCoffeeShopList.lists);
+  const dispatch = useDispatch();
+  const getAllCoffeeShopList = useCallback(
+    () => dispatch(actions.getAllCoffeeShopList()),
+    [dispatch]
+  );
+
+  const [tempLists, setTempLists] = useState(null);
+
+  useEffect(() => {
+    getAllCoffeeShopList();
+  }, [getAllCoffeeShopList]);
+
+  useEffect(() => setTempLists(rawCoffeeShopList), [rawCoffeeShopList]);
+
+  if (!tempLists) return <div className="spinner"><Spinner /></div>; // Change with Spinner (Change later)
+
+  const redirectHandler = id => props.history.push(`/coffee-shop/${id}`);
+
+  const filteredDataList = filteredList => setTempLists(filteredList);
+
+  const userHasPreference = () => {
+    if (!coffeeShopList.length) return null;
+    const resultMatching = profileMatching(userPreference, coffeeShopList);
+    const bestCoffeeShop = resultMatching[0];
+    coffeeShopList = resultMatching.slice(1);
+
+    const todayHours = bestCoffeeShop.operationalHours[todayDay];
+
+    return (
+      <BestRecommendation
+        className={classes.BestRecommendation}
+        image={"./Starbuck3.png"}
+        name={bestCoffeeShop.name}
+        address={bestCoffeeShop.address}
+        operationalHours={
+          todayHours ? `${todayHours.open} - ${todayHours.close}` : "Close"
+        }
+        averagePrice={`Rp ${bestCoffeeShop.averagePrice}`}
+        moreInformation={""}
+        redirect={redirectHandler}
+        id={bestCoffeeShop.id}
+      />
+    );
+  };
+
+  const listIsEmpty = () => (
+    <Card cardType={classes.ListIsEmpty}>
+      <span>Empty</span>
+    </Card>
+  );
+
+  let coffeeShopList = tempLists; // Default if not authenticated
+  const coffeeShopListIsEmpty = !coffeeShopList.length
+  const todayDay = new Date().getDay();
+
   return (
-    <div className={style.Search}>
-      <Filter />
-      <div className={style.Recommendation}>
+    <div className={classes.Search}>
+      <div className={classes.Recommendation}>
         <div>
-          <BestRecommendation
-            className={style.BestRecommendation}
-            image={"./Starbuck3.png"}
-            name={"Starbucks"}
-            address={"Malang City Point (Jl. Raya Dieng No. 31)"}
-            openingHour={"07.00"}
-            closingHour={"22.00"}
-            averagePrice={"Rp50.000"}
-            moreInformation={""}
+          <Filter
+            allCoffeeShopList={rawCoffeeShopList}
+            filterFunc={filteredDataList}
           />
         </div>
-        <RecommendationLists
-          image={"./JavaDancerCoffee1.png"}
-          name={"Java Dancer Coffee"}
-          address={"Jl. Jakarta No. 59 (Jl. Simpang Ijen)"}
-          openingHour={"08.00"}
-          closingHour={"23.00"}
-          averagePrice={"Rp30.000"}
-        />
+        <div>{userPreference ? userHasPreference() : null}</div>
+        <div>
+          {coffeeShopList.map(coffeeShop => {
+            const todayHours = coffeeShop.operationalHours[todayDay];
+            return (
+              <RecommendationLists
+                key={coffeeShop.id}
+                image={"./JavaDancerCoffee1.png"}
+                name={coffeeShop.name}
+                address={coffeeShop.address}
+                operationalHours={
+                  todayHours
+                    ? `${todayHours.open} - ${todayHours.close}`
+                    : "Close"
+                }
+                averagePrice={`Rp ${coffeeShop.averagePrice}`}
+                redirect={redirectHandler}
+                id={coffeeShop.id}
+              />
+            );
+          })}
+          {coffeeShopListIsEmpty ?  listIsEmpty() : null}
+        </div>
       </div>
-
-      <Blank />
     </div>
   );
 };

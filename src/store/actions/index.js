@@ -1,12 +1,32 @@
 export {
-    auth,
-    login, 
-    logout,
-    setAuthRedirectPath,
-    authCheckState,
-    logoutSucceed,
-    authStart,
+    getAllCoffeeShopList,
+    getAllCoffeeShopListSuccess,
+} from './allCoffeeShopList';
+
+export {
+    getCoffeeShopData,
+    getCoffeeShopDataSuccess,
+    setCoffeeShopData,
+    setCoffeeShopDataSuccess
+} from './coffeeShop'
+
+export {
+    signUp,
+    login,
     authSuccess,
-    authFail,
-    checkAuthTimeout
-  } from './auth'
+    logout,
+    authCheckState,
+    editProfile,
+    editProfileSuccess,
+    editPassword,
+    setPreference,
+    setPreferenceSuccess,
+    getUserData,
+    getUserDataSuccess,
+    sendVerification,
+    sendVerificationSuccess,
+    getCoffeeShopUploadedBy,
+    getCoffeeShopUploadedBySuccess,
+    deleteCoffeeShop,
+    setRating
+} from './member';

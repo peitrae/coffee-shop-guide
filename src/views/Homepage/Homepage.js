@@ -1,36 +1,44 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-import style from "./Homepage.module.css";
-import { BtnLarge } from "../../components/UI/Button/Button";
-import { GET_AUTH_TOKEN } from "../../shared/utility";
 import SignUp from "../../components/Auth/SignUp/SignUp";
-import Login from "../../components//Auth/Login/Login";
+import { BtnLarge } from "../../components/UI/Button/Button";
+import style from "./Homepage.module.css";
+
+import Preference from "./Preference/Preference";
 
 const Homepage = props => {
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [showPreference, setShowPreference] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
+
+  const authenticated = useSelector(state => state.member.token !== null);
+  const hasPreference = useSelector(state => state.member.preference);
+
+  const preferenceCancelHandler = () => setShowPreference(false);
+
+  const authCancelHandler = () => setShowSignUp(false);
 
   const searchContinueHandler = () => {
-    props.history.push("/search");
+    hasPreference ? props.history.push("/search") : setShowPreference(true);
   };
 
-  const authCancelHandler = () => {
-    setIsSignUp(false);
-    setIsLogin(false);
+  let button = (
+    <BtnLarge btnName="Sign Up" clicked={() => setShowSignUp(true)} />
+  );
+  if (authenticated) {
+    button = <BtnLarge btnName="Find" clicked={searchContinueHandler} />;
   }
-
-  console.log("SignUp",isSignUp);
-
-  let button = <BtnLarge btnName="Buat Akun" clicked={() => setIsSignUp(true)} />;
-  GET_AUTH_TOKEN &&
-    (button = <BtnLarge btnName="Temukan" clicked={searchContinueHandler} />);
 
   return (
     <div className={style.Homepage}>
-      {isSignUp && <SignUp show={isSignUp} clicked={authCancelHandler} auth={isSignUp}/>}
-      {isLogin && <Login show={isLogin} clicked={authCancelHandler}/>}
-      <h1 className={style.Header}>Temukan kedai kopi terbaik di Malang</h1>
+      {showSignUp ? (
+        <SignUp show={showSignUp} close={authCancelHandler} auth={showSignUp} />
+      ) : null}
+      <h1 className={style.Header}>Find the best coffee shop in Malang</h1>
       <div className={style.BtnFind}>{button}</div>
+      {showPreference ? (
+        <Preference show={showPreference} close={preferenceCancelHandler} />
+      ) : null}
     </div>
   );
 };

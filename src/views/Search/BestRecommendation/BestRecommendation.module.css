@@ -1,0 +1,61 @@
+.BestRecommendation {
+  margin-bottom: 16px;
+  width: 562px;
+  cursor: pointer;
+}
+
+.Address {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #464646;
+}
+
+.GreenLine {
+  position: absolute;
+  width: 8px;
+  height: 319px;
+  background: #219653;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.Description {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 300px;
+  left: 24px;
+}
+
+.Details {
+  top: 90px;
+  position: absolute;
+}
+
+.MoreInformation {
+  margin: 0;
+  padding: 0;
+}
+
+.MoreInformationList {
+  list-style-type: none;
+}
+
+.LeftCol {
+  font-size: 14px;
+  line-height: 16px;
+  color: #464646;
+  vertical-align: top;
+  padding-top: 3px;
+}
+
+.RightCol {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  color: #464646;
+  margin-left: 200px;
+  vertical-align: top;
+}
+
+

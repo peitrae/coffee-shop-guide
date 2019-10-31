@@ -9,16 +9,20 @@ import createSagaMiddleware from "redux-saga";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import authReducer from "./store/reducer/auth";
-import { watchAuth } from "./store/sagas/index";
+import memberReducer from "./store/reducer/member";
+import allCoffeeShopListReducer from "./store/reducer/allCoffeeShopList";
+import coffeeShopReducer from "./store/reducer/coffeeShop";
+import { watchMember, watchAllCoffeeShopList, watchCoffeeShop } from "./store/sagas/index";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true})
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true })
     : null || compose;
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  member: memberReducer,
+  allCoffeeShopList: allCoffeeShopListReducer,
+  coffeeShop: coffeeShopReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -28,7 +32,9 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
 
-sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchMember);
+sagaMiddleware.run(watchAllCoffeeShopList);
+sagaMiddleware.run(watchCoffeeShop);
 
 const app = (
   <Provider store={store}>

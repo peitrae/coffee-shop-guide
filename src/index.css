@@ -30,7 +30,36 @@ h2 {
   color: #219653;
 }
 
+a {
+  text-decoration: none;
+}
+
 table {
   border-collapse: separate;
   border-spacing: 5px;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.errorMessage {
+  position: absolute;
+  font-size: 12px;
+  color: #eb5757;
+  left: 50%;
+  transform: translateX(-50%);
 }

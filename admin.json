@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "coffee-shop-guide",
+  "private_key_id": "50fd53fd5a3f544de9bef936574a94b42a89c945",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDSY4GSvXu4n7hy\nji4ZqdHFYXcitm2TJdQlQo/3TcsMJa2t4s+sOU+iKx1nG7OiSSRHiymXoESyYDjd\nuAZePYiHdCfbTV73wLQj99VNyoJc77UAwnfsML+TaK9G7viN4aVW4eNWc2YtZBm7\nM4VdrC6UrWPQbBsomplxQuSOKL7G+mfQe3atUJphl+48kjVqK1Za1Hq2SPWTu6wN\n/2C2y5sWF7aJC3EVVwOcYZo1eHkzFsz3GkKZJVucnYNQ4ch+sEmYl8thUYrXSphU\nMmxc3OvIgb7ZS5RH7NtgIRfk4ceLBHmsoXx4fVIPtSIp0gRoFe1wvP7ofbxc8Kmx\nMO8Sf5njAgMBAAECggEAEtlOYQav4G0S2dSKJct0m0HtqgL9EytW89WgT1A9akOv\n6T3CTFRAIa/KLRQqxlXWNcCug8KclPyQ67BShbvukPAjp/6pDPpLSVOpXRRRFKF3\nLm+9zb/aUgsVdP3w78kxBnUraHHjTBrFQWPOxYMpEzHrmN8umbcsGx0am+/jk7Du\n4cbaSQ4tiNO1M2OrMLqfDhtPorsjv5dS/UZJTm7pBn8hnNQf+LzpNwtdLbEAqS57\nDW8eVUGYIEUAqyYFT1az/fNkQNpIONU8lW+omR7S+ES/IzGJUsonPh+w8npAqdX6\nQFxvGgXZg3ArX96YefE6TTDiI3SJCFqYDiwk/OF5RQKBgQDxFqw26LZWVp6eTaQ8\nDKFQaWsXGN/hY0Dy5NeJhZfzvTtffsStaAv5Rk2XYUqBtndhMM7HMg9YAZTzEO5d\nAWMtdhta+evwMKY0IQkCH3CpycLbywss6m/ZhLyOaaZxXoN0C4wmBLccLe4N3EIx\njoPOgtip1RgXqRqmuHfOG/ufdwKBgQDfZr2Q/+abMy9J0zSU3u6ChXZ7ATMq9eYm\nuXB0H1aDmUuag3mtNPYFhTTxBABYZw5fuQhptNQpJsn/4dS/sCOFwAUCMXCWkbzP\nsG/kxE3i2tphkKGRDgcLewnjfLSa5/U8M8TaWHBcEDnYBg7yi7aaj9Zz+UXWXkO8\nb62iEBEr9QKBgQCZd2tM0LoxH5Z9AsOHDisputFWtJjfKoVPmOizO/1MRKsk0Nd1\n4wOsPFpsAJyjEXnQvncCShWGWgts5tw1DAsMB2DGesz76pwCFv1bApR/IFYP/6Iv\nh1SHzH0S0qIHDLj1B9zA3sOJBpvA6vKgBS5WKOiuw11Awn6anlZ1N07nZQKBgFed\nrMU8h83gojA7BElKsZJBE7mkO9QigrQ3UFJKpBySt6MO4166Aa8ikiPgZN5G9M03\n/YOvpvHIw7p2cIEJbLUdHRnCGB0FZV6zHP9EuiM5oCJZnfQM41huVe+BTjfet0B4\nMUFNJCwHNRhzL9OSVfiCZyIu5mPvrnMt/ZQs5v8tAoGBAMId/FxdyFpzh5MM+kYs\n2WA5J2j3EwirLqrOddDhUrH1d6c+hf9FVzx2jV8rA9r1gwn/juxVXyyF4/yayKW5\nUAedLuN3kYtzTQp9r4gbN188Zi3d9SSHOK2oSz0LCOOuRgCHujC8HcA4HVvI15l+\nfBnRL3xcDzSiVF7nrZzAamDW\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-w59ax@coffee-shop-guide.iam.gserviceaccount.com",
+  "client_id": "105825367051675620184",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-w59ax%40coffee-shop-guide.iam.gserviceaccount.com"
+}

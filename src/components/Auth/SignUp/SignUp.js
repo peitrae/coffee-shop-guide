@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
 import Modal from "../../UI/Modal/Modal";
 import { BtnMedium } from "../../UI/Button/Button";
-import style from "./SignUp.module.css";
-import * as actions from "../../../store/actions/index";
+import classesStyle from "./SignUp.module.css";
+import * as actions from "../../../store/actions/member";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -36,27 +36,25 @@ const SignUp = props => {
     password: ""
   });
 
-  const { authRedirectPath, onSetAuthRedirectPath} = props;
-
-  useEffect(() => {
-    if (authRedirectPath !== "/") {
-      onSetAuthRedirectPath();
-    }
-  }, [authRedirectPath, onSetAuthRedirectPath]);
-
   const inputChangeHandler = type => event => {
     setSignUp({ ...signUp, [type]: event.target.value });
   };
-  
+
   const submitHandler = event => {
     event.preventDefault();
-    props.onAuth(signUp.name, signUp.phoneNumber, signUp.email, signUp.password, props.auth);
+    props.onSignUp(signUp.email, signUp.password, signUp.name);
   };
 
+  props.isAuthenticated && props.close();
+
   return (
-    <Modal header={"Daftar"} show={props.show} clicked={props.clicked}>
-      {props.isAuthenticated ? props.clicked() : null}
-      <form className={style.FormSignUp} onSubmit={submitHandler}>
+    <Modal
+      header={"Sign Up"}
+      show={props.show}
+      close={props.close}
+      modalType={classesStyle.SignUp}
+    >
+      <form className={classesStyle.FormSignUp} onSubmit={submitHandler}>
         <TextField
           id="name"
           label="Name"
@@ -86,12 +84,8 @@ const SignUp = props => {
           variant="outlined"
         />
 
-        <div className={style.BtnSignUp}>
-          <BtnMedium
-            btnType="Green"
-            clicked={props.signup}
-            btnName={"Daftar"}
-          />
+        <div className={classesStyle.BtnSignUp}>
+          <BtnMedium btnType="Green" btnName={"Sign Up"} />
         </div>
       </form>
     </Modal>
@@ -100,17 +94,18 @@ const SignUp = props => {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.token !== null,
-    authRedirectPath: state.auth.authRedirectPath
+    isAuthenticated: state.member.token !== null
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (name, phoneNumber, email, password, isSignup) =>
-      dispatch(actions.auth(name, phoneNumber, email, password, isSignup)),
-    onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath("/"))
+    onSignUp: (email, password, name) =>
+      dispatch(actions.signUp(email, password, name))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);

@@ -1,9 +1,13 @@
-export const GET_AUTH_TOKEN = localStorage.getItem("token");
+export const GET_MEMBER_TOKEN = localStorage.getItem("token");
 
-export const updateObject = (oldObject, updatedProperties) => {
+export const updateState = (oldState, updatedState) => {
     return {
-      ...oldObject,
-      ...updatedProperties
+      ...oldState,
+      ...updatedState
     };
   }; 
+
+
+
+
   

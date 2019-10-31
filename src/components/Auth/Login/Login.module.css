@@ -11,3 +11,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.Login {
+    position: fixed;
+    width: 370px;
+    height: 416px;
+  }

@@ -1,11 +1,19 @@
 .Search {
-    display: flex;
-    position: absolute;
-    justify-content: center;
-    top: 92px;
-    width: 100%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  top: 92px;
+  width: 100%;
 }
 
 .Recommendation {
-    margin: 0 24px;
+  margin: 0 24px;
+}
+
+.ListIsEmpty {
+  width: 562px;
+  height: 185px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

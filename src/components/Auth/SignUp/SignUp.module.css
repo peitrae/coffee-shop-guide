@@ -1,13 +1,20 @@
-.BtnSignUp{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -72px;
+.BtnSignUp {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -72px;
 }
 
-.FormSignUp{
-    position: absolute;
-    top: 132px;
-    left: 50%;
-    transform: translateX(-50%);
+.FormSignUp {
+  position: absolute;
+  top: 132px;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
+.SignUp {
+  position: fixed;
+  width: 370px;
+  height: 416px;
+}
+

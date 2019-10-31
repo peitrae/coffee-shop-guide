@@ -1,44 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../store/actions";
 
-import ProfileCard from "../../components/UI/Card/ProfileCard/ProfileCard";
-import Profile from "./Profile/Profile";
-import EditProfile from "./EditProfile/EditProfile";
+import Profile from "../../components/Profile/Profile";
 import classes from "./ProfilePage.module.css";
+import MiniLists from "../../components/MiniLists/MiniLists";
 
-const ProfilePage = props => {
-  const [isEdit, setIsEdit] = useState({
-    edit: false, // !edit ? Profile : Edit Component
-    editProfile: true // editProfile ? Edit Profile : Edit Password
-  });
+const ProfilePage = () => {
+  const [deleteClicked, setDeleteClicked] = useState(false)
 
-  const editProfileHandler = () => {
-    setIsEdit({ ...isEdit, edit: true });
-  };
+  const userId = useSelector(state => state.member.localId);
+  const emailVerified = useSelector(state => state.member.emailVerified);
+  const coffeeShopListByUser = useSelector(
+    state => state.member.coffeeShopList
+  );
 
-  const editPasswordHandler = () => {
-    setIsEdit({ edit: true, editProfile: false });
-  };
+  const dispatch = useDispatch();
+  const getCoffeeShopUploadedBy = useCallback(
+    userId => dispatch(actions.getCoffeeShopUploadedBy(userId)),
+    [dispatch]
+  );
 
-  const backProfileHandler = event => {
-    event.preventDefault();
-    setIsEdit({ edit: false, editProfile: true });
-  };
+  useEffect(() => {
+    if (userId) getCoffeeShopUploadedBy(userId);
+    setDeleteClicked(false)
+  }, [emailVerified, deleteClicked]); // Not render after delete
 
-  console.log("Edit", isEdit.edit)
-  console.log("Edit Profile", isEdit.editProfile)
+  console.log(deleteClicked)
 
   return (
     <div className={classes.ProfilePage}>
-      <ProfileCard profilePict="./ProfilePicture.png">
-        {!isEdit.edit ? (
-          <Profile
-            editProfileClicked={editProfileHandler}
-            editPasswordClicked={editPasswordHandler}
-          />
-        ) : (
-          <EditProfile editType={isEdit.editProfile} btnBack={backProfileHandler}/>
-        )}
-      </ProfileCard>
+      <Profile />
+      {!emailVerified ? (
+        <MiniLists
+          headerList="Halaman Kamu"
+          coffeeShopList={coffeeShopListByUser}
+          showEditableButton
+          deleteClicked={setDeleteClicked}
+        />
+      ) : null}
     </div>
   );
 };

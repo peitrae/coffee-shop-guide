@@ -1,9 +1,8 @@
 .ProfilePage {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 115px;
 }
