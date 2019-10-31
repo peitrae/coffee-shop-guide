@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 
 import classes from "./Profile.module.css";
 import Card from "../UI/Card/Card";
