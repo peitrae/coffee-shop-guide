@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import Modal from "../../UI/Modal/Modal";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import { BtnMedium } from "../../UI/Button/Button";
-import classesStyle from "./SignUp.module.css";
+import classes from "./SignUp.module.css";
 import * as actions from "../../../store/actions/member";
 
 const useStyles = makeStyles(theme => ({
@@ -17,17 +18,11 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 300
-  },
-  dense: {
-    marginTop: 14
-  },
-  menu: {
-    width: 200
   }
 }));
 
 const SignUp = props => {
-  const classes = useStyles();
+  const classesMaterial = useStyles();
 
   const [signUp, setSignUp] = useState({
     name: "",
@@ -35,6 +30,8 @@ const SignUp = props => {
     email: "",
     password: ""
   });
+
+  const errorMessage = useSelector(state => state.member.error)
 
   const inputChangeHandler = type => event => {
     setSignUp({ ...signUp, [type]: event.target.value });
@@ -52,13 +49,14 @@ const SignUp = props => {
       header={"Sign Up"}
       show={props.show}
       close={props.close}
-      modalType={classesStyle.SignUp}
+      modalType={classes.SignUp}
     >
-      <form className={classesStyle.FormSignUp} onSubmit={submitHandler}>
+    {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
+      <form className={classes.FormSignUp} onSubmit={submitHandler}>
         <TextField
           id="name"
           label="Name"
-          className={classes.textField}
+          className={classesMaterial.textField}
           value={signUp.name}
           onChange={inputChangeHandler("name")}
           margin="normal"
@@ -67,7 +65,7 @@ const SignUp = props => {
         <TextField
           id="email"
           label="Email"
-          className={classes.textField}
+          className={classesMaterial.textField}
           value={signUp.email}
           onChange={inputChangeHandler("email")}
           margin="normal"
@@ -76,15 +74,16 @@ const SignUp = props => {
         <TextField
           id="password"
           label="Password"
-          className={classes.textField}
+          className={classesMaterial.textField}
           onChange={inputChangeHandler("password")}
           type="password"
           autoComplete="current-password"
           margin="normal"
           variant="outlined"
+          placeholder="At least 6 characters"
         />
 
-        <div className={classesStyle.BtnSignUp}>
+        <div className={classes.BtnSignUp}>
           <BtnMedium btnType="Green" btnName={"Sign Up"} />
         </div>
       </form>

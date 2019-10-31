@@ -28,5 +28,6 @@ export {
     getCoffeeShopUploadedBy,
     getCoffeeShopUploadedBySuccess,
     deleteCoffeeShop,
-    setRating
+    setRating,
+    setError
 } from './member';

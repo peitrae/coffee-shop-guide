@@ -1,5 +1,4 @@
-- Rating in Coffee Shop Page
-- User Preference Action, Reducer, and Saga
+- If user not input anything in preference ?
 - setError
 
 $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\peitr\Code\React\coffee-shop-guide\admin.json"

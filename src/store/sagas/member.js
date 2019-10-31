@@ -41,7 +41,7 @@ export function* signUpSaga(action) {
       )
     );
   } catch (error) {
-    console.log(error.response.data.error.message);
+    yield put(actions.setError(error.response.data.error.message));
   }
 }
 
@@ -82,7 +82,7 @@ export function* loginSaga(action) {
     yield put(actions.getUserData(token, localId));
     yield put(actions.authSuccess(localId, token, email, name, emailVerified));
   } catch (error) {
-    console.log(error.response.data.error.message);
+    yield put(actions.setError(error.response.data.error.message));
   }
 }
 

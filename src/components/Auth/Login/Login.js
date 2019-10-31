@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Modal from "../../UI/Modal/Modal";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import { BtnMedium } from "../../UI/Button/Button";
 import classes from "./Login.module.css";
+
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -16,22 +18,18 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 300
-  },
-  dense: {
-    marginTop: 14
-  },
-  menu: {
-    width: 200
   }
 }));
 
 const Login = props => {
-  const materialUi = useStyles();
+  const classesMaterial = useStyles();
 
   const [login, setLogin] = useState({
     email: "",
     password: ""
   });
+
+  const errorMessage = useSelector(state => state.member.error)
 
   const {
     header,
@@ -62,11 +60,12 @@ const Login = props => {
       clicked={clicked}
       modalType={classes.Login}
     >
+      {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
       <form className={classes.FormLogin} onSubmit={submitHandler}>
         <TextField
           id="email"
           label="Email"
-          className={materialUi.textField}
+          className={classesMaterial.textField}
           value={login.email}
           onChange={inputChangeHandler("email")}
           margin="normal"
@@ -75,7 +74,7 @@ const Login = props => {
         <TextField
           id="password"
           label="Password"
-          className={materialUi.textField}
+          className={classesMaterial.textField}
           onChange={inputChangeHandler("password")}
           type="password"
           autoComplete="current-password"

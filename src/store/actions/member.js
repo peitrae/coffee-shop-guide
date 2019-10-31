@@ -134,3 +134,10 @@ export const setRating = (rating, coffeeShopId) => {
     coffeeShopId
   }
 }
+
+export const setError = error => {
+  return {
+    type: actionTypes.MEMBER_SET_ERROR,
+    error
+  }
+}

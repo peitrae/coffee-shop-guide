@@ -9,7 +9,8 @@ const initialState = {
   photoURL: "../../assets/logo/defaultProfile.png",
   preference: false,
   emailSent: false,
-  coffeeShopList: null
+  coffeeShopList: null,
+  error: null
 };
 
 const authSuccess = (state, action) => {
@@ -46,7 +47,11 @@ const sendVerificationSuccess = state => {
 
 const getCoffeeShopUploadedBySuccess = (state, action) => {
   return updateState(state, { coffeeShopList: action.coffeeShopList });
-}
+};
+
+const setError = (state, action) => {
+  return updateState(state, { error: action.error });
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -62,6 +67,8 @@ const reducer = (state = initialState, action) => {
       return sendVerificationSuccess(state);
     case actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY_SUCCESS:
       return getCoffeeShopUploadedBySuccess(state, action);
+    case actionTypes.MEMBER_SET_ERROR:
+      return setError(state, action);
     default:
       return state;
   }
