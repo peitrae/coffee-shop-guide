@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 import classes from "./Picture.module.css";
 import Card from "../../../components/UI/Card/Card";
-import Spinner from "../../../components/UI/Spinner/Spinner";
 
 const Images = () => {
   const images = useSelector(state => state.coffeeShop.data.images);

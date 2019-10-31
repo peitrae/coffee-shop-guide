@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../store/actions";
 
 import Profile from "../../components/Profile/Profile";
-import classes from "./ProfilePage.module.css";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import MiniLists from "../../components/MiniLists/MiniLists";
+import classes from "./ProfilePage.module.css";
+
 
 const ProfilePage = () => {
   const [deleteClicked, setDeleteClicked] = useState(false)
@@ -26,7 +28,7 @@ const ProfilePage = () => {
     setDeleteClicked(false)
   }, [emailVerified, deleteClicked]); // Not render after delete
 
-  console.log(deleteClicked)
+  if(!coffeeShopListByUser) return <div className="spinner"><Spinner /></div> 
 
   return (
     <div className={classes.ProfilePage}>
