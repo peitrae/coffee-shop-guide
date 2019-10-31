@@ -1,0 +1,11 @@
+.Search {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    top: 92px;
+    width: 100%;
+}
+
+.Recommendation {
+    margin: 0 24px;
+}

@@ -1,0 +1,12 @@
+.FormEdit {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.Btn{
+    display: flex;
+    justify-content: space-between;
+    width: 204px;
+}

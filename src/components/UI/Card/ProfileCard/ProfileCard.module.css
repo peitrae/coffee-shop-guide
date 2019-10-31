@@ -1,0 +1,41 @@
+.ProfileCard {
+  background: #fafafa;
+  border-radius: 4px;
+  height: 490px;
+  width: 368px;
+  border-radius: 5px;
+  padding: 0;
+}
+
+.GreenSection {
+  width: 368px;
+  height: 24%;
+  background: #219653;
+  border-radius: 5px 5px 0 0;
+  position: absolute;
+  top: 0;
+}
+
+.GreenLine {
+  position: absolute;
+  width: 8px;
+  height: 319px;
+  background: #219653;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.Section {
+  height: 100%;
+  padding: 190px 24px 24px 24px;
+  box-sizing: border-box;
+}
+
+.ImgProfile {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 24%;
+  transform: translate(-50%, -50%);
+}

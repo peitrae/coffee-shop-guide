@@ -1,0 +1,28 @@
+.Homepage {
+  background: url("/background.png") center no-repeat;
+  background-size: cover;
+  height: 774px;
+}
+
+.Header {
+  position: absolute;
+  width: 639px;
+  height: 49px;
+  left: 50%;
+  top: 43%;
+  transform: translate(-50%, -43%);
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 49px;
+
+  color: #FAFAFA;
+}
+
+.BtnFind {
+  position: absolute;
+  left: 50%;
+  top: 63%;
+  transform: translate(-50%, -63%);
+}
