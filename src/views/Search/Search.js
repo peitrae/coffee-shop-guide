@@ -52,8 +52,7 @@ const Search = props => {
         }
         averagePrice={`Rp ${bestCoffeeShop.averagePrice}`}
         moreInformation={""}
-        redirect={redirectHandler}
-        id={bestCoffeeShop.id}
+        coffeeShopId={bestCoffeeShop.id}
       />
     );
   };
@@ -94,7 +93,7 @@ const Search = props => {
                 }
                 averagePrice={`Rp ${coffeeShop.averagePrice}`}
                 redirect={redirectHandler}
-                id={coffeeShop.id}
+                coffeeShopId={coffeeShop.id}
               />
             );
           })}

@@ -1,12 +1,13 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import Card from "../../../components/UI/Card/Card";
 import classes from "./RecommendationLists.module.css";
 
 const recommendationLists = props => (
-  <div onClick={() => props.redirect(props.id)}>
+  <NavLink to={`/coffee-shop/${props.coffeeShopId}`}>
     <Card cardType={classes.List}>
-      <img src={props.image} alt={props.name} className={classes.ImgList}/>
+      <img src={props.image} alt={props.name} className={classes.ImgList} />
       <div className={classes.ListDescription}>
         <h2>{props.name}</h2>
         <span className={classes.Address}>{props.address}</span>
@@ -14,9 +15,7 @@ const recommendationLists = props => (
           <tbody>
             <tr>
               <td className={classes.LeftCol}>Hours:</td>
-              <td className={classes.RightCol}>
-                {props.operationalHours}
-              </td>
+              <td className={classes.RightCol}>{props.operationalHours}</td>
             </tr>
             <tr>
               <td className={classes.LeftCol}>Average Price:</td>
@@ -26,7 +25,7 @@ const recommendationLists = props => (
         </table>
       </div>
     </Card>
-    </div>
-  );
+  </NavLink>
+);
 
 export default recommendationLists;

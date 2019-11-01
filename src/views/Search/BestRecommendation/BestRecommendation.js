@@ -1,11 +1,12 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import Card from "../../../components/UI/Card/Card";
 import classes from "./BestRecommendation.module.css";
 
 const BestRecommendation = props => {
   return (
-    <div onClick={() => props.redirect(props.id)}>
+    <NavLink to={`/coffee-shop/${props.coffeeShopId}`}>
       <div className={classes.GreenLine}></div>
       <Card cardType={classes.BestRecommendation}>
         <h1>Best for you</h1>
@@ -17,9 +18,7 @@ const BestRecommendation = props => {
             <tbody>
               <tr>
                 <td className={classes.LeftCol}>Hours:</td>
-                <td className={classes.RightCol}>
-                  {props.operationalHours}
-                </td>
+                <td className={classes.RightCol}>{props.operationalHours}</td>
               </tr>
               <tr>
                 <td className={classes.LeftCol}>Average Price:</td>
@@ -30,8 +29,12 @@ const BestRecommendation = props => {
                 <td className={classes.RightCol}>
                   <ul className={classes.MoreInformation}>
                     <li className={classes.MoreInformationList}>Wi-Fi</li>
-                    <li className={classes.MoreInformationList}>Ruang Terbuka</li>
-                    <li className={classes.MoreInformationList}>Di dalam ruangan</li>
+                    <li className={classes.MoreInformationList}>
+                      Ruang Terbuka
+                    </li>
+                    <li className={classes.MoreInformationList}>
+                      Di dalam ruangan
+                    </li>
                   </ul>
                 </td>
               </tr>
@@ -39,7 +42,7 @@ const BestRecommendation = props => {
           </table>
         </div>
       </Card>
-    </div>
+    </NavLink>
   );
 };
 
