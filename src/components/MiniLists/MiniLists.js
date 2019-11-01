@@ -52,7 +52,7 @@ const MiniLists = props => {
             listImg={ico}
             listName={coffeeShop.name}
             listAddress={coffeeShop.address}
-            toCoffeeShop={() => toCoffeeShop(coffeeShop.id)}
+            coffeeShopId={coffeeShop.id}
             toUploadCoffeeShop={() => toUploadCoffeeShop(coffeeShop.id)}
             deleteHandler={() => deleteCoffeeShopHandler(coffeeShop.id)}
             showEditableButton={props.showEditableButton}
