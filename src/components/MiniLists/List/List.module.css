@@ -25,7 +25,6 @@
 .NameList {
   font-weight: bold;
   font-size: 16px;
-  line-height: 18px;
   color: #219653;
   margin: 0 0 4px 0;
   cursor: pointer;
@@ -34,7 +33,6 @@
 .AddressList {
   font-weight: bold;
   font-size: 14px;
-  line-height: 16px;
   color: #464646;
   cursor: pointer;
 }

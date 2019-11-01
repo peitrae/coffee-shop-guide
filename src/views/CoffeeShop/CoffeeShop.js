@@ -48,7 +48,7 @@ const CoffeeShop = props => {
       </div>
       <div className={classes.RightDiv}>
         <MiniLists
-          headerList="Yang Lain"
+          headerList="You might also like"
           coffeeShopList={filteredCoffeeShopList}
         />
       </div>
