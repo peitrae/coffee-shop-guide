@@ -1,6 +1,5 @@
 - If user not input anything in preference ?
 - Edit user image profile
-- change to use Redux Hooks
 - change language to English
 
 $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\peitr\Code\React\coffee-shop-guide\admin.json"
