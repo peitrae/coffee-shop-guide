@@ -25,10 +25,6 @@ const MiniLists = props => {
       </Card>
     );
   }
-
-  const toCoffeeShop = coffeeShopId =>
-    props.history.push(`/coffee-shop/${coffeeShopId}`);
-
   const toUploadCoffeeShop = coffeeShopId =>
     props.history.push(`/update-coffee-shop/${coffeeShopId}`);
 
