@@ -9,18 +9,14 @@ import Rating from "./Rating/Rating";
 const Header = props => {
   const [showRating, setShowRating] = useState(false);
 
-  const isAuthenticated = useSelector(state => state.member.token !== null); 
-  const userId = useSelector(state => state.member.localId)
+  const isAuthenticated = useSelector(state => state.member.token !== null);
+  const userId = useSelector(state => state.member.localId);
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
   const { header, name, address, rating } = coffeeShopData;
 
-  const ratingHandler = () => {
-    setShowRating(true);
-  };
+  const ratingHandler = () => setShowRating(true);
 
-  const ratingCancelHandler = () => {
-    setShowRating(false);
-  };
+  const ratingCancelHandler = () => setShowRating(false);
 
   const coffeeShopRatingCalculation = () => {
     const ratingArr = [];
@@ -31,8 +27,6 @@ const Header = props => {
     const toScaleTen = overallRating * 2;
     return toScaleTen.toFixed(1);
   };
-
-  coffeeShopRatingCalculation();
 
   return (
     <React.Fragment>
@@ -57,14 +51,18 @@ const Header = props => {
             <span className={classes.Address}>{address}</span>
           </div>
           <div className={classes.Feedback}>
-            <div className={classes.Rating}>
-              {coffeeShopRatingCalculation()}
-            </div>
-            {isAuthenticated ? <BtnMedium
-              btnName="Rate"
-              btnType="GreenBorder"
-              clicked={ratingHandler}
-            /> : null }
+            {rating ? (
+              <div className={classes.Rating}>
+                {coffeeShopRatingCalculation()}
+              </div>
+            ) : null}
+            {isAuthenticated ? (
+              <BtnMedium
+                btnName="Rate"
+                btnType="GreenBorder"
+                clicked={ratingHandler}
+              />
+            ) : null}
           </div>
         </div>
       </Card>
