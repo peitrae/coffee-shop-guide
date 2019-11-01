@@ -9,6 +9,7 @@ import Rating from "./Rating/Rating";
 const Header = props => {
   const [showRating, setShowRating] = useState(false);
 
+  const isAuthenticated = useSelector(state => state.member.token !== null); 
   const userId = useSelector(state => state.member.localId)
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
   const { header, name, address, rating } = coffeeShopData;
@@ -24,12 +25,6 @@ const Header = props => {
   const coffeeShopRatingCalculation = () => {
     const ratingArr = [];
     for (let key in rating) ratingArr.push(rating[key]);
-
-    // const avgByColumn = ratingArr.reduce((prev, curr) => [
-    //   (prev[0] + curr[0]) / ratingArr.length,
-    //   (prev[1] + curr[1]) / ratingArr.length,
-    //   (prev[2] + curr[2]) / ratingArr.length
-    // ]);
 
     const overallRating =
       ratingArr.reduce((prev, curr) => prev[2] + curr[2]) / ratingArr.length;
@@ -65,11 +60,11 @@ const Header = props => {
             <div className={classes.Rating}>
               {coffeeShopRatingCalculation()}
             </div>
-            <BtnMedium
+            {isAuthenticated ? <BtnMedium
               btnName="Rate"
               btnType="GreenBorder"
               clicked={ratingHandler}
-            />
+            /> : null }
           </div>
         </div>
       </Card>
