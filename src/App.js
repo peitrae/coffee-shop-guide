@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Homepage from "./views/Homepage/Homepage";
 import Search from "./views/Search/Search";
@@ -11,8 +11,12 @@ import CoffeeShop from "./views/CoffeeShop/CoffeeShop";
 import UpdateCoffeeShop from "./views/UpdateCoffeeShop/UpdateCoffeeShop";
 import * as actions from "./store/actions/member";
 
-const App = props => {
-  const { authCheckState, hasPreference } = props;
+const App = () => {
+
+  const hasPreference = useSelector(state => state.member.preference)
+
+  const dispatch = useDispatch()
+  const authCheckState = useCallback(preference => dispatch(actions.authCheckState(preference)), [dispatch])
 
   useEffect(() => {
     authCheckState(hasPreference);
@@ -39,22 +43,4 @@ const App = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.member.token !== null,
-    hasPreference: state.member.preference
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    authCheckState: preference => dispatch(actions.authCheckState(preference))
-  };
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-);
+export default withRouter(App);

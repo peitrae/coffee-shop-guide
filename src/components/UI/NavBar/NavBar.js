@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router";
 
 import ProfileLogo from "../Logo/ProfileLogo";
@@ -13,15 +13,13 @@ const NavBar = props => {
   const [showBubbleBox, setShowBubbleBox] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
-  const { isAuthenticated, onLogin } = props;
+  const isAuthenticated = useSelector(state => state.member.token !== null)
+  const dispatch = useDispatch();
+  const onLogin = (email, password) => dispatch(actions.login(email, password))
 
-  const profileLogoClickedHandler = () => {
-    showBubbleBox ? setShowBubbleBox(false) : setShowBubbleBox(true);
-  };
+  const profileLogoClickedHandler = () => setShowBubbleBox(!showBubbleBox)
 
-  const authCancelHandler = () => {
-    setIsLogin(false);
-  };
+  const authCancelHandler = () => setIsLogin(false);
 
   let bgColor = "#219653";
   let shadow = "0 8px 16px -8px rgba(0,0,0,0.4)";
@@ -46,37 +44,22 @@ const NavBar = props => {
           )}
         </div>
       </header>
-      {showBubbleBox && (
+      {showBubbleBox ? (
         <BubbleBox
           show={profileLogoClickedHandler}
           close={profileLogoClickedHandler}
         />
-      )}
-      {isLogin && (
+      ) : null}
+      {isLogin ? (
         <Login
           show={isLogin}
           close={authCancelHandler}
           header={"Login"}
           submit={onLogin}
         />
-      )}
+      ) : null}
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.member.token !== null
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogin: (email, password) => dispatch(actions.login(email, password))
-  };
-};
-
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NavBar));
+export default withRouter(NavBar);

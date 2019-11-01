@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router";
 
 import { BtnMedium, BtnSmall } from "../../UI/Button/Button";
@@ -7,8 +7,13 @@ import classes from "./MainProfile.module.css";
 import * as actions from "../../../store/actions/member";
 
 const MainProfile = props => {
-  const { name, email, photoURL, emailSent, emailVerified } = props.getUserData;
-  const { editProfileClicked, editPasswordClicked, toBeOwner } = props;
+  const { editProfileClicked, editPasswordClicked } = props;
+
+  const getUserData = useSelector(state => state.member); 
+  const dispatch = useDispatch();
+  const toBeOwner = () => dispatch(actions.sendVerification())
+
+  const { name, email, photoURL, emailSent, emailVerified } = getUserData;
 
   const toBeOwnerHandler = () => {
     toBeOwner();
@@ -69,21 +74,4 @@ const MainProfile = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    getUserData: state.member
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    toBeOwner: () => dispatch(actions.sendVerification())
-  };
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(MainProfile)
-);
+export default withRouter(MainProfile);

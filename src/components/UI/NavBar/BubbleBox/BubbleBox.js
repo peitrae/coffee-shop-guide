@@ -1,19 +1,21 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import classes from "./BubbleBox.module.css";
 import Card from "../../Card/Card";
 import Backdrop from "../../Backdrop/Backdrop";
 import * as actions from "../../../../store/actions/member";
 
-const bubleBox = props => {
+const BubbleBox = props => {
+  const dispatch = useDispatch();
+  const onLogout = () => dispatch(actions.logout());
 
   const logoutHandler = () => {
-    props.onLogout();
+    onLogout();
     props.close();
   };
-  
+
   return (
     <React.Fragment>
       <Backdrop
@@ -33,16 +35,4 @@ const bubleBox = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.member.token !== null
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogout: () => dispatch(actions.logout())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(bubleBox);
+export default BubbleBox;

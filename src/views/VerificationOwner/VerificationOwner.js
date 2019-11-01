@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Card from "../../components/UI/Card/Card";
 import classes from "./VerificationOwner.module.css";
@@ -11,8 +11,9 @@ import * as actions from "../../store/actions/member";
 const VerificationOwner = props => {
   const [timeLeft, setTimeLeft] = useState(60);
 
-  const { emailSent, emailVerified } = props.getUserData;
-  const { toBeOwner } = props;
+  const emailVerified = useSelector(state => state.member.emailVerified);
+  const dispatch = useDispatch();
+  const toBeOwner = () => dispatch(actions.sendVerification());
 
   let header = "Verifikasi Email";
   let icon = envelopeIco;
@@ -24,17 +25,12 @@ const VerificationOwner = props => {
     desc = "Tunggu pengajuanmu diverifikasi oleh kami";
   }
 
-  const backToProfile = () => {
-    props.history.push("/profile");
-  };
+  const backToProfile = () => props.history.push("/profile");
 
   const resendEmail = () => {
     setTimeLeft(60);
     toBeOwner();
   };
-
-  console.log("emailSent", emailSent);
-  console.log("emailVerified", !emailVerified);
 
   useEffect(() => {
     if (!timeLeft) return;
@@ -67,19 +63,4 @@ const VerificationOwner = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    getUserData: state.member
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    toBeOwner: () => dispatch(actions.sendVerification())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(VerificationOwner);
+export default VerificationOwner;
