@@ -25,7 +25,7 @@ const BestRecommendation = props => {
                 <td className={classes.RightCol}>{props.averagePrice}</td>
               </tr>
               <tr>
-                <td className={classes.LeftCol}>More Info:</td>
+                <td className={classes.LeftCol}>Facilities:</td>
                 <td className={classes.RightCol}>
                   <ul className={classes.MoreInformation}>
                     {props.facilities.map(facility => (
