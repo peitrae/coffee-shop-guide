@@ -28,13 +28,11 @@ const BestRecommendation = props => {
                 <td className={classes.LeftCol}>More Info:</td>
                 <td className={classes.RightCol}>
                   <ul className={classes.MoreInformation}>
-                    <li className={classes.MoreInformationList}>Wi-Fi</li>
-                    <li className={classes.MoreInformationList}>
-                      Ruang Terbuka
-                    </li>
-                    <li className={classes.MoreInformationList}>
-                      Di dalam ruangan
-                    </li>
+                    {props.facilities.map(facility => (
+                      <li className={classes.MoreInformationList}>
+                        {facility}
+                      </li>
+                    ))}
                   </ul>
                 </td>
               </tr>

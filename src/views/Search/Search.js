@@ -51,7 +51,7 @@ const Search = props => {
           todayHours ? `${todayHours.open} - ${todayHours.close}` : "Close"
         }
         averagePrice={`Rp ${bestCoffeeShop.averagePrice}`}
-        moreInformation={""}
+        facilities={bestCoffeeShop.facilities}
         coffeeShopId={bestCoffeeShop.id}
       />
     );
