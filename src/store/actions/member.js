@@ -17,13 +17,21 @@ export const login = (email, password) => {
   };
 };
 
-export const authSuccess = (localId, idToken, email, name, emailVerified) => {
+export const authSuccess = (
+  localId,
+  idToken,
+  email,
+  name,
+  photoURL,
+  emailVerified
+) => {
   return {
     type: actionTypes.MEMBER_AUTH_SUCCESS,
     localId,
     idToken,
     email,
     name,
+    photoURL,
     emailVerified
   };
 };
@@ -37,23 +45,25 @@ export const logout = () => {
 export const authCheckState = hasPreference => {
   return {
     type: actionTypes.MEMBER_CHECK_STATE,
-    hasPreference,
+    hasPreference
   };
 };
 
-export const editProfile = (name, email) => {
+export const editProfile = (name, email, photoURL) => {
   return {
     type: actionTypes.MEMBER_EDIT_PROFILE,
     name,
-    email
+    email,
+    photoURL
   };
 };
 
-export const editProfileSuccess = (name, email) => {
+export const editProfileSuccess = (name, email, photoURL) => {
   return {
     type: actionTypes.MEMBER_EDIT_PROFILE_SUCCESS,
     name,
-    email
+    email,
+    photoURL
   };
 };
 
@@ -64,7 +74,7 @@ export const editPassword = password => {
   };
 };
 
-export const setPreference = (preference) => {
+export const setPreference = preference => {
   return {
     type: actionTypes.MEMBER_SET_PREFERENCE,
     preference
@@ -110,34 +120,34 @@ export const getCoffeeShopUploadedBy = userId => {
   return {
     type: actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY,
     userId
-  }
-}
+  };
+};
 
 export const getCoffeeShopUploadedBySuccess = coffeeShopList => {
   return {
     type: actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY_SUCCESS,
     coffeeShopList
-  }
-}
+  };
+};
 
 export const deleteCoffeeShop = coffeeShopId => {
   return {
     type: actionTypes.MEMBER_DELETE_COFFEE_SHOP,
     coffeeShopId
-  }
-}
+  };
+};
 
 export const setRating = (rating, coffeeShopId) => {
   return {
     type: actionTypes.MEMBER_SET_RATING,
     rating,
     coffeeShopId
-  }
-}
+  };
+};
 
 export const setError = error => {
   return {
     type: actionTypes.MEMBER_SET_ERROR,
     error
-  }
-}
+  };
+};

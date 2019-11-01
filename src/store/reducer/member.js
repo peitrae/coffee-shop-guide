@@ -6,7 +6,7 @@ const initialState = {
   token: null,
   email: null,
   name: null,
-  photoURL: "../../assets/logo/defaultProfile.png",
+  photoURL: null,
   preference: false,
   emailSent: false,
   coffeeShopList: null,
@@ -19,6 +19,7 @@ const authSuccess = (state, action) => {
     token: action.token,
     email: action.email,
     name: action.name,
+    photoURL: action.photoURL,
     emailVerified: action.emailVerified
   });
 };
@@ -30,7 +31,8 @@ const authLogout = state => {
 const editProfileSuccess = (state, action) => {
   return updateState(state, {
     email: action.email,
-    name: action.name
+    name: action.name,
+    photoURL: action.photoURL
   });
 };
 

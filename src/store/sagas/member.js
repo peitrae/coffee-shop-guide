@@ -105,15 +105,15 @@ export function* editProfileSaga(action) {
   const editProfileData = {
     idToken: TOKEN,
     displayName: action.name,
-    email: action.email
+    email: action.email,
+    photoUrl: action.photoURL
   };
 
   try {
     const resEditProfile = yield axios.post(urlEditProfile, editProfileData);
+    const { displayName, email, photoUrl } = resEditProfile.data;
 
-    const { displayName, email } = resEditProfile.data;
-
-    yield put(actions.editProfileSuccess(displayName, email));
+    yield put(actions.editProfileSuccess(displayName, email, photoUrl));
   } catch (error) {
     console.log(error);
   }
@@ -170,9 +170,7 @@ export function* getUserDataSaga(action) {
 }
 
 export function* sendVerificationSaga() {
-  const urlSendVerification =
-    "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" +
-    API_KEY;
+  const urlSendVerification = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`;
   const urlSetEmailSent = `https://coffee-shop-guide.firebaseio.com/users/${LOCAL_ID}/emailSent.json?auth=${TOKEN}`;
   try {
     // yield axios.post(urlSendVerification, {
@@ -213,10 +211,18 @@ export function* authCheckStateSaga(action) {
       const localId = resUserData.data.users[0].localId;
       const email = resUserData.data.users[0].email;
       const displayName = resUserData.data.users[0].displayName;
+      const photoURL = resUserData.data.users[0].photoUrl;
       const emailVerified = resUserData.data.users[0].emailVerified;
 
       yield put(
-        actions.authSuccess(localId, TOKEN, email, displayName, emailVerified)
+        actions.authSuccess(
+          localId,
+          TOKEN,
+          email,
+          displayName,
+          photoURL,
+          emailVerified
+        )
       );
       yield put(actions.getUserData(TOKEN, localId));
     }
@@ -254,10 +260,10 @@ export function* deleteCoffeeShopSaga(action) {
 }
 
 export function* setRatingSaga(action) {
-  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}/rating/${LOCAL_ID}.json?auth=${TOKEN}`
+  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}/rating/${LOCAL_ID}.json?auth=${TOKEN}`;
   try {
-    const response = axios.put(url, action.rating)
-    console.log(response)
+    const response = axios.put(url, action.rating);
+    console.log(response);
   } catch (error) {
     console.log(error.response.data.error.message);
   }

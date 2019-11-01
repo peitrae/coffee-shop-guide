@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 
 import classes from "./Profile.module.css";
 import Card from "../UI/Card/Card";
@@ -11,6 +12,8 @@ const Profile = props => {
     edit: false, // edit ? Edit Component : Profile Component
     editProfile: true // editProfile ? Edit Profile : Edit Password
   });
+
+  const profPict = useSelector(state => state.member.photoURL)
 
   const editProfileHandler = () => {
     setIsEdit({ ...isEdit, edit: true });
@@ -32,8 +35,8 @@ const Profile = props => {
     <Card cardType={classes.ProfileCard}>
       <div className={classes.GreenDiv}></div>
       <img
-        src={ProfileImg}
-        alt="Profile Picture"
+        src={profPict || ProfileImg}
+        alt="Profile"
         className={classes.ImgProfile}
       />
       <div className={classes.Section}>
