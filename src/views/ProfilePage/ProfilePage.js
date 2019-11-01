@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../store/actions";
 
 import Profile from "../../components/Profile/Profile";
+import VerificationOwner from "./VerificationOwner/VerificationOwner"
 import Spinner from "../../components/UI/Spinner/Spinner";
 import MiniLists from "../../components/MiniLists/MiniLists";
 import classes from "./ProfilePage.module.css";
 
-
 const ProfilePage = () => {
-  const [deleteClicked, setDeleteClicked] = useState(false)
+  const [deleteClicked, setDeleteClicked] = useState(false);
+  const [showVerification, setShowVerification] = useState(false);
 
   const userId = useSelector(state => state.member.localId);
   const emailVerified = useSelector(state => state.member.emailVerified);
@@ -25,17 +26,29 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (userId) getCoffeeShopUploadedBy(userId);
-    setDeleteClicked(false)
+    setDeleteClicked(false);
   }, [emailVerified, deleteClicked]); // Not render after delete
 
-  if(!coffeeShopListByUser) return <div className="spinner"><Spinner /></div> 
+  const closeVerificationHandler = () => setShowVerification(false)
+
+  const showVerificationHandler = () => setShowVerification(true)
+
+  if (!coffeeShopListByUser)
+    return (
+      <div className="spinner">
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className={classes.ProfilePage}>
-      <Profile />
+      <Profile
+        showVerificationHandler={showVerificationHandler}
+      />
+      {showVerification ? <VerificationOwner show={showVerification}  close={closeVerificationHandler}/> : null}
       {!emailVerified ? (
         <MiniLists
-          headerList="Halaman Kamu"
+          headerList="Your Page"
           coffeeShopList={coffeeShopListByUser}
           showEditableButton
           deleteClicked={setDeleteClicked}

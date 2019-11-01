@@ -7,20 +7,22 @@ import classes from "./MainProfile.module.css";
 import * as actions from "../../../store/actions/member";
 
 const MainProfile = props => {
-  const { editProfileClicked, editPasswordClicked } = props;
+  const {
+    editProfileClicked,
+    editPasswordClicked,
+    showVerificationHandler
+  } = props;
 
-  const getUserData = useSelector(state => state.member); 
+  const getUserData = useSelector(state => state.member);
   const dispatch = useDispatch();
-  const toBeOwner = () => dispatch(actions.sendVerification())
+  const toBeOwner = () => dispatch(actions.sendVerification());
 
-  const { name, email, photoURL, emailSent, emailVerified } = getUserData;
+  const { name, email, emailSent, emailVerified } = getUserData;
 
   const toBeOwnerHandler = () => {
     toBeOwner();
-    props.history.push("/verificationOwner");
+    showVerificationHandler()
   };
-
-  const checkStatusHandler = () => props.history.push("/verificationOwner");
 
   const addCoffeeShop = () => props.history.push("/addCoffeeShop");
 
@@ -36,17 +38,9 @@ const MainProfile = props => {
   } else if (emailSent && !emailVerified) {
     mainButton = (
       <BtnMedium
-        btnName="Check Status"
-        btnType="Green"
-        clicked={checkStatusHandler}
-      />
-    );
-  } else if (!emailSent) {
-    mainButton = (
-      <BtnMedium
         btnName="Verification"
         btnType="Green"
-        clicked={toBeOwnerHandler}
+        clicked={emailSent ? showVerificationHandler : toBeOwnerHandler()}
       />
     );
   }

@@ -27,10 +27,6 @@ const Profile = props => {
     setIsEdit({ edit: false, editProfile: true });
   };
 
-  const toVerificationOwner = () => {
-    props.history.push("/verificationOwner")
-  }
-
   return (
     <Card cardType={classes.ProfileCard}>
       <div className={classes.GreenDiv}></div>
@@ -44,7 +40,7 @@ const Profile = props => {
           <MainProfile
             editProfileClicked={editProfileHandler}
             editPasswordClicked={editPasswordHandler}
-            toVerificationOwner={toVerificationOwner}
+            showVerificationHandler={props.showVerificationHandler}
           />
         ) : (
           <EditProfile

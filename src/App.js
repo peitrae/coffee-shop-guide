@@ -6,7 +6,6 @@ import Homepage from "./views/Homepage/Homepage";
 import Search from "./views/Search/Search";
 import NavBar from "./components/UI/NavBar/NavBar";
 import ProfilePage from "./views/ProfilePage/ProfilePage";
-import VerificationOwner from "./views/VerificationOwner/VerificationOwner";
 import CoffeeShop from "./views/CoffeeShop/CoffeeShop";
 import UpdateCoffeeShop from "./views/UpdateCoffeeShop/UpdateCoffeeShop";
 import * as actions from "./store/actions/member";
@@ -36,7 +35,6 @@ const App = () => {
           component={UpdateCoffeeShop}
         />
         <Route path="/profile" exact component={ProfilePage} />
-        <Route path="/verificationOwner" exact component={VerificationOwner} />
         <Redirect to="/" />
       </Switch>
     </React.Fragment>
