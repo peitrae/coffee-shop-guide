@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import {useSelector } from "react-redux";
 
 import Card from "../../../components/UI/Card/Card";
 import classes from "./Header.module.css";
 import { BtnMedium } from "../../../components/UI/Button/Button";
 import Rating from "./Rating/Rating";
-import * as actions from "../../../store/actions";
 
 const Header = props => {
   const [showRatingQuest, setShowRatingQuest] = useState(false);

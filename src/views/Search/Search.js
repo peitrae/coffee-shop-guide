@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import profileMatching from "../../profileMatching";
+import profileMatching from "../../utilities/profileMatching";
 import Filter from "./Filter/Filter";
 import BestRecommendation from "./BestRecommendation/BestRecommendation";
 import RecommendationLists from "./RecommendationLists/RecommendationLists";

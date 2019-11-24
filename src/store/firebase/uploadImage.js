@@ -1,4 +1,4 @@
-import firebase from "../../Firebase";
+import firebase from "./firebaseConfig";
 
 const storage = firebase.storage();
 const storageRef = storage.ref();
