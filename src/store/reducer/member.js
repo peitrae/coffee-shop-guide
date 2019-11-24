@@ -20,7 +20,8 @@ const authSuccess = (state, action) => {
     email: action.email,
     name: action.name,
     photoURL: action.photoURL,
-    emailVerified: action.emailVerified
+    emailVerified: action.emailVerified,
+    coffeeShopList: action.coffeeShopList,
   });
 };
 

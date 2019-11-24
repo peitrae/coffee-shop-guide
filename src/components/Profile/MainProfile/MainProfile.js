@@ -24,7 +24,7 @@ const MainProfile = props => {
     showVerificationHandler()
   };
 
-  const addCoffeeShop = () => props.history.push("/addCoffeeShop");
+  const addCoffeeShop = () => props.history.push("/update-coffee-shop");
 
   let mainButton = null;
   if (emailVerified) {

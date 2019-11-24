@@ -12,20 +12,17 @@ const ProfilePage = () => {
   const [deleteClicked, setDeleteClicked] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
 
-  const userId = useSelector(state => state.member.localId);
-  const emailVerified = useSelector(state => state.member.emailVerified);
-  const coffeeShopListByUser = useSelector(
-    state => state.member.coffeeShopList
-  );
+  const userData = useSelector(state => state.member)
+  const { localId, emailVerified, coffeeShopList } = userData;
 
   const dispatch = useDispatch();
   const getCoffeeShopUploadedBy = useCallback(
-    userId => dispatch(actions.getCoffeeShopUploadedBy(userId)),
+    localId => dispatch(actions.getCoffeeShopUploadedBy(localId)),
     [dispatch]
   );
 
   useEffect(() => {
-    if (userId) getCoffeeShopUploadedBy(userId);
+    if (localId) getCoffeeShopUploadedBy(localId);
     setDeleteClicked(false);
   }, [emailVerified, deleteClicked]); // Not render after delete
 
@@ -33,7 +30,7 @@ const ProfilePage = () => {
 
   const showVerificationHandler = () => setShowVerification(true)
 
-  if (!coffeeShopListByUser)
+  if (!userData)
     return (
       <div className="spinner">
         <Spinner />
@@ -46,10 +43,10 @@ const ProfilePage = () => {
         showVerificationHandler={showVerificationHandler}
       />
       {showVerification ? <VerificationOwner show={showVerification}  close={closeVerificationHandler}/> : null}
-      {!emailVerified ? (
+      { emailVerified ? (
         <MiniLists
           headerList="Your Page"
-          coffeeShopList={coffeeShopListByUser}
+          coffeeShopList={coffeeShopList}
           showEditableButton
           deleteClicked={setDeleteClicked}
         />

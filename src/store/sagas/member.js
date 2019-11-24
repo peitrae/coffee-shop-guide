@@ -173,10 +173,10 @@ export function* sendVerificationSaga() {
   const urlSendVerification = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`;
   const urlSetEmailSent = `https://coffee-shop-guide.firebaseio.com/users/${LOCAL_ID}/emailSent.json?auth=${TOKEN}`;
   try {
-    // yield axios.post(urlSendVerification, {
-    //   requestType: "VERIFY_EMAIL",
-    //   idToken: TOKEN
-    // }) DONT DELETE
+    yield axios.post(urlSendVerification, {
+       requestType: "VERIFY_EMAIL",
+       idToken: TOKEN
+     })
     yield axios.put(urlSetEmailSent, {
       data: true
     });
