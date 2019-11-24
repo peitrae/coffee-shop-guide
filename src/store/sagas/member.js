@@ -141,9 +141,7 @@ export function* setPreferenceSaga(action) {
   try {
     const response = yield axios.put(url, action.preference);
 
-    console.log("setPreferenceSaga", response);
-
-    yield put(actions.setPreferenceSuccess([action.preference]));
+    yield put(actions.setPreferenceSuccess(action.preference));
   } catch (error) {
     console.log(error.response.data.error.message);
   }

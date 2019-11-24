@@ -28,8 +28,8 @@ const BestRecommendation = props => {
                 <td className={classes.LeftCol}>Facilities:</td>
                 <td className={classes.RightCol}>
                   <ul className={classes.MoreInformation}>
-                    {props.facilities.map(facility => (
-                      <li className={classes.MoreInformationList}>
+                    {props.facilities.map((facility, index) => (
+                      <li key={index} className={classes.MoreInformationList}>
                         {facility}
                       </li>
                     ))}

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "coffeeshopguide"
+    "default": "coffee-shop-guide",
+    "coffeeshopguide": "coffee-shop-guide"
   }
 }

@@ -29,6 +29,12 @@ const authLogout = state => {
   return updateState(state, { ...initialState });
 };
 
+const setPreferenceSuccess = (state, action) => {
+  return updateState(state, {
+    preference: action.preference
+  });
+};
+
 const editProfileSuccess = (state, action) => {
   return updateState(state, {
     email: action.email,
@@ -62,6 +68,8 @@ const reducer = (state = initialState, action) => {
       return authSuccess(state, action);
     case actionTypes.MEMBER_LOGOUT:
       return authLogout(state);
+    case actionTypes.MEMBER_SET_PREFERENCE_SUCCESS:
+      return setPreferenceSuccess(state, action);  
     case actionTypes.MEMBER_GET_USER_DATA_SUCCESS:
       return getUserDataSuccess(state, action);
     case actionTypes.MEMBER_EDIT_PROFILE_SUCCESS:
