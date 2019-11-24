@@ -1,5 +1,6 @@
 import React, { useState } from "react"; 
 import { useDispatch} from "react-redux";
+import { withRouter } from "react-router";
 
 import Questionnaire from "../../../components/Questionnaire/Questionnaire";
 import * as actions from "../../../store/actions/member";
@@ -37,6 +38,7 @@ const Preference = props => {
   const submitHandler = event => {
     event.preventDefault()
     setUserPreference(preference);
+    props.history.push("/search")
   };
 
   return (
@@ -55,4 +57,4 @@ const Preference = props => {
   );
 };
 
-export default Preference;
+export default withRouter(Preference);
