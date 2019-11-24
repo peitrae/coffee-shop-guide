@@ -262,8 +262,8 @@ export function* deleteCoffeeShopSaga(action) {
 export function* setRatingSaga(action) {
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}/rating/${LOCAL_ID}.json?auth=${TOKEN}`;
   try {
-    const response = axios.put(url, action.rating);
-    console.log(response);
+    yield axios.put(url, action.rating);
+    yield put(actions.getCoffeeShopData(action.coffeeShopId));
   } catch (error) {
     console.log(error.response.data.error.message);
   }

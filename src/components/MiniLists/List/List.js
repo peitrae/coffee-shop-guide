@@ -24,7 +24,7 @@ const List = props => (
           <div className={classes.ButtonDiv}>
             <BtnSmall btnName="Edit" clicked={props.toUploadCoffeeShop} />
             <BtnSmall
-              btnName="Hapus"
+              btnName="Delete"
               btnType="Danger"
               clicked={props.deleteHandler}
             />

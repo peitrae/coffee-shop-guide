@@ -5,10 +5,10 @@ import Questionnaire from "../../../../components/Questionnaire/Questionnaire";
 import * as actions from "../../../../store/actions";
 
 const Rating = props => {
-  const { coffeeShopId, show, close, ratingCoffeeShop, userId } = props;
+  const { coffeeShopId, show, close} = props;
 
   let initialValue = [0, 0, 0];
-  if (userId) initialValue = ratingCoffeeShop[userId];
+  // if (ratingCoffeeShop[userId]) initialValue = ratingCoffeeShop[userId];
 
   const [rating, setRating] = useState(initialValue);
 
@@ -33,6 +33,7 @@ const Rating = props => {
   const submitRatingHandler = event => {
     event.preventDefault();
     submitRating(rating, coffeeShopId);
+    close();
   };
 
   return (

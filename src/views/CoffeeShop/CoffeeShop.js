@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./Header/Header";
@@ -10,6 +10,7 @@ import * as actions from "../../store/actions";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 const CoffeeShop = props => {
+  
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
   const coffeeShopList = useSelector(state => state.allCoffeeShopList.lists);
 
@@ -27,7 +28,7 @@ const CoffeeShop = props => {
 
   useEffect(() => {
     getCoffeeShopData(coffeeShopId);
-  }, [coffeeShopId]);
+  }, [coffeeShopId]); 
 
   useEffect(() => {
     getCoffeeShopList();
