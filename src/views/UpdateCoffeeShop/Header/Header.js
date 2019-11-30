@@ -37,8 +37,6 @@ const Header = props => {
     setState({ ...state, [type]: event.target.value });
   };
 
-  console.log("Header Rendered")
-
   return (
     <Card cardType={classes.Card}>
       <div>

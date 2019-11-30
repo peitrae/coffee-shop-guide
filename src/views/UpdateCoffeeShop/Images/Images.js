@@ -51,9 +51,7 @@ const Images = props => {
     setState({ ...state, images: tempImages });
     setImagesPreview(tempImages);
   }
-
-  console.log(state)
-
+  
   return (
     <Card cardType={classes.Card}>
       <h2>Images</h2>
