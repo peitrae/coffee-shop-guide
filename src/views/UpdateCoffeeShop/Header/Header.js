@@ -12,26 +12,26 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap"
   },
   textFieldFull: {
-    width: 700
+    width: 535
   }
 }));
 
 const Header = props => {
   const classesMaterial = useStyles();
 
-  const { state, setState } = props
+  const { state, setState } = props;
   const { header, name, address } = state;
 
-  const [headerPreview, setHeaderPreview] = useState(header)
+  const [headerPreview, setHeaderPreview] = useState(header);
 
   const headerChangeHandler = event => {
-    setState({...state, header: event.target.files[0]})
+    setState({ ...state, header: event.target.files[0] });
     let reader = new FileReader();
     reader.onloadend = () => {
-      setHeaderPreview(reader.result)
-    }
-    reader.readAsDataURL(event.target.files[0])
-  }
+      setHeaderPreview(reader.result);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
 
   const inputChangeHandler = type => event => {
     setState({ ...state, [type]: event.target.value });
@@ -40,7 +40,11 @@ const Header = props => {
   return (
     <Card cardType={classes.Card}>
       <div>
-        <img src={headerPreview} alt="Coffee Shop Header" className={classes.ImgHeader}/>
+        <img
+          src={headerPreview}
+          alt="Coffee Shop Header"
+          className={classes.ImgHeader}
+        />
         <div className={classes.EditHeader}>
           <label className={classes.EditLabel}>
             <input
@@ -60,24 +64,38 @@ const Header = props => {
       </div>
       <div className={classes.Desc}>
         <div>
-          <TextField
-            id="name"
-            label="Name"
-            className={classesMaterial.textFieldFull}
-            value={name}
-            onChange={inputChangeHandler("name")}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            id="address"
-            label="Address"
-            className={classesMaterial.textFieldFull}
-            value={address}
-            onChange={inputChangeHandler("address")}
-            margin="normal"
-            variant="outlined"
-          />
+          <table>
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <td>
+                  <TextField
+                    id="name"
+                    label="Name"
+                    className={classesMaterial.textFieldFull}
+                    value={name}
+                    onChange={inputChangeHandler("name")}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td>
+                  <TextField
+                    id="address"
+                    label="Address"
+                    className={classesMaterial.textFieldFull}
+                    value={address}
+                    onChange={inputChangeHandler("address")}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </Card>
