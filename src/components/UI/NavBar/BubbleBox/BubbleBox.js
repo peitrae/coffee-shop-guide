@@ -25,7 +25,7 @@ const BubbleBox = props => {
       />
       <Card cardType={classes.BubbleBox}>
         <NavLink to={"/profile"} className={classes.Link}>
-          Profile
+          <div onClick={props.close}>Profile</div>
         </NavLink>
         <button className={classes.Logout} onClick={logoutHandler}>
           Logout
