@@ -147,12 +147,12 @@ const EditComponent = props => {
         {content}
         <div className={classes.Btn}>
           <BtnMedium
-            btnName="Kembali"
+            btnName="Back"
             btnType="GreenBorder"
             clicked={props.backToProfile}
           />
           <BtnMedium
-            btnName="Simpan"
+            btnName="Save"
             btnType="Green"
             clicked={submitEditHandler}
           />
