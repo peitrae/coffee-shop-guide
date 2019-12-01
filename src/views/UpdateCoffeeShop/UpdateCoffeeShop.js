@@ -56,29 +56,27 @@ const UpdateData = props => {
     if (userLocalId) setCoffeeShop({ ...coffeeShop, uploadedBy: userLocalId });
   }, [userLocalId]);
 
-  if (redirectToCoffeeShop)
-    props.history.push(`/coffee-shop/${redirectToCoffeeShop}`);
-
   const editCoffeeShopNotReady = coffeeShopId && !coffeeShopData;
   const addCoffeeShopNotReady = !userLocalId;
 
   if (editCoffeeShopNotReady || addCoffeeShopNotReady) return <div className="spinner"><Spinner /></div>;
 
-  const sortingOperationalHours = coffeeShop => {
-    coffeeShop.operationalHours.sort((a, b) => a.day - b.day);
-    return coffeeShop;
-  };
+  // const sortingOperationalHours = coffeeShop => {
+  //   coffeeShop.operationalHours.sort((a, b) => a.day - b.day);
+  //   return coffeeShop;
+  // };
 
   const submitHandler = event => {
     event.preventDefault();
-    const finishedCoffeeShopData = sortingOperationalHours(coffeeShop);
-    setCoffeeShopData(finishedCoffeeShopData, coffeeShopId);
+    // const finishedCoffeeShopData = sortingOperationalHours(coffeeShop);
+    setCoffeeShopData(coffeeShop, coffeeShopId);
+    props.history.push(`/coffee-shop/${redirectToCoffeeShop}`);
   };
 
   return (
     <div className={classes.CoffeeShop}>
       <div className={classes.MainDiv}>
-        <form onSubmit={submitHandler}>
+        <form>
           <Header state={coffeeShop} setState={setCoffeeShop} />
           <Information state={coffeeShop} setState={setCoffeeShop} />
           <Images
@@ -87,7 +85,7 @@ const UpdateData = props => {
             coffeeShopId={coffeeShopId}
           />
           <div className={classes.BtnSubmit}>
-            <BtnLarge btnName="Submit" />
+            <BtnLarge btnName="Submit" clicked={submitHandler}/>
           </div>
         </form>
       </div>
