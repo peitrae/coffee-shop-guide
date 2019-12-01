@@ -12,8 +12,9 @@ export const BtnMedium = props => {
 };
 
 export const BtnLarge = props => {
+  const btnLarge = [classes.ButtonLarge, classes[props.btnType], [props.className]].join(" ");
   return (
-    <button className={classes.ButtonLarge} onClick={props.clicked}>
+    <button className={btnLarge} onClick={props.clicked}>
       {props.btnName}
     </button>
   );

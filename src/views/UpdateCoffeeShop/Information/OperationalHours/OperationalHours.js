@@ -45,8 +45,6 @@ const OperationalHours = props => {
 
   const choosenDay = operationalHours.map(value => value.day);
 
-  console.log("operationalHours", operationalHours)
-
   const dayChangeHandler = index => event => {
     let temp = [...state.operationalHours];
     temp[index].day = event.target.value;

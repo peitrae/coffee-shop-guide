@@ -46,6 +46,7 @@ const UpdateData = props => {
     images: [],
     uploadedBy: userLocalId
   });
+  const [readyToSubmit, setReadyToSubmit] = useState(true)
 
   useEffect(() => {
     const editCoffeeShop = coffeeShopId && coffeeShopData;
@@ -82,10 +83,14 @@ const UpdateData = props => {
           <Images
             state={coffeeShop}
             setState={setCoffeeShop}
+            setReadyToSubmit={setReadyToSubmit}
             coffeeShopId={coffeeShopId}
           />
           <div className={classes.BtnSubmit}>
-            <BtnLarge btnName="Submit" clicked={submitHandler}/>
+            {readyToSubmit 
+              ? <BtnLarge btnName="Submit" clicked={submitHandler}/>
+              : <BtnLarge btnName="Submit" btnType="Disabled" />
+            }
           </div>
         </form>
       </div>
