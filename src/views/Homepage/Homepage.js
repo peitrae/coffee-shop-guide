@@ -26,7 +26,7 @@ const Homepage = props => {
     <BtnLarge btnName="Sign Up" clicked={() => setShowSignUp(true)} />
   );
   if (authenticated) {
-    button = <BtnLarge btnName="Find" clicked={searchContinueHandler} />;
+    button = <BtnLarge btnName="Search" clicked={searchContinueHandler} />;
   }
 
   return (
