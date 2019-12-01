@@ -19,7 +19,7 @@ export const login = (email, password) => {
 
 export const authSuccess = (
   localId,
-  idToken,
+  token,
   email,
   name,
   photoURL,
@@ -28,7 +28,7 @@ export const authSuccess = (
   return {
     type: actionTypes.MEMBER_AUTH_SUCCESS,
     localId,
-    idToken,
+    token,
     email,
     name,
     photoURL,
@@ -116,10 +116,10 @@ export const sendVerificationSuccess = () => {
   };
 };
 
-export const getCoffeeShopUploadedBy = userId => {
+export const getCoffeeShopUploadedBy = localId => {
   return {
     type: actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY,
-    userId
+    localId
   };
 };
 

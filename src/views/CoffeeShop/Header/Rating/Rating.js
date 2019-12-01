@@ -8,7 +8,7 @@ const Rating = props => {
   const { coffeeShopId, show, close} = props;
 
   let initialValue = [0, 0, 0];
-  // if (ratingCoffeeShop[userId]) initialValue = ratingCoffeeShop[userId];
+  // if (ratingCoffeeShop[localId]) initialValue = ratingCoffeeShop[localId];
 
   const [rating, setRating] = useState(initialValue);
 

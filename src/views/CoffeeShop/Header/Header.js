@@ -10,7 +10,7 @@ const Header = props => {
   const [showRatingQuest, setShowRatingQuest] = useState(false);
 
   const isAuthenticated = useSelector(state => state.member.token !== null);
-  const userId = useSelector(state => state.member.localId);
+  const localId = useSelector(state => state.member.localId);
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
   const { header, name, address, rating } = coffeeShopData;
 
@@ -44,7 +44,7 @@ const Header = props => {
           close={ratingCancelHandler}
           ratingCoffeeShop={rating}
           coffeeShopId={props.coffeeShopId}
-          userId={userId}
+          localId={localId}
         />
       ) : null}
       <Card cardType={classes.Header}>

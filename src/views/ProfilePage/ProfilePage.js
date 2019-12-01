@@ -36,6 +36,7 @@ const ProfilePage = () => {
         <Spinner />
       </div>
     );
+    console.log("userData", userData)
 
   return (
     <div className={classes.ProfilePage}>

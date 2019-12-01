@@ -69,18 +69,24 @@ export function* loginSaga(action) {
     const localId = responseLogin.data.localId;
     const email = responseLogin.data.email;
     const name = responseLogin.data.displayName;
-    const emailVerified = resUserData.emailVerified;
+    const photoURL = resUserData.data.users[0].photoUrl;
+    const emailVerified = resUserData.data.users[0].emailVerified;
 
     const expirationDate = yield new Date(
       new Date().getTime() + responseLogin.data.expiresIn * 1000
     );
+
+    console.log("responseLogin.data", responseLogin.data);
 
     yield localStorage.setItem("token", token);
     yield localStorage.setItem("localId", localId);
     yield localStorage.setItem("expirationDate", expirationDate);
 
     yield put(actions.getUserData(token, localId));
-    yield put(actions.authSuccess(localId, token, email, name, emailVerified));
+    yield put(actions.getCoffeeShopUploadedBy(localId));
+    yield put(
+      actions.authSuccess(localId, token, email, name, photoURL, emailVerified)
+    );
   } catch (error) {
     yield put(actions.setError(error.response.data.error.message));
   }
@@ -172,9 +178,9 @@ export function* sendVerificationSaga() {
   const urlSetEmailSent = `https://coffee-shop-guide.firebaseio.com/users/${LOCAL_ID}/emailSent.json?auth=${TOKEN}`;
   try {
     yield axios.post(urlSendVerification, {
-       requestType: "VERIFY_EMAIL",
-       idToken: TOKEN
-     })
+      requestType: "VERIFY_EMAIL",
+      idToken: TOKEN
+    });
     yield axios.put(urlSetEmailSent, {
       data: true
     });
@@ -206,6 +212,8 @@ export function* authCheckStateSaga(action) {
         idToken: TOKEN
       });
 
+      console.log(resUserData.data.users[0]);
+
       const localId = resUserData.data.users[0].localId;
       const email = resUserData.data.users[0].email;
       const displayName = resUserData.data.users[0].displayName;
@@ -227,8 +235,8 @@ export function* authCheckStateSaga(action) {
   }
 }
 
-export function* getCoffeeShopUploadedBySaga() {
-  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop.json?orderBy="uploadedBy"&equalTo="${LOCAL_ID}"`;
+export function* getCoffeeShopUploadedBySaga(action) {
+  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop.json?orderBy="uploadedBy"&equalTo="${action.localId}"`;
 
   try {
     const response = yield axios.get(url);
