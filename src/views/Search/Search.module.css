@@ -1,6 +1,6 @@
 .Search {
   display: flex;
-  position: absolute;
+  position: relative;
   justify-content: center;
   top: 92px;
   width: 100%;
