@@ -15,6 +15,8 @@ const ErrorMessage = props => {
         return "Email not found";
       case "EMAIL_EXISTS":
         return "The email address is already in use by another account";
+      case "PASSWORD_NOT_MATCH":
+        return "Password not match"
       default:
         return props.message;
     }

@@ -7,6 +7,7 @@ import { BtnMedium, BtnSmall } from "../../../components/UI/Button/Button";
 import ProfileImg from "../../../assets/logo/defaultProfile.png";
 import classes from "./EditProfile.module.css";
 import uploadImage from "../../../store/firebase/uploadImage";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import * as actions from "../../../store/actions/member";
 
 const useStyles = makeStyles(theme => ({
@@ -42,7 +43,9 @@ const EditComponent = props => {
     photoURL: photoURL
   });
 
-  if(photoURL && profPictPreview === ProfileImg) setProfPictPreview(photoURL)
+  const [showError, setShowError] = useState(false);
+
+  if (photoURL && profPictPreview === ProfileImg) setProfPictPreview(photoURL);
 
   const classesMaterial = useStyles();
 
@@ -52,15 +55,13 @@ const EditComponent = props => {
 
   const profPictChangeHandler = event => {
     const img = event.target.files[0];
-    const metadata = img.type;
     const reference = "member/images/" + edit.name;
 
-    uploadImage(img, metadata, reference)
+    uploadImage(img, reference)
       .then(response => {
-        setEdit({...edit, photoURL: response});
+        setEdit({ ...edit, photoURL: response });
       })
       .catch(error => console.log(error));
-
 
     let reader = new FileReader();
     reader.onloadend = () => {
@@ -71,8 +72,17 @@ const EditComponent = props => {
 
   const submitEditHandler = event => {
     event.preventDefault();
-    editType ? editProfile(edit.name, edit.email, edit.photoURL) : editPassword(edit.password);
-    backToProfile();
+    if (editType) {
+      editProfile(edit.name, edit.email, edit.photoURL);
+      backToProfile();
+    } else {
+      if (edit.password !== edit.confirmPassword) {
+        setShowError(true);
+      } else {
+        editPassword(edit.password);
+        backToProfile();
+      }
+    }
   };
 
   let content = (
@@ -143,6 +153,7 @@ const EditComponent = props => {
           </label>
         </div>
       </div>
+      {showError ? <ErrorMessage message={"PASSWORD_NOT_MATCH"}/> : null}
       <form className={classes.FormEdit}>
         {content}
         <div className={classes.Btn}>
