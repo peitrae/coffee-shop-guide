@@ -142,7 +142,7 @@ export function* setPreferenceSaga(action) {
   const url = `https://coffee-shop-guide.firebaseio.com/users/${LOCAL_ID}/preference.json?auth=${TOKEN}`;
 
   try {
-    const response = yield axios.put(url, action.preference);
+    yield axios.put(url, action.preference);
 
     yield put(actions.setPreferenceSuccess(action.preference));
   } catch (error) {
