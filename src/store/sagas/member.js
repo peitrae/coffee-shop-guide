@@ -32,14 +32,13 @@ export function* signUpSaga(action) {
     yield localStorage.setItem("token", responseSignUp.data.idToken);
     yield localStorage.setItem("expirationDate", expirationDate);
     yield localStorage.setItem("localId", responseSignUp.data.localId);
-    yield put(
-      actions.authSuccess(
-        responseSignUp.data.localId,
-        responseSignUp.data.idToken,
-        responseSignUp.data.email,
-        responseUpdateName.data.displayName
-      )
-    );
+
+    const token = responseSignUp.data.idToken;
+    const localId = responseSignUp.data.localId;
+    const email = responseSignUp.data.email;
+    const name = responseUpdateName.data.displayName;
+
+    yield put(actions.authSuccess(localId, token, email, name));
   } catch (error) {
     yield put(actions.setError(error.response.data.error.message));
   }
@@ -75,8 +74,6 @@ export function* loginSaga(action) {
     const expirationDate = yield new Date(
       new Date().getTime() + responseLogin.data.expiresIn * 1000
     );
-
-    console.log("responseLogin.data", responseLogin.data);
 
     yield localStorage.setItem("token", token);
     yield localStorage.setItem("localId", localId);
@@ -241,15 +238,15 @@ export function* getCoffeeShopUploadedBySaga(action) {
   try {
     const response = yield axios.get(url);
 
-    const result = [];
+    const coffeeShopUploadedBy = [];
     for (let key in response.data) {
-      result.push({
+      coffeeShopUploadedBy.push({
         ...response.data[key],
         id: key
       });
     }
 
-    yield put(actions.getCoffeeShopUploadedBySuccess(result));
+    yield put(actions.getCoffeeShopUploadedBySuccess(coffeeShopUploadedBy));
   } catch (error) {
     console.log(error.response.data.error.message);
   }

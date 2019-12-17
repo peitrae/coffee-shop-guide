@@ -153,9 +153,9 @@ const EditComponent = props => {
           </label>
         </div>
       </div>
-      {showError ? <ErrorMessage message={"PASSWORD_NOT_MATCH"}/> : null}
       <form className={classes.FormEdit}>
         {content}
+        {showError ? <ErrorMessage message={"PASSWORD_NOT_MATCH"}/> : null}
         <div className={classes.Btn}>
           <BtnMedium
             btnName="Back"

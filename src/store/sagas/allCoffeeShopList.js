@@ -8,15 +8,15 @@ export function* getAllCoffeeShopListSaga() {
 
     try {
       const response = yield axios.get(url);
-      const coffeeShopData = []
+      const coffeeShopList = []
         for(let key in response.data) {
-          coffeeShopData.push({
+          coffeeShopList.push({
             ...response.data[key],
             id: key
           })
         }
 
-      yield put(actions.getAllCoffeeShopListSuccess(coffeeShopData))
+      yield put(actions.getAllCoffeeShopListSuccess(coffeeShopList))
     } catch (error) {
       console.log(error.response.data.error.message);
     }

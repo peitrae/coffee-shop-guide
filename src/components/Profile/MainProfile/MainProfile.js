@@ -35,7 +35,7 @@ const MainProfile = props => {
         clicked={addCoffeeShop}
       />
     ); // Change clicked to edit/add page
-  } else if (emailSent && !emailVerified) {
+  } else if (!emailVerified) {
     mainButton = (
       <BtnMedium
         btnName="Verification"

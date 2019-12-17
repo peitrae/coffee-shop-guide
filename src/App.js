@@ -36,7 +36,7 @@ const App = props => {
           <Route path="/profile" exact component={ProfilePage} />
           <Redirect to="/" />
         </Switch>
-      { (props.location.pathname === "/" ) ? null : <Footer />}
+      <Footer />
     </React.Fragment>
   );
 };

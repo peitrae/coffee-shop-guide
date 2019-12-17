@@ -24,7 +24,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (localId) getCoffeeShopUploadedBy(localId);
     setDeleteClicked(false);
-  }, [emailVerified, deleteClicked]); // Not render after delete
+  }, [emailVerified, deleteClicked]);
 
   const closeVerificationHandler = () => setShowVerification(false)
 
@@ -36,7 +36,6 @@ const ProfilePage = () => {
         <Spinner />
       </div>
     );
-    console.log("userData", userData)
 
   return (
     <div className={classes.ProfilePage}>

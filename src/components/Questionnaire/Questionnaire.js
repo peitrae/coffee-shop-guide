@@ -5,7 +5,6 @@ import Question from "./Question/Question";
 import classes from "./Questionnaire.module.css";
 
 const Questionnaire = props => {
-   // Move to parent
   const [showQuestion, setShowQuestion] = useState(0);
 
   const {
