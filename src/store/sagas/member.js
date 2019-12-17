@@ -139,8 +139,9 @@ export function* editPasswordSaga(action) {
 }
 
 export function* setPreferenceSaga(action) {
-  const url = `https://coffee-shop-guide.firebaseio.com/users/${LOCAL_ID}/preference.json?auth=${TOKEN}`;
-
+  const url = `https://coffee-shop-guide.firebaseio.com/users/${action.localId}/preference.json?auth=${action.token}`;
+  console.log("action.localId", action.localId)
+  console.log("action.token", action.token)
   try {
     yield axios.put(url, action.preference);
 
@@ -208,8 +209,6 @@ export function* authCheckStateSaga(action) {
       const resUserData = yield axios.post(url + API_KEY, {
         idToken: TOKEN
       });
-
-      console.log(resUserData.data.users[0]);
 
       const localId = resUserData.data.users[0].localId;
       const email = resUserData.data.users[0].email;

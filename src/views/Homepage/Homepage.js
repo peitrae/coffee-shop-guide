@@ -11,15 +11,17 @@ const Homepage = props => {
   const [showPreference, setShowPreference] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
-  const authenticated = useSelector(state => state.member.token !== null);
-  const hasPreference = useSelector(state => state.member.preference);
+  const userData = useSelector(state => state.member)
+
+  const authenticated = userData.token !== null
+  const {localId, token, preference} = userData
 
   const preferenceCancelHandler = () => setShowPreference(false);
 
   const authCancelHandler = () => setShowSignUp(false);
 
   const searchContinueHandler = () => {
-    hasPreference ? props.history.push("/search") : setShowPreference(true);
+    preference ? props.history.push("/search") : setShowPreference(true);
   };
 
   let button = (
@@ -37,7 +39,7 @@ const Homepage = props => {
       <h1 className={style.Header}>Find the best coffee shop in Malang</h1>
       <div className={style.BtnFind}>{button}</div>
       {showPreference ? (
-        <Preference show={showPreference} close={preferenceCancelHandler} />
+        <Preference show={showPreference} close={preferenceCancelHandler} localId={localId} token={token}/>
       ) : null}
     </div>
   );

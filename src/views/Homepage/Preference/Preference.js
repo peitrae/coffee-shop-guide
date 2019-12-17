@@ -7,11 +7,14 @@ import * as actions from "../../../store/actions/member";
 
 const Preference = props => {
 
+  console.log(props.localId)
+  console.log(props.token)
+
   const [preference, setPreference] = useState([0, 0, 0, 0]);
 
   const dispatch = useDispatch();
-  const setUserPreference = preference =>
-    dispatch(actions.setPreference(preference));
+  const setUserPreference = (preference, localId, token) =>
+    dispatch(actions.setPreference(preference, localId, token));
 
   const preferenceQuestions = [
     "What is your taste and quality of product of coffee shop rating preference?",
@@ -37,7 +40,7 @@ const Preference = props => {
 
   const submitHandler = event => {
     event.preventDefault()
-    setUserPreference(preference);
+    setUserPreference(preference, props.localId, props.token);
     props.history.push("/search")
   };
 
