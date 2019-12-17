@@ -7,9 +7,6 @@ import * as actions from "../../../store/actions/member";
 
 const Preference = props => {
 
-  console.log(props.localId)
-  console.log(props.token)
-
   const [preference, setPreference] = useState([0, 0, 0, 0]);
 
   const dispatch = useDispatch();

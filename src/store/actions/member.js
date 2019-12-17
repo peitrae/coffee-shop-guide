@@ -75,8 +75,6 @@ export const editPassword = password => {
 };
 
 export const setPreference = (preference, localId, token) => {
-  console.log(localId)
-  console.log(token)
   return {
     type: actionTypes.MEMBER_SET_PREFERENCE,
     preference,

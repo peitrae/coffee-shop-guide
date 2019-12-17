@@ -34,7 +34,6 @@ const profileMatching = (preference, coffeeShopList) => {
     };
 
     const searchPriceRange = averagePrice => {
-      console.log(averagePrice);
       switch (averagePrice) {
         case averagePrice < 10000:
           return 1;
@@ -114,13 +113,10 @@ const profileMatching = (preference, coffeeShopList) => {
     for (let index in candidateData) {
       let result = 0;
       if (coreFactor.length && secondaryFactor.length) {
-        console.log("coreFactor & secondaryFactor");
         result = coreFactor[index] * 0.6 + secondaryFactor[index] * 0.4;
       } else if (coreFactor.length) {
-        console.log("only coreFactor");
         result = coreFactor[index];
       } else if (secondaryFactor.length) {
-        console.log("only secondaryFactor");
         result = secondaryFactor[index];
       }
       total.push(result);

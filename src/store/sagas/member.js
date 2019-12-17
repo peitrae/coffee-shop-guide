@@ -140,8 +140,7 @@ export function* editPasswordSaga(action) {
 
 export function* setPreferenceSaga(action) {
   const url = `https://coffee-shop-guide.firebaseio.com/users/${action.localId}/preference.json?auth=${action.token}`;
-  console.log("action.localId", action.localId)
-  console.log("action.token", action.token)
+  
   try {
     yield axios.put(url, action.preference);
 
