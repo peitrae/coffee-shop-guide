@@ -20,7 +20,7 @@ const UpdateData = props => {
   const setCoffeeShopData = (coffeeShopData, coffeeShopId) =>
     dispatch(actions.setCoffeeShopData(coffeeShopData, coffeeShopId));
   const getCoffeeShopData = useCallback(
-    id => dispatch(actions.getCoffeeShopData(coffeeShopId)),
+    coffeeShopId => dispatch(actions.getCoffeeShopData(coffeeShopId)),
     [dispatch]
   );
 
@@ -71,6 +71,7 @@ const UpdateData = props => {
     event.preventDefault();
     // const finishedCoffeeShopData = sortingOperationalHours(coffeeShop);
     setCoffeeShopData(coffeeShop, coffeeShopId);
+    console.log("redirectToCoffeeShop", redirectToCoffeeShop)
     props.history.push(`/coffee-shop/${redirectToCoffeeShop}`);
   };
 
