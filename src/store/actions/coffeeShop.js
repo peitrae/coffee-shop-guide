@@ -23,7 +23,6 @@ export const setCoffeeShopData = (coffeeShopData, coffeeShopId) => {
 }
 
 export const setCoffeeShopDataSuccess = (data, redirect) => {
-  console.log("setCoffeeShopDataSuccess", redirect)
   return {
     type: actionTypes.COFFEE_SHOP_SET_DATA_SUCCESS,
     data,

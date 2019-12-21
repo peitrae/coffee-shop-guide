@@ -46,7 +46,7 @@ const UpdateData = props => {
     images: [],
     uploadedBy: userLocalId
   });
-  const [readyToSubmit, setReadyToSubmit] = useState(true)
+  const [readyToSubmit, setReadyToSubmit] = useState(true);
 
   useEffect(() => {
     const editCoffeeShop = coffeeShopId && coffeeShopData;
@@ -60,19 +60,19 @@ const UpdateData = props => {
   const editCoffeeShopNotReady = coffeeShopId && !coffeeShopData;
   const addCoffeeShopNotReady = !userLocalId;
 
-  if (editCoffeeShopNotReady || addCoffeeShopNotReady) return <div className="spinner"><Spinner /></div>;
+  if (editCoffeeShopNotReady || addCoffeeShopNotReady)
+    return (
+      <div className="spinner">
+        <Spinner />
+      </div>
+    );
 
-  // const sortingOperationalHours = coffeeShop => {
-  //   coffeeShop.operationalHours.sort((a, b) => a.day - b.day);
-  //   return coffeeShop;
-  // };
+  if (redirectToCoffeeShop)
+    props.history.push(`/coffee-shop/${redirectToCoffeeShop}`);
 
   const submitHandler = event => {
     event.preventDefault();
-    // const finishedCoffeeShopData = sortingOperationalHours(coffeeShop);
     setCoffeeShopData(coffeeShop, coffeeShopId);
-    console.log("redirectToCoffeeShop", redirectToCoffeeShop)
-    props.history.push(`/coffee-shop/${redirectToCoffeeShop}`);
   };
 
   return (
@@ -88,10 +88,11 @@ const UpdateData = props => {
             coffeeShopId={coffeeShopId}
           />
           <div className={classes.BtnSubmit}>
-            {readyToSubmit 
-              ? <BtnLarge btnName="Submit" clicked={submitHandler}/>
-              : <BtnLarge btnName="Submit" btnType="Disabled" />
-            }
+            {readyToSubmit ? (
+              <BtnLarge btnName="Submit" clicked={submitHandler} />
+            ) : (
+              <BtnLarge btnName="Submit" btnType="Disabled" />
+            )}
           </div>
         </form>
       </div>
