@@ -17,7 +17,7 @@ const MainProfile = props => {
   const dispatch = useDispatch();
   const toBeOwner = () => dispatch(actions.sendVerification());
 
-  const { name, email, emailSent, emailVerified } = getUserData;
+  const { name, email, emailVerified } = getUserData;
 
   const toBeOwnerHandler = () => {
     toBeOwner();
@@ -40,7 +40,7 @@ const MainProfile = props => {
       <BtnMedium
         btnName="Verification"
         btnType="Green"
-        clicked={emailSent ? showVerificationHandler : toBeOwnerHandler()}
+        clicked={() => toBeOwnerHandler()}
       />
     );
   }

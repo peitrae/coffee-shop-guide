@@ -37,6 +37,8 @@ const ProfilePage = () => {
       </div>
     );
 
+    console.log(showVerification)
+
   return (
     <div className={classes.ProfilePage}>
       <Profile
