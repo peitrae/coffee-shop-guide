@@ -31,8 +31,12 @@
 }
 
 .AddressList {
+  position: absolute;
   font-weight: bold;
+  width: 200px;
   font-size: 14px;
+  height: 19px;
+  overflow: hidden;
   color: #464646;
   cursor: pointer;
 }
