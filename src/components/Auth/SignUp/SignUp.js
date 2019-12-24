@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Modal from "../../UI/Modal/Modal";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import { BtnMedium } from "../../UI/Button/Button";
+import { CloseButton } from "../../UI/Button/CloseButton/CloseButton";
 import classes from "./SignUp.module.css";
 import * as actions from "../../../store/actions/member";
 
@@ -56,6 +57,7 @@ const SignUp = props => {
       close={props.close}
       modalType={classes.SignUp}
     >
+      <CloseButton className={classes.Close} clicked={props.close}/>
       {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       <form className={classes.FormSignUp} onSubmit={submitHandler}>
         <TextField

@@ -56,7 +56,7 @@ const Header = props => {
         <div className={classes.Desc}>
           <div>
             <h1 className={classes.Name}>{name}</h1>
-            <span className={classes.Address}>{address}</span>
+            <p className={classes.Address}>{address}</p>
           </div>
           <div className={classes.Feedback}>
             {rating ? (

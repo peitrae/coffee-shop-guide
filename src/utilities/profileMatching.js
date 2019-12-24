@@ -1,6 +1,5 @@
 const profileMatching = (preference, coffeeShopList) => {
   if (preference && coffeeShopList) {
-    const defaultValue = 1000;
     const noCandidateData = [];
     const candidateData = [];
     const coreFactorIndex = [];
@@ -34,18 +33,21 @@ const profileMatching = (preference, coffeeShopList) => {
     };
 
     const searchPriceRange = averagePrice => {
-      switch (averagePrice) {
-        case averagePrice < 10000:
-          return 1;
-        case averagePrice >= 10000 && averagePrice < 30000:
-          return 2;
-        case averagePrice >= 30000 && averagePrice <= 50000:
-          return 3;
-        case averagePrice > 50000:
-          return 4;
-        default:
-          return defaultValue;
-      }
+      console.log("searchPriceRange", averagePrice)
+      if (averagePrice < 10000)  return 1;
+      else if (averagePrice >= 10000 && averagePrice < 30000) return 2;
+      else if (averagePrice >= 30000 && averagePrice <= 50000) return 3;
+      else return 4;
+      // switch (averagePrice) {
+      //   case (averagePrice < 10000):
+      //     return 1;
+      //   case (averagePrice >= 10000 && averagePrice < 30000):
+      //     return 2;
+      //   case (averagePrice >= 30000 && averagePrice <= 50000):
+      //     return 3;
+      //   case (averagePrice > 50000):
+      //     return 4;
+      // }
     };
 
     const candidateValue = candidateData.map(num => {

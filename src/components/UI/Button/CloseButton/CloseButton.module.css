@@ -1,0 +1,33 @@
+.BtnClose {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    opacity: 0.3;
+  }
+  .BtnClose:hover {
+    opacity: 1;
+  }
+  .BtnClose:before, .BtnClose:after {
+    position: absolute;
+    top: 26%;
+    left: 48%;
+    content: ' ';
+    height: 12px;
+    width: 2px;
+    background-color: #333;
+  }
+  .BtnClose:before {
+    transform: rotate(45deg);
+  }
+  .BtnClose:after {
+    transform: rotate(-45deg);
+  }
+  
+  .BtnCloseFull {
+    background-color: #333;
+    border-radius: 50%;
+  }
+
+  .BtnCloseFull::before, .BtnCloseFull::after {
+    background-color: #fafafa; 
+  }
