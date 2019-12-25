@@ -6,6 +6,16 @@
   align-items: center;
 }
 
+.ImgProfile {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .BtnSmall {
   font-size: 12px;
   display: block;
