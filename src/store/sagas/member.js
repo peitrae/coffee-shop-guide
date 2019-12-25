@@ -26,19 +26,18 @@ export function* signUpSaga(action) {
       displayName: action.name
     });
 
+    const { idToken, refreshToken, localId, email } = responseSignUp.data;
+    const displayName = responseUpdateName.data.displayName;
+
     const expirationDate = yield new Date(
       new Date().getTime() + responseSignUp.data.expiresIn * 1000
     );
-    yield localStorage.setItem("token", responseSignUp.data.idToken);
+    yield localStorage.setItem("token", idToken);
+    yield localStorage.setItem("refreshToken", refreshToken);
     yield localStorage.setItem("expirationDate", expirationDate);
-    yield localStorage.setItem("localId", responseSignUp.data.localId);
+    yield localStorage.setItem("localId", localId);
 
-    const token = responseSignUp.data.idToken;
-    const localId = responseSignUp.data.localId;
-    const email = responseSignUp.data.email;
-    const name = responseUpdateName.data.displayName;
-
-    yield put(actions.authSuccess(localId, token, email, name));
+    yield put(actions.authSuccess(localId, idToken, email, displayName));
   } catch (error) {
     yield put(actions.setError(error.response.data.error.message));
   }
@@ -64,25 +63,37 @@ export function* loginSaga(action) {
       idToken: responseLogin.data.idToken
     });
 
-    const token = responseLogin.data.idToken;
-    const localId = responseLogin.data.localId;
-    const email = responseLogin.data.email;
-    const name = responseLogin.data.displayName;
-    const photoURL = resUserData.data.users[0].photoUrl;
-    const emailVerified = resUserData.data.users[0].emailVerified;
+    console.log("responseLogin", responseLogin);
+
+    const {
+      idToken,
+      refreshToken,
+      localId,
+      email,
+      displayName
+    } = responseLogin.data;
+    const { photoURL, emailVerified } = resUserData.data.users[0];
 
     const expirationDate = yield new Date(
       new Date().getTime() + responseLogin.data.expiresIn * 1000
     );
 
-    yield localStorage.setItem("token", token);
+    yield localStorage.setItem("token", idToken);
+    yield localStorage.setItem("refreshToken", refreshToken);
     yield localStorage.setItem("localId", localId);
     yield localStorage.setItem("expirationDate", expirationDate);
 
-    yield put(actions.getUserData(token, localId));
+    yield put(actions.getUserData(idToken, localId));
     yield put(actions.getCoffeeShopUploadedBy(localId));
     yield put(
-      actions.authSuccess(localId, token, email, name, photoURL, emailVerified)
+      actions.authSuccess(
+        localId,
+        idToken,
+        email,
+        displayName,
+        photoURL,
+        emailVerified
+      )
     );
   } catch (error) {
     yield put(actions.setError(error.response.data.error.message));
@@ -140,7 +151,7 @@ export function* editPasswordSaga(action) {
 
 export function* setPreferenceSaga(action) {
   const url = `https://coffee-shop-guide.firebaseio.com/users/${action.localId}/preference.json?auth=${action.token}`;
-  
+
   try {
     yield axios.put(url, action.preference);
 
@@ -209,19 +220,14 @@ export function* authCheckStateSaga(action) {
         idToken: TOKEN
       });
 
-      const localId = resUserData.data.users[0].localId;
-      const email = resUserData.data.users[0].email;
-      const displayName = resUserData.data.users[0].displayName;
-      const photoURL = resUserData.data.users[0].photoUrl;
-      const emailVerified = resUserData.data.users[0].emailVerified;
-
+      const { localId, email, displayName, photoUrl, emailVerified } = resUserData.data.users[0]
       yield put(
         actions.authSuccess(
           localId,
           TOKEN,
           email,
           displayName,
-          photoURL,
+          photoUrl,
           emailVerified
         )
       );
