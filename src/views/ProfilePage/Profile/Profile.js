@@ -9,7 +9,7 @@ import classes from "./Profile.module.css";
 import * as actions from "../../../store/actions/member";
 
 const Profile = props => {
-  const { name, email, emailVerified, photoURL, showEditProfile, showEditPassword, showVerificationHandler } = props;
+  const { name, email, emailVerified, photoUrl, showEditProfile, showEditPassword, showVerificationHandler } = props;
 
   const dispatch = useDispatch();
   const toBeOwner = () => dispatch(actions.sendVerification());
@@ -23,7 +23,7 @@ const Profile = props => {
 
   const image = (
     <img
-      src={photoURL || ProfileImg}
+      src={photoUrl || ProfileImg}
       alt="Profile"
       className={classes.ImgProfile}
     />

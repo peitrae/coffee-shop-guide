@@ -27,19 +27,19 @@ const EditComponent = props => {
 
   const [profPictPreview, setProfPictPreview] = useState(ProfileImg);
 
-  const { name, email, photoURL, cancelEditProfile } = props;
+  const { name, email, photoUrl, cancelEditProfile } = props;
 
   const dispatch = useDispatch();
-  const editProfile = (name, email, photoURL) =>
-    dispatch(actions.editProfile(name, email, photoURL));
+  const editProfile = (name, email, photoUrl) =>
+    dispatch(actions.editProfile(name, email, photoUrl));
 
   const [edit, setEdit] = useState({
     name: name,
     email: email,
-    photoURL: photoURL
+    photoUrl: photoUrl
   });
 
-  if (photoURL && profPictPreview === ProfileImg) setProfPictPreview(photoURL);
+  if (photoUrl && profPictPreview === ProfileImg) setProfPictPreview(photoUrl);
 
   const classesMaterial = useStyles();
 
@@ -53,7 +53,7 @@ const EditComponent = props => {
 
     uploadImage(img, reference)
       .then(response => {
-        setEdit({ ...edit, photoURL: response });
+        setEdit({ ...edit, photoUrl: response });
       })
       .catch(error => console.log(error));
 
@@ -66,7 +66,7 @@ const EditComponent = props => {
 
   const submitEditHandler = event => {
     event.preventDefault();
-    editProfile(edit.name, edit.email, edit.photoURL);
+    editProfile(edit.name, edit.email, edit.photoUrl);
     cancelEditProfile();
   };
 

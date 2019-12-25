@@ -6,7 +6,7 @@ const initialState = {
   token: null,
   email: null,
   name: null,
-  photoURL: null,
+  photoUrl: null,
   preference: false,
   emailSent: false,
   coffeeShopList: null,
@@ -19,7 +19,7 @@ const authSuccess = (state, action) => {
     token: action.token,
     email: action.email,
     name: action.name,
-    photoURL: action.photoURL,
+    photoUrl: action.photoUrl,
     emailVerified: action.emailVerified,
     coffeeShopList: action.coffeeShopList,
   });
@@ -39,7 +39,7 @@ const editProfileSuccess = (state, action) => {
   return updateState(state, {
     email: action.email,
     name: action.name,
-    photoURL: action.photoURL
+    photoUrl: action.photoUrl
   });
 };
 

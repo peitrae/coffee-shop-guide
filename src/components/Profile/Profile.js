@@ -13,7 +13,7 @@ const Profile = props => {
     editProfile: true // editProfile ? Edit Profile : Edit Password
   });
 
-  const profPict = useSelector(state => state.member.photoURL)
+  const profPict = useSelector(state => state.member.photoUrl)
 
   const editProfileHandler = () => {
     setIsEdit({ ...isEdit, edit: true });

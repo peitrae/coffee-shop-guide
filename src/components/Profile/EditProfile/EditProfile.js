@@ -28,11 +28,11 @@ const EditComponent = props => {
   const [profPictPreview, setProfPictPreview] = useState(ProfileImg);
 
   const getUserData = useSelector(state => state.member);
-  const { name, email, photoURL } = getUserData;
+  const { name, email, photoUrl } = getUserData;
 
   const dispatch = useDispatch();
-  const editProfile = (name, email, photoURL) =>
-    dispatch(actions.editProfile(name, email, photoURL));
+  const editProfile = (name, email, photoUrl) =>
+    dispatch(actions.editProfile(name, email, photoUrl));
   const editPassword = password => dispatch(actions.editPassword(password));
 
   const [edit, setEdit] = useState({
@@ -40,12 +40,12 @@ const EditComponent = props => {
     email: email,
     password: "",
     confirmPassword: "",
-    photoURL: photoURL
+    photoUrl: photoUrl
   });
 
   const [showError, setShowError] = useState(false);
 
-  if (photoURL && profPictPreview === ProfileImg) setProfPictPreview(photoURL);
+  if (photoUrl && profPictPreview === ProfileImg) setProfPictPreview(photoUrl);
 
   const classesMaterial = useStyles();
 
@@ -59,7 +59,7 @@ const EditComponent = props => {
 
     uploadImage(img, reference)
       .then(response => {
-        setEdit({ ...edit, photoURL: response });
+        setEdit({ ...edit, photoUrl: response });
       })
       .catch(error => console.log(error));
 
@@ -73,7 +73,7 @@ const EditComponent = props => {
   const submitEditHandler = event => {
     event.preventDefault();
     if (editType) {
-      editProfile(edit.name, edit.email, edit.photoURL);
+      editProfile(edit.name, edit.email, edit.photoUrl);
       backToProfile();
     } else {
       if (edit.password !== edit.confirmPassword) {

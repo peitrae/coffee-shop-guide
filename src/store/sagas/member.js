@@ -70,7 +70,7 @@ export function* loginSaga(action) {
       email,
       displayName
     } = responseLogin.data;
-    const { photoURL, emailVerified } = resUserData.data.users[0];
+    const { photoUrl, emailVerified } = resUserData.data.users[0];
 
     const expirationDate = yield new Date(
       new Date().getTime() + responseLogin.data.expiresIn * 1000
@@ -89,7 +89,7 @@ export function* loginSaga(action) {
         idToken,
         email,
         displayName,
-        photoURL,
+        photoUrl,
         emailVerified
       )
     );
@@ -118,7 +118,7 @@ export function* editProfileSaga(action) {
     idToken: TOKEN,
     displayName: action.name,
     email: action.email,
-    photoUrl: action.photoURL
+    photoUrl: action.photoUrl
   };
 
   try {

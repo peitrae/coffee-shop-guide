@@ -23,7 +23,7 @@ const ProfilePage = () => {
     coffeeShopList,
     name,
     email,
-    photoURL
+    photoUrl
   } = userData;
 
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const ProfilePage = () => {
         <Profile
           name={name}
           email={email}
-          photoURL={photoURL}
+          photoUrl={photoUrl}
           emailVerified={emailVerified}
           showEditProfile={editProfileHandler}
           showEditPassword={editPasswordHandler}
@@ -72,12 +72,12 @@ const ProfilePage = () => {
         <EditProfile
           name={name}
           email={email}
-          photoURL={photoURL}
+          photoUrl={photoUrl}
           cancelEditProfile={editProfileCancelHandler}
         />
       ) : showEditPassword ? (
         <EditPassword
-          photoURL={photoURL}
+          photoUrl={photoUrl}
           cancelEditPassword={editPasswordCancelHandler}
         />
       ) : null}

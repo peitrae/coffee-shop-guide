@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EditComponent = props => {
-  const { photoURL, cancelEditPassword } = props;
+  const { photoUrl, cancelEditPassword } = props;
 
   const dispatch = useDispatch();
   const editPassword = password => dispatch(actions.editPassword(password));
@@ -53,7 +53,7 @@ const EditComponent = props => {
 
   const image = (
     <img
-      src={photoURL || ProfileImg}
+      src={photoUrl || ProfileImg}
       alt="Profile"
       className={classes.ImgProfile}
     />

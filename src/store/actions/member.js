@@ -22,7 +22,7 @@ export const authSuccess = (
   token,
   email,
   name,
-  photoURL,
+  photoUrl,
   emailVerified
 ) => {
   return {
@@ -31,7 +31,7 @@ export const authSuccess = (
     token,
     email,
     name,
-    photoURL,
+    photoUrl,
     emailVerified
   };
 };
@@ -49,21 +49,21 @@ export const authCheckState = hasPreference => {
   };
 };
 
-export const editProfile = (name, email, photoURL) => {
+export const editProfile = (name, email, photoUrl) => {
   return {
     type: actionTypes.MEMBER_EDIT_PROFILE,
     name,
     email,
-    photoURL
+    photoUrl
   };
 };
 
-export const editProfileSuccess = (name, email, photoURL) => {
+export const editProfileSuccess = (name, email, photoUrl) => {
   return {
     type: actionTypes.MEMBER_EDIT_PROFILE_SUCCESS,
     name,
     email,
-    photoURL
+    photoUrl
   };
 };
 
