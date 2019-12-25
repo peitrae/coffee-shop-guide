@@ -79,7 +79,7 @@ const EditComponent = props => {
         className={classes.EditProfPict}
       >
         <BtnSmall className={classes.BtnSmall}>
-          <label for="uploadImage" className={classes.BtnSmall}>
+          <label htmlFor="uploadImage" className={classes.BtnSmall}>
             Edit
           </label>
         </BtnSmall>
