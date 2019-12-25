@@ -63,8 +63,6 @@ export function* loginSaga(action) {
       idToken: responseLogin.data.idToken
     });
 
-    console.log("responseLogin", responseLogin);
-
     const {
       idToken,
       refreshToken,
