@@ -1,0 +1,139 @@
+Mulai
+
+profileMatching(preference, coffeeShopList) {
+  if (preference && coffeeShopList) {
+    Inisialisasi dan deklarasi variabel awal untuk perhitungan profile profileMatching
+
+    FOR coffeeShopList AS coffeeShop{
+      IF (coffeeShop memiliki rating) {
+        candidateData.push(coffeeShop)
+      } ELSE {
+        noCandidateData.push(coffeeShop)
+      }
+    }
+
+    FOR preference AS value{
+      IF (value >= 4) {
+        coreFactorIndex.push(preference.indexOf(value))
+      } ELSE {
+        secondaryFactorIndex.push(preference.indexOf(value))
+      }
+    }
+
+    searchPriceRange(averagePrice) {
+      DO (averagePrice) {
+        CASE averagePrice < 10000:
+          return 1;
+        CASE averagePrice >= 10000 && averagePrice < 30000:
+          return 2;
+        CASE averagePrice >= 30000 && averagePrice <= 50000:
+          return 3;
+        CASE averagePrice > 50000:
+          return 4;
+        DEFAULT:
+          return defaultValue;
+      }
+    };
+
+    candidateValue = FOR candidateData AS num {
+      priceRange = searchPriceRange(num.averagePrice);
+      avgRating = rata - rata num.rating;
+      return [...avgRating, priceRange];
+    }
+
+    Perhitungan gap dari candidateValue
+
+    Perhitungan bobot dari gap
+
+    const weighting = gap.map(arr => {
+      let temp = arr.map(childArr => {
+        switch (childArr) {
+          case 0:
+            return 5;
+          case 1:
+            return 4.5;
+          case -1:
+            return 4;
+          case 2:
+            return 3.5;
+          case -2:
+            return 3;
+          case 3:
+            return 2.5;
+          case -3:
+            return 2;
+          case 4:
+            return 1.5;
+          case -4:
+            return 1;
+          default:
+            break;
+        }
+      });
+      return temp;
+    });
+
+    const average = arr => {
+      return (
+        arr.reduce((accumulator, currentValue) => accumulator + currentValue) /
+        arr.length
+      );
+    };
+
+    const coreFactor = [];
+    const secondaryFactor = [];
+
+    weighting.forEach(arr => {
+      let coreFactorTemp = [];
+      let secondaryFactorTemp = [];
+      arr.forEach((num, index) => {
+        coreFactorIndex.includes(index)
+          ? coreFactorTemp.push(num)
+          : secondaryFactorTemp.push(num);
+      });
+      if (coreFactorTemp.length) coreFactor.push(average(coreFactorTemp));
+      if (secondaryFactorTemp.length)
+        secondaryFactor.push(average(secondaryFactorTemp));
+    });
+
+    const total = [];
+    for (let index in candidateData) {
+      let result = 0;
+      if (coreFactor.length && secondaryFactor.length) {
+        console.log("coreFactor & secondaryFactor");
+        result = coreFactor[index] * 0.6 + secondaryFactor[index] * 0.4;
+      } else if (coreFactor.length) {
+        console.log("only coreFactor");
+        result = coreFactor[index];
+      } else if (secondaryFactor.length) {
+        console.log("only secondaryFactor");
+        result = secondaryFactor[index];
+      }
+      total.push(result);
+    }
+
+    const injectIndex = total.map((num, index) => [index, num]);
+    const sortByValue = injectIndex.sort((a, b) => a[1] - b[1]).reverse();
+    const sortCandidateData = sortByValue.map(value => candidateData[value[0]]);
+    const resultProfileMatching = [...sortCandidateData, ...noCandidateData]
+
+    // DEBUG
+    // console.log("preference", preference);
+    // console.log("candidateData", candidateData);
+    // console.log("candidateValue", candidateValue);
+    // console.log("coreFactorIndex", coreFactorIndex);
+    // console.log("secondaryFactorIndex", secondaryFactorIndex);
+    // console.log("gap", gap);
+    // console.log("weighting", weighting);
+    // console.log("coreFactor", coreFactor);
+    // console.log("secondaryFactor", secondaryFactor);
+    // console.log("total", total);
+    // console.log("injectIndex", injectIndex);
+    // console.log("sortByValue", sortByValue);
+    // console.log("sortCandidateData", sortCandidateData);
+
+    return resultProfileMatching;
+  }
+};
+
+export default profileMatching;
