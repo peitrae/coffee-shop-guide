@@ -53,7 +53,7 @@ const Login = props => {
       clicked={clicked}
       modalType={classes.Login}
     >
-      <CloseButton className={classes.Close} clicked={close}/>
+      <CloseButton className={classes.Close} clicked={close} />
       {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       <form className={classes.FormLogin} onSubmit={submitHandler}>
         <TextField
