@@ -28,12 +28,3 @@ export const BtnSmall = props => {
     </button>
   );
 };
-
-export const BtnClose = props => {
-  const btnClose = [classes.ButtonClose, [props.classes]].join(' ');
-  return (
-    <button className={btnClose} onClick={props.clicked}>
-      X
-    </button>
-  )
-}
