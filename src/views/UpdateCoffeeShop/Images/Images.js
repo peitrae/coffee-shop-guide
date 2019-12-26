@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 import Card from "../../../components//UI/Card/Card";
-import UploadButton from "../../../components/UI/Button/UploadButton/UploadButton";
-import { BtnClose } from "../../../components/UI/Button/Button";
 import uploadPictureIco from "../../../assets/logo/uploadPicture.png";
 import CircularProgress from "../../../components/Progress/CircularProgress";
 import classes from "./Images.module.css";
@@ -15,9 +13,11 @@ const Images = props => {
 
   const [preview, setPreview] = useState(state.images);
 
-  const uploadImageHandler = (type, index) => event => {
+  const uploadImageHandler = (edit, index) => event => {
     const img = event.target.files[0];
     const reference = "coffeeShop/images/" + state.name;
+
+    console.log(edit)
 
     uploadImage(img, reference)
       .then(response => {
@@ -30,11 +30,9 @@ const Images = props => {
     let reader = new FileReader();
     reader.onloadend = () => {
       const tempPreview = [...preview];
-      if (type === "edit") {
-        tempPreview[index] = reader.result;
-      } else {
-        tempPreview.push(reader.result);
-      }
+      edit 
+        ? tempPreview[index] = reader.result
+        : tempPreview.push(reader.result);
       setPreview(tempPreview);
     };
     reader.readAsDataURL(img);
@@ -61,27 +59,27 @@ const Images = props => {
         {preview.map((img, index) => (
           <UploadImage
             key={index}
-            uploadHandler={() => uploadImageHandler("edit", index)}
+            uploadHandler={() => uploadImageHandler(true, index)}
           >
             <div className={classes.BtnUpload}>
               {state.images[index] ? null : <CircularProgress />}
               <CloseButtonWhite
                 className={classes.Close}
-                clicked={deleteImageHandler}
+                clicked={deleteImageHandler(index)}
               />
               <img src={img} alt="Upload" className={classes.ImgPreview} />
             </div>
           </UploadImage>
         ))}
         {preview.length < 4 ? (
-          <UploadImage uploadHandler={uploadImageHandler}>
+          <UploadImage uploadHandler={() => uploadImageHandler()}>
             <div className={[classes.BtnUpload, classes.Border].join(" ")}>
               <img
                 src={uploadPictureIco}
                 alt="Upload"
                 className={classes.UploadIco}
               />
-              <span className={classes.UploadDesc}>Upload Picture</span>
+              <span className={classes.UploadDesc}>Upload Image</span>
             </div>
           </UploadImage>
         ) : null}
