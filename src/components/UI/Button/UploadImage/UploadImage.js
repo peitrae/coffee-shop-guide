@@ -11,7 +11,7 @@ const UploadImage = props => {
         className={classes.FileInput}
         onChange={props.uploadHandler()}
       />
-      <label for="uploadImage" class={classes.Label}>
+      <label htmlFor="uploadImage" className={classes.Label}>
         {props.children}
       </label>
     </div>
