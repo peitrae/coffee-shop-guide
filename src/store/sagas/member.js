@@ -122,14 +122,14 @@ export function* editProfileSaga(action) {
     photoUrl: action.photoUrl
   };
 
-  console.log("editProfileData", editProfileData)
+  console.log("editProfileData", editProfileData);
 
   try {
     const resEditProfile = yield axios.post(urlEditProfile, editProfileData);
     const { displayName, email, photoUrl } = resEditProfile.data;
 
     yield put(actions.editProfileSuccess(displayName, email, photoUrl));
-    if(action.password) yield put(actions.login(email, action.password))
+    if (action.password) yield put(actions.login(email, action.password));
   } catch (error) {
     console.log(error);
   }
@@ -268,7 +268,7 @@ export function* deleteCoffeeShopSaga(action) {
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}.json?auth=${TOKEN}`;
   try {
     yield axios.delete(url);
-    yield put(actions.getAllCoffeeShopList());
+    yield put(actions.getCoffeeShopUploadedBy(LOCAL_ID));
   } catch (error) {
     console.log(error.response.data.error.message);
   }

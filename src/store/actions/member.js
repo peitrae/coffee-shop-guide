@@ -136,7 +136,7 @@ export const getCoffeeShopUploadedBySuccess = coffeeShopList => {
 export const deleteCoffeeShop = coffeeShopId => {
   return {
     type: actionTypes.MEMBER_DELETE_COFFEE_SHOP,
-    coffeeShopId
+    coffeeShopId,
   };
 };
 

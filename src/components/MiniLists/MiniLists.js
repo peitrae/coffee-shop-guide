@@ -1,7 +1,4 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { withRouter } from "react-router";
-import * as actions from "../../store/actions";
+import React from "react";
 
 import classes from "./MiniLists.module.css";
 import Card from "../UI/Card/Card";
@@ -10,13 +7,13 @@ import defaultIco from "../../assets/Starbuck3.png";
 import Spinner from "../UI/Spinner/Spinner";
 
 const MiniLists = props => {
-  const { headerList, coffeeShopList, deleteClicked } = props;
-
-  const dispatch = useDispatch();
-  const deleteCoffeeShop = useCallback(
-    coffeeShopId => dispatch(actions.deleteCoffeeShop(coffeeShopId)),
-    [dispatch]
-  );
+  const {
+    headerList,
+    coffeeShopList,
+    showEditableButton,
+    editHandler,
+    deleteHandler
+  } = props;
 
   if (!coffeeShopList) {
     return (
@@ -25,23 +22,14 @@ const MiniLists = props => {
       </Card>
     );
   }
-  const toUploadCoffeeShop = coffeeShopId =>
-    props.history.push(`/update-coffee-shop/${coffeeShopId}`);
-
-  const deleteCoffeeShopHandler = coffeeShopId => {
-    deleteCoffeeShop(coffeeShopId);
-    deleteClicked(true);
-    console.log(coffeeShopId);
-  };
 
   return (
     <Card cardType={classes.MiniLists}>
       <h2 className={classes.HeaderList}>{headerList}</h2>
       {coffeeShopList.map(coffeeShop => {
         let ico = defaultIco;
-        if (coffeeShop.images) {
-          ico = coffeeShop.images[0];
-        }
+        if (coffeeShop.images) ico = coffeeShop.images[0];
+
         return (
           <List
             key={coffeeShop.id}
@@ -49,9 +37,9 @@ const MiniLists = props => {
             listName={coffeeShop.name}
             listAddress={coffeeShop.address}
             coffeeShopId={coffeeShop.id}
-            toUploadCoffeeShop={() => toUploadCoffeeShop(coffeeShop.id)}
-            deleteHandler={() => deleteCoffeeShopHandler(coffeeShop.id)}
-            showEditableButton={props.showEditableButton}
+            toUploadCoffeeShop={() => editHandler(coffeeShop.id)}
+            deleteHandler={() => deleteHandler(coffeeShop.id)}
+            showEditableButton={showEditableButton}
           />
         );
       })}
@@ -59,4 +47,4 @@ const MiniLists = props => {
   );
 };
 
-export default withRouter(React.memo(MiniLists));
+export default MiniLists;
