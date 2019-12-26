@@ -10,27 +10,46 @@
   margin-bottom: 16px;
 }
 
-.ImgPreview {
-    width: 167px;
-    height: 167px;
-    border-radius: 4px;
-    display: inline-block;
-    vertical-align: top;
+.Images {
+  display: flex;
+}
+
+.BtnUpload {
+  width: 167px;
+  height: 167px;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+.Progress {
+  width: 167px;
+  height: 167px;
+}
+
+.Border {
+  border: 1px #333 solid;
 }
 
 .UploadIco {
-  width: 74px;
-  height: 74px;
+  width: 77px;
+  height: 77px;
 }
 
 .UploadDesc {
   margin-top: 4px;
   font-size: 16px;
-  color: #464646;
+  color: #333;
 }
 
-.EditButton {
-  border: none
+.ImgPreview {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
 }
 
 .BtnClose {

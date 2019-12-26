@@ -1,33 +1,41 @@
 .BtnClose {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    opacity: 0.3;
-  }
-  .BtnClose:hover {
-    opacity: 1;
-  }
-  .BtnClose:before, .BtnClose:after {
-    position: absolute;
-    top: 26%;
-    left: 48%;
-    content: ' ';
-    height: 12px;
-    width: 2px;
-    background-color: #333;
-  }
-  .BtnClose:before {
-    transform: rotate(45deg);
-  }
-  .BtnClose:after {
-    transform: rotate(-45deg);
-  }
-  
-  .BtnCloseFull {
-    background-color: #333;
-    border-radius: 50%;
-  }
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  opacity: 0.3;
+  top: 4px;
+  right: 4px;
+}
+.BtnClose:hover {
+  opacity: 1;
+}
+.BtnClose:before,
+.BtnClose:after {
+  position: absolute;
+  top: 26%;
+  left: 48%;
+  content: " ";
+  height: 12px;
+  width: 2px;
+  background-color: #333;
+}
+.BtnClose:before {
+  transform: rotate(45deg);
+}
+.BtnClose:after {
+  transform: rotate(-45deg);
+}
 
-  .BtnCloseFull::before, .BtnCloseFull::after {
-    background-color: #fafafa; 
-  }
+.BtnCloseWhite {
+  opacity: 1;
+}
+
+.BtnCloseWhite:hover {
+  background-color: #ee4040;
+  border-radius: 50%;
+}
+
+.BtnCloseWhite:before,
+.BtnCloseWhite:after {
+  background-color: #fafafa;
+}

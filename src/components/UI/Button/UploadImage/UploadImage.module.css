@@ -1,0 +1,8 @@
+.FileInput {
+  opacity: 0;
+  position: absolute;
+}
+
+.Label {
+  cursor: pointer;
+}

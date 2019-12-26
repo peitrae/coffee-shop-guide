@@ -7,6 +7,8 @@ import uploadPictureIco from "../../../assets/logo/uploadPicture.png";
 import CircularProgress from "../../../components/Progress/CircularProgress";
 import classes from "./Images.module.css";
 import uploadImage from "../../../store/firebase/uploadImage";
+import { CloseButtonWhite } from "../../../components/UI/Button/CloseButton/CloseButton";
+import UploadImage from "../../../components/UI/Button/UploadImage/UploadImage";
 
 const Images = props => {
   const { state, setState, setReadyToSubmit } = props;
@@ -55,33 +57,33 @@ const Images = props => {
   return (
     <Card cardType={classes.Card}>
       <h2>Images</h2>
-      <div>
+      <div className={classes.Images}>
         {preview.map((img, index) => (
-          <UploadButton
+          <UploadImage
             key={index}
-            handler={() => uploadImageHandler("edit", index)}
-            uploadType="NoBorder"
+            uploadHandler={() => uploadImageHandler("edit", index)}
           >
-            {state.images[index] ? null : <CircularProgress />}
-            <BtnClose
-              btnName="X"
-              classes={classes.BtnClose}
-              clicked={deleteImageHandler(index)}
-            />
-            <img src={img} alt="Upload" className={classes.ImgPreview} />
-          </UploadButton>
+            <div className={classes.BtnUpload}>
+              {state.images[index] ? null : <CircularProgress />}
+              <CloseButtonWhite
+                className={classes.Close}
+                clicked={deleteImageHandler}
+              />
+              <img src={img} alt="Upload" className={classes.ImgPreview} />
+            </div>
+          </UploadImage>
         ))}
         {preview.length < 4 ? (
-          <React.Fragment>
-            <UploadButton handler={() => uploadImageHandler()}>
+          <UploadImage uploadHandler={uploadImageHandler}>
+            <div className={[classes.BtnUpload, classes.Border].join(" ")}>
               <img
                 src={uploadPictureIco}
                 alt="Upload"
                 className={classes.UploadIco}
               />
               <span className={classes.UploadDesc}>Upload Picture</span>
-            </UploadButton>
-          </React.Fragment>
+            </div>
+          </UploadImage>
         ) : null}
       </div>
     </Card>

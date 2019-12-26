@@ -18,8 +18,11 @@ const useStyles = makeStyles(theme => ({
 
 const Progress = props => {
   const classesMaterial = useStyles();
+
+  const style = [classes.Progress, [props.className]].join(" ")
+
   return (
-    <div className={classes.Progress}>
+    <div className={style}>
       <div className={classesMaterial.root}>
         <ColorCircularProgress size={50} thickness={5} />
       </div>
