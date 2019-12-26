@@ -103,6 +103,7 @@ export function* logoutSaga() {
     yield call([localStorage, "removeItem"], "token");
     yield call([localStorage, "removeItem"], "expirationDate");
     yield call([localStorage, "removeItem"], "localId");
+    yield call([localStorage, "removeItem"], "refreshToken");
   } catch (error) {
     console.log(error.response.data.error.message);
   }
@@ -121,11 +122,14 @@ export function* editProfileSaga(action) {
     photoUrl: action.photoUrl
   };
 
+  console.log("editProfileData", editProfileData)
+
   try {
     const resEditProfile = yield axios.post(urlEditProfile, editProfileData);
     const { displayName, email, photoUrl } = resEditProfile.data;
 
     yield put(actions.editProfileSuccess(displayName, email, photoUrl));
+    if(action.password) yield put(actions.login(email, action.password))
   } catch (error) {
     console.log(error);
   }
@@ -218,7 +222,13 @@ export function* authCheckStateSaga(action) {
         idToken: TOKEN
       });
 
-      const { localId, email, displayName, photoUrl, emailVerified } = resUserData.data.users[0]
+      const {
+        localId,
+        email,
+        displayName,
+        photoUrl,
+        emailVerified
+      } = resUserData.data.users[0];
       yield put(
         actions.authSuccess(
           localId,

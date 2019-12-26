@@ -10,6 +10,7 @@ import classes from "./EditProfile.module.css";
 import { BtnMedium, BtnSmall } from "../../../components/UI/Button/Button";
 import uploadImage from "../../../store/firebase/uploadImage";
 import * as actions from "../../../store/actions/member";
+import EnterPassword from "./EnterPassword/EnterPassword";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -24,19 +25,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const EditComponent = props => {
-
   const [profPictPreview, setProfPictPreview] = useState(ProfileImg);
+  const [showEnterPassword, setShowEnterPassword] = useState(false);
 
   const { name, email, photoUrl, cancelEditProfile } = props;
 
   const dispatch = useDispatch();
-  const editProfile = (name, email, photoUrl) =>
-    dispatch(actions.editProfile(name, email, photoUrl));
+  const editProfile = (name, email, photoUrl, password) =>
+    dispatch(actions.editProfile(name, email, photoUrl, password));
 
   const [edit, setEdit] = useState({
     name: name,
     email: email,
-    photoUrl: photoUrl
+    photoUrl: photoUrl,
+    password: ""
   });
 
   if (photoUrl && profPictPreview === ProfileImg) setProfPictPreview(photoUrl);
@@ -64,10 +66,16 @@ const EditComponent = props => {
     reader.readAsDataURL(img);
   };
 
-  const submitEditHandler = event => {
-    event.preventDefault();
-    editProfile(edit.name, edit.email, edit.photoUrl);
+  const submitEditHandler = () => {
+    editProfile(edit.name, edit.email, edit.photoUrl, edit.password);
     cancelEditProfile();
+  };
+
+  const cancelEnterPasswordHandler = () => setShowEnterPassword(false);
+
+  const checkIfEmailChange = event => {
+    event.preventDefault();
+    email !== edit.email ? setShowEnterPassword(true) : submitEditHandler();
   };
 
   const image = (
@@ -88,42 +96,53 @@ const EditComponent = props => {
   );
 
   return (
-    <ProfileCard image={image}>
-      <form className={classes.FormEdit}>
-        <div>
-          <TextField
-            id="name"
-            label="Name"
-            className={classesMaterial.textField}
-            value={edit.name}
-            onChange={inputChangeHandler("name")}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            id="email"
-            label="Email"
-            className={classesMaterial.textField}
-            value={edit.email}
-            onChange={inputChangeHandler("email")}
-            margin="normal"
-            variant="outlined"
-          />
-        </div>
-        <div className={classes.BtnGroup}>
-          <BtnMedium
-            btnName="Back"
-            btnType="GreenBorder"
-            clicked={cancelEditProfile}
-          />
-          <BtnMedium
-            btnName="Save"
-            btnType="Green"
-            clicked={submitEditHandler}
-          />
-        </div>
-      </form>
-    </ProfileCard>
+    <React.Fragment>
+      <ProfileCard image={image}>
+        <form className={classes.FormEdit}>
+          <div>
+            <TextField
+              id="name"
+              label="Name"
+              className={classesMaterial.textField}
+              value={edit.name}
+              onChange={inputChangeHandler("name")}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              id="email"
+              label="Email"
+              className={classesMaterial.textField}
+              value={edit.email}
+              onChange={inputChangeHandler("email")}
+              margin="normal"
+              variant="outlined"
+            />
+          </div>
+          <div className={classes.BtnGroup}>
+            <BtnMedium
+              btnName="Back"
+              btnType="GreenBorder"
+              clicked={cancelEditProfile}
+            />
+            <BtnMedium
+              btnName="Save"
+              btnType="Green"
+              clicked={checkIfEmailChange}
+            />
+          </div>
+        </form>
+      </ProfileCard>
+      {showEnterPassword ? (
+        <EnterPassword
+          inputChangeHandler={inputChangeHandler}
+          value={edit.password}
+          showEnterPassword={showEnterPassword}
+          cancelEnterPassword={cancelEnterPasswordHandler}
+          submitHandler={submitEditHandler}
+        />
+      ) : null}
+    </React.Fragment>
   );
 };
 

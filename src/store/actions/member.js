@@ -49,12 +49,13 @@ export const authCheckState = hasPreference => {
   };
 };
 
-export const editProfile = (name, email, photoUrl) => {
+export const editProfile = (name, email, photoUrl, password) => {
   return {
     type: actionTypes.MEMBER_EDIT_PROFILE,
     name,
     email,
-    photoUrl
+    photoUrl,
+    password
   };
 };
 
