@@ -149,24 +149,20 @@ const EditComponent = props => {
             onChange={profPictChangeHandler}
           />
           <label>
-            <BtnSmall btnName="Upload" className={classes.ButtonSmall} />
+            <BtnSmall className={classes.ButtonSmall}>Upload</BtnSmall>
           </label>
         </div>
       </div>
       <form className={classes.FormEdit}>
         {content}
-        {showError ? <ErrorMessage message={"PASSWORD_NOT_MATCH"}/> : null}
+        {showError ? <ErrorMessage message={"PASSWORD_NOT_MATCH"} /> : null}
         <div className={classes.Btn}>
-          <BtnMedium
-            btnName="Back"
-            btnType="GreenBorder"
-            clicked={props.backToProfile}
-          />
-          <BtnMedium
-            btnName="Save"
-            btnType="Green"
-            clicked={submitEditHandler}
-          />
+          <BtnMedium btnType="GreenBorder" clicked={props.backToProfile}>
+            Back
+          </BtnMedium>
+          <BtnMedium btnType="Green" clicked={submitEditHandler}>
+            Save
+          </BtnMedium>
         </div>
       </form>
     </React.Fragment>

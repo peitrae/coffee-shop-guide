@@ -91,11 +91,12 @@ const UpdateData = props => {
             coffeeShopId={coffeeShopId}
           />
           <div className={classes.BtnSubmit}>
-            {readyToSubmit ? (
-              <BtnLarge btnName="Submit" clicked={submitHandler} />
-            ) : (
-              <BtnLarge btnName="Submit" btnType="Disabled" />
-            )}
+            <BtnLarge
+              clicked={submitHandler}
+              btnType={readyToSubmit ? null : "Disabled"}
+            >
+              Submit
+            </BtnLarge>
           </div>
         </form>
       </div>

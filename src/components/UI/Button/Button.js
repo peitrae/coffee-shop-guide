@@ -10,7 +10,7 @@ export const BtnLarge = props => {
   ].join(" ");
   return (
     <button className={btnLarge} onClick={props.clicked}>
-      {props.btnName}
+      {props.children}
     </button>
   );
 };

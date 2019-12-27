@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Card from "../../../components/UI/Card/Card";
 import classes from "./Header.module.css";
@@ -65,11 +65,9 @@ const Header = props => {
               </div>
             ) : null}
             {isAuthenticated ? (
-              <BtnMedium
-                btnName="Rate"
-                btnType="GreenBorder"
-                clicked={ratingHandler}
-              />
+              <BtnMedium btnType="GreenBorder" clicked={ratingHandler}>
+                Rate
+              </BtnMedium>
             ) : null}
           </div>
         </div>

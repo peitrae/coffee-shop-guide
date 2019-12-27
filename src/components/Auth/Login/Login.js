@@ -75,7 +75,9 @@ const Login = props => {
         />
 
         <div className={classes.BtnLogin}>
-          <BtnMedium btnType="Green" clicked={signup} btnName={"Login"} />
+          <BtnMedium btnType="Green" clicked={signup}>
+            Login
+          </BtnMedium>
         </div>
       </form>
     </Modal>

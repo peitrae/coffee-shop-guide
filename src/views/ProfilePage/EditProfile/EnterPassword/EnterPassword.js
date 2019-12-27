@@ -6,7 +6,6 @@ import { BtnMedium } from "../../../../components/UI/Button/Button";
 import classes from "./EnterPassword.module.css";
 
 const EnterPassword = props => {
-  
   const {
     show,
     value,
@@ -16,12 +15,7 @@ const EnterPassword = props => {
   } = props;
 
   return (
-    <Modal
-      show={show}
-      close={cancelHandler}
-      header={"Enter Password"}
-      small
-    >
+    <Modal show={show} close={cancelHandler} header={"Enter Password"} small>
       <p className={classes.Desc}>Enter your password to change the email.</p>
       <form>
         <TextForm
@@ -34,7 +28,9 @@ const EnterPassword = props => {
         />
       </form>
       <div className={classes.BtnSubmit}>
-        <BtnMedium btnName="Submit" btnType="Green" clicked={submitHandler} />
+        <BtnMedium btnType="Green" clicked={submitHandler}>
+          Submit
+        </BtnMedium>
       </div>
     </Modal>
   );

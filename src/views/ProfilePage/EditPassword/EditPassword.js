@@ -86,16 +86,12 @@ const EditComponent = props => {
           />
         </div>
         <div className={classes.BtnGroup}>
-          <BtnMedium
-            btnName="Back"
-            btnType="GreenBorder"
-            clicked={cancelEditPassword}
-          />
-          <BtnMedium
-            btnName="Save"
-            btnType="Green"
-            clicked={submitEditHandler}
-          />
+          <BtnMedium btnType="GreenBorder" clicked={cancelEditPassword}>
+            Back
+          </BtnMedium>
+          <BtnMedium btnType="Green" clicked={submitEditHandler}>
+            Save
+          </BtnMedium>
         </div>
       </form>
     </ProfileCard>

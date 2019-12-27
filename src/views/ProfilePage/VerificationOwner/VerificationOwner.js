@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import classes from "./VerificationOwner.module.css";
 import { BtnMedium } from "../../../components/UI/Button/Button";
 import envelopeIco from "../../../assets/logo/envelope.png";
-import Modal from "../../../components/UI/Modal/Modal"
+import Modal from "../../../components/UI/Modal/Modal";
 import * as actions from "../../../store/actions/member";
 
 const VerificationOwner = props => {
@@ -30,19 +30,23 @@ const VerificationOwner = props => {
   }, [timeLeft]);
 
   return (
-    <Modal modalType={classes.Verification} show={props.show} close={props.close}>
+    <Modal
+      modalType={classes.Verification}
+      show={props.show}
+      close={props.close}
+    >
       <h1 className={classes.Header}>{"Verify your email"}</h1>
       <img src={envelopeIco} alt="email" className={classes.EnvelopeIco} />
-      <span className={classes.Desc}>Check your email for a verification link</span>
+      <span className={classes.Desc}>
+        Check your email for a verification link
+      </span>
       <div className={classes.Btn}>
         {emailVerified ? null : timeLeft ? (
-          <BtnMedium btnName={`${timeLeft}s`} btnType="Disabled" />
+          <BtnMedium btnType="Disabled">{`${timeLeft}s`}</BtnMedium>
         ) : (
-          <BtnMedium
-            btnName="Resend"
-            btnType="Green"
-            clicked={resendEmail}
-          />
+          <BtnMedium btnType="Green" clicked={resendEmail}>
+            Resend
+          </BtnMedium>
         )}
       </div>
     </Modal>

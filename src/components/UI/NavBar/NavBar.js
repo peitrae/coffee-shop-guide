@@ -55,11 +55,9 @@ const NavBar = props => {
             {isAuthenticated ? (
               <ProfileLogo clicked={profileLogoClickedHandler} />
             ) : (
-              <BtnMedium
-                btnName="Login"
-                clicked={() => setIsLogin(true)}
-                btnType="WhiteBorder"
-              />
+              <BtnMedium clicked={() => setIsLogin(true)} btnType="WhiteBorder">
+                Login
+              </BtnMedium>
             )}
           </div>
         </div>

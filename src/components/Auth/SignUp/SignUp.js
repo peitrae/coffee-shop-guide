@@ -89,7 +89,7 @@ const SignUp = props => {
         />
 
         <div className={classes.BtnSignUp}>
-          <BtnMedium btnType="Green" btnName={"Sign Up"} />
+          <BtnMedium btnType="Green">Sign Up</BtnMedium>
         </div>
       </form>
     </Modal>

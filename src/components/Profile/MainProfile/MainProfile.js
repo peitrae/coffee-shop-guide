@@ -21,7 +21,7 @@ const MainProfile = props => {
 
   const toBeOwnerHandler = () => {
     toBeOwner();
-    showVerificationHandler()
+    showVerificationHandler();
   };
 
   const addCoffeeShop = () => props.history.push("/update-coffee-shop");
@@ -29,35 +29,27 @@ const MainProfile = props => {
   let mainButton = null;
   if (emailVerified) {
     mainButton = (
-      <BtnMedium
-        btnName="Add Coffee Shop"
-        btnType="Green"
-        clicked={addCoffeeShop}
-      />
+      <BtnMedium btnType="Green" clicked={addCoffeeShop}>
+        Add Coffee Shop
+      </BtnMedium>
     ); // Change clicked to edit/add page
   } else if (!emailVerified) {
     mainButton = (
-      <BtnMedium
-        btnName="Verification"
-        btnType="Green"
-        clicked={() => toBeOwnerHandler()}
-      />
+      <BtnMedium btnType="Green" clicked={() => toBeOwnerHandler()}>
+        Verification
+      </BtnMedium>
     );
   }
 
   return (
     <div className={classes.Profile}>
       <div className={classes.DivEdit}>
-        <BtnSmall
-          className={classes.BtnSmall}
-          btnName={"Edit Profile"}
-          clicked={editProfileClicked}
-        />
-        <BtnSmall
-          className={classes.BtnSmall}
-          btnName={"Edit Password"}
-          clicked={editPasswordClicked}
-        />
+        <BtnSmall className={classes.BtnSmall} clicked={editProfileClicked}>
+          Edit Profile
+        </BtnSmall>
+        <BtnSmall className={classes.BtnSmall} clicked={editPasswordClicked}>
+          Edit Password
+        </BtnSmall>
       </div>
       <div className={classes.DivProfile}>
         <span className={classes.Name}>{name}</span>

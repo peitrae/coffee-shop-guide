@@ -56,7 +56,7 @@ const Header = props => {
               onChange={headerChangeHandler}
             />
             <div>
-              <BtnMedium btnName="Edit Header" btnType="WhiteBorder" />
+              <BtnMedium btnType="WhiteBorder">Edit Header</BtnMedium>
             </div>
           </label>
           ;

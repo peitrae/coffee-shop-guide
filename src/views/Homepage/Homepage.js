@@ -11,10 +11,10 @@ const Homepage = props => {
   const [showPreference, setShowPreference] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
-  const userData = useSelector(state => state.member)
+  const userData = useSelector(state => state.member);
 
-  const authenticated = userData.token !== null
-  const {localId, token, preference} = userData
+  const authenticated = userData.token !== null;
+  const { localId, token, preference } = userData;
 
   const preferenceCancelHandler = () => setShowPreference(false);
 
@@ -24,11 +24,9 @@ const Homepage = props => {
     preference ? props.history.push("/search") : setShowPreference(true);
   };
 
-  let button = (
-    <BtnLarge btnName="Sign Up" clicked={() => setShowSignUp(true)} />
-  );
+  let button = <BtnLarge clicked={() => setShowSignUp(true)}>Sign Up</BtnLarge>;
   if (authenticated) {
-    button = <BtnLarge btnName="Search" clicked={searchContinueHandler} />;
+    button = <BtnLarge clicked={searchContinueHandler}>Search</BtnLarge>;
   }
 
   return (
@@ -39,7 +37,12 @@ const Homepage = props => {
       <h1 className={style.Header}>Find the best coffee shop in Malang</h1>
       <div className={style.BtnFind}>{button}</div>
       {showPreference ? (
-        <Preference show={showPreference} close={preferenceCancelHandler} localId={localId} token={token}/>
+        <Preference
+          show={showPreference}
+          close={preferenceCancelHandler}
+          localId={localId}
+          token={token}
+        />
       ) : null}
     </div>
   );

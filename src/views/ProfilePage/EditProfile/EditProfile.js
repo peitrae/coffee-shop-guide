@@ -120,16 +120,12 @@ const EditComponent = props => {
             />
           </div>
           <div className={classes.BtnGroup}>
-            <BtnMedium
-              btnName="Back"
-              btnType="GreenBorder"
-              clicked={cancelEditProfile}
-            />
-            <BtnMedium
-              btnName="Save"
-              btnType="Green"
-              clicked={checkIfEmailChange}
-            />
+            <BtnMedium btnType="GreenBorder" clicked={cancelEditProfile}>
+              Back
+            </BtnMedium>
+            <BtnMedium btnType="Green" clicked={checkIfEmailChange}>
+              Save
+            </BtnMedium>
           </div>
         </form>
       </ProfileCard>

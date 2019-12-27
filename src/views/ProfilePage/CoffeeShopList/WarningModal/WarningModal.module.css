@@ -1,0 +1,10 @@
+.Desc {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .BtnGroup {
+    display: flex;
+    justify-content: center;
+  }
+  
