@@ -137,8 +137,8 @@ const EditComponent = props => {
         <EnterPassword
           inputChangeHandler={inputChangeHandler}
           value={edit.password}
-          showEnterPassword={showEnterPassword}
-          cancelEnterPassword={cancelEnterPasswordHandler}
+          show={showEnterPassword}
+          cancelHandler={cancelEnterPasswordHandler}
           submitHandler={submitEditHandler}
         />
       ) : null}

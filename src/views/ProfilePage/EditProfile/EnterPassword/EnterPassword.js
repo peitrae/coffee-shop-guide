@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import Modal from "../../../../components/UI/Modal/Modal";
 
 import TextForm from "../../../../components/UI/TextForm/TextForm";
-import CloseButton from "../../../../components/UI/Button/CloseButton/CloseButton";
 import { BtnMedium } from "../../../../components/UI/Button/Button";
 import classes from "./EnterPassword.module.css";
 
 const EnterPassword = props => {
+  
   const {
-    showEnterPassword,
+    show,
     value,
-    cancelEnterPassword,
+    cancelHandler,
     submitHandler,
     inputChangeHandler
   } = props;
 
   return (
-    <Modal show={showEnterPassword} close={cancelEnterPassword} cancelHandler={cancelEnterPassword}>
-      <h2>Enter Password</h2>
+    <Modal
+      show={show}
+      close={cancelHandler}
+      header={"Enter Password"}
+      small
+    >
       <p className={classes.Desc}>Enter your password to change the email.</p>
       <form>
         <TextForm
