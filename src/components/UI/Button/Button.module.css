@@ -1,4 +1,4 @@
-.ButtonLarge {
+.BtnLarge {
   width: 175px;
   height: 48px;
   background: #219653;
@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.ButtonMedium {
+.BtnMedium {
   min-width: 96px;
   padding: 0 12px;
   height: 36px;
@@ -26,32 +26,19 @@
   cursor: pointer;
 }
 
-.ButtonSmall {
+.BtnSmall {
   font-weight: 500;
   font-size: 14px;
   color: #219653;
   padding: 0;
 }
 
-.ButtonSmall:hover {
+.BtnSmall:hover {
   font-weight: 600;
 }
 
 .Danger {
   color: #eb5757;
-}
-
-.ButtonClose {
-  height: 24px;
-  width: 24px;
-  background-color: #eb5757;
-  color: #fafafa;
-  border-radius: 4px;
-  font-size: 10px;
-}
-
-.ButtonClose:hover {
-  background-color: #f03b3b;
 }
 
 .Disabled {
