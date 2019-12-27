@@ -5,6 +5,8 @@
   
   .BtnGroup {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    width: 204px;
+    margin: 32px auto 0 auto;
   }
   
