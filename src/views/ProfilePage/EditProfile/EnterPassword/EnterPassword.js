@@ -16,8 +16,7 @@ const EnterPassword = props => {
   } = props;
 
   return (
-    <Modal show={showEnterPassword} close={cancelEnterPassword}>
-      <CloseButton className={classes.Close} clicked={cancelEnterPassword} />
+    <Modal show={showEnterPassword} close={cancelEnterPassword} cancelHandler={cancelEnterPassword}>
       <h2>Enter Password</h2>
       <p className={classes.Desc}>Enter your password to change the email.</p>
       <form>

@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "../../UI/Modal/Modal";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import { BtnMedium } from "../../UI/Button/Button";
-import { CloseButton } from "../../UI/Button/CloseButton/CloseButton";
 import classes from "./Login.module.css";
 
 const useStyles = makeStyles(theme => ({
@@ -53,7 +52,6 @@ const Login = props => {
       clicked={clicked}
       modalType={classes.Login}
     >
-      <CloseButton className={classes.Close} clicked={close} />
       {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       <form className={classes.FormLogin} onSubmit={submitHandler}>
         <TextField
