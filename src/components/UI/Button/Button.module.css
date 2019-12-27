@@ -33,7 +33,7 @@
   padding: 0;
 }
 
-.ButtonSmall:hover{
+.ButtonSmall:hover {
   font-weight: 600;
 }
 
@@ -54,8 +54,6 @@
   background-color: #f03b3b;
 }
 
-
-
 .Disabled {
   background: #d7d7d7;
   color: #b6b6b6;
@@ -75,11 +73,15 @@
   color: #219653;
 }
 
-/* .CheckboxButton {
+.CheckboxButton {
   border-radius: 4px;
   height: 30px;
   min-width: 98px;
   border: 1px solid #219653;
   box-sizing: border-box;
   box-shadow: 0px 2px 2px rgba(156, 39, 176, 0.2);
-} */
+}
+
+.CheckboxButton:hover {
+  font-weight: 500;
+}

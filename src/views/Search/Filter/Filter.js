@@ -93,7 +93,7 @@ const Filter = props => {
 
   const priceCheckedChangedHandler = priceRange => {
     if (priceChecked) priceRange = false;
-    if (showPriceRangeGroup)  setShowPriceRangeGroup(!showPriceRangeGroup);
+    if (showPriceRangeGroup) setShowPriceRangeGroup(!showPriceRangeGroup);
     setFilter({ ...filter, priceChecked: priceRange });
   };
 
@@ -103,9 +103,10 @@ const Filter = props => {
       <div className={classes.Price}>
         <BtnSmall
           btnType="CheckboxButton"
-          btnName="Price"
           clicked={() => setShowPriceRangeGroup(!showPriceRangeGroup)}
-        />
+        >
+          Price
+        </BtnSmall>
         {showPriceRangeGroup ? (
           <PriceRadioBtnGroup
             className={classes.PriceRadioBtnGroup}
