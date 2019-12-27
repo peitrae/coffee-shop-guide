@@ -24,7 +24,7 @@ const MiniLists = props => {
   }
 
   return (
-    <Card className={classes.MiniLists}>
+    <Card className={classes.MiniLists} shadow>
       <h2 className={classes.HeaderList}>{headerList}</h2>
       {coffeeShopList.map(coffeeShop => {
         let ico = defaultIco;

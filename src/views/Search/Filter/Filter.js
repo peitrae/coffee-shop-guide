@@ -98,7 +98,7 @@ const Filter = props => {
   };
 
   return (
-    <Card className={classes.Filter}>
+    <Card className={classes.Filter} shadow>
       <h3>Filter: </h3>
       <div className={classes.Price}>
         <BtnSmall
