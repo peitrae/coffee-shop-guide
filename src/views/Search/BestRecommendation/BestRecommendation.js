@@ -8,7 +8,7 @@ const BestRecommendation = props => {
   return (
     <NavLink to={`/coffee-shop/${props.coffeeShopId}`}>
       <div className={classes.GreenLine}></div>
-      <Card cardType={classes.BestRecommendation}>
+      <Card className={classes.BestRecommendation}>
         <h1>Best for you</h1>
         <img src={props.image} alt={props.name} />
         <div className={classes.Description}>

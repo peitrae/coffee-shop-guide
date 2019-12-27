@@ -53,7 +53,7 @@ const Images = props => {
   }
 
   return (
-    <Card cardType={classes.Card}>
+    <Card className={classes.Card}>
       <h2>Images</h2>
       <div className={classes.Images}>
         {preview.map((img, index) => (

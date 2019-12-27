@@ -48,7 +48,7 @@ const Information = props => {
   };
 
   return (
-    <Card cardType={classes.Card}>
+    <Card className={classes.Card}>
       <h2>Information</h2>
       <div>
         <div>

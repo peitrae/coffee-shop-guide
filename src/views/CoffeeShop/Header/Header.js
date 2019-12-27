@@ -47,7 +47,7 @@ const Header = props => {
           localId={localId}
         />
       ) : null}
-      <Card cardType={classes.Header}>
+      <Card className={classes.Header}>
         <img
           src={header}
           alt="Coffee Shop Header"

@@ -10,7 +10,7 @@ const Information = props => {
   const day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
   return (
-    <Card cardType={classes.Information}>
+    <Card className={classes.Information}>
       <h2 className={classes.HeaderText}>Information</h2>
       <div className={classes.Desc}>
         <div>

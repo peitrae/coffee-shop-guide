@@ -8,7 +8,7 @@ const PriceRadioBtnGroup = props => {
   const { clicked, checked, className } = props
   const style = [classes.RadioButtonGroup, [className]].join(' ')
   return(
-  <Card cardType={style}>
+  <Card className={style}>
     <RadioButton
       inputId={"belowTen"}
       clicked={() => clicked("belowTen")}

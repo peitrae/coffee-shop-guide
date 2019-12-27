@@ -7,7 +7,7 @@ const modal = props => (
   
   <React.Fragment>
     <Backdrop show={props.show} close={props.close} />
-    <Card cardType={[classes.Modal, [props.modalType]].join(" ")}>
+    <Card className={[classes.Modal, [props.modalType]].join(" ")}>
       <h1 className={classes.Header}>{props.header}</h1>
       {props.children}
     </Card>

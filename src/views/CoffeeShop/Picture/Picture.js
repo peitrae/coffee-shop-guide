@@ -12,7 +12,7 @@ const Images = () => {
   }
 
   return (
-    <Card cardType={classes.Picture}>
+    <Card className={classes.Picture}>
       <h2 className={classes.HeaderText}>Images</h2>
       <div className={classes.PictureLists}>
         {images.map((img, index) => (

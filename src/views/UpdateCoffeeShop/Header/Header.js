@@ -38,7 +38,7 @@ const Header = props => {
   };
 
   return (
-    <Card cardType={classes.Card}>
+    <Card className={classes.Card}>
       <div>
         <img
           src={headerPreview}

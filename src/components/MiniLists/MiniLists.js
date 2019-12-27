@@ -17,14 +17,14 @@ const MiniLists = props => {
 
   if (!coffeeShopList) {
     return (
-      <Card cardType={classes.MiniLists}>
+      <Card className={classes.MiniLists}>
         <Spinner />
       </Card>
     );
   }
 
   return (
-    <Card cardType={classes.MiniLists}>
+    <Card className={classes.MiniLists}>
       <h2 className={classes.HeaderList}>{headerList}</h2>
       {coffeeShopList.map(coffeeShop => {
         let ico = defaultIco;

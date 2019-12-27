@@ -23,7 +23,7 @@ const BubbleBox = props => {
         close={props.close}
         backdropType="Transparent"
       />
-      <Card cardType={classes.BubbleBox}>
+      <Card className={classes.BubbleBox}>
         <NavLink to={"/profile"} className={classes.Link}>
           <div onClick={props.close}>Profile</div>
         </NavLink>

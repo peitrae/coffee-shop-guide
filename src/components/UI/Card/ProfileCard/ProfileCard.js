@@ -5,7 +5,7 @@ import classes from "./ProfileCard.module.css";
 import Card from "../Card";
 
 const ProfileCard = props => (
-  <Card cardType={classes.ProfileCard}>
+  <Card className={classes.ProfileCard}>
     <div className={classes.GreenDiv}>{props.image}</div>
     <div>
       <div className={classes.Section}>{props.children}</div>

@@ -6,7 +6,7 @@ import classes from "./RecommendationLists.module.css";
 
 const recommendationLists = props => (
   <NavLink to={`/coffee-shop/${props.coffeeShopId}`}>
-    <Card cardType={classes.List}>
+    <Card className={classes.List}>
       <img src={props.image} alt={props.name} className={classes.ImgList} />
       <div className={classes.ListDescription}>
         <h2>{props.name}</h2>

@@ -28,7 +28,7 @@ const Profile = props => {
   };
 
   return (
-    <Card cardType={classes.ProfileCard}>
+    <Card className={classes.ProfileCard}>
       <div className={classes.GreenDiv}></div>
       <img
         src={profPict || ProfileImg}

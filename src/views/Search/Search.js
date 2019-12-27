@@ -58,7 +58,7 @@ const Search = props => {
   };
 
   const listIsEmpty = () => (
-    <Card cardType={classes.ListIsEmpty}>
+    <Card className={classes.ListIsEmpty}>
       <span>Empty</span>
     </Card>
   );
