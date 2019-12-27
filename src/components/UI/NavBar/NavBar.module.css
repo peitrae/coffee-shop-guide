@@ -1,21 +1,55 @@
 .Toolbar {
-    z-index: 1000;
-    position: fixed;
-    width: 100%;
-    height: 68px;
-    box-shadow: none;
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  height: 68px;
 }
 
-.Header {
-    width: 100%;
-    height: 100%;
-    background: none;
+.Nav {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  box-sizing: border-box;
 }
 
-.NavButton{
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
+.Logo {
+  font-size: 21px;
+  font-weight: 700;
+  font-style: italic;
+  color: #fafafa;
+}
+
+.NavList {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.NavLink {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fafafa;
+  padding: 6px 10px;
+  margin-left: 8px;
+}
+
+.NavLink:hover {
+  background-color: rgba(70, 70, 70, 0.2);
+  border-radius: 4px;
+}
+
+.Vline {
+  height: 36px;
+  width: 2px;
+  background-color: rgba(70, 70, 70, 0.4);
+  margin-left: 8px;
+}
+
+.NavBtn {
+  cursor: pointer;
+  margin-left: 8px;
 }
