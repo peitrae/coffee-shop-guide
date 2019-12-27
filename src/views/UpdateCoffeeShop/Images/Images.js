@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Card from "../../../components//UI/Card/Card";
 import uploadPictureIco from "../../../assets/logo/uploadPicture.png";
@@ -11,10 +11,9 @@ import UploadImage from "../../../components/UI/Button/UploadImage/UploadImage";
 const Images = props => {
   const { images, coffeeShopName, setImage, setReadyToSubmit } = props;
 
-  const tempImages = images
-  const [preview, setPreview] = useState(tempImages);
+  const [preview, setPreview] = useState([]);
 
-  console.log(images)
+  useEffect(() => setPreview(images), [images]);
 
   const uploadImageHandler = (edit, index) => event => {
     const img = event.target.files[0];
@@ -22,6 +21,7 @@ const Images = props => {
 
     uploadImage(img, reference)
       .then(response => {
+        const tempImages = [...images];
         tempImages.push(response);
         setImage(tempImages);
       })
