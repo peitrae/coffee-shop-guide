@@ -9,29 +9,27 @@ import { CloseButtonWhite } from "../../../components/UI/Button/CloseButton/Clos
 import UploadImage from "../../../components/UI/Button/UploadImage/UploadImage";
 
 const Images = props => {
-  const { state, setState, setReadyToSubmit } = props;
+  const { images, coffeeShopName, setImage, setReadyToSubmit } = props;
 
-  const [preview, setPreview] = useState(state.images);
+  const tempImages = images || []
+  const [preview, setPreview] = useState(tempImages);
 
   const uploadImageHandler = (edit, index) => event => {
     const img = event.target.files[0];
-    const reference = "coffeeShop/images/" + state.name;
-
-    console.log(edit)
+    const reference = "coffeeShop/images/" + coffeeShopName;
 
     uploadImage(img, reference)
       .then(response => {
-        const tempImages = state.images || [];
         tempImages.push(response);
-        setState({ ...state, images: tempImages });
+        setImage(tempImages);
       })
       .catch(error => console.log(error));
 
     let reader = new FileReader();
     reader.onloadend = () => {
       const tempPreview = [...preview];
-      edit 
-        ? tempPreview[index] = reader.result
+      edit
+        ? (tempPreview[index] = reader.result)
         : tempPreview.push(reader.result);
       setPreview(tempPreview);
     };
@@ -40,13 +38,13 @@ const Images = props => {
 
   const deleteImageHandler = index => event => {
     event.preventDefault();
-    const tempImages = [...state.images];
+    const tempImages = [...images];
     tempImages.splice(index, 1);
-    setState({ ...state, images: tempImages });
+    tempImages(tempImages);
     setPreview(tempImages);
   };
 
-  if (state.images.length === preview.length) {
+  if (images.length === preview.length) {
     setReadyToSubmit(true);
   } else {
     setReadyToSubmit(false);
@@ -59,10 +57,10 @@ const Images = props => {
         {preview.map((img, index) => (
           <UploadImage
             key={index}
-            uploadHandler={() => uploadImageHandler(true, index)}
+            uploadHandler={() => uploadImageHandler(index)}
           >
             <div className={classes.BtnUpload}>
-              {state.images[index] ? null : <CircularProgress />}
+              {images[index] ? null : <CircularProgress />}
               <CloseButtonWhite
                 className={classes.Close}
                 clicked={deleteImageHandler(index)}
@@ -72,7 +70,7 @@ const Images = props => {
           </UploadImage>
         ))}
         {preview.length < 4 ? (
-          <UploadImage uploadHandler={() => uploadImageHandler()}>
+          <UploadImage uploadHandler={uploadImageHandler}>
             <div className={[classes.BtnUpload, classes.Border].join(" ")}>
               <img
                 src={uploadPictureIco}

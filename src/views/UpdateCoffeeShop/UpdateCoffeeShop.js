@@ -70,6 +70,8 @@ const UpdateData = props => {
   if (redirectToCoffeeShop)
     props.history.push(`/coffee-shop/${redirectToCoffeeShop}`);
 
+  const setImage = images => setCoffeeShop({ ...coffeeShop, images: images });
+
   const submitHandler = event => {
     event.preventDefault();
     setCoffeeShopData(coffeeShop, coffeeShopId);
@@ -82,8 +84,9 @@ const UpdateData = props => {
           <Header state={coffeeShop} setState={setCoffeeShop} />
           <Information state={coffeeShop} setState={setCoffeeShop} />
           <Images
-            state={coffeeShop}
-            setState={setCoffeeShop}
+            images={coffeeShop.images}
+            coffeeShopName={coffeeShop.name}
+            setImage={setImage}
             setReadyToSubmit={setReadyToSubmit}
             coffeeShopId={coffeeShopId}
           />
