@@ -21,12 +21,8 @@ const useStyles = makeStyles(theme => ({
 const Information = props => {
   const classesMaterial = useStyles();
 
-  const { state, setState } = props
-  const {
-    averagePrice,
-    contact,
-    facilities
-  } = state;
+  const { state, setState } = props;
+  const { averagePrice, contact, facilities } = state;
 
   const inputChangeHandler = type => event => {
     setState({ ...state, [type]: event.target.value });
@@ -113,28 +109,30 @@ const Information = props => {
                           </td>
                           <td className={classes.ButtonPaddingHelper}>
                             <BtnSmall
-                              btnName="Delete"
                               btnType="Danger"
-                              clicked={() =>
-                                deleteHandler("facilities", index)
-                              }
-                            />
+                              clicked={() => deleteHandler("facilities", index)}
+                            >
+                              Delete
+                            </BtnSmall>
                           </td>
                         </tr>
                       ))}
                       <tr>
                         <td>
-                          <BtnSmall
-                            btnName="Add More"
-                            clicked={addFacilitiesHandler}
-                          />
+                          <BtnSmall clicked={addFacilitiesHandler}>
+                            Add More
+                          </BtnSmall>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </td>
               </tr>
-              <OperationalHours state={state} setState={setState} deleteHandler={deleteHandler}/>
+              <OperationalHours
+                state={state}
+                setState={setState}
+                deleteHandler={deleteHandler}
+              />
             </tbody>
           </table>
         </div>

@@ -161,12 +161,11 @@ const OperationalHours = props => {
                     </td>
                     <td className={classes.ButtonPaddingHelper}>
                       <BtnSmall
-                        btnName="Delete"
                         btnType="Danger"
                         clicked={() =>
                           deleteHandler("operationalHours", index)
                         }
-                      />
+                      >Delete</BtnSmall>
                     </td>
                   </tr>
                 );
@@ -175,9 +174,8 @@ const OperationalHours = props => {
                 <td>
                   {operationalHours.length < 7 ? (
                     <BtnSmall
-                      btnName="Add More"
                       clicked={addOperationalHoursHandler}
-                    />
+                    >Add More</BtnSmall>
                   ) : null}
                 </td>
               </tr>
