@@ -57,7 +57,7 @@ const UpdateData = props => {
     if (userLocalId) setCoffeeShop({ ...coffeeShop, uploadedBy: userLocalId });
   }, [userLocalId]);
 
-  const editCoffeeShopNotReady = coffeeShopId && !coffeeShopData;
+  const editCoffeeShopNotReady = !coffeeShopData;
   const addCoffeeShopNotReady = !userLocalId;
 
   if (editCoffeeShopNotReady || addCoffeeShopNotReady)

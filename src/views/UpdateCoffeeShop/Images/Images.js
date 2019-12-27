@@ -11,8 +11,10 @@ import UploadImage from "../../../components/UI/Button/UploadImage/UploadImage";
 const Images = props => {
   const { images, coffeeShopName, setImage, setReadyToSubmit } = props;
 
-  const tempImages = images || []
+  const tempImages = images
   const [preview, setPreview] = useState(tempImages);
+
+  console.log(images)
 
   const uploadImageHandler = (edit, index) => event => {
     const img = event.target.files[0];
