@@ -12,6 +12,13 @@
   width: 390px;
 }
 
+.Img {
+  width: 148px;
+  height: 148px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
 .Address {
   font-weight: bold;
   font-size: 14px;

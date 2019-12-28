@@ -9,6 +9,7 @@ import classes from "./Search.module.css";
 import * as actions from "../../store/actions";
 import Card from "../../components/UI/Card/Card";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import noImage from  "../../assets/JavaDancerCoffee1.png"
 
 const Search = props => {
   const userPreference = useSelector(state => state.member.preference);
@@ -83,7 +84,7 @@ const Search = props => {
             return (
               <RecommendationLists
                 key={coffeeShop.id}
-                image={"./JavaDancerCoffee1.png"}
+                image={coffeeShop.images ? coffeeShop.images[0] : noImage}
                 name={coffeeShop.name}
                 address={coffeeShop.address}
                 operationalHours={
