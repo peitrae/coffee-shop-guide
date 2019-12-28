@@ -7,7 +7,8 @@ import WarningModal from "./WarningModal/WarningModal";
 import * as actions from "../../../store/actions";
 
 const CoffeeShopList = props => {
-  const [showWarning, setShowWarning] = useState(true);
+  const [showWarning, setShowWarning] = useState(false);
+  const [deleteSelected, setDeleteSelected] = useState(null);
 
   const coffeeShopList = useSelector(state => state.member.coffeeShopList);
 
@@ -29,10 +30,20 @@ const CoffeeShopList = props => {
     getCoffeeShopUploadedBy(localId);
   }, [localId]);
 
-  const cancelWarningHandler = () => setShowWarning(false);
+  const cancelWarningHandler = () => {
+    setDeleteSelected(null);
+    setShowWarning(false);
+  };
 
   const deleteCoffeeShopHandler = coffeeShopId => {
-    deleteCoffeeShop(coffeeShopId);
+    setDeleteSelected(coffeeShopId);
+    setShowWarning(true);
+  };
+
+  const deleteWarningHandler = () => {
+    deleteCoffeeShop(deleteSelected);
+    setShowWarning(false);
+    setDeleteSelected(null);
   };
 
   return (
@@ -48,7 +59,7 @@ const CoffeeShopList = props => {
         <WarningModal
           show={showWarning}
           cancelHandler={cancelWarningHandler}
-          submitWarningHandler={deleteCoffeeShopHandler}
+          submitWarningHandler={deleteWarningHandler}
         />
       ) : null}
     </React.Fragment>
