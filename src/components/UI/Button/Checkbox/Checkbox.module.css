@@ -33,7 +33,7 @@
 }
 
 .Container:hover .CheckboxInput ~ .Checkmark {
-  background-color: #6fcf97;
+  background-color: rgba(111 , 207 , 151, 0.5);
 }
 
 .Container .CheckboxInput:checked ~ .Checkmark {

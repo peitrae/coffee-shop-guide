@@ -101,12 +101,14 @@ const Filter = props => {
     <Card className={classes.Filter} shadow>
       <h3>Filter: </h3>
       <div className={classes.Price}>
-        <BtnSmall
-          btnType="CheckboxButton"
-          clicked={() => setShowPriceRangeGroup(!showPriceRangeGroup)}
+        <Checkbox
+          inputId="priceGroup"
+          changed={() => setShowPriceRangeGroup(!showPriceRangeGroup)}
+          label = "Price"
+          checked={priceChecked}
         >
           Price
-        </BtnSmall>
+        </Checkbox>
         {showPriceRangeGroup ? (
           <PriceRadioBtnGroup
             className={classes.PriceRadioBtnGroup}
@@ -118,19 +120,19 @@ const Filter = props => {
       <Checkbox
         inputId="openNow"
         changed={() => checkBoxHandleChange("openNowChecked")}
-        labelChild="Open Now"
+        label="Open Now"
         checked={openNowChecked}
       />
       <Checkbox
         inputId="wiFi"
         changed={() => checkBoxHandleChange("wiFiChecked")}
-        labelChild="Wi-fi"
+        label="Wi-fi"
         checked={wiFiChecked}
       />
       <Checkbox
         inputId="creditCard"
         changed={() => checkBoxHandleChange("creditCardChecked")}
-        labelChild="Credit Card"
+        label="Credit Card"
         checked={creditCardChecked}
       />
     </Card>

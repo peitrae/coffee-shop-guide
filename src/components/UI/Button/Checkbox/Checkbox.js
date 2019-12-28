@@ -8,13 +8,12 @@ const Checkbox = props => (
       type="checkbox"
       name={props.inputId}
       className={classes.CheckboxInput}
-      value={props.labelChild}
+      value={props.label}
       onChange={props.changed}
-      onClick={props.clicked}
       checked={props.checked}
     />
     <div className={classes.Checkmark}>
-      <div>{props.labelChild}</div>
+      <div>{props.label}</div>
     </div>
   </label>
 )
