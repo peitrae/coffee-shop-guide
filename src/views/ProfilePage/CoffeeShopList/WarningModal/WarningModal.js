@@ -11,6 +11,7 @@ const WarningModal = props => {
       close={props.cancelHandler}
       header={"Warning"}
       small
+      danger
     >
       <p className={classes.Desc}>
         Are you sure want to delete the coffee shop?
