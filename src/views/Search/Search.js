@@ -44,7 +44,7 @@ const Search = props => {
 
     return (
       <BestRecommendation
-        className={classes.BestRecommendation}
+        className={bestCoffeeShop.images ? bestCoffeeShop.images[0] : noImage}
         image={"./Starbuck3.png"}
         name={bestCoffeeShop.name}
         address={bestCoffeeShop.address}
