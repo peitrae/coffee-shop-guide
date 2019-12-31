@@ -4,19 +4,18 @@ import { useSelector } from "react-redux";
 import Card from "../../../components/UI/Card/Card";
 import classes from "./Header.module.css";
 import { BtnMedium } from "../../../components/UI/Button/Button";
-import Rating from "./Rating/Rating";
+import RatingQuestions from "./RatingQuestions/RatingQuestions";
 
-const Header = props => {
+const Header = () => {
   const [showRatingQuest, setShowRatingQuest] = useState(false);
 
   const isAuthenticated = useSelector(state => state.member.token !== null);
-  const localId = useSelector(state => state.member.localId);
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
   const { header, name, address, rating } = coffeeShopData;
 
-  const ratingHandler = () => setShowRatingQuest(true);
+  const showRatingHandler = () => setShowRatingQuest(true);
 
-  const ratingCancelHandler = () => setShowRatingQuest(false);
+  const cancelRatingHandler = () => setShowRatingQuest(false);
 
   const coffeeShopRatingCalculation = () => {
     const ratingArr = [];
@@ -39,12 +38,9 @@ const Header = props => {
   return (
     <React.Fragment>
       {showRatingQuest ? (
-        <Rating
+        <RatingQuestions
           show={showRatingQuest}
-          close={ratingCancelHandler}
-          ratingCoffeeShop={rating}
-          coffeeShopId={props.coffeeShopId}
-          localId={localId}
+          close={cancelRatingHandler}
         />
       ) : null}
       <Card className={classes.Header}>
@@ -65,7 +61,7 @@ const Header = props => {
               </div>
             ) : null}
             {isAuthenticated ? (
-              <BtnMedium btnType="GreenBorder" clicked={ratingHandler}>
+              <BtnMedium btnType="GreenBorder" clicked={showRatingHandler}>
                 Rate
               </BtnMedium>
             ) : null}

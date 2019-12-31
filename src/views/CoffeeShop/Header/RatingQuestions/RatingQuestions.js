@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from 'react-router'
 
 import Questionnaire from "../../../../components/Questionnaire/Questionnaire";
 import * as actions from "../../../../store/actions";
 
-const Rating = props => {
-  const { coffeeShopId, show, close} = props;
+const RatingQuestions = props => {
+  const {show, close} = props;
+  const coffeeShopId = props.match.params.id
+  const ratingCoffeeShop = useSelector(state => state.coffeeShop.data.rating);
+  const localId = useSelector(state => state.member.localId);
 
   let initialValue = [0, 0, 0];
-  // if (ratingCoffeeShop[localId]) initialValue = ratingCoffeeShop[localId];
+  if (ratingCoffeeShop[localId]) initialValue = ratingCoffeeShop[localId];
 
   const [rating, setRating] = useState(initialValue);
 
@@ -50,4 +54,4 @@ const Rating = props => {
   );
 };
 
-export default Rating;
+export default withRouter(RatingQuestions);
