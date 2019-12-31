@@ -21,7 +21,7 @@ const SuggestionList = props => {
 
   const coffeeShopList = useSelector(state => state.allCoffeeShopList.lists);
 
-  if (!coffeeShopList ) return <div className="spinner"><Spinner /></div>;
+  if (!coffeeShopList) return <Spinner />;
 
   const filteredCoffeeShopList = coffeeShopList.filter(
     (list, index) => list.id !== coffeeShopId && index < 6

@@ -24,12 +24,7 @@ const CoffeeShop = props => {
     getCoffeeShopData(coffeeShopId);
   }, [coffeeShopId]);
 
-  if (!coffeeShopData)
-    return (
-      <div className="spinner">
-        <Spinner />
-      </div>
-    );
+  if (!coffeeShopData) return <Spinner />;
 
   return (
     <div className={classes.CoffeeShop}>
