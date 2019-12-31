@@ -9,15 +9,15 @@ import RatingQuestions from "./RatingQuestions/RatingQuestions";
 const Header = () => {
   const [showRatingQuest, setShowRatingQuest] = useState(false);
 
-  const isAuthenticated = useSelector(state => state.member.token !== null);
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
-  const { header, name, address, rating } = coffeeShopData;
+  const { token, header, name, address, rating } = coffeeShopData;
+  const isAuthenticated = token !== null;
 
   const showRatingHandler = () => setShowRatingQuest(true);
 
   const cancelRatingHandler = () => setShowRatingQuest(false);
 
-  const coffeeShopRatingCalculation = () => {
+  const ratingAverage = () => {
     const ratingArr = [];
     for (let key in rating) ratingArr.push(rating[key]);
 
@@ -38,10 +38,7 @@ const Header = () => {
   return (
     <React.Fragment>
       {showRatingQuest ? (
-        <RatingQuestions
-          show={showRatingQuest}
-          close={cancelRatingHandler}
-        />
+        <RatingQuestions show={showRatingQuest} close={cancelRatingHandler} />
       ) : null}
       <Card className={classes.Header}>
         <img
@@ -56,9 +53,7 @@ const Header = () => {
           </div>
           <div className={classes.Feedback}>
             {rating ? (
-              <div className={classes.Rating}>
-                {coffeeShopRatingCalculation()}
-              </div>
+              <div className={classes.Rating}>{ratingAverage()}</div>
             ) : null}
             {isAuthenticated ? (
               <BtnMedium btnType="GreenBorder" clicked={showRatingHandler}>
