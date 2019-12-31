@@ -9,7 +9,7 @@ import classes from "./Search.module.css";
 import * as actions from "../../store/actions";
 import Card from "../../components/UI/Card/Card";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import noImage from  "../../assets/JavaDancerCoffee1.png"
+import noImage from "../../assets/JavaDancerCoffee1.png";
 
 const Search = props => {
   const userPreference = useSelector(state => state.member.preference);
@@ -28,7 +28,7 @@ const Search = props => {
 
   useEffect(() => setTempLists(rawCoffeeShopList), [rawCoffeeShopList]);
 
-  if (!tempLists) return <div className="spinner"><Spinner /></div>; // Change with Spinner (Change later)
+  if (!tempLists) return <Spinner />;
 
   const redirectHandler = id => props.history.push(`/coffee-shop/${id}`);
 
@@ -65,7 +65,7 @@ const Search = props => {
   );
 
   let coffeeShopList = tempLists; // Default if not authenticated
-  const coffeeShopListIsEmpty = !coffeeShopList.length
+  const coffeeShopListIsEmpty = !coffeeShopList.length;
   const todayDay = new Date().getDay();
 
   return (
@@ -98,7 +98,7 @@ const Search = props => {
               />
             );
           })}
-          {coffeeShopListIsEmpty ?  listIsEmpty() : null}
+          {coffeeShopListIsEmpty ? listIsEmpty() : null}
         </div>
       </div>
     </div>

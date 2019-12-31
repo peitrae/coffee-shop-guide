@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from 'react-router'
+import { withRouter } from "react-router";
 
 import MiniLists from "../../../components/MiniLists/MiniLists";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import * as actions from "../../../store/actions";
 
 const SuggestionList = props => {
-
-  const coffeeShopId = props.match.params.id
+  const coffeeShopId = props.match.params.id;
   const dispatch = useDispatch();
   const getCoffeeShopList = useCallback(
     () => dispatch(actions.getAllCoffeeShopList()),
@@ -34,4 +33,4 @@ const SuggestionList = props => {
   );
 };
 
-export default withRouter(SuggestionList)
+export default withRouter(SuggestionList);

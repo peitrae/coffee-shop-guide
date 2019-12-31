@@ -29,12 +29,7 @@ const ProfilePage = () => {
 
   const showVerificationHandler = () => setShowVerification(true);
 
-  if (!userData)
-    return (
-      <div className="spinner">
-        <Spinner />
-      </div>
-    );
+  if (!userData) return <Spinner />;
 
   return (
     <div className={classes.ProfilePage}>

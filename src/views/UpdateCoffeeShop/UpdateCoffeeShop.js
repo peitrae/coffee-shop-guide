@@ -60,12 +60,7 @@ const UpdateData = props => {
   const editCoffeeShopNotReady = coffeeShopId && !coffeeShopData;
   const addCoffeeShopNotReady = !userLocalId;
 
-  if (editCoffeeShopNotReady || addCoffeeShopNotReady)
-    return (
-      <div className="spinner">
-        <Spinner />
-      </div>
-    );
+  if (editCoffeeShopNotReady || addCoffeeShopNotReady) return <Spinner />;
 
   if (redirectToCoffeeShop)
     props.history.push(`/coffee-shop/${redirectToCoffeeShop}`);
