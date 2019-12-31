@@ -43,7 +43,7 @@ const CoffeeShop = props => {
   return (
     <div className={classes.CoffeeShop}>
       <div className={classes.MainDiv}>
-        <Header coffeeShopId={coffeeShopId}/>
+        <Header />
         <Information />
         <Picture />
       </div>
