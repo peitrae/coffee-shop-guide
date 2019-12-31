@@ -10,7 +10,6 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import SuggestionList from "./SuggestionList/SuggestionList";
 
 const CoffeeShop = props => {
-  
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
 
   const dispatch = useDispatch();
@@ -23,12 +22,14 @@ const CoffeeShop = props => {
 
   useEffect(() => {
     getCoffeeShopData(coffeeShopId);
-  }, [coffeeShopId]); 
+  }, [coffeeShopId]);
 
-  
-
-  if (!coffeeShopData ) return <div className="spinner"><Spinner /></div>;
-
+  if (!coffeeShopData)
+    return (
+      <div className="spinner">
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className={classes.CoffeeShop}>
@@ -38,8 +39,7 @@ const CoffeeShop = props => {
         <Picture />
       </div>
       <div className={classes.RightDiv}>
-        <SuggestionList
-        />
+        <SuggestionList />
       </div>
     </div>
   );
