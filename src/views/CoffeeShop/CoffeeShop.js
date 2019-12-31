@@ -5,22 +5,17 @@ import Header from "./Header/Header";
 import Picture from "./Picture/Picture";
 import Information from "./Information/Information";
 import classes from "./CoffeeShop.module.css";
-import MiniLists from "../../components/MiniLists/MiniLists";
 import * as actions from "../../store/actions";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import SuggestionList from "./SuggestionList/SuggestionList";
 
 const CoffeeShop = props => {
   
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
-  const coffeeShopList = useSelector(state => state.allCoffeeShopList.lists);
 
   const dispatch = useDispatch();
   const getCoffeeShopData = useCallback(
     id => dispatch(actions.getCoffeeShopData(id)),
-    [dispatch]
-  );
-  const getCoffeeShopList = useCallback(
-    () => dispatch(actions.getAllCoffeeShopList()),
     [dispatch]
   );
 
@@ -30,15 +25,10 @@ const CoffeeShop = props => {
     getCoffeeShopData(coffeeShopId);
   }, [coffeeShopId]); 
 
-  useEffect(() => {
-    getCoffeeShopList();
-  }, []);
+  
 
-  if (!coffeeShopData || !coffeeShopList) return <div className="spinner"><Spinner /></div>;
+  if (!coffeeShopData ) return <div className="spinner"><Spinner /></div>;
 
-  const filteredCoffeeShopList = coffeeShopList.filter(
-    (list, index) => list.id !== coffeeShopId && index < 6
-  );
 
   return (
     <div className={classes.CoffeeShop}>
@@ -48,9 +38,7 @@ const CoffeeShop = props => {
         <Picture />
       </div>
       <div className={classes.RightDiv}>
-        <MiniLists
-          headerList="You might also like"
-          coffeeShopList={filteredCoffeeShopList}
+        <SuggestionList
         />
       </div>
     </div>
