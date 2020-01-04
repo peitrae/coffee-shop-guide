@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import Checkbox from "../../../components/UI/Button/Checkbox/Checkbox";
-
 import Card from "../../../components/UI/Card/Card";
 import classes from "./Filter.module.css";
 import PriceRadioBtnGroup from "./PriceRadioBtnGroup/PriceRadioBtnGroup";
