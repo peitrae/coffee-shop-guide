@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "../../../../components/UI/Modal/Modal";
 
 import TextForm from "../../../../components/UI/TextForm/TextForm";

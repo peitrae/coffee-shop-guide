@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import TextForm from "../../../components/UI/TextForm/TextForm";
 import UploadButton from "../../../components/UI/Button/UploadButton/UploadButton";
