@@ -16,7 +16,7 @@ const SuggestionList = props => {
 
   useEffect(() => {
     getCoffeeShopList();
-  }, []);
+  }, [getCoffeeShopList]);
 
   const coffeeShopList = useSelector(state => state.allCoffeeShopList.lists);
 
