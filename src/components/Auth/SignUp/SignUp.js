@@ -1,28 +1,14 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 
+import TextForm from "../../../components/UI/TextForm/TextForm";
 import Modal from "../../UI/Modal/Modal";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import { BtnMedium } from "../../UI/Button/Button";
 import classes from "./SignUp.module.css";
 import * as actions from "../../../store/actions/member";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300
-  }
-}));
-
 const SignUp = props => {
-  const classesMaterial = useStyles();
 
   const [signUp, setSignUp] = useState({
     name: "",
@@ -58,33 +44,27 @@ const SignUp = props => {
     >
       {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       <form className={classes.FormSignUp} onSubmit={submitHandler}>
-        <TextField
+        <TextForm
           id="name"
           label="Name"
-          className={classesMaterial.textField}
+          className={"textField-3"}
           value={signUp.name}
-          onChange={inputChangeHandler("name")}
-          margin="normal"
-          variant="outlined"
+          inputHandler={inputChangeHandler("name")}
         />
-        <TextField
+        <TextForm
           id="email"
           label="Email"
-          className={classesMaterial.textField}
+          className={"textField-3"}
           value={signUp.email}
-          onChange={inputChangeHandler("email")}
-          margin="normal"
-          variant="outlined"
+          inputHandler={inputChangeHandler("email")}
         />
-        <TextField
+        <TextForm
           id="password"
           label="Password"
-          className={classesMaterial.textField}
-          onChange={inputChangeHandler("password")}
+          className={"textField-3"}
+          inputHandler={inputChangeHandler("password")}
           type="password"
           autoComplete="current-password"
-          margin="normal"
-          variant="outlined"
           placeholder="At least 6 characters"
         />
 

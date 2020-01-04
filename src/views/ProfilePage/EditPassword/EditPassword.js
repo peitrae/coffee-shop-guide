@@ -1,26 +1,13 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 
+import TextForm from "../../../components/UI/TextForm/TextForm";
 import { BtnMedium } from "../../../components/UI/Button/Button";
 import ProfileCard from "../../../components/UI/Card/ProfileCard/ProfileCard";
 import ProfileImg from "../../../assets/logo/defaultProfile.png";
 import classes from "./EditPassword.module.css";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import * as actions from "../../../store/actions/member";
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300
-  }
-}));
 
 const EditComponent = props => {
   const { photoUrl, cancelEditPassword } = props;
@@ -34,8 +21,6 @@ const EditComponent = props => {
   });
 
   const [showError, setShowError] = useState(false);
-
-  const classesMaterial = useStyles();
 
   const inputChangeHandler = type => event => {
     setEdit({ ...edit, [type]: event.target.value });
@@ -63,26 +48,20 @@ const EditComponent = props => {
     <ProfileCard image={image}>
       {showError ? <ErrorMessage message={"PASSWORD_NOT_MATCH"} /> : null}
       <form className={classes.FormEdit}>
-        <div>
-          <TextField
+        <div className={classes.TextFormGroup}>
+          <TextForm
             id="password"
             label="New Password"
-            className={classesMaterial.textField}
-            onChange={inputChangeHandler("password")}
+            className={"textField-3"}
+            inputHandler={inputChangeHandler("password")}
             type="password"
-            autoComplete="current-password"
-            margin="normal"
-            variant="outlined"
           />
-          <TextField
+          <TextForm
             id="password"
             label="Confirm New Password"
-            className={classesMaterial.textField}
-            onChange={inputChangeHandler("confirmPassword")}
+            className={"textField-3"}
+            inputHandler={inputChangeHandler("confirmPassword")}
             type="password"
-            autoComplete="current-password"
-            margin="normal"
-            variant="outlined"
           />
         </div>
         <div className={classes.BtnGroup}>

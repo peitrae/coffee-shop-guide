@@ -1,26 +1,13 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
+import TextForm from "../../../components/UI/TextForm/TextForm";
 import Card from "../../../components//UI/Card/Card";
 import classes from "./Information.module.css";
 import { BtnSmall } from "../../../components/UI/Button/Button";
 import OperationalHours from "./OperationalHours/OperationalHours";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textFieldHalf: {
-    width: 300
-  }
-}));
-
 const Information = props => {
-  const classesMaterial = useStyles();
-
   const { state, setState } = props;
   const { averagePrice, contact, facilities } = state;
 
@@ -57,15 +44,14 @@ const Information = props => {
               <tr>
                 <th>Average Price</th>
                 <td className={classes.TablePaddingHelper}>
-                  <TextField
+                  <TextForm
                     id="averagePrice"
-                    className={classesMaterial.textFieldHalf}
+                    label={"averagePrice"}
+                    className={"textField-3"}
                     placeholder="Average Price"
                     value={averagePrice}
-                    onChange={inputChangeHandler("averagePrice")}
-                    margin="normal"
+                    inputHandler={inputChangeHandler("averagePrice")}
                     type="number"
-                    variant="outlined"
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">Rp</InputAdornment>
@@ -77,15 +63,14 @@ const Information = props => {
               <tr>
                 <th>Contact</th>
                 <td className={classes.TablePaddingHelper}>
-                  <TextField
+                  <TextForm
                     id="contact"
+                    label="Contact"
+                    className={"textField-3"}
                     placeholder="Contact"
-                    className={classesMaterial.textFieldHalf}
                     value={contact}
-                    onChange={inputChangeHandler("contact")}
-                    margin="normal"
+                    inputHandler={inputChangeHandler("contact")}
                     type="number"
-                    variant="outlined"
                   />
                 </td>
               </tr>
@@ -97,14 +82,13 @@ const Information = props => {
                       {facilities.map((facility, index) => (
                         <tr key={index}>
                           <td>
-                            <TextField
+                            <TextForm
                               id="facilities"
+                              label="Facilities"
                               placeholder="Facilities"
-                              className={classesMaterial.textFieldHalf}
+                              className={"textField-3"}
                               value={facility}
-                              onChange={facilitiesChangeHandler(index)}
-                              margin="normal"
-                              variant="outlined"
+                              inputHandler={facilitiesChangeHandler(index)}
                             />
                           </td>
                           <td className={classes.ButtonPaddingHelper}>

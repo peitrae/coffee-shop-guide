@@ -9,6 +9,9 @@ const useStyles = makeStyles(theme => ({
   },
   "textField-3": {
     width: 300
+  },
+  "textField-6": {
+    width: 535
   }
 }));
 
@@ -17,9 +20,11 @@ const TextForm = props => {
     id,
     label,
     className,
+    placeholder,
     type,
     value,
-    inputHandler
+    inputHandler,
+    InputProps
   } = props;
 
   const classes = useStyles();
@@ -29,11 +34,13 @@ const TextForm = props => {
       id={id}
       label={label}
       className={classes[className]}
+      placeholder={placeholder}
       type={type}
       value={value}
       onChange={inputHandler}
       margin="normal"
       variant="outlined"
+      InputProps={InputProps}
     />
   );
 };

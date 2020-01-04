@@ -1,24 +1,11 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
 
+import TextForm from "../../../components/UI/TextForm/TextForm";
 import Card from "../../../components//UI/Card/Card";
 import classes from "./Header.module.css";
 import { BtnMedium } from "../../../components/UI/Button/Button";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textFieldFull: {
-    width: 535
-  }
-}));
-
 const Header = props => {
-  const classesMaterial = useStyles();
-
   const { state, setState } = props;
   const { header, name, address } = state;
 
@@ -69,28 +56,24 @@ const Header = props => {
               <tr>
                 <th>Name</th>
                 <td>
-                  <TextField
+                  <TextForm
                     id="name"
                     label="Name"
-                    className={classesMaterial.textFieldFull}
+                    className={"textField-6"}
                     value={name}
-                    onChange={inputChangeHandler("name")}
-                    margin="normal"
-                    variant="outlined"
+                    inputHandler={inputChangeHandler("name")}
                   />
                 </td>
               </tr>
               <tr>
                 <th>Address</th>
                 <td>
-                  <TextField
+                  <TextForm
                     id="address"
                     label="Address"
-                    className={classesMaterial.textFieldFull}
+                    className={"textField-6"}
                     value={address}
-                    onChange={inputChangeHandler("address")}
-                    margin="normal"
-                    variant="outlined"
+                    inputHandler={inputChangeHandler("address")}
                   />
                 </td>
               </tr>

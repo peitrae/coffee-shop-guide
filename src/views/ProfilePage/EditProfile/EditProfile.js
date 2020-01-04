@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 
+import TextForm from "../../../components/UI/TextForm/TextForm";
 import UploadButton from "../../../components/UI/Button/UploadButton/UploadButton";
 import ProfileCard from "../../../components/UI/Card/ProfileCard/ProfileCard";
 import ProfileImg from "../../../assets/logo/defaultProfile.png";
@@ -11,18 +10,6 @@ import { BtnMedium, BtnSmall } from "../../../components/UI/Button/Button";
 import uploadImage from "../../../store/firebase/uploadImage";
 import * as actions from "../../../store/actions/member";
 import EnterPassword from "./EnterPassword/EnterPassword";
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300
-  }
-}));
 
 const EditComponent = props => {
   const [profPictPreview, setProfPictPreview] = useState(ProfileImg);
@@ -42,8 +29,6 @@ const EditComponent = props => {
   });
 
   if (photoUrl && profPictPreview === ProfileImg) setProfPictPreview(photoUrl);
-
-  const classesMaterial = useStyles();
 
   const inputChangeHandler = type => event => {
     setEdit({ ...edit, [type]: event.target.value });
@@ -100,23 +85,19 @@ const EditComponent = props => {
       <ProfileCard image={image}>
         <form className={classes.FormEdit}>
           <div>
-            <TextField
+            <TextForm
               id="name"
               label="Name"
-              className={classesMaterial.textField}
+              className={"textField-3"}
               value={edit.name}
-              onChange={inputChangeHandler("name")}
-              margin="normal"
-              variant="outlined"
+              inputHandler={inputChangeHandler("name")}
             />
-            <TextField
+            <TextForm
               id="email"
               label="Email"
-              className={classesMaterial.textField}
+              className={"textField-3"}
               value={edit.email}
-              onChange={inputChangeHandler("email")}
-              margin="normal"
-              variant="outlined"
+              inputHandler={inputChangeHandler("email")}
             />
           </div>
           <div className={classes.BtnGroup}>
