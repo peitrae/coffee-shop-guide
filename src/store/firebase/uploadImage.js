@@ -13,10 +13,7 @@ const uploadImage = (img, reference) => {
 
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
-      snapshot => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      },
+      snapshot => null,
       error => {
         return reject(error.code);
       },
