@@ -11,6 +11,9 @@ import SuggestionList from "./SuggestionList/SuggestionList";
 import Footer from "../../components/UI/Footer/Footer";
 
 const CoffeeShop = props => {
+
+  const coffeeShopId = props.match.params.id;
+
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
 
   const dispatch = useDispatch();
@@ -19,12 +22,12 @@ const CoffeeShop = props => {
     [dispatch]
   );
 
-  const coffeeShopId = props.match.params.id;
+  
 
   useEffect(() => {
     getCoffeeShopData(coffeeShopId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [coffeeShopId]);
 
   if (!coffeeShopData) return <Spinner />;
 
