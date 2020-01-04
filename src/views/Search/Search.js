@@ -64,7 +64,7 @@ const Search = props => {
     </Card>
   );
 
-  let coffeeShopList = tempLists; // Default if not authenticated
+  let coffeeShopList = tempLists;
   const coffeeShopListIsEmpty = !coffeeShopList.length;
   const todayDay = new Date().getDay();
 
