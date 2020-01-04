@@ -33,7 +33,6 @@ const profileMatching = (preference, coffeeShopList) => {
     };
 
     const searchPriceRange = averagePrice => {
-      console.log("searchPriceRange", averagePrice)
       if (averagePrice < 10000)  return 1;
       else if (averagePrice >= 10000 && averagePrice < 30000) return 2;
       else if (averagePrice >= 30000 && averagePrice <= 50000) return 3;
