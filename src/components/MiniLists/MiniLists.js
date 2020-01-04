@@ -4,7 +4,6 @@ import classes from "./MiniLists.module.css";
 import Card from "../UI/Card/Card";
 import List from "./List/List";
 import defaultIco from "../../assets/Starbuck3.png";
-import Spinner from "../UI/Spinner/Spinner";
 
 const MiniLists = props => {
   const {

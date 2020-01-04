@@ -9,7 +9,6 @@ import ProfilePage from "./views/ProfilePage/ProfilePage";
 import CoffeeShop from "./views/CoffeeShop/CoffeeShop";
 import UpdateCoffeeShop from "./views/UpdateCoffeeShop/UpdateCoffeeShop";
 import * as actions from "./store/actions/member";
-import Footer from "./components/UI/Footer/Footer";
 
 const App = () => {
   const hasPreference = useSelector(state => state.member.preference);

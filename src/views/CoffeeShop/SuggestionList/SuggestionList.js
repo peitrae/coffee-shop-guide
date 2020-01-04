@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 
 import MiniLists from "../../../components/MiniLists/MiniLists";
-import Spinner from "../../../components/UI/Spinner/Spinner";
 import * as actions from "../../../store/actions";
 
 const SuggestionList = props => {
