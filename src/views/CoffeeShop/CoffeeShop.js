@@ -8,6 +8,7 @@ import classes from "./CoffeeShop.module.css";
 import * as actions from "../../store/actions";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import SuggestionList from "./SuggestionList/SuggestionList";
+import Footer from "../../components/UI/Footer/Footer";
 
 const CoffeeShop = props => {
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
@@ -28,16 +29,19 @@ const CoffeeShop = props => {
   if (!coffeeShopData) return <Spinner />;
 
   return (
-    <div className={classes.CoffeeShop}>
-      <div className={classes.MainDiv}>
-        <Header />
-        <Information />
-        <Picture />
+    <React.Fragment>
+      <div className={classes.CoffeeShop}>
+        <div className={classes.MainDiv}>
+          <Header />
+          <Information />
+          <Picture />
+        </div>
+        <div className={classes.RightDiv}>
+          <SuggestionList />
+        </div>
       </div>
-      <div className={classes.RightDiv}>
-        <SuggestionList />
-      </div>
-    </div>
+      <Footer />
+    </React.Fragment>
   );
 };
 

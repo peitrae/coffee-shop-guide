@@ -10,6 +10,7 @@ import * as actions from "../../store/actions";
 import Card from "../../components/UI/Card/Card";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import noImage from "../../assets/JavaDancerCoffee1.png";
+import Footer from "../../components/UI/Footer/Footer";
 
 const Search = props => {
   const userPreference = useSelector(state => state.member.preference);
@@ -69,39 +70,42 @@ const Search = props => {
   const todayDay = new Date().getDay();
 
   return (
-    <div className={classes.Search}>
-      <div className={classes.Recommendation}>
-        <div>
-          <Filter
-            allCoffeeShopList={rawCoffeeShopList}
-            filterFunc={filteredDataList}
-          />
-        </div>
-        <div>{userPreference ? userHasPreference() : null}</div>
-        <div>
-          {coffeeShopList.map(coffeeShop => {
-            const todayHours = coffeeShop.operationalHours[todayDay];
-            return (
-              <RecommendationLists
-                key={coffeeShop.id}
-                image={coffeeShop.images ? coffeeShop.images[0] : noImage}
-                name={coffeeShop.name}
-                address={coffeeShop.address}
-                operationalHours={
-                  todayHours
-                    ? `${todayHours.open} - ${todayHours.close}`
-                    : "Close"
-                }
-                averagePrice={`Rp ${coffeeShop.averagePrice}`}
-                redirect={redirectHandler}
-                coffeeShopId={coffeeShop.id}
-              />
-            );
-          })}
-          {coffeeShopListIsEmpty ? listIsEmpty() : null}
+    <React.Fragment>
+      <div className={classes.Search}>
+        <div className={classes.Recommendation}>
+          <div>
+            <Filter
+              allCoffeeShopList={rawCoffeeShopList}
+              filterFunc={filteredDataList}
+            />
+          </div>
+          <div>{userPreference ? userHasPreference() : null}</div>
+          <div>
+            {coffeeShopList.map(coffeeShop => {
+              const todayHours = coffeeShop.operationalHours[todayDay];
+              return (
+                <RecommendationLists
+                  key={coffeeShop.id}
+                  image={coffeeShop.images ? coffeeShop.images[0] : noImage}
+                  name={coffeeShop.name}
+                  address={coffeeShop.address}
+                  operationalHours={
+                    todayHours
+                      ? `${todayHours.open} - ${todayHours.close}`
+                      : "Close"
+                  }
+                  averagePrice={`Rp ${coffeeShop.averagePrice}`}
+                  redirect={redirectHandler}
+                  coffeeShopId={coffeeShop.id}
+                />
+              );
+            })}
+            {coffeeShopListIsEmpty ? listIsEmpty() : null}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </React.Fragment>
   );
 };
 

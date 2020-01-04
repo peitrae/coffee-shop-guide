@@ -20,11 +20,12 @@ const SuggestionList = props => {
 
   const coffeeShopList = useSelector(state => state.allCoffeeShopList.lists);
 
-  if (!coffeeShopList) return <Spinner />;
+  if (!coffeeShopList) return <MiniLists headerList="You might also like" coffeeShopList={[]}/>;
 
   const filteredCoffeeShopList = coffeeShopList.filter(
     (list, index) => list.id !== coffeeShopId && index < 6
   );
+
   return (
     <MiniLists
       headerList="You might also like"

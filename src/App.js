@@ -37,7 +37,6 @@ const App = () => {
           <Route path="/profile" exact component={ProfilePage} />
           <Redirect to="/" />
         </Switch>
-      <Footer />
     </React.Fragment>
   );
 };

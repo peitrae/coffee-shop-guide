@@ -7,6 +7,7 @@ import EditPassword from "./EditPassword/EditPassword";
 import VerificationOwner from "./VerificationOwner/VerificationOwner";
 import CoffeeShopList from "./CoffeeShopList/CoffeeShopList";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import Footer from "../../components/UI/Footer/Footer";
 import classes from "./ProfilePage.module.css";
 
 const ProfilePage = () => {
@@ -29,41 +30,44 @@ const ProfilePage = () => {
 
   const showVerificationHandler = () => setShowVerification(true);
 
-  if (!userData) return <Spinner />;
+  if (!userData.localId) return <Spinner />;
 
   return (
-    <div className={classes.ProfilePage}>
-      {!showEditProfile && !showEditPassword ? (
-        <Profile
-          name={name}
-          email={email}
-          photoUrl={photoUrl}
-          emailVerified={emailVerified}
-          showEditProfile={editProfileHandler}
-          showEditPassword={editPasswordHandler}
-          showVerificationHandler={showVerificationHandler}
-        />
-      ) : showEditProfile ? (
-        <EditProfile
-          name={name}
-          email={email}
-          photoUrl={photoUrl}
-          cancelEditProfile={editProfileCancelHandler}
-        />
-      ) : showEditPassword ? (
-        <EditPassword
-          photoUrl={photoUrl}
-          cancelEditPassword={editPasswordCancelHandler}
-        />
-      ) : null}
-      {showVerification ? (
-        <VerificationOwner
-          show={showVerification}
-          close={closeVerificationHandler}
-        />
-      ) : null}
-      {emailVerified ? <CoffeeShopList localId={localId} /> : null}
-    </div>
+    <React.Fragment>
+      <div className={classes.ProfilePage}>
+        {!showEditProfile && !showEditPassword ? (
+          <Profile
+            name={name}
+            email={email}
+            photoUrl={photoUrl}
+            emailVerified={emailVerified}
+            showEditProfile={editProfileHandler}
+            showEditPassword={editPasswordHandler}
+            showVerificationHandler={showVerificationHandler}
+          />
+        ) : showEditProfile ? (
+          <EditProfile
+            name={name}
+            email={email}
+            photoUrl={photoUrl}
+            cancelEditProfile={editProfileCancelHandler}
+          />
+        ) : showEditPassword ? (
+          <EditPassword
+            photoUrl={photoUrl}
+            cancelEditPassword={editPasswordCancelHandler}
+          />
+        ) : null}
+        {showVerification ? (
+          <VerificationOwner
+            show={showVerification}
+            close={closeVerificationHandler}
+          />
+        ) : null}
+        {emailVerified ? <CoffeeShopList localId={localId} /> : null}
+      </div>
+      <Footer />
+    </React.Fragment>
   );
 };
 

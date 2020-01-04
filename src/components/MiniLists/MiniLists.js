@@ -15,14 +15,6 @@ const MiniLists = props => {
     deleteHandler
   } = props;
 
-  if (!coffeeShopList) {
-    return (
-      <Card className={classes.MiniLists}>
-        <Spinner />
-      </Card>
-    );
-  }
-
   return (
     <Card className={classes.MiniLists} shadow>
       <h2 className={classes.HeaderList}>{headerList}</h2>

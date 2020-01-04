@@ -9,6 +9,7 @@ import HeaderPict from "../../assets/Header.png";
 import classes from "./UpdateCoffeeShop.module.css";
 import * as actions from "../../store/actions";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import Footer from "../../components/UI/Footer/Footer";
 
 const UpdateData = props => {
   const coffeeShopId = props.match.params.id || null;
@@ -75,29 +76,32 @@ const UpdateData = props => {
   };
 
   return (
-    <div className={classes.CoffeeShop}>
-      <div className={classes.MainDiv}>
-        <form>
-          <Header state={coffeeShop} setState={setCoffeeShop} />
-          <Information state={coffeeShop} setState={setCoffeeShop} />
-          <Images
-            images={coffeeShop.images}
-            coffeeShopName={coffeeShop.name}
-            setImage={setImage}
-            setReadyToSubmit={setReadyToSubmit}
-            coffeeShopId={coffeeShopId}
-          />
-          <div className={classes.BtnSubmit}>
-            <BtnLarge
-              clicked={submitHandler}
-              btnType={readyToSubmit ? null : "Disabled"}
-            >
-              Submit
-            </BtnLarge>
-          </div>
-        </form>
+    <React.Fragment>
+      <div className={classes.CoffeeShop}>
+        <div className={classes.MainDiv}>
+          <form>
+            <Header state={coffeeShop} setState={setCoffeeShop} />
+            <Information state={coffeeShop} setState={setCoffeeShop} />
+            <Images
+              images={coffeeShop.images}
+              coffeeShopName={coffeeShop.name}
+              setImage={setImage}
+              setReadyToSubmit={setReadyToSubmit}
+              coffeeShopId={coffeeShopId}
+            />
+            <div className={classes.BtnSubmit}>
+              <BtnLarge
+                clicked={submitHandler}
+                btnType={readyToSubmit ? null : "Disabled"}
+              >
+                Submit
+              </BtnLarge>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </React.Fragment>
   );
 };
 
