@@ -4,10 +4,9 @@ import Checkbox from "../../../components/UI/Button/Checkbox/Checkbox";
 
 import Card from "../../../components/UI/Card/Card";
 import classes from "./Filter.module.css";
-import { BtnSmall } from "../../../components/UI/Button/Button";
 import PriceRadioBtnGroup from "./PriceRadioBtnGroup/PriceRadioBtnGroup";
 
-const Filter = props => {
+const Filter = ({ allCoffeeShopList, filterFunc }) => {
   const [filter, setFilter] = useState({
     priceChecked: false,
     openNowChecked: false,
@@ -16,9 +15,6 @@ const Filter = props => {
   });
 
   const [showPriceRangeGroup, setShowPriceRangeGroup] = useState(false);
-
-  let { allCoffeeShopList } = props;
-  const { filterFunc } = props;
 
   const {
     priceChecked,
@@ -92,7 +88,7 @@ const Filter = props => {
     setFilter({ ...filter, [name]: !filter[name] });
 
   const priceCheckedChangedHandler = priceRange => {
-    if (priceChecked) priceRange = false;
+    if (priceChecked === priceRange) priceRange = false;
     if (showPriceRangeGroup) setShowPriceRangeGroup(!showPriceRangeGroup);
     setFilter({ ...filter, priceChecked: priceRange });
   };
