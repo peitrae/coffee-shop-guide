@@ -22,7 +22,8 @@ const CoffeeShop = props => {
 
   useEffect(() => {
     getCoffeeShopData(coffeeShopId);
-  }, [coffeeShopId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!coffeeShopData) return <Spinner />;
 

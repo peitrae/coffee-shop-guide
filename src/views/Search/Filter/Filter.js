@@ -22,7 +22,10 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
     creditCardChecked
   } = filter;
 
-  useEffect(() => filterChanged(), [filter]);
+  useEffect(() => {
+    filterChanged()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  } , [filter]);
 
   const checkPrice = averagePrice => {
     switch (priceChecked) {
@@ -34,6 +37,7 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
         return averagePrice >= 30000 && averagePrice <= 50000;
       case "aboveFifty":
         return averagePrice > 50000;
+      default: console.log("error")
     }
   };
 
@@ -82,6 +86,8 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
 
     filterFunc(allCoffeeShopList);
   };
+
+  
 
   const checkBoxHandleChange = name =>
     setFilter({ ...filter, [name]: !filter[name] });

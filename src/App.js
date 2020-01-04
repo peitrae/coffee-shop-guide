@@ -11,7 +11,7 @@ import UpdateCoffeeShop from "./views/UpdateCoffeeShop/UpdateCoffeeShop";
 import * as actions from "./store/actions/member";
 import Footer from "./components/UI/Footer/Footer";
 
-const App = props => {
+const App = () => {
   const hasPreference = useSelector(state => state.member.preference);
 
   const dispatch = useDispatch();
@@ -22,6 +22,7 @@ const App = props => {
 
   useEffect(() => {
     authCheckState(hasPreference);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

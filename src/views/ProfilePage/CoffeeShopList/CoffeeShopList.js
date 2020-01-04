@@ -17,7 +17,7 @@ const CoffeeShopList = props => {
   const dispatch = useDispatch();
   const getCoffeeShopUploadedBy = useCallback(
     localId => dispatch(actions.getCoffeeShopUploadedBy(localId)),
-    [localId]
+    [dispatch]
   );
 
   const editCoffeeShopHandler = coffeeShopId =>
@@ -27,7 +27,8 @@ const CoffeeShopList = props => {
     dispatch(actions.deleteCoffeeShop(coffeeShopId));
 
   useEffect(() => {
-    getCoffeeShopUploadedBy(localId);
+    if(localId) getCoffeeShopUploadedBy(localId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [localId]);
 
   const cancelWarningHandler = () => {

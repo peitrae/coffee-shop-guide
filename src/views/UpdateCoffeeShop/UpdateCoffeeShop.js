@@ -26,7 +26,8 @@ const UpdateData = props => {
 
   useEffect(() => {
     if (coffeeShopId) getCoffeeShopData(coffeeShopId);
-  }, [coffeeShopId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [coffeeShop, setCoffeeShop] = useState({
     header: HeaderPict,
@@ -55,6 +56,7 @@ const UpdateData = props => {
 
   useEffect(() => {
     if (userLocalId) setCoffeeShop({ ...coffeeShop, uploadedBy: userLocalId });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userLocalId]);
 
   const editCoffeeShopNotReady = coffeeShopId && !coffeeShopData;
