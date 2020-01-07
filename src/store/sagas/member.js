@@ -1,9 +1,10 @@
 import { put, call } from "redux-saga/effects";
 import axios from "axios";
 
+import { config } from "../../config"
 import * as actions from "../actions";
 
-const API_KEY = "AIzaSyDQW-erUjRKlvBa-E3IaeCJZnFFCvQgcW4";
+const API_KEY = config["apiKey"];
 const TOKEN = localStorage.getItem("token");
 const LOCAL_ID = localStorage.getItem("localId");
 
