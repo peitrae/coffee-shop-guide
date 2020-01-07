@@ -1,4 +1,4 @@
-import firebase from "./firebaseConfig";
+const firebase = require('../../../config')
 
 const storage = firebase.storage();
 const storageRef = storage.ref();

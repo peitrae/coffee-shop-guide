@@ -23,7 +23,8 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "config": "file:../../../config"
   },
   "scripts": {
     "start": "react-scripts start",
