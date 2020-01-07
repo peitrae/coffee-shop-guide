@@ -3,6 +3,7 @@ import React from "react";
 import classes from "./MiniLists.module.css";
 import Card from "../UI/Card/Card";
 import List from "./List/List";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import defaultIco from "../../assets/Starbuck3.png";
 
 const MiniLists = props => {
@@ -13,6 +14,8 @@ const MiniLists = props => {
     editHandler,
     deleteHandler
   } = props;
+
+  if(!coffeeShopList) return <Card className={classes.MiniLists} shadow><Spinner /></Card>
 
   return (
     <Card className={classes.MiniLists} shadow>
