@@ -8,14 +8,10 @@
 }
 
 .QuestionDiv {
-  position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 140px;
+  justify-content: space-around;
+  height: 180px;
   width: 100%;
 }
 
@@ -32,16 +28,7 @@
   width: 100%;
 }
 
-.Questionnaire button {
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 16px;
-  color: #219653;
-  position: absolute;
-  bottom: 36px;
-  padding: 0;
-}
-
-.BtnFinish {
-    right: 56px;
+.Controller {
+  display: flex;
+  justify-content: space-between;
 }

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import Modal from "../UI/Modal/Modal";
 import Question from "./Question/Question";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { BtnMediumText } from "../UI/Button/Button";
 import classes from "./Questionnaire.module.css";
 
 const Questionnaire = props => {
@@ -14,20 +16,16 @@ const Questionnaire = props => {
     header,
     submitHandler,
     label,
-    priceLabel,
+    priceLabelRadio,
     typePrice,
     answers,
-    setAnswers
+    setAnswers,
+    errorMessage
   } = props;
 
-  const nextQuestionHandler = event => {
-    event.preventDefault();
-    if (showQuestion < questions.length) setShowQuestion(showQuestion + 1);
-  };
+  const nextQuestionHandler = () => setShowQuestion(showQuestion + 1);
 
-  const prevQuestionHandler = () => {
-    showQuestion > 0 ? setShowQuestion(showQuestion - 1) : close();
-  };
+  const prevQuestionHandler = () => setShowQuestion(showQuestion - 1);
 
   const radioInputHandler = event => {
     let arrayCopy = [...answers];
@@ -44,6 +42,7 @@ const Questionnaire = props => {
       show={show}
       close={close}
     >
+      {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
       <form
         id="questionnaire"
         className={classes.QuestionDiv}
@@ -54,24 +53,22 @@ const Questionnaire = props => {
           showQuestion={showQuestion}
           clicked={radioInputHandler}
           checked={answers[showQuestion]}
-          label={showQuestion === typePrice ? priceLabel : label}
+          label={showQuestion === typePrice ? priceLabelRadio : label}
           typePrice={typePrice}
         />
       </form>
-      <button onClick={prevQuestionHandler}>Previous</button>
-      {showQuestion < questions.length - 1 ? (
-        <button className={classes.BtnFinish} onClick={nextQuestionHandler}>
-          Next
-        </button>
-      ) : (
-        <button
-          type="submit"
-          form="questionnaire"
-          className={classes.BtnFinish}
-        >
-          Finish
-        </button>
-      )}
+      <div className={classes.Controller}>
+        {showQuestion 
+          ? <BtnMediumText clicked={prevQuestionHandler}>Previous</BtnMediumText>
+          : <BtnMediumText clicked={close}>Back</BtnMediumText>
+        }
+        
+        {showQuestion < questions.length - 1 ? (
+          <BtnMediumText clicked={nextQuestionHandler}>Next</BtnMediumText>
+        ) : (
+          <BtnMediumText clicked={submitHandler}>Finish</BtnMediumText>
+        )}
+      </div>
     </Modal>
   );
 };
