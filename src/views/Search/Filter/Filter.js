@@ -127,7 +127,7 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
       <Checkbox
         inputId="wiFi"
         changed={() => checkBoxHandleChange("wiFiChecked")}
-        label="Wi-fi"
+        label="Wifi"
         checked={wiFiChecked}
       />
       <Checkbox
