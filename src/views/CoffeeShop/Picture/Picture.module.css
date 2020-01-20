@@ -18,6 +18,7 @@
   height: 170px;
   border-radius: 4px;
   margin: 8px;
+  object-fit: cover;
 }
 
 .PictureLists {
