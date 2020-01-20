@@ -28,11 +28,11 @@ const EditComponent = props => {
 
   const submitEditHandler = event => {
     event.preventDefault();
-    if (edit.password !== edit.confirmPassword) {
-      setShowError(true);
-    } else {
+    if (edit.password === edit.confirmPassword) {
       editPassword(edit.password);
       cancelEditPassword();
+    } else {
+      setShowError(true);
     }
   };
 
