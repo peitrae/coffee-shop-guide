@@ -29,9 +29,7 @@ export function* setCoffeeShopDataSaga(action) {
       coffeeShopId = response.data.name;
     }
 
-    yield put(
-      actions.setCoffeeShopDataSuccess(action.coffeeShopData, coffeeShopId)
-    );
+    yield action.history.push(`/coffee-shop/${coffeeShopId}`);
   } catch (error) {
     console.log(error.response.data.error.message);
   }

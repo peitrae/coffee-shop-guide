@@ -16,10 +16,9 @@ const UpdateData = props => {
 
   const userLocalId = useSelector(state => state.member.localId);
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
-  const redirectToCoffeeShop = useSelector(state => state.coffeeShop.redirect);
   const dispatch = useDispatch();
-  const setCoffeeShopData = (coffeeShopData, coffeeShopId) =>
-    dispatch(actions.setCoffeeShopData(coffeeShopData, coffeeShopId));
+  const setCoffeeShopData = (coffeeShopData, coffeeShopId, history) =>
+    dispatch(actions.setCoffeeShopData(coffeeShopData, coffeeShopId, history));
   const getCoffeeShopData = useCallback(
     coffeeShopId => dispatch(actions.getCoffeeShopData(coffeeShopId)),
     [dispatch]
@@ -65,14 +64,11 @@ const UpdateData = props => {
 
   if (editCoffeeShopNotReady || addCoffeeShopNotReady) return <Spinner />;
 
-  if (redirectToCoffeeShop)
-    props.history.push(`/coffee-shop/${redirectToCoffeeShop}`);
-
   const setImage = images => setCoffeeShop({ ...coffeeShop, images: images });
 
   const submitHandler = event => {
     event.preventDefault();
-    setCoffeeShopData(coffeeShop, coffeeShopId);
+    setCoffeeShopData(coffeeShop, coffeeShopId, props.history)
   };
 
   return (

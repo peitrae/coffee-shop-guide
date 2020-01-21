@@ -14,18 +14,11 @@ export const getCoffeeShopDataSuccess = data => {
   };
 };
 
-export const setCoffeeShopData = (coffeeShopData, coffeeShopId) => {
+export const setCoffeeShopData = (coffeeShopData, coffeeShopId, history) => {
   return {
     type: actionTypes.COFFEE_SHOP_SET_DATA,
     coffeeShopData,
-    coffeeShopId
-  }
-}
-
-export const setCoffeeShopDataSuccess = (data, redirect) => {
-  return {
-    type: actionTypes.COFFEE_SHOP_SET_DATA_SUCCESS,
-    data,
-    redirect
+    coffeeShopId,
+    history
   }
 }

@@ -6,8 +6,7 @@ export {
 export {
     getCoffeeShopData,
     getCoffeeShopDataSuccess,
-    setCoffeeShopData,
-    setCoffeeShopDataSuccess
+    setCoffeeShopData
 } from './coffeeShop'
 
 export {
