@@ -35,6 +35,8 @@ const Header = () => {
     return toScaleTen.toFixed(1);
   };
 
+  console.log("rating", rating);
+
   return (
     <React.Fragment>
       {showRatingQuest ? (
@@ -52,7 +54,7 @@ const Header = () => {
             <p className={classes.Address}>{address}</p>
           </div>
           <div className={classes.Feedback}>
-            {rating ? (
+            {rating && rating.length !== 0 ? (
               <div className={classes.Rating}>{ratingAverage()}</div>
             ) : null}
             {isAuthenticated ? (
