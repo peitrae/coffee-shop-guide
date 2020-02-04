@@ -12,7 +12,6 @@ const SignUp = props => {
 
   const [signUp, setSignUp] = useState({
     name: "",
-    phoneNumber: "",
     email: "",
     password: ""
   });
