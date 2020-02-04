@@ -15,6 +15,11 @@ export function* signUpSaga(action) {
     returnSecureToken: true
   };
 
+  const updateNameData = {
+    idToken: responseSignUp.data.idToken,
+    displayName: action.name
+  }
+
   const urlSignUp =
     "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + API_KEY;
   const urlUpdateProfile =
@@ -22,10 +27,7 @@ export function* signUpSaga(action) {
 
   try {
     const responseSignUp = yield axios.post(urlSignUp, signUpData);
-    const responseUpdateName = yield axios.post(urlUpdateProfile, {
-      idToken: responseSignUp.data.idToken,
-      displayName: action.name
-    });
+    const responseUpdateName = yield axios.post(urlUpdateProfile, updateNameData);
 
     const { idToken, refreshToken, localId, email } = responseSignUp.data;
     const displayName = responseUpdateName.data.displayName;
@@ -141,12 +143,11 @@ export function* editPasswordSaga(action) {
     "https://identitytoolkit.googleapis.com/v1/accounts:update?key=" + API_KEY;
 
   try {
-    const resEditPassword = yield axios.post(urlEditPassword, {
+    yield axios.post(urlEditPassword, {
       idToken: TOKEN,
       password: action.password
     });
-
-    console.log("resEditPassword", resEditPassword);
+    
   } catch (error) {
     console.log(error.response.data.error.message);
   }
