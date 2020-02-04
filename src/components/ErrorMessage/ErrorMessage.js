@@ -1,4 +1,5 @@
 import React from "react";
+import classes from './ErrorMessage.module.css'
 
 const ErrorMessage = props => {
   const checkErrorMessage = message => {
@@ -22,7 +23,7 @@ const ErrorMessage = props => {
     }
   };
 
-  return <div className="errorMessage">{checkErrorMessage(props.message)}</div>;
+  return <div className={classes.ErrorMessage}>{checkErrorMessage(props.message)}</div>;
 };
 
 export default ErrorMessage;
