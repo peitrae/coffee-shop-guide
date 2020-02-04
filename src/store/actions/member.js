@@ -154,3 +154,9 @@ export const setError = error => {
     error
   };
 };
+
+export const clearError = () => {
+  return {
+    type: actionTypes.MEMBER_CLEAR_ERROR
+  }
+}
