@@ -4,6 +4,14 @@
   cursor: pointer;
 }
 
+.Header {
+  color: #219653;
+}
+
+.Title {
+  color: #464646;
+}
+
 .Address {
   font-weight: bold;
   font-size: 14px;

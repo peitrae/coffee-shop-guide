@@ -9,10 +9,10 @@ const BestRecommendation = (props) => {
     <NavLink to={`/coffee-shop/${props.coffeeShopId}`}>
       <div className={classes.GreenLine}></div>
       <Card className={classes.BestRecommendation} shadow>
-        <h1>Best for you</h1>
+        <h1 className={classes.Header} >Best for you</h1>
         <img src={props.image} alt={props.name} />
         <div className={classes.Description}>
-          <h2>{props.name}</h2>
+          <h2 className={classes.Title}>{props.name}</h2>
           <span className={classes.Address}>{props.address}</span>
           <table className={classes.Details}>
             <tbody>
