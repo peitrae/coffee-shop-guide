@@ -72,7 +72,7 @@ const profileMatching = (preference, coffeeShopList) => {
           case -4:
             return 1;
           default:
-            break;
+            return 0;
         }
       });
       return temp;
