@@ -5,6 +5,10 @@
   width: 361px;
 }
 
+.Spinner {
+  height: 250px;
+}
+
 .HeaderList {
   margin-bottom: 16px;
   color: #464646;

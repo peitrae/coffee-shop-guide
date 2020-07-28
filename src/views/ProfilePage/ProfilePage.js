@@ -1,26 +1,29 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import Profile from "./Profile/Profile";
-import EditProfile from "./EditProfile/EditProfile";
-import EditPassword from "./EditPassword/EditPassword";
-import VerificationOwner from "./VerificationOwner/VerificationOwner";
-import CoffeeShopList from "./CoffeeShopList/CoffeeShopList";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import Footer from "../../components/UI/Footer/Footer";
-import classes from "./ProfilePage.module.css";
+import Profile from './Profile/Profile';
+import EditProfile from './EditProfile/EditProfile';
+import EditPassword from './EditPassword/EditPassword';
+import SendVerification from './SendVerification/SendVerification';
+import CoffeeShopList from './CoffeeShopList/CoffeeShopList';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import Footer from '../../components/UI/Footer/Footer';
+import classes from './ProfilePage.module.css';
 
 const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showEditPassword, setShowEditPassword] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
 
-  const userData = useSelector(state => state.member);
-  const { localId, emailVerified, name, email, photoUrl } = userData;
+  const { localId, emailVerified, name, email, photoUrl } = useSelector(
+    (state) => state.member
+  );
 
   const editProfileHandler = () => setShowEditProfile(true);
 
-  const editProfileCancelHandler = () => setShowEditProfile(false);
+  const editProfileCancelHandler = () => {
+    setShowEditProfile(false);
+  };
 
   const editPasswordHandler = () => setShowEditPassword(true);
 
@@ -30,7 +33,7 @@ const ProfilePage = () => {
 
   const showVerificationHandler = () => setShowVerification(true);
 
-  if (!userData.localId) return <Spinner />;
+  if (!localId) return <Spinner />;
 
   return (
     <React.Fragment>
@@ -46,12 +49,7 @@ const ProfilePage = () => {
             showVerificationHandler={showVerificationHandler}
           />
         ) : showEditProfile ? (
-          <EditProfile
-            name={name}
-            email={email}
-            photoUrl={photoUrl}
-            cancelEditProfile={editProfileCancelHandler}
-          />
+          <EditProfile cancelEditProfile={editProfileCancelHandler} />
         ) : showEditPassword ? (
           <EditPassword
             photoUrl={photoUrl}
@@ -59,7 +57,7 @@ const ProfilePage = () => {
           />
         ) : null}
         {showVerification ? (
-          <VerificationOwner
+          <SendVerification
             show={showVerification}
             close={closeVerificationHandler}
           />

@@ -1,9 +1,10 @@
 const profileMatching = (preference, coffeeShopList) => {
-  if (preference && coffeeShopList) {
     const noCandidateData = [];
     const candidateData = [];
     const coreFactorIndex = [];
     const secondaryFactorIndex = [];
+    const coreFactor = [];
+    const secondaryFactor = [];
 
     const checkHasRating = coffeeShopList => {
       coffeeShopList.forEach(coffeeShop => {
@@ -15,10 +16,10 @@ const profileMatching = (preference, coffeeShopList) => {
 
     checkHasRating(coffeeShopList);
 
-    preference.forEach(value => {
+    preference.forEach((value, index) => {
       value >= 4
-        ? coreFactorIndex.push(preference.indexOf(value))
-        : secondaryFactorIndex.push(preference.indexOf(value));
+        ? coreFactorIndex.push(index)
+        : secondaryFactorIndex.push(index);
     });
 
     const avgCoffeeShopRating = rating => {
@@ -39,9 +40,9 @@ const profileMatching = (preference, coffeeShopList) => {
       else return 4;
     };
 
-    const candidateValue = candidateData.map(num => {
-      const priceRange = searchPriceRange(num.averagePrice);
-      const avgRating = avgCoffeeShopRating(num.rating);
+    const candidateValue = candidateData.map(candidate => {
+      const priceRange = searchPriceRange(candidate.averagePrice);
+      const avgRating = avgCoffeeShopRating(candidate.rating);
       return [...avgRating, priceRange];
     });
 
@@ -50,8 +51,8 @@ const profileMatching = (preference, coffeeShopList) => {
     );
 
     const weighting = gap.map(arr => {
-      let temp = arr.map(childArr => {
-        switch (childArr) {
+      let temp = arr.map(value => {
+        switch (value) {
           case 0:
             return 5;
           case 1:
@@ -84,9 +85,6 @@ const profileMatching = (preference, coffeeShopList) => {
       );
     };
 
-    const coreFactor = [];
-    const secondaryFactor = [];
-
     weighting.forEach(arr => {
       let coreFactorTemp = [];
       let secondaryFactorTemp = [];
@@ -115,8 +113,8 @@ const profileMatching = (preference, coffeeShopList) => {
 
     const injectIndex = total.map((num, index) => [index, num]);
     const sortByValue = injectIndex.sort((a, b) => a[1] - b[1]).reverse();
-    const sortCandidateData = sortByValue.map(value => candidateData[value[0]]);
-    const resultProfileMatching = [...sortCandidateData, ...noCandidateData];
+    const sortedCandidateData = sortByValue.map(value => candidateData[value[0]]);
+    const resultProfileMatching = [...sortedCandidateData, ...noCandidateData];
 
     // DEBUG
     // console.log("preference", preference);
@@ -131,10 +129,9 @@ const profileMatching = (preference, coffeeShopList) => {
     // console.log("total", total);
     // console.log("injectIndex", injectIndex);
     // console.log("sortByValue", sortByValue);
-    // console.log("sortCandidateData", sortCandidateData);
+    // console.log("sortedCandidateData", sortedCandidateData);
 
     return resultProfileMatching;
-  }
 };
 
 export default profileMatching;

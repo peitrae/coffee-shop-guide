@@ -1,3 +1,9 @@
+html, 
+body, 
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -45,11 +51,4 @@ button {
 
 button:focus {
   outline: none;
-}
-
-.spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

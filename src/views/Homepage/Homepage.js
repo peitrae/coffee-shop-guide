@@ -1,27 +1,33 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import SignUp from "../../components/Auth/SignUp/SignUp";
-import { BtnLarge } from "../../components/UI/Button/Button";
-import classes from "./Homepage.module.css";
+import SignUp from '../../components/Auth/SignUp/SignUp';
+import { BtnLarge } from '../../components/UI/Button/Button';
+import Preference from './Preference/Preference';
+import classes from './Homepage.module.css';
+import * as actions from "../../store/actions/member";
 
-import Preference from "./Preference/Preference";
+const Homepage = (props) => {
+  const dispatch = useDispatch()
 
-const Homepage = props => {
   const [showPreference, setShowPreference] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
-  const userData = useSelector(state => state.member);
+  const userData = useSelector((state) => state.member);
 
   const authenticated = userData.token !== null;
-  const { localId, token, preference } = userData;
 
   const preferenceCancelHandler = () => setShowPreference(false);
 
-  const authCancelHandler = () => setShowSignUp(false);
+  const authCancelHandler = () => {
+    setShowSignUp(false);
+    dispatch(actions.deleteResponse());
+  };
 
   const searchContinueHandler = () => {
-    preference ? props.history.push("/search") : setShowPreference(true);
+    userData.preference
+      ? props.history.push('/search')
+      : setShowPreference(true);
   };
 
   let button = <BtnLarge clicked={() => setShowSignUp(true)}>Sign Up</BtnLarge>;
@@ -40,8 +46,7 @@ const Homepage = props => {
         <Preference
           show={showPreference}
           close={preferenceCancelHandler}
-          localId={localId}
-          token={token}
+          localId={userData.localId}
         />
       ) : null}
     </div>

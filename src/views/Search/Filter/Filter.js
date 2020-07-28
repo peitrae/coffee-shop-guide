@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import Checkbox from "../../../components/UI/Button/Checkbox/Checkbox";
-import Card from "../../../components/UI/Card/Card";
-import classes from "./Filter.module.css";
-import PriceRadioBtnGroup from "./PriceRadioBtnGroup/PriceRadioBtnGroup";
+import Checkbox from '../../../components/UI/Button/Checkbox/Checkbox';
+import Card from '../../../components/UI/Card/Card';
+import classes from './Filter.module.css';
+import PriceRadioBtnGroup from './PriceRadioBtnGroup/PriceRadioBtnGroup';
 
 const Filter = ({ allCoffeeShopList, filterFunc }) => {
   const [filter, setFilter] = useState({
@@ -23,21 +23,22 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
   } = filter;
 
   useEffect(() => {
-    filterChanged()
+    filterChanged();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  } , [filter]);
+  }, [filter]);
 
   const checkPrice = averagePrice => {
     switch (priceChecked) {
-      case "belowTen":
+      case 'belowTen':
         return averagePrice < 10000;
-      case "tenTillThirty":
+      case 'tenTillThirty':
         return averagePrice >= 10000 && averagePrice < 30000;
-      case "thirtyTillFifty":
+      case 'thirtyTillFifty':
         return averagePrice >= 30000 && averagePrice <= 50000;
-      case "aboveFifty":
+      case 'aboveFifty':
         return averagePrice > 50000;
-      default: console.log("error")
+      default:
+        console.log('error');
     }
   };
 
@@ -77,17 +78,15 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
       );
     if (wiFiChecked)
       allCoffeeShopList = allCoffeeShopList.filter(coffeeShop =>
-        coffeeShop.facilities.includes("Wifi")
+        coffeeShop.facilities.includes('Wifi')
       );
     if (creditCardChecked)
       allCoffeeShopList = allCoffeeShopList.filter(coffeeShop =>
-        coffeeShop.facilities.includes("Credit Card")
+        coffeeShop.facilities.includes('Credit Card')
       );
 
     filterFunc(allCoffeeShopList);
   };
-
-  
 
   const checkBoxHandleChange = name =>
     setFilter({ ...filter, [name]: !filter[name] });
@@ -103,9 +102,9 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
       <h3>Filter: </h3>
       <div className={classes.Price}>
         <Checkbox
-          inputId="priceGroup"
+          inputId='priceGroup'
           changed={() => setShowPriceRangeGroup(!showPriceRangeGroup)}
-          label = "Price"
+          label='Price'
           checked={priceChecked}
         >
           Price
@@ -119,21 +118,21 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
         ) : null}
       </div>
       <Checkbox
-        inputId="openNow"
-        changed={() => checkBoxHandleChange("openNowChecked")}
-        label="Open Now"
+        inputId='openNow'
+        changed={() => checkBoxHandleChange('openNowChecked')}
+        label='Open Now'
         checked={openNowChecked}
       />
       <Checkbox
-        inputId="wiFi"
-        changed={() => checkBoxHandleChange("wiFiChecked")}
-        label="Wifi"
+        inputId='wiFi'
+        changed={() => checkBoxHandleChange('wiFiChecked')}
+        label='Wifi'
         checked={wiFiChecked}
       />
       <Checkbox
-        inputId="creditCard"
-        changed={() => checkBoxHandleChange("creditCardChecked")}
-        label="Credit Card"
+        inputId='creditCard'
+        changed={() => checkBoxHandleChange('creditCardChecked')}
+        label='Credit Card'
         checked={creditCardChecked}
       />
     </Card>

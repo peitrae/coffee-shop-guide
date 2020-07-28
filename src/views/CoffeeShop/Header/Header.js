@@ -35,8 +35,6 @@ const Header = () => {
     return toScaleTen.toFixed(1);
   };
 
-  console.log("rating", rating);
-
   return (
     <React.Fragment>
       {showRatingQuest ? (

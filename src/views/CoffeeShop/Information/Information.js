@@ -1,13 +1,32 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import Card from "../../../components/UI/Card/Card";
-import classes from "./Information.module.css";
+import Card from '../../../components/UI/Card/Card';
+import classes from './Information.module.css';
 
-const Information = props => {
-  const coffeeShopData = useSelector(state => state.coffeeShop.data);
+const Information = () => {
+  const coffeeShopData = useSelector((state) => state.coffeeShop.data);
 
-  const day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  const day = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+
+  const {
+    operationalHours,
+    averagePrice,
+    contact,
+    facilities,
+  } = coffeeShopData;
+
+  if (!operationalHours && !averagePrice && !contact && !facilities) {
+    return null;
+  }
 
   return (
     <Card className={classes.Information}>
@@ -16,21 +35,20 @@ const Information = props => {
         <div>
           <table>
             <tbody>
-              <tr>
-                <th className={classes.TableHeader}>Opening hours:</th>
-                <td>{day[coffeeShopData.operationalHours[0].day]}</td>
-                <td>
-                  {coffeeShopData.operationalHours[0].open} -{" "}
-                  {coffeeShopData.operationalHours[0].close}
-                </td>
-              </tr>
-              {coffeeShopData.operationalHours.slice(1).map(value => (
+              {operationalHours && (
+                <tr>
+                  <th className={classes.TableHeader}>Opening hours:</th>
+                  <td>{day[operationalHours[0].day]}</td>
+                  <td>
+                    {operationalHours[0].open} - {operationalHours[0].close}
+                  </td>
+                </tr>
+              )}
+              {operationalHours?.slice(1).map((value) => (
                 <tr key={value.day}>
                   <th></th>
                   <td>{day[value.day]}</td>
-                  <td>
-                    {`${value.open} - ${value.close}`}
-                  </td>
+                  <td>{`${value.open} - ${value.close}`}</td>
                 </tr>
               ))}
             </tbody>
@@ -39,19 +57,26 @@ const Information = props => {
         <div>
           <table>
             <tbody>
-              <tr>
-                <th className={classes.TableHeader}>Average Price:</th>
-                <td colSpan="2">{`Rp ${coffeeShopData.averagePrice} (1 menu)`}</td>
-              </tr>
-              <tr>
-                <th className={classes.TableHeader}>Contact:</th>
-                <td colSpan="2">{coffeeShopData.contact}</td>
-              </tr>
-              <tr>
-                <th className={classes.TableHeader}>Facilities:</th>
-                <td>{coffeeShopData.facilities[0]}</td>
-              </tr>
-              {coffeeShopData.facilities.slice(1).map((facility, index) => (
+              {averagePrice && (
+                <tr>
+                  <th className={classes.TableHeader}>Average Price:</th>
+                  <td colSpan="2">{`Rp ${averagePrice} (1 menu)`}</td>
+                </tr>
+              )}
+              {contact && (
+                <tr>
+                  <th className={classes.TableHeader}>Contact:</th>
+                  <td colSpan="2">{contact}</td>
+                </tr>
+              )}
+
+              {facilities && (
+                <tr>
+                  <th className={classes.TableHeader}>Facilities:</th>
+                  <td>{facilities[0]}</td>
+                </tr>
+              )}
+              {facilities?.slice(1).map((facility, index) => (
                 <tr key={index}>
                   <th></th>
                   <td>{facility}</td>

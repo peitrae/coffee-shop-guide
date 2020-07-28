@@ -1,22 +1,24 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import profileMatching from "../../utilities/profileMatching";
-import Filter from "./Filter/Filter";
-import BestRecommendation from "./BestRecommendation/BestRecommendation";
-import RecommendationLists from "./RecommendationLists/RecommendationLists";
-import classes from "./Search.module.css";
-import * as actions from "../../store/actions";
-import Card from "../../components/UI/Card/Card";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import noImage from "../../assets/JavaDancerCoffee1.png";
-import Footer from "../../components/UI/Footer/Footer";
+import profileMatching from '../../utilities/profileMatching';
+import Filter from './Filter/Filter';
+import BestRecommendation from './BestRecommendation/BestRecommendation';
+import RecommendationLists from './RecommendationLists/RecommendationLists';
+import classes from './Search.module.css';
+import * as actions from '../../store/actions';
+import Card from '../../components/UI/Card/Card';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import noImage from '../../assets/JavaDancerCoffee1.png';
+import Footer from '../../components/UI/Footer/Footer';
 
-const Search = props => {
-  const userPreference = useSelector(state => state.member.preference);
-  const rawCoffeeShopList = useSelector(state => state.allCoffeeShopList.lists);
+const Search = (props) => {
+  const userPreference = useSelector((state) => state.member.preference);
+  const rawCoffeeShopList = useSelector(
+    (state) => state.allCoffeeShopList.lists
+  );
   const dispatch = useDispatch();
-  const getAllCoffeeShopList = useCallback(
+  const getCoffeeShopList = useCallback(
     () => dispatch(actions.getAllCoffeeShopList()),
     [dispatch]
   );
@@ -24,19 +26,24 @@ const Search = props => {
   const [tempLists, setTempLists] = useState(null);
 
   useEffect(() => {
-    getAllCoffeeShopList();
-  }, [getAllCoffeeShopList]);
+    getCoffeeShopList();
+  }, [getCoffeeShopList]);
 
   useEffect(() => setTempLists(rawCoffeeShopList), [rawCoffeeShopList]);
 
-  if (!tempLists) return <Spinner />;
+  if (!tempLists) {
+    return <Spinner />;
+  }
 
-  const redirectHandler = id => props.history.push(`/coffee-shop/${id}`);
+  const redirectHandler = (id) => props.history.push(`/coffee-shop/${id}`);
 
-  const filteredDataList = filteredList => setTempLists(filteredList);
+  const filteredDataList = (filteredList) => setTempLists(filteredList);
 
   const userHasPreference = () => {
     if (!coffeeShopList.length) return null;
+    if (!userPreference && !coffeeShopList) {
+      return false;
+    }
     const resultMatching = profileMatching(userPreference, coffeeShopList);
     const bestCoffeeShop = resultMatching[0];
     coffeeShopList = resultMatching.slice(1);
@@ -46,11 +53,11 @@ const Search = props => {
     return (
       <BestRecommendation
         className={bestCoffeeShop.images ? bestCoffeeShop.images[0] : noImage}
-        image={"./Starbuck3.png"}
+        image={'./Starbuck3.png'}
         name={bestCoffeeShop.name}
         address={bestCoffeeShop.address}
         operationalHours={
-          todayHours ? `${todayHours.open} - ${todayHours.close}` : "Close"
+          todayHours ? `${todayHours.open} - ${todayHours.close}` : 'Close'
         }
         averagePrice={`Rp ${bestCoffeeShop.averagePrice}`}
         facilities={bestCoffeeShop.facilities}
@@ -81,7 +88,7 @@ const Search = props => {
           </div>
           <div>{userPreference ? userHasPreference() : null}</div>
           <div>
-            {coffeeShopList.map(coffeeShop => {
+            {coffeeShopList.map((coffeeShop) => {
               const todayHours = coffeeShop.operationalHours[todayDay];
               return (
                 <RecommendationLists
@@ -92,7 +99,7 @@ const Search = props => {
                   operationalHours={
                     todayHours
                       ? `${todayHours.open} - ${todayHours.close}`
-                      : "Close"
+                      : 'Close'
                   }
                   averagePrice={`Rp ${coffeeShop.averagePrice}`}
                   redirect={redirectHandler}
@@ -109,4 +116,4 @@ const Search = props => {
   );
 };
 
-export default Search;
+export default React.memo(Search);

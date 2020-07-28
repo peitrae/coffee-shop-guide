@@ -9,7 +9,7 @@ import { CloseButtonWhite } from "../../../components/UI/Button/CloseButton/Clos
 import UploadImage from "../../../components/UI/Button/UploadImage/UploadImage";
 
 const Images = props => {
-  const { images, coffeeShopName, setImage, setReadyToSubmit } = props;
+  const { images = [], coffeeShopName, setImage, setReadyToSubmit } = props;
 
   const [preview, setPreview] = useState([]);
 

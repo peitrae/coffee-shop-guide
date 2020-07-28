@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 
@@ -15,10 +15,6 @@ const CoffeeShopList = props => {
   const { localId } = props;
 
   const dispatch = useDispatch();
-  const getCoffeeShopUploadedBy = useCallback(
-    localId => dispatch(actions.getCoffeeShopUploadedBy(localId)),
-    [dispatch]
-  );
 
   const editCoffeeShopHandler = coffeeShopId =>
     props.history.push(`/update-coffee-shop/${coffeeShopId}`);
@@ -27,7 +23,9 @@ const CoffeeShopList = props => {
     dispatch(actions.deleteCoffeeShop(coffeeShopId));
 
   useEffect(() => {
-    if(localId) getCoffeeShopUploadedBy(localId);
+    if(localId) {
+      dispatch(actions.getCoffeeShopUploadedBy(localId));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [localId]);
 

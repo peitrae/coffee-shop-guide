@@ -7,10 +7,11 @@ const initialState = {
   email: null,
   name: null,
   photoUrl: null,
-  preference: false,
-  emailSent: false,
+  preference: null,
+  emailSent: null,
   coffeeShopList: null,
-  error: null
+  emailVerified: null,
+  response: null,
 };
 
 const authSuccess = (state, action) => {
@@ -21,7 +22,8 @@ const authSuccess = (state, action) => {
     name: action.name,
     photoUrl: action.photoUrl,
     emailVerified: action.emailVerified,
-    coffeeShopList: action.coffeeShopList,
+    preference: action.preference,
+    emailSent: action.emailSent
   });
 };
 
@@ -43,13 +45,6 @@ const editProfileSuccess = (state, action) => {
   });
 };
 
-const getUserDataSuccess = (state, action) => {
-  return updateState(state, {
-    preference: action.preference,
-    emailSent: action.emailSent
-  });
-};
-
 const sendVerificationSuccess = state => {
   return updateState(state, { emailSent: true });
 };
@@ -58,9 +53,13 @@ const getCoffeeShopUploadedBySuccess = (state, action) => {
   return updateState(state, { coffeeShopList: action.coffeeShopList });
 };
 
-const setError = (state, action) => {
-  return updateState(state, { error: action.error });
+const setResponse = (state, action) => {
+  return updateState(state, { response: action.response });
 };
+
+const deleteResponse = (state) => {
+  return updateState(state, { response: null });
+}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -69,17 +68,17 @@ const reducer = (state = initialState, action) => {
     case actionTypes.MEMBER_LOGOUT:
       return authLogout(state);
     case actionTypes.MEMBER_SET_PREFERENCE_SUCCESS:
-      return setPreferenceSuccess(state, action);  
-    case actionTypes.MEMBER_GET_USER_DATA_SUCCESS:
-      return getUserDataSuccess(state, action);
+      return setPreferenceSuccess(state, action); 
     case actionTypes.MEMBER_EDIT_PROFILE_SUCCESS:
       return editProfileSuccess(state, action);
     case actionTypes.MEMBER_SEND_VERIFICATION_SUCCESS:
       return sendVerificationSuccess(state);
     case actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY_SUCCESS:
       return getCoffeeShopUploadedBySuccess(state, action);
-    case actionTypes.MEMBER_SET_ERROR:
-      return setError(state, action);
+    case actionTypes.MEMBER_SET_RESPONSE:
+      return setResponse(state, action);
+    case actionTypes.MEMBER_DELETE_RESPONSE:
+      return deleteResponse(state);
     default:
       return state;
   }

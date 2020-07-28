@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import classes from "./VerificationOwner.module.css";
+import classes from "./SendVerification.module.css";
 import { BtnMedium } from "../../../components/UI/Button/Button";
 import envelopeIco from "../../../assets/logo/envelope.png";
 import Modal from "../../../components/UI/Modal/Modal";
 import * as actions from "../../../store/actions/member";
 
-const VerificationOwner = props => {
+const SendVerification = props => {
   const [timeLeft, setTimeLeft] = useState(60);
 
   const emailVerified = useSelector(state => state.member.emailVerified);
@@ -31,7 +31,7 @@ const VerificationOwner = props => {
 
   return (
     <Modal
-      modalType={classes.Verification}
+      classes={classes.Verification}
       show={props.show}
       close={props.close}
     >
@@ -41,7 +41,7 @@ const VerificationOwner = props => {
         Check your email for a verification link
       </span>
       <div className={classes.Btn}>
-        {emailVerified ? null : timeLeft ? (
+        {!emailVerified && timeLeft ? (
           <BtnMedium btnType="Disabled">{`${timeLeft}s`}</BtnMedium>
         ) : (
           <BtnMedium btnType="Green" clicked={resendEmail}>
@@ -53,4 +53,4 @@ const VerificationOwner = props => {
   );
 };
 
-export default VerificationOwner;
+export default SendVerification;

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import classes from "./BubbleBox.module.css";
@@ -14,6 +14,7 @@ const BubbleBox = props => {
   const logoutHandler = () => {
     onLogout();
     props.close();
+    props.history.push("/")
   };
 
   return (
@@ -35,4 +36,4 @@ const BubbleBox = props => {
   );
 };
 
-export default BubbleBox;
+export default withRouter(BubbleBox);

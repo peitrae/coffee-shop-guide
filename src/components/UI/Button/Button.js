@@ -16,10 +16,12 @@ export const BtnLarge = props => {
 };
 
 export const BtnMedium = props => {
-  const style = [classes.BtnMedium, classes[props.btnType]].join(" ");
+  const {btnType, clicked, children, type, form} = props;
+
+  const style = [classes.BtnMedium, classes[btnType]].join(" ");
   return (
-    <button className={style} onClick={props.clicked}>
-      {props.children}
+    <button className={style} onClick={clicked} form={form} type={type}>
+      {children}
     </button>
   );
 };

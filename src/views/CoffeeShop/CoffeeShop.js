@@ -11,7 +11,6 @@ import SuggestionList from "./SuggestionList/SuggestionList";
 import Footer from "../../components/UI/Footer/Footer";
 
 const CoffeeShop = props => {
-
   const coffeeShopId = props.match.params.id;
 
   const coffeeShopData = useSelector(state => state.coffeeShop.data);
@@ -21,8 +20,6 @@ const CoffeeShop = props => {
     id => dispatch(actions.getCoffeeShopData(id)),
     [dispatch]
   );
-
-  
 
   useEffect(() => {
     getCoffeeShopData(coffeeShopId);

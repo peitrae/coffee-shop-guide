@@ -1,42 +1,53 @@
-import React, { useEffect, useCallback } from "react";
-import { Route, Switch, withRouter, Redirect } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, Fragment } from 'react';
+import { Route, Switch, withRouter, Redirect } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Homepage from "./views/Homepage/Homepage";
-import Search from "./views/Search/Search";
-import NavBar from "./components/UI/NavBar/NavBar";
-import ProfilePage from "./views/ProfilePage/ProfilePage";
-import CoffeeShop from "./views/CoffeeShop/CoffeeShop";
-import UpdateCoffeeShop from "./views/UpdateCoffeeShop/UpdateCoffeeShop";
-import * as actions from "./store/actions/member";
+import Homepage from './views/Homepage/Homepage';
+import Search from './views/Search/Search';
+import NavBar from './components/UI/NavBar/NavBar';
+import ProfilePage from './views/ProfilePage/ProfilePage';
+import CoffeeShop from './views/CoffeeShop/CoffeeShop';
+import UpdateCoffeeShop from './views/UpdateCoffeeShop/UpdateCoffeeShop';
+import Spinner from './components/UI/Spinner/Spinner';
+import * as actions from './store/actions/member';
 
 const App = () => {
-  const hasPreference = useSelector(state => state.member.preference);
+  const token = localStorage.getItem('token');
 
   const dispatch = useDispatch();
-  const authCheckState = useCallback(
-    preference => dispatch(actions.authCheckState(preference)),
-    [dispatch]
-  );
+
+  const isAuthenticated = useSelector(state => state.member.token !== null);
 
   useEffect(() => {
-    authCheckState(hasPreference);
+    dispatch(actions.authCheckState());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <React.Fragment>
-      <NavBar />
-        <Switch>
-          <Route path="/" exact component={Homepage} />
+  const authenticatedRoute = () => {
+    if (token) {
+      return (
+        <Fragment>
           <Route path="/search" exact component={Search} />
           <Route path="/coffee-shop/:id" exact component={CoffeeShop} />
           <Route path="/update-coffee-shop" exact component={UpdateCoffeeShop} />
           <Route path="/update-coffee-shop/:id" exact component={UpdateCoffeeShop} />
           <Route path="/profile" exact component={ProfilePage} />
-          <Redirect to="/" />
-        </Switch>
-    </React.Fragment>
+        </Fragment>
+      );
+    } else return null;
+  };
+
+  if(token && !isAuthenticated) {
+    return <Spinner />
+  } else return (
+    <Fragment>
+      <NavBar/>
+      <Switch>
+        <Route path="/" exact component={Homepage} />
+        {authenticatedRoute()}
+        <Redirect to="/" />
+      </Switch>
+    </Fragment>
   );
 };
 

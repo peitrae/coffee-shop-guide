@@ -18,6 +18,8 @@ const ErrorMessage = props => {
         return "The email address is already in use by another account";
       case "PASSWORD_NOT_MATCH":
         return "Password not match"
+      case "CREDENTIAL_TOO_OLD_LOGIN_AGAIN":
+        return "Please login again"
       default:
         return props.message;
     }

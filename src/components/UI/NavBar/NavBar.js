@@ -15,17 +15,17 @@ const NavBar = props => {
   const [isLogin, setIsLogin] = useState(false);
 
   const isAuthenticated = useSelector(state => state.member.token !== null);
+
   const dispatch = useDispatch();
-  const onLogin = (email, password) => dispatch(actions.login(email, password));
-  const clearError = () => dispatch(actions.clearError())
+  const onLogin = (email, password, rememberMe) => dispatch(actions.login(email, password, rememberMe));
 
   const inHomepage = props.location.pathname === "/";
 
   const profileLogoClickedHandler = () => setShowBubbleBox(!showBubbleBox);
 
   const authCancelHandler = () => {
-    setIsLogin(false)
-    clearError()
+    setIsLogin(false);
+    dispatch(actions.deleteResponse());
   };
 
   let bgColor = "#219653";
@@ -77,7 +77,6 @@ const NavBar = props => {
         <Login
           show={isLogin}
           close={authCancelHandler}
-          header={"Login"}
           submit={onLogin}
         />
       ) : null}

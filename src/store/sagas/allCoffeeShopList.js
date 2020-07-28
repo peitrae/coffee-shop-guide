@@ -8,6 +8,7 @@ export function* getAllCoffeeShopListSaga() {
 
     try {
       const response = yield axios.get(url);
+
       const coffeeShopList = []
         for(let key in response.data) {
           coffeeShopList.push({

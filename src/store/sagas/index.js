@@ -14,7 +14,7 @@ import {
   sendVerificationSaga,
   getCoffeeShopUploadedBySaga,
   deleteCoffeeShopSaga,
-  setRatingSaga
+  setRatingSaga,
 } from "./member";
 
 import {

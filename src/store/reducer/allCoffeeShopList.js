@@ -11,7 +11,7 @@ const getAllCoffeeShopListSuccess = (state, action) => {
 
 const openNowAllCoffeeShopList = (state, action) => {
   return updateState(state, { lists: action.filteredAllCoffeeShopList });
-};
+}; // Check
 
 
 const reducer = (state = initialState, action) => {

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Modal from "../UI/Modal/Modal";
-import Question from "./Question/Question";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { BtnMediumText } from "../UI/Button/Button";
-import classes from "./Questionnaire.module.css";
+import Modal from '../UI/Modal/Modal';
+import Question from './Question/Question';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { BtnMediumText } from '../UI/Button/Button';
+import classes from './Questionnaire.module.css';
 
-const Questionnaire = props => {
+const Questionnaire = (props) => {
   const [showQuestion, setShowQuestion] = useState(0);
 
   const {
@@ -20,14 +20,14 @@ const Questionnaire = props => {
     typePrice,
     answers,
     setAnswers,
-    errorMessage
+    errorMessage,
   } = props;
 
   const nextQuestionHandler = () => setShowQuestion(showQuestion + 1);
 
   const prevQuestionHandler = () => setShowQuestion(showQuestion - 1);
 
-  const radioInputHandler = event => {
+  const radioInputHandler = (event) => {
     let arrayCopy = [...answers];
     let indexQuestion = event.target.name;
     let choice = parseInt(event.target.value);
@@ -36,13 +36,14 @@ const Questionnaire = props => {
   };
 
   return (
-    <Modal
-      modalType={classes.Questionnaire}
-      header={header}
-      show={show}
-      close={close}
-    >
-      {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
+    <Modal classes={classes.Questionnaire} show={show} close={close}>
+      <h1 className={classes.Header}>{header}</h1>
+
+      {errorMessage ? (
+        <div className={classes.ErrorMessage}>
+          <ErrorMessage message={errorMessage} />
+        </div>
+      ) : null}
       <form
         id="questionnaire"
         className={classes.QuestionDiv}
@@ -58,11 +59,12 @@ const Questionnaire = props => {
         />
       </form>
       <div className={classes.Controller}>
-        {showQuestion 
-          ? <BtnMediumText clicked={prevQuestionHandler}>Previous</BtnMediumText>
-          : <BtnMediumText clicked={close}>Back</BtnMediumText>
-        }
-        
+        {showQuestion ? (
+          <BtnMediumText clicked={prevQuestionHandler}>Previous</BtnMediumText>
+        ) : (
+          <BtnMediumText clicked={close}>Back</BtnMediumText>
+        )}
+
         {showQuestion < questions.length - 1 ? (
           <BtnMediumText clicked={nextQuestionHandler}>Next</BtnMediumText>
         ) : (

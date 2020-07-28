@@ -1,30 +1,30 @@
-import React from "react";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import React from 'react';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
-import TextForm from "../../../components/UI/TextForm/TextForm";
-import Card from "../../../components//UI/Card/Card";
-import classes from "./Information.module.css";
-import { BtnSmall } from "../../../components/UI/Button/Button";
-import OperationalHours from "./OperationalHours/OperationalHours";
+import TextForm from '../../../components/UI/TextForm/TextForm';
+import Card from '../../../components//UI/Card/Card';
+import classes from './Information.module.css';
+import Facilities from './Facilities/Facilities';
+import OperationalHours from './OperationalHours/OperationalHours';
 
-const Information = props => {
+const Information = (props) => {
   const { state, setState } = props;
   const { averagePrice, contact, facilities } = state;
 
-  const inputChangeHandler = type => event => {
+  const inputChangeHandler = (type) => (event) => {
     setState({ ...state, [type]: event.target.value });
   };
 
-  const facilitiesChangeHandler = index => event => {
+  const facilityChangeHandler = (index) => (event) => {
     const tempEdit = [...state.facilities];
     tempEdit[index] = event.target.value;
     setState({ ...state, facilities: tempEdit });
   };
 
-  const addFacilitiesHandler = event => {
+  const addFacilityHandler = (event) => {
     event.preventDefault();
     const tempAdd = [...state.facilities];
-    tempAdd.push("");
+    tempAdd.push('');
     setState({ ...state, facilities: tempAdd });
   };
 
@@ -46,16 +46,16 @@ const Information = props => {
                 <td className={classes.TablePaddingHelper}>
                   <TextForm
                     id="averagePrice"
-                    label={"averagePrice"}
-                    className={"textField-3"}
+                    label={'averagePrice'}
+                    className={'textField-3'}
                     placeholder="Average Price"
                     value={averagePrice}
-                    inputHandler={inputChangeHandler("averagePrice")}
+                    inputHandler={inputChangeHandler('averagePrice')}
                     type="number"
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">Rp</InputAdornment>
-                      )
+                      ),
                     }}
                   />
                 </td>
@@ -66,10 +66,10 @@ const Information = props => {
                   <TextForm
                     id="contact"
                     label="Contact"
-                    className={"textField-3"}
+                    className={'textField-3'}
                     placeholder="Contact"
                     value={contact}
-                    inputHandler={inputChangeHandler("contact")}
+                    inputHandler={inputChangeHandler('contact')}
                     type="number"
                   />
                 </td>
@@ -77,39 +77,11 @@ const Information = props => {
               <tr>
                 <th>Amenities</th>
                 <td>
-                  <table>
-                    <tbody>
-                      {facilities.map((facility, index) => (
-                        <tr key={index}>
-                          <td>
-                            <TextForm
-                              id="facilities"
-                              label="Facilities"
-                              placeholder="Facilities"
-                              className={"textField-3"}
-                              value={facility}
-                              inputHandler={facilitiesChangeHandler(index)}
-                            />
-                          </td>
-                          <td className={classes.ButtonPaddingHelper}>
-                            <BtnSmall
-                              btnType="Danger"
-                              clicked={() => deleteHandler("facilities", index)}
-                            >
-                              Delete
-                            </BtnSmall>
-                          </td>
-                        </tr>
-                      ))}
-                      <tr>
-                        <td>
-                          <BtnSmall clicked={addFacilitiesHandler}>
-                            Add More
-                          </BtnSmall>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <Facilities
+                    facilities={facilities}
+                    facilityChangeHandler={facilityChangeHandler}
+                    addFacilityHandler={addFacilityHandler}
+                  />
                 </td>
               </tr>
               <OperationalHours

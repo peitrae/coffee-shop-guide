@@ -1,7 +1,7 @@
 .Homepage {
   background: url("/background.jpg") center no-repeat;
   background-size: cover;
-  height: 697px;
+  height: 100%;
 }
 
 .Header {

@@ -15,6 +15,7 @@ const RatingQuestions = props => {
   if (ratingCoffeeShop[localId]) initialValue = ratingCoffeeShop[localId];
 
   const [rating, setRating] = useState(initialValue);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const dispatch = useDispatch();
   const submitRating = (rating, coffeeShopId) =>
@@ -34,10 +35,14 @@ const RatingQuestions = props => {
     { label: 5, value: 5 }
   ];
 
-  const submitRatingHandler = event => {
+  function submitRatingHandler (event) {
     event.preventDefault();
-    submitRating(rating, coffeeShopId);
-    close();
+    if (rating.indexOf(0) === -1) {
+      submitRating(rating, coffeeShopId);
+      close();
+    } else {
+      setErrorMessage("Fill all questionnaire");
+    }
   };
 
   return (
@@ -50,6 +55,7 @@ const RatingQuestions = props => {
       submitHandler={submitRatingHandler}
       answers={rating}
       setAnswers={setRating}
+      errorMessage={errorMessage}
     />
   );
 };

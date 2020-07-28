@@ -1,10 +1,10 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import Card from "../../../components/UI/Card/Card";
-import classes from "./BestRecommendation.module.css";
+import Card from '../../../components/UI/Card/Card';
+import classes from './BestRecommendation.module.css';
 
-const BestRecommendation = props => {
+const BestRecommendation = (props) => {
   return (
     <NavLink to={`/coffee-shop/${props.coffeeShopId}`}>
       <div className={classes.GreenLine}></div>
@@ -25,16 +25,23 @@ const BestRecommendation = props => {
                 <td className={classes.RightCol}>{props.averagePrice}</td>
               </tr>
               <tr>
-                <td className={classes.LeftCol}>Facilities:</td>
-                <td className={classes.RightCol}>
-                  <ul className={classes.MoreInformation}>
-                    {props.facilities.map((facility, index) => (
-                      <li key={index} className={classes.MoreInformationList}>
-                        {facility}
-                      </li>
-                    ))}
-                  </ul>
-                </td>
+                {props.facilities && (
+                  <Fragment>
+                    <td className={classes.LeftCol}>Facilities:</td>
+                    <td className={classes.RightCol}>
+                      <ul className={classes.MoreInformation}>
+                        {props.facilities.map((facility, index) => (
+                          <li
+                            key={index}
+                            className={classes.MoreInformationList}
+                          >
+                            {facility}
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+                  </Fragment>
+                )}
               </tr>
             </tbody>
           </table>

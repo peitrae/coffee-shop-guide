@@ -1,22 +1,22 @@
-import React, { useState } from "react"; 
-import { useDispatch} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { withRouter } from "react-router";
 
 import Questionnaire from "../../../components/Questionnaire/Questionnaire";
 import * as actions from "../../../store/actions/member";
 
 const Preference = props => {
-
   const [preference, setPreference] = useState([0, 0, 0, 0]);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const dispatch = useDispatch();
-  const setUserPreference = (preference, localId, token) =>
-    dispatch(actions.setPreference(preference, localId, token));
+  const setUserPreference = preference =>
+    dispatch(actions.setPreference(preference));
 
   const preferenceQuestions = [
-    "What is your taste and quality of product of coffee shop rating preference?",
-    "What is your order/delivery process of coffee shop rating preference?",
-    "What is your overall rating of coffee shop preference?",
+    "How important taste and quality of product of coffee shop rating preference for you?",
+    "How important order/delivery process of coffee shop rating preference for you?",
+    "How important overall rating of coffee shop preference for you?",
     "What is your coffee shop price range prefeference ?"
   ];
 
@@ -35,10 +35,14 @@ const Preference = props => {
     { label: "> 50K", value: 4 }
   ];
 
-  const submitHandler = event => {
-    event.preventDefault()
-    setUserPreference(preference, props.localId, props.token);
-    props.history.push("/search")
+  function submitHandler (event) {
+    event.preventDefault();
+    if (preference.indexOf(0) === -1) {
+      setUserPreference(preference, props.localId);
+      props.history.push("/search");
+    } else {
+      setErrorMessage("Fill all questionnaire");
+    }
   };
 
   return (
@@ -51,8 +55,9 @@ const Preference = props => {
       header="Your Preference"
       submitHandler={submitHandler}
       label={defaultLabelRadio}
-      priceLabel={priceLabelRadio}
+      priceLabelRadio={priceLabelRadio}
       typePrice={3} // questionnaireQuestions[3]
+      errorMessage={errorMessage}
     />
   );
 };

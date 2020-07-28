@@ -17,8 +17,9 @@
 }
 
 .BtnSubmit {
-  position: relative;
-  left: 40%;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
 }
 
 

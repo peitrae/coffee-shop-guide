@@ -21,13 +21,12 @@ export {
     setPreference,
     setPreferenceSuccess,
     getUserData,
-    getUserDataSuccess,
     sendVerification,
     sendVerificationSuccess,
     getCoffeeShopUploadedBy,
     getCoffeeShopUploadedBySuccess,
     deleteCoffeeShop,
     setRating,
-    setError,
-    clearError
+    setResponse,
+    deleteResponse,
 } from './member';
