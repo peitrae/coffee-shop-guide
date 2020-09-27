@@ -6,7 +6,9 @@ export {
 export {
     getCoffeeShopData,
     getCoffeeShopDataSuccess,
-    setCoffeeShopData
+    setCoffeeShopData,
+    getBookmark,
+    getBookmarkSuccess,
 } from './coffeeShop'
 
 export {
@@ -27,6 +29,10 @@ export {
     getCoffeeShopUploadedBySuccess,
     deleteCoffeeShop,
     setRating,
+    setBookmark,
+    setBookmarkSuccess,
+    // getBookmarkIds,
+    // getBookmarkIdsSuccess,
     setResponse,
     deleteResponse,
 } from './member';

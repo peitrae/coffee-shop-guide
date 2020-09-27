@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 
-import MiniLists from "../../../components/MiniLists/MiniLists";
+import MiniList from "../../../components/MiniList/MiniList";
 import WarningModal from "./WarningModal/WarningModal";
 import * as actions from "../../../store/actions";
 
@@ -46,11 +46,10 @@ const CoffeeShopList = props => {
   };
 
   return (
-    <React.Fragment>
-      <MiniLists
-        headerList="Your Page"
-        coffeeShopList={coffeeShopList}
-        showEditableButton
+    <>
+      <MiniList
+        title="Your Page"
+        list={coffeeShopList}
         editHandler={editCoffeeShopHandler}
         deleteHandler={deleteCoffeeShopHandler}
       />
@@ -61,7 +60,7 @@ const CoffeeShopList = props => {
           submitWarningHandler={deleteWarningHandler}
         />
       ) : null}
-    </React.Fragment>
+    </>
   );
 };
 

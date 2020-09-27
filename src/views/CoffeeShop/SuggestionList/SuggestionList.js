@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 
-import MiniLists from "../../../components/MiniLists/MiniLists";
+import MiniList from "../../../components/MiniList/MiniList";
 import * as actions from "../../../store/actions";
 
 const SuggestionList = props => {
@@ -19,16 +19,16 @@ const SuggestionList = props => {
 
   const coffeeShopList = useSelector(state => state.allCoffeeShopList.lists);
 
-  if (!coffeeShopList) return <MiniLists headerList="You might also like" coffeeShopList={[]}/>;
+  if (!coffeeShopList) return <MiniList title="You might also like" list={[]}/>;
 
   const filteredCoffeeShopList = coffeeShopList.filter(
     (list, index) => list.id !== coffeeShopId && index < 6
   );
 
   return (
-    <MiniLists
+    <MiniList
       headerList="You might also like"
-      coffeeShopList={filteredCoffeeShopList}
+      list={filteredCoffeeShopList}
     />
   );
 };

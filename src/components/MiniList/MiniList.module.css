@@ -1,4 +1,4 @@
-.MiniLists {
+.MiniList {
   padding: 16px 24px;
   box-sizing: border-box;
   margin-left: 24px;
@@ -7,10 +7,4 @@
 
 .Spinner {
   height: 250px;
-}
-
-.HeaderList {
-  margin-bottom: 16px;
-  color: #464646;
-  font-size: 16px;
 }

@@ -78,11 +78,11 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
       );
     if (wiFiChecked)
       allCoffeeShopList = allCoffeeShopList.filter(coffeeShop =>
-        coffeeShop.facilities.includes('Wifi')
+        coffeeShop.facilities?.includes('Wifi')
       );
     if (creditCardChecked)
       allCoffeeShopList = allCoffeeShopList.filter(coffeeShop =>
-        coffeeShop.facilities.includes('Credit Card')
+        coffeeShop.facilities?.includes('Credit Card')
       );
 
     filterFunc(allCoffeeShopList);

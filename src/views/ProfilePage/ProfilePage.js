@@ -6,6 +6,7 @@ import EditProfile from './EditProfile/EditProfile';
 import EditPassword from './EditPassword/EditPassword';
 import SendVerification from './SendVerification/SendVerification';
 import CoffeeShopList from './CoffeeShopList/CoffeeShopList';
+import BookmarkList from './BookmarkList/BookmarkList';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Footer from '../../components/UI/Footer/Footer';
 import classes from './ProfilePage.module.css';
@@ -63,6 +64,7 @@ const ProfilePage = () => {
           />
         ) : null}
         {emailVerified ? <CoffeeShopList localId={localId} /> : null}
+        <BookmarkList />
       </div>
       <Footer />
     </React.Fragment>

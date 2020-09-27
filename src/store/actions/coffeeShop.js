@@ -22,3 +22,17 @@ export const setCoffeeShopData = (coffeeShopData, coffeeShopId, history) => {
     history
   }
 }
+
+export const getBookmark = (coffeeShopIds) => {
+  return {
+    type: actionTypes.COFFEE_SHOP_GET_BOOKMARK,
+    coffeeShopIds,
+  };
+};
+
+export const getBookmarkSuccess = (coffeeShops) => {
+  return {
+    type: actionTypes.COFFEE_SHOP_GET_BOOKMARK_SUCCESS,
+    coffeeShops,
+  };
+};

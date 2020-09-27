@@ -9,7 +9,12 @@ export function* getCoffeeShopData(action) {
 
   try {
     const response = yield axios.get(url);
-    yield put(actions.getCoffeeShopDataSuccess(response.data));
+    yield put(
+      actions.getCoffeeShopDataSuccess({
+        coffeeShop_id: action.coffeeShopId,
+        ...response.data,
+      })
+    );
   } catch (error) {
     console.log(error.response.data.error.message);
   }
@@ -30,6 +35,29 @@ export function* setCoffeeShopDataSaga(action) {
     }
 
     yield action.history.push(`/coffee-shop/${coffeeShopId}`);
+  } catch (error) {
+    console.log(error.response.data.error.message);
+  }
+}
+
+export function* getBookmarkSaga(action) {
+
+  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop.json`;
+
+  try {
+    const response = yield axios.get(url);
+
+    const coffeeShops = [];
+    for (let key in response.data) {
+      if (action.coffeeShopIds.includes(key)) {
+        coffeeShops.push({
+          ...response.data[key],
+          id: key,
+        });
+      }
+    }
+
+    yield put(actions.getBookmarkSuccess(coffeeShops));
   } catch (error) {
     console.log(error.response.data.error.message);
   }

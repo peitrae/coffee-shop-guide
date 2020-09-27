@@ -1,4 +1,4 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from "./actionTypes";
 
 export const signUp = (email, password, name) => {
   return {
@@ -14,7 +14,7 @@ export const login = (email, password, rememberMe) => {
     type: actionTypes.MEMBER_LOGIN,
     email,
     password,
-    rememberMe
+    rememberMe,
   };
 };
 
@@ -26,7 +26,8 @@ export const authSuccess = (
   photoUrl,
   emailVerified,
   preference,
-  emailSent
+  emailSent,
+  bookmark
 ) => {
   return {
     type: actionTypes.MEMBER_AUTH_SUCCESS,
@@ -38,6 +39,7 @@ export const authSuccess = (
     emailVerified,
     preference,
     emailSent,
+    bookmark,
   };
 };
 
@@ -141,6 +143,33 @@ export const setRating = (rating, coffeeShopId) => {
     coffeeShopId,
   };
 };
+
+export const setBookmark = (coffeeShopIds) => {
+  return {
+    type: actionTypes.MEMBER_SET_BOOKMARK,
+    coffeeShopIds,
+  };
+};
+
+export const setBookmarkSuccess = (coffeeShopIds) => {
+  return {
+    type: actionTypes.MEMBER_SET_BOOKMARK_SUCCESS,
+    coffeeShopIds,
+  };
+};
+
+// export const getBookmarkIds = () => {
+//   return {
+//     type: actionTypes.MEMBER_GET_BOOKMARK_IDS,
+//   };
+// };
+
+// export const getBookmarkIdsSuccess = (bookmark) => {
+//   return {
+//     type: actionTypes.MEMBER_GET_BOOKMARK_IDS_SUCCESS,
+//     bookmark,
+//   };
+// };
 
 export const setResponse = (response) => {
   return {

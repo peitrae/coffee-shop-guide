@@ -18,7 +18,7 @@ const WarningModal = props => {
       </p>
       <div className={classes.BtnGroup}>
         <BtnMedium btnType="Green" clicked={props.cancelHandler}>
-          Back
+          Cancel
         </BtnMedium>
         <BtnMediumText btnType="DangerText" clicked={props.submitWarningHandler}>
           Delete

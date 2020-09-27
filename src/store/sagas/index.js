@@ -15,6 +15,7 @@ import {
   getCoffeeShopUploadedBySaga,
   deleteCoffeeShopSaga,
   setRatingSaga,
+  setBookmarkSaga
 } from "./member";
 
 import {
@@ -23,7 +24,8 @@ import {
 
 import {
   getCoffeeShopData,
-  setCoffeeShopDataSaga
+  setCoffeeShopDataSaga,
+  getBookmarkSaga
 } from "./coffeeShop";
 
 export function* watchMember() {
@@ -39,7 +41,8 @@ export function* watchMember() {
     takeEvery(actionTypes.MEMBER_SEND_VERIFICATION, sendVerificationSaga),
     takeEvery(actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY, getCoffeeShopUploadedBySaga),
     takeEvery(actionTypes.MEMBER_DELETE_COFFEE_SHOP, deleteCoffeeShopSaga),
-    takeEvery(actionTypes.MEMBER_SET_RATING, setRatingSaga)
+    takeEvery(actionTypes.MEMBER_SET_RATING, setRatingSaga),
+    takeEvery(actionTypes.MEMBER_SET_BOOKMARK, setBookmarkSaga)
   ]);
 }
 
@@ -52,7 +55,8 @@ export function* watchAllCoffeeShopList() {
 export function* watchCoffeeShop() {
   yield all([
     takeEvery(actionTypes.COFFEE_SHOP_GET_DATA, getCoffeeShopData),
-    takeEvery(actionTypes.COFFEE_SHOP_SET_DATA, setCoffeeShopDataSaga)
+    takeEvery(actionTypes.COFFEE_SHOP_SET_DATA, setCoffeeShopDataSaga),
+    takeEvery(actionTypes.COFFEE_SHOP_GET_BOOKMARK, getBookmarkSaga)
   ]);
 }
 

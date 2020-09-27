@@ -1,10 +1,10 @@
-import { put, call } from 'redux-saga/effects';
-import axios from 'axios';
+import { put, call } from "redux-saga/effects";
+import axios from "axios";
 
-import { config } from '../../config';
-import * as actions from '../actions';
+import { config } from "../../firebase";
+import * as actions from "../actions";
 
-const API_KEY = config['apiKey'];
+const API_KEY = config["apiKey"];
 
 export function* signUpSaga(action) {
   const signUpData = {
@@ -14,9 +14,9 @@ export function* signUpSaga(action) {
   };
 
   const urlSignUp =
-    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + API_KEY;
+    "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + API_KEY;
   const urlUpdateProfile =
-    'https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + API_KEY;
+    "https://identitytoolkit.googleapis.com/v1/accounts:update?key=" + API_KEY;
 
   try {
     const responseSignUp = yield axios.post(urlSignUp, signUpData);
@@ -33,10 +33,10 @@ export function* signUpSaga(action) {
     const expirationDate = yield new Date(
       new Date().getTime() + responseSignUp.data.expiresIn * 1000
     );
-    yield localStorage.setItem('token', idToken);
-    yield localStorage.setItem('refreshToken', refreshToken);
-    yield localStorage.setItem('expirationDate', expirationDate);
-    yield localStorage.setItem('localId', localId);
+    yield localStorage.setItem("token", idToken);
+    yield localStorage.setItem("refreshToken", refreshToken);
+    yield localStorage.setItem("expirationDate", expirationDate);
+    yield localStorage.setItem("localId", localId);
 
     yield put(actions.authSuccess(localId, idToken, email, name));
   } catch (error) {
@@ -62,12 +62,12 @@ export function* loginSaga(action) {
       new Date().getTime() + expiresIn * 1000
     );
 
-    yield localStorage.setItem('token', idToken);
-    yield localStorage.setItem('refreshToken', refreshToken);
-    yield localStorage.setItem('localId', localId);
-    yield localStorage.setItem('expirationDate', expirationDate);
+    yield localStorage.setItem("token", idToken);
+    yield localStorage.setItem("refreshToken", refreshToken);
+    yield localStorage.setItem("localId", localId);
+    yield localStorage.setItem("expirationDate", expirationDate);
     if (action.rememberMe) {
-      yield localStorage.setItem('rememberMe', true);
+      yield localStorage.setItem("rememberMe", true);
     }
 
     yield put(actions.getUserData(idToken, localId));
@@ -78,18 +78,18 @@ export function* loginSaga(action) {
 
 export function* logoutSaga() {
   try {
-    yield call([localStorage, 'clear']);
+    yield call([localStorage, "clear"]);
   } catch (error) {
     console.log(error.response.data.error.message);
   }
 }
 
 export function* editProfileSaga(action) {
-  let token = localStorage.getItem('token');
-  const localId = localStorage.getItem('localId');
+  let token = localStorage.getItem("token");
+  const localId = localStorage.getItem("localId");
 
   const urlEditProfile =
-    'https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + API_KEY;
+    "https://identitytoolkit.googleapis.com/v1/accounts:update?key=" + API_KEY;
 
   const editProfileData = {
     idToken: token,
@@ -101,27 +101,24 @@ export function* editProfileSaga(action) {
 
   try {
     const resEditProfile = yield axios.post(urlEditProfile, editProfileData);
-    const {
-      idToken,
-      refreshToken,
-    } = yield resEditProfile.data;
+    const { idToken, refreshToken } = yield resEditProfile.data;
 
     if (idToken) {
       token = idToken;
-      yield localStorage.setItem('token', idToken);
-      yield localStorage.setItem('refreshToken', refreshToken);
+      yield localStorage.setItem("token", idToken);
+      yield localStorage.setItem("refreshToken", refreshToken);
     }
 
     yield put(actions.setResponse(resEditProfile.data));
     yield put(actions.getUserData(token, localId));
   } catch (error) {
-    console.log('ERROR EDIT');
+    console.log("ERROR EDIT");
     yield put(actions.setResponse(error.response.data));
   }
 }
 
 export function* editPasswordSaga(action) {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
 
   const editPasswordData = {
@@ -134,15 +131,15 @@ export function* editPasswordSaga(action) {
     const response = yield axios.post(url, editPasswordData);
     const { idToken, refreshToken } = response.data;
 
-    yield localStorage.setItem('token', idToken);
-    yield localStorage.setItem('refreshToken', refreshToken);
+    yield localStorage.setItem("token", idToken);
+    yield localStorage.setItem("refreshToken", refreshToken);
   } catch (error) {
     console.log(error.response.data.error.message);
   }
 }
 
 export function* setPreferenceSaga(action) {
-  const localId = localStorage.getItem('localId');
+  const localId = localStorage.getItem("localId");
   const url = `https://coffee-shop-guide.firebaseio.com/users/${localId}/preference.json`;
 
   try {
@@ -155,9 +152,6 @@ export function* setPreferenceSaga(action) {
 }
 
 export function* getUserDataSaga(action) {
-  let preference = null;
-  let emailSent = null;
-
   const urlAuth = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`;
   const urlDB = `https://coffee-shop-guide.firebaseio.com/users/${action.localId}.json`;
 
@@ -165,7 +159,7 @@ export function* getUserDataSaga(action) {
     const resAuth = yield axios.post(urlAuth, {
       idToken: action.token,
     });
-    const resDatabase = yield axios.get(urlDB);
+    const resDB = yield axios.get(urlDB);
 
     const {
       email,
@@ -174,11 +168,7 @@ export function* getUserDataSaga(action) {
       emailVerified,
     } = resAuth.data.users[0];
 
-    if (resDatabase.data) {
-      resDatabase.data.preference && (preference = resDatabase.data.preference);
-      resDatabase.data.emailSent &&
-        (emailSent = resDatabase.data.emailSent.data);
-    }
+    const { preference, emailSent, bookmark } = resDB.data;
 
     yield put(
       actions.authSuccess(
@@ -189,7 +179,8 @@ export function* getUserDataSaga(action) {
         photoUrl,
         emailVerified,
         preference,
-        emailSent
+        emailSent.data,
+        bookmark
       )
     );
   } catch (error) {
@@ -198,11 +189,11 @@ export function* getUserDataSaga(action) {
 }
 
 export function* sendVerificationSaga() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`;
 
   const sendVerificationData = {
-    requestType: 'VERIFY_EMAIL',
+    requestType: "VERIFY_EMAIL",
     idToken: token,
   };
 
@@ -216,22 +207,22 @@ export function* sendVerificationSaga() {
 }
 
 export function* authCheckStateSaga() {
-  const token = localStorage.getItem('token');
-  const localId = localStorage.getItem('localId');
+  const token = localStorage.getItem("token");
+  const localId = localStorage.getItem("localId");
 
   if (token) {
     const expirationDate = yield new Date(
-      localStorage.getItem('expirationDate')
+      localStorage.getItem("expirationDate")
     );
-    const rememberMe = localStorage.getItem('rememberMe');
+    const rememberMe = localStorage.getItem("rememberMe");
 
     if (expirationDate > new Date()) {
       yield put(actions.getUserData(token, localId));
     } else if (rememberMe && expirationDate < new Date()) {
       const url = `https://securetoken.googleapis.com/v1/token?key=${API_KEY}`;
       const changeTokenData = {
-        grant_type: 'refresh_token',
-        refresh_token: localStorage.getItem('refreshToken'),
+        grant_type: "refresh_token",
+        refresh_token: localStorage.getItem("refreshToken"),
       };
 
       try {
@@ -243,10 +234,10 @@ export function* authCheckStateSaga() {
           new Date().getTime() + expires_in * 1000
         );
 
-        yield localStorage.setItem('token', id_token);
-        yield localStorage.setItem('refreshToken', refresh_token);
-        yield localStorage.setItem('localId', user_id);
-        yield localStorage.setItem('expirationDate', expirationDate);
+        yield localStorage.setItem("token", id_token);
+        yield localStorage.setItem("refreshToken", refresh_token);
+        yield localStorage.setItem("localId", user_id);
+        yield localStorage.setItem("expirationDate", expirationDate);
 
         yield put(actions.getUserData(id_token, user_id));
       } catch (error) {
@@ -281,7 +272,7 @@ export function* getCoffeeShopUploadedBySaga(action) {
 }
 
 export function* deleteCoffeeShopSaga(action) {
-  const localId = localStorage.getItem('localId');
+  const localId = localStorage.getItem("localId");
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}.json`;
 
   try {
@@ -293,7 +284,7 @@ export function* deleteCoffeeShopSaga(action) {
 }
 
 export function* setRatingSaga(action) {
-  const localId = localStorage.getItem('localId');
+  const localId = localStorage.getItem("localId");
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}/rating/${localId}.json`;
   try {
     yield axios.put(url, action.rating);
@@ -302,3 +293,29 @@ export function* setRatingSaga(action) {
     console.log(error.response.data.error.message);
   }
 }
+
+export function* setBookmarkSaga(action) {
+  const localId = localStorage.getItem("localId");
+  const url = `https://coffee-shop-guide.firebaseio.com/users/${localId}/bookmark.json`;
+
+  try {
+    yield axios.put(url, action.coffeeShopIds);
+    yield put(actions.setBookmarkSuccess(action.coffeeShopIds));
+    yield put(actions.getBookmark(action.coffeeShopIds));
+  } catch (error) {
+    console.log(error.response.data.error.message);
+  }
+}
+
+// export function* getBookmarkIdsSaga() {
+//   const localId = localStorage.getItem("localId");
+//   const url = `https://coffee-shop-guide.firebaseio.com/users/${localId}/bookmark.json`;
+
+//   try {
+//     const response = yield axios.get(url);
+
+//     yield put(actions.getBookmarkIdsSuccess(response));
+//   } catch (error) {
+//     console.log(error.response.data.error.message);
+//   }
+// }
