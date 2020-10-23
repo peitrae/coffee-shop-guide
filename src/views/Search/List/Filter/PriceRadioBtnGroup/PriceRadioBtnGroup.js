@@ -1,7 +1,7 @@
 import React from "react";
 
-import RadioButton from "../../../../components/UI/Button/RadioButton/RadioButton";
-import Card from "../../../../components/UI/Card/Card";
+import RadioButton from "../../../../../components/UI/Button/RadioButton/RadioButton";
+import Card from "../../../../../components/UI/Card/Card";
 import classes from "./PriceRadioBtnGroup.module.css"
 
 const PriceRadioBtnGroup = props => {

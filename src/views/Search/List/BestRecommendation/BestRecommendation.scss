@@ -1,8 +1,7 @@
-@import "../../../assets//styles/GlobalStyles.scss";
+@import "../../../../assets//styles/GlobalStyles.scss";
 
 .best-recommend {
   margin-bottom: 16px;
-  width: 645px;
   height: 270px;
   cursor: pointer;
   display: flex;
@@ -64,7 +63,7 @@
 
     .main-rating {
       height: 36px;
-      width: 48px;
+      width: 36px;
       background: $secondary;
       border-radius: 4px;
       color: $primary;
@@ -72,6 +71,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-shrink: 0;
     }
   }
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import Card from "../../../components/UI/Card/Card";
-import noImage from "../../../assets/no-image.png";
+import Card from "../../../../components/UI/Card/Card";
+import noImage from "../../../../assets/no-image.png";
 
 import "./BestRecommendation.scss";
 

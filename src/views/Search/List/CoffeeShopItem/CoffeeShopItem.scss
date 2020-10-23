@@ -1,0 +1,62 @@
+@import "../../../../assets/styles/GlobalStyles.scss";
+
+.coffeeshop-item {
+  margin-bottom: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  &-img {
+    width: 148px;
+    height: 148px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  &-desc {
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .address {
+      font-weight: 600;
+      font-size: 14px;
+      color: $black;
+    }
+
+    .details {
+      font-size: 14px;
+      color: $black;
+
+      &-wrapper {
+        display: flex;
+      }
+
+      &-label {
+        width: 108px;
+      }
+
+      &-main {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &-rating {
+    height: 36px;
+    width: 36px;
+    background: #6fcf9780;
+    border-radius: 4px;
+    color: #219653;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+}
+
