@@ -26,7 +26,6 @@ export const authSuccess = (
   photoUrl,
   emailVerified,
   preference,
-  emailSent,
   bookmark
 ) => {
   return {
@@ -38,7 +37,6 @@ export const authSuccess = (
     photoUrl,
     emailVerified,
     preference,
-    emailSent,
     bookmark,
   };
 };

@@ -168,7 +168,7 @@ export function* getUserDataSaga(action) {
       emailVerified,
     } = resAuth.data.users[0];
 
-    const { preference, emailSent, bookmark } = resDB.data;
+    const { preference, bookmark} = resDB.data || {};
 
     yield put(
       actions.authSuccess(
@@ -179,12 +179,11 @@ export function* getUserDataSaga(action) {
         photoUrl,
         emailVerified,
         preference,
-        emailSent.data,
         bookmark
       )
     );
   } catch (error) {
-    yield put(actions.setResponse(error?.response?.data));
+    yield put(actions.setResponse(error.response?.data));
   }
 }
 
