@@ -1,50 +1,59 @@
-import React, { Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-import Card from '../../../components/UI/Card/Card';
-import classes from './BestRecommendation.module.css';
+import Card from "../../../components/UI/Card/Card";
+import noImage from "../../../assets/no-image.png";
 
-const BestRecommendation = (props) => {
+import "./BestRecommendation.scss";
+
+const BestRecommendation = ({ coffeeShop }) => {
+  const {
+    id,
+    name,
+    images,
+    address,
+    operationalHours,
+    averagePrice,
+    facilities,
+    profileMatching,
+  } = coffeeShop;
+
+  const todayHours = operationalHours[new Date().getDay()];
+
   return (
-    <NavLink to={`/coffee-shop/${props.coffeeShopId}`}>
-      <div className={classes.GreenLine}></div>
-      <Card className={classes.BestRecommendation} shadow>
-        <h1 className={classes.Header} >Best for you</h1>
-        <img src={props.image} alt={props.name} />
-        <div className={classes.Description}>
-          <h2 className={classes.Title}>{props.name}</h2>
-          <span className={classes.Address}>{props.address}</span>
-          <table className={classes.Details}>
-            <tbody>
-              <tr>
-                <td className={classes.LeftCol}>Hours:</td>
-                <td className={classes.RightCol}>{props.operationalHours}</td>
-              </tr>
-              <tr>
-                <td className={classes.LeftCol}>Average Price:</td>
-                <td className={classes.RightCol}>{props.averagePrice}</td>
-              </tr>
-              <tr>
-                {props.facilities && (
-                  <Fragment>
-                    <td className={classes.LeftCol}>Facilities:</td>
-                    <td className={classes.RightCol}>
-                      <ul className={classes.MoreInformation}>
-                        {props.facilities.map((facility, index) => (
-                          <li
-                            key={index}
-                            className={classes.MoreInformationList}
-                          >
-                            {facility}
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
-                  </Fragment>
-                )}
-              </tr>
-            </tbody>
-          </table>
+    <NavLink to={`/coffee-shop/${id}`}>
+      <Card className="best-recommend" shadow>
+        <div className="best-recommend-accent"></div>
+        <div className="best-recommend-main">
+          <h1 className="main-title">Best for you</h1>
+          <div className="main-coffeeshop">
+            <img
+              src={images ? images[0] : noImage}
+              alt={name}
+              className="main-coffeeshop-img"
+            />
+            <div className="main-coffeeshop-desc">
+              <h2 className="name">{name}</h2>
+              <span className="address">{address}</span>
+              <div className="details">
+                <div className="details-wrapper">
+                  <div className="details-label">Hours:</div>
+                  <span className="details-main">
+                    {todayHours
+                      ? `${todayHours.open} - ${todayHours.close}`
+                      : "Close"}
+                  </span>
+                </div>
+                <div className="details-wrapper">
+                  <div className="details-label">Average Price:</div>
+                  <span className="details-main">{`Rp ${averagePrice}`}</span>
+                </div>
+              </div>
+            </div>
+            <div className="main-rating">
+              <span>{profileMatching}</span>
+            </div>
+          </div>
         </div>
       </Card>
     </NavLink>
