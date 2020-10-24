@@ -50,9 +50,11 @@ const BestRecommendation = ({ coffeeShop }) => {
                 </div>
               </div>
             </div>
-            <div className="main-rating">
-              <span>{profileMatching}</span>
-            </div>
+            {profileMatching ? (
+              <div className="main-rating">
+                <span>{profileMatching}</span>
+              </div>
+            ) : null}
           </div>
         </div>
       </Card>
