@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from "react";
 
 import classes from "./Checkbox.module.css";
 
-const Checkbox = props => (
-    <label className={classes.Container}>
+const Checkbox = forwardRef((props, ref) => (
+  <label className={classes.Container} ref={ref}>
     <input
       type="checkbox"
       name={props.inputId}
@@ -16,6 +16,6 @@ const Checkbox = props => (
       <div>{props.label}</div>
     </div>
   </label>
-)
+));
 
 export default Checkbox;
