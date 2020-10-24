@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import Checkbox from '../../../../components/UI/Button/Checkbox/Checkbox';
-import Card from '../../../../components/UI/Card/Card';
-import classes from './Filter.module.css';
-import PriceRadioBtnGroup from './PriceRadioBtnGroup/PriceRadioBtnGroup';
+import Checkbox from "../../../../components/UI/Button/Checkbox/Checkbox";
+import Card from "../../../../components/UI/Card/Card";
+import classes from "./Filter.module.css";
+import PriceRadioBtnGroup from "./PriceRadioBtnGroup/PriceRadioBtnGroup";
 
-const Filter = ({ allCoffeeShopList, filterFunc }) => {
+const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
   const [filter, setFilter] = useState({
     priceChecked: false,
     openNowChecked: false,
     wiFiChecked: false,
-    creditCardChecked: false
+    creditCardChecked: false,
   });
 
-  const [showPriceRangeGroup, setShowPriceRangeGroup] = useState(false);
+  const [showPrice, setShowPrice] = useState(false);
 
   const {
     priceChecked,
     openNowChecked,
     wiFiChecked,
-    creditCardChecked
+    creditCardChecked,
   } = filter;
 
   useEffect(() => {
@@ -27,22 +27,22 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
-  const checkPrice = averagePrice => {
+  const checkPrice = (averagePrice) => {
     switch (priceChecked) {
-      case 'belowTen':
+      case "belowTen":
         return averagePrice < 10000;
-      case 'tenTillThirty':
+      case "tenTillThirty":
         return averagePrice >= 10000 && averagePrice < 30000;
-      case 'thirtyTillFifty':
+      case "thirtyTillFifty":
         return averagePrice >= 30000 && averagePrice <= 50000;
-      case 'aboveFifty':
+      case "aboveFifty":
         return averagePrice > 50000;
       default:
-        console.log('error');
+        console.log("error");
     }
   };
 
-  const checkIfOpen = operationalHours => {
+  const checkIfOpen = (operationalHours) => {
     const date = new Date();
     const todayDay = date.getDay();
     const todayHours = date.getHours();
@@ -67,33 +67,41 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
     return checkDay && checkHours && checkMinutes;
   };
 
+  const showPriceHandler = () => setShowPrice(!showPrice);
+
   const filterChanged = () => {
     if (priceChecked)
-      allCoffeeShopList = allCoffeeShopList.filter(coffeeShop =>
+      coffeeShops = coffeeShops.filter((coffeeShop) =>
         checkPrice(coffeeShop.averagePrice)
       );
     if (openNowChecked)
-      allCoffeeShopList = allCoffeeShopList.filter(coffeeShop =>
+      coffeeShops = coffeeShops.filter((coffeeShop) =>
         checkIfOpen(coffeeShop.operationalHours)
       );
     if (wiFiChecked)
-      allCoffeeShopList = allCoffeeShopList.filter(coffeeShop =>
-        coffeeShop.facilities?.includes('Wifi')
+      coffeeShops = coffeeShops.filter((coffeeShop) =>
+        coffeeShop.facilities?.includes("Wifi")
       );
     if (creditCardChecked)
-      allCoffeeShopList = allCoffeeShopList.filter(coffeeShop =>
-        coffeeShop.facilities?.includes('Credit Card')
+      coffeeShops = coffeeShops.filter((coffeeShop) =>
+        coffeeShop.facilities?.includes("Credit Card")
       );
 
-    filterFunc(allCoffeeShopList);
+    console.log("changed", coffeeShops);
+
+    onFilterCoffeeShops(coffeeShops);
   };
 
-  const checkBoxHandleChange = name =>
+  const checkBoxHandleChange = (name) =>
     setFilter({ ...filter, [name]: !filter[name] });
 
-  const priceCheckedChangedHandler = priceRange => {
-    if (priceChecked === priceRange) priceRange = false;
-    if (showPriceRangeGroup) setShowPriceRangeGroup(!showPriceRangeGroup);
+  const priceCheckedChangedHandler = (priceRange) => {
+    if (priceChecked === priceRange) {
+      priceRange = false;
+    }
+    if (showPrice) {
+      showPriceHandler();
+    }
     setFilter({ ...filter, priceChecked: priceRange });
   };
 
@@ -102,14 +110,12 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
       <h3>Filter: </h3>
       <div className={classes.Price}>
         <Checkbox
-          inputId='priceGroup'
-          changed={() => setShowPriceRangeGroup(!showPriceRangeGroup)}
-          label='Price'
+          inputId="priceGroup"
+          changed={showPriceHandler}
+          label="Price"
           checked={priceChecked}
-        >
-          Price
-        </Checkbox>
-        {showPriceRangeGroup ? (
+        />
+        {showPrice ? (
           <PriceRadioBtnGroup
             className={classes.PriceRadioBtnGroup}
             checked={priceChecked}
@@ -118,21 +124,21 @@ const Filter = ({ allCoffeeShopList, filterFunc }) => {
         ) : null}
       </div>
       <Checkbox
-        inputId='openNow'
-        changed={() => checkBoxHandleChange('openNowChecked')}
-        label='Open Now'
+        inputId="openNow"
+        changed={() => checkBoxHandleChange("openNowChecked")}
+        label="Open Now"
         checked={openNowChecked}
       />
       <Checkbox
-        inputId='wiFi'
-        changed={() => checkBoxHandleChange('wiFiChecked')}
-        label='Wifi'
+        inputId="wiFi"
+        changed={() => checkBoxHandleChange("wiFiChecked")}
+        label="Wifi"
         checked={wiFiChecked}
       />
       <Checkbox
-        inputId='creditCard'
-        changed={() => checkBoxHandleChange('creditCardChecked')}
-        label='Credit Card'
+        inputId="creditCard"
+        changed={() => checkBoxHandleChange("creditCardChecked")}
+        label="Credit Card"
         checked={creditCardChecked}
       />
     </Card>
