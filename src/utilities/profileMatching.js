@@ -1,4 +1,8 @@
 const profileMatching = (preference, coffeeShopList) => {
+  if(!preference || !coffeeShopList) {
+    return null;
+  }
+
   const noCandidateData = [];
   const candidateData = [];
   const coreFactorIndex = [];
