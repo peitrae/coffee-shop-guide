@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import Checkbox from "../../../../components/UI/Button/Checkbox/Checkbox";
 import Card from "../../../../components/UI/Card/Card";
-import classes from "./Filter.module.css";
 import PriceRadioBtnGroup from "./PriceRadioBtnGroup/PriceRadioBtnGroup";
+import DistanceGroup from "./DistanceGroup/DistanceGroup";
+
+import "./Filter.scss";
 
 const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
   const [filter, setFilter] = useState({
@@ -11,15 +13,18 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
     openNowChecked: false,
     wiFiChecked: false,
     creditCardChecked: false,
+    distanceChecked: false,
   });
 
   const [showPrice, setShowPrice] = useState(false);
+  const [showDistance, setShowDistance] = useState(true);
 
   const {
     priceChecked,
     openNowChecked,
     wiFiChecked,
     creditCardChecked,
+    distanceChecked,
   } = filter;
 
   useEffect(() => {
@@ -67,8 +72,6 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
     return checkDay && checkHours && checkMinutes;
   };
 
-  const showPriceHandler = () => setShowPrice(!showPrice);
-
   const filterChanged = () => {
     if (priceChecked)
       coffeeShops = coffeeShops.filter((coffeeShop) =>
@@ -87,15 +90,13 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
         coffeeShop.facilities?.includes("Credit Card")
       );
 
-    console.log("changed", coffeeShops);
-
     onFilterCoffeeShops(coffeeShops);
   };
 
   const checkBoxHandleChange = (name) =>
     setFilter({ ...filter, [name]: !filter[name] });
 
-  const priceCheckedChangedHandler = (priceRange) => {
+  const priceClickHandler = (priceRange) => {
     if (priceChecked === priceRange) {
       priceRange = false;
     }
@@ -105,10 +106,16 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
     setFilter({ ...filter, priceChecked: priceRange });
   };
 
+  const distanceClickHandler = (distance) => {};
+
+  const showPriceHandler = () => setShowPrice(!showPrice);
+
+  const showDistanceHandler = () => setShowDistance(!showDistance);
+
   return (
-    <Card className={classes.Filter} shadow>
-      <h3>Filter: </h3>
-      <div className={classes.Price}>
+    <Card className="search-filter" shadow>
+      <h3 className="search-filter-label">Filter: </h3>
+      <div className="search-filter-price">
         <Checkbox
           inputId="priceGroup"
           changed={showPriceHandler}
@@ -117,9 +124,8 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
         />
         {showPrice ? (
           <PriceRadioBtnGroup
-            className={classes.PriceRadioBtnGroup}
             checked={priceChecked}
-            clicked={priceCheckedChangedHandler}
+            clicked={priceClickHandler}
           />
         ) : null}
       </div>
@@ -141,6 +147,20 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
         label="Credit Card"
         checked={creditCardChecked}
       />
+      <div className="search-filter-distance">
+        <Checkbox
+          inputId="distanceGrp"
+          changed={showDistanceHandler}
+          label="Distance"
+          checked={distanceChecked}
+        />
+        {showDistance ? (
+          <DistanceGroup
+            onClick={distanceClickHandler}
+            checked={distanceChecked}
+          />
+        ) : null}
+      </div>
     </Card>
   );
 };

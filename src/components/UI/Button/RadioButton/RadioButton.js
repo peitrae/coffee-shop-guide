@@ -1,28 +1,30 @@
 import React from "react";
 
-import classes from "./RadioButton.module.css";
+import "./RadioButton.scss";
 
-const RadioButton = props => {
-
-const radioButton = [classes.Container, classes[props.radioButtonType]].join(" ");
-
-return (
-  <label className={radioButton}>
+const RadioButton = ({
+  name,
+  value,
+  onClick,
+  checked,
+  size,
+  children,
+  className,
+}) => (
+  <label className={`radio-btn radio-btn-${size} ${className}`}>
     <input
       type="radio"
-      name={props.inputId}
-      className={classes.RadioInput}
-      value={props.value}
+      name={name}
+      className="radio-btn-input"
+      value={value}
       readOnly
-      onClick={props.clicked}
-      checked={props.checked}
+      onClick={onClick}
+      checked={checked}
     />
-    <div className={classes.Checkmark}>
-      <div>{props.label}</div>
+    <div className="radio-btn-checkmark">
+      <div>{children}</div>
     </div>
   </label>
 );
-
-};
 
 export default RadioButton;
