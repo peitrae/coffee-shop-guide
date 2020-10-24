@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import List from "./List/List";
@@ -12,7 +12,7 @@ import "./Search.scss";
 const Search = () => {
   const userPreference = useSelector((state) => state.member.preference);
   const coffeeShops = useSelector((state) => state.allCoffeeShopList.lists);
-  
+
   const dispatch = useDispatch();
   const getCoffeeShops = useCallback(
     () => dispatch(actions.getAllCoffeeShopList()),
@@ -25,14 +25,22 @@ const Search = () => {
 
   const sortedCoffeeShops = profileMatching(userPreference, coffeeShops);
 
+  const [filteredCoffeeShops, setFilteredCoffeeShops] = useState(null);
+
+  const onFilterCoffeeShops = (coffeeShops) => {
+    setFilteredCoffeeShops(coffeeShops);
+  };
+
   return (
     <>
       <div className="search-result">
         <List
+          filteredCoffeeShops={filteredCoffeeShops}
           sortedCoffeeShops={sortedCoffeeShops}
+          onFilter={onFilterCoffeeShops}
         />
         <div className="search-result-map">
-          <MapView coffeeShops={sortedCoffeeShops}/>
+          <MapView coffeeShops={filteredCoffeeShops || sortedCoffeeShops} />
         </div>
       </div>
       <Footer />

@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { isPointWithinRadius } from "geolib";
 
 import Checkbox from "../../../../components/UI/Button/Checkbox/Checkbox";
 import Card from "../../../../components/UI/Card/Card";
-import PriceRadioBtnGroup from "./PriceRadioBtnGroup/PriceRadioBtnGroup";
+import PriceGroup from "./PriceGroup/PriceGroup";
 import DistanceGroup from "./DistanceGroup/DistanceGroup";
 
 import "./Filter.scss";
 
-const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
+const Filter = ({ coffeeShops, onFilter }) => {
+  const priceRef = useRef();
+  const distanceRef = useRef();
+
   const [filter, setFilter] = useState({
     priceChecked: false,
     openNowChecked: false,
@@ -17,7 +21,7 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
   });
 
   const [showPrice, setShowPrice] = useState(false);
-  const [showDistance, setShowDistance] = useState(true);
+  const [showDistance, setShowDistance] = useState(false);
 
   const {
     priceChecked,
@@ -72,6 +76,22 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
     return checkDay && checkHours && checkMinutes;
   };
 
+  const withinRadius = (coffeeShops, radius) => {
+    const user = { lat: -7.983, long: 112.621 };
+
+    return coffeeShops.filter(({ location }) => {
+      if (!location) {
+        return false;
+      }
+
+      return isPointWithinRadius(
+        { latitude: location.lat, longitude: location.long },
+        { latitude: user.lat, longitude: user.long },
+        radius
+      );
+    });
+  };
+
   const filterChanged = () => {
     if (priceChecked)
       coffeeShops = coffeeShops.filter((coffeeShop) =>
@@ -89,8 +109,10 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
       coffeeShops = coffeeShops.filter((coffeeShop) =>
         coffeeShop.facilities?.includes("Credit Card")
       );
-
-    onFilterCoffeeShops(coffeeShops);
+    if (distanceChecked) {
+      coffeeShops = withinRadius(coffeeShops, distanceChecked);
+    }
+    onFilter(coffeeShops);
   };
 
   const checkBoxHandleChange = (name) =>
@@ -106,11 +128,35 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
     setFilter({ ...filter, priceChecked: priceRange });
   };
 
-  const distanceClickHandler = (distance) => {};
+  const distanceClickHandler = (distance) => {
+    if (distanceChecked === distance) {
+      distance = false;
+    }
+    if (showDistance) {
+      showDistanceHandler();
+    }
+    setFilter({ ...filter, distanceChecked: distance });
+  };
 
   const showPriceHandler = () => setShowPrice(!showPrice);
 
+  const closePriceHandler = (e) => {
+    if (e && priceRef.current.contains(e.target)) {
+      return;
+    }
+
+    setShowPrice(!showPrice);
+  };
+
   const showDistanceHandler = () => setShowDistance(!showDistance);
+
+  const closeDistanceHandler = (e) => {
+    if (e && distanceRef.current.contains(e.target)) {
+      return;
+    }
+
+    setShowPrice(!showPrice);
+  };
 
   return (
     <Card className="search-filter" shadow>
@@ -121,11 +167,13 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
           changed={showPriceHandler}
           label="Price"
           checked={priceChecked}
+          ref={priceRef}
         />
         {showPrice ? (
-          <PriceRadioBtnGroup
+          <PriceGroup
             checked={priceChecked}
-            clicked={priceClickHandler}
+            onClick={priceClickHandler}
+            onClickOutside={closePriceHandler}
           />
         ) : null}
       </div>
@@ -153,10 +201,12 @@ const Filter = ({ coffeeShops, onFilterCoffeeShops }) => {
           changed={showDistanceHandler}
           label="Distance"
           checked={distanceChecked}
+          ref={distanceRef}
         />
         {showDistance ? (
           <DistanceGroup
             onClick={distanceClickHandler}
+            onClickOutside={closeDistanceHandler}
             checked={distanceChecked}
           />
         ) : null}

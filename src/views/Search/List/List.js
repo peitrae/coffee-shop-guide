@@ -8,25 +8,16 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 
 import "./List.scss";
 
-const List = ({ sortedCoffeeShops }) => {
-  const [filteredCoffeeShops, setFilteredCoffeeShops] = useState(null);
-
-  const onFilterCoffeeShops = (coffeeShops) => {
-    setFilteredCoffeeShops(coffeeShops);
-  }
-
+const List = ({ filteredCoffeeShops, sortedCoffeeShops, onFilter }) => {
   if (!sortedCoffeeShops) {
     return <Spinner />;
   }
 
-  const coffeeShops = filteredCoffeeShops || sortedCoffeeShops; 
+  const coffeeShops = filteredCoffeeShops || sortedCoffeeShops;
 
   return (
     <div className="search-result-list">
-    <Filter
-      coffeeShops={sortedCoffeeShops}
-      onFilterCoffeeShops={onFilterCoffeeShops}
-    />
+      <Filter coffeeShops={sortedCoffeeShops} onFilter={onFilter} />
       {coffeeShops ? <BestRecommendation coffeeShop={coffeeShops[0]} /> : null}
       {coffeeShops ? (
         coffeeShops
