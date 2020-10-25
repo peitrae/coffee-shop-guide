@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import Card from "../../../components/UI/Card/Card";
-import classes from "./Header.module.css";
 import { BtnMedium, PlainBtn } from "../../../components/UI/Button/Button";
 import Feedback from "./Feedback/Feedback";
 import Share from "./Share/Share";
@@ -93,7 +92,7 @@ const Header = () => {
         <Feedback show={showRatingQuest} close={cancelRatingHandler} />
       ) : null}
 
-      <Card className={classes.Header}>
+      <Card className="coffeeshop-header">
         <img
           src={header}
           alt="Coffee Shop Header"
