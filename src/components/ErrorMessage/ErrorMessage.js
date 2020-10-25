@@ -1,7 +1,8 @@
 import React from "react";
-import classes from './ErrorMessage.module.css'
 
-const ErrorMessage = props => {
+import "./ErrorMessage.scss";
+
+const ErrorMessage = ({children, className}) => {
   const checkErrorMessage = message => {
     switch (message) {
       case "INVALID_EMAIL":
@@ -21,11 +22,11 @@ const ErrorMessage = props => {
       case "CREDENTIAL_TOO_OLD_LOGIN_AGAIN":
         return "Please login again"
       default:
-        return props.message;
+        return message;
     }
   };
 
-  return <div className={classes.ErrorMessage}>{checkErrorMessage(props.message)}</div>;
+  return <div className={`error-message ${className}`}>{checkErrorMessage(children)}</div>;
 };
 
 export default ErrorMessage;
