@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import Card from "../../../components/UI/Card/Card";
 import classes from "./Header.module.css";
 import { BtnMedium, PlainBtn } from "../../../components/UI/Button/Button";
-import RatingQuestions from "./RatingQuestions/RatingQuestions";
+import Feedback from "./Feedback/Feedback";
 import Share from "./Share/Share";
 import * as actions from "../../../store/actions";
 
@@ -24,8 +24,10 @@ const Header = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   const { token, bookmark } = useSelector((state) => state.member);
-  const coffeeShopData = useSelector((state) => state.coffeeShop.data);
-  const { coffeeShop_id, header, name, address, rating } = coffeeShopData;
+  const coffeeShop = useSelector((state) => state.coffeeShop.data);
+  const { coffeeShop_id, header, name, address, feedback } = coffeeShop;
+
+  console.log(coffeeShop)
 
   useEffect(() => {
     const bookmarked = bookmark.includes(coffeeShop_id);
@@ -67,7 +69,9 @@ const Header = () => {
 
   const ratingAverage = () => {
     const ratingArr = [];
-    for (let key in rating) ratingArr.push(rating[key]);
+    for (let key in feedback) {
+      ratingArr.push(feedback[key].rating);
+    }
 
     let overallRating = 0;
     ratingArr.length === 1
@@ -86,7 +90,7 @@ const Header = () => {
   return (
     <>
       {showRatingQuest ? (
-        <RatingQuestions show={showRatingQuest} close={cancelRatingHandler} />
+        <Feedback show={showRatingQuest} close={cancelRatingHandler} />
       ) : null}
 
       <Card className={classes.Header}>
@@ -127,7 +131,7 @@ const Header = () => {
             <p className="content-address">{address}</p>
           </div>
           <div className="coffeeshop-header-rating">
-            {rating && rating.length !== 0 ? (
+            {feedback ? (
               <div className="content">{ratingAverage()}</div>
             ) : null}
             {isAuthenticated ? (

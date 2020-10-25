@@ -282,11 +282,11 @@ export function* deleteCoffeeShopSaga(action) {
   }
 }
 
-export function* setRatingSaga(action) {
+export function* setFeedbackCoffeeShopSaga(action) {
   const localId = localStorage.getItem("localId");
-  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}/rating/${localId}.json`;
+  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}/feedback/${localId}.json`;
   try {
-    yield axios.put(url, action.rating);
+    yield axios.put(url, action.feedback);
     yield put(actions.getCoffeeShopData(action.coffeeShopId));
   } catch (error) {
     console.log(error.response.data.error.message);

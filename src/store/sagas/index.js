@@ -14,7 +14,7 @@ import {
   sendVerificationSaga,
   getCoffeeShopUploadedBySaga,
   deleteCoffeeShopSaga,
-  setRatingSaga,
+  setFeedbackCoffeeShopSaga,
   setBookmarkSaga
 } from "./member";
 
@@ -41,7 +41,7 @@ export function* watchMember() {
     takeEvery(actionTypes.MEMBER_SEND_VERIFICATION, sendVerificationSaga),
     takeEvery(actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY, getCoffeeShopUploadedBySaga),
     takeEvery(actionTypes.MEMBER_DELETE_COFFEE_SHOP, deleteCoffeeShopSaga),
-    takeEvery(actionTypes.MEMBER_SET_RATING, setRatingSaga),
+    takeEvery(actionTypes.MEMBER_SET_FEEDBACK_COFFEE_SHOP, setFeedbackCoffeeShopSaga),
     takeEvery(actionTypes.MEMBER_SET_BOOKMARK, setBookmarkSaga)
   ]);
 }

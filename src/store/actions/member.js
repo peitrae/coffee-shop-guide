@@ -134,10 +134,10 @@ export const deleteCoffeeShop = (coffeeShopId) => {
   };
 };
 
-export const setRating = (rating, coffeeShopId) => {
+export const setFeedbackCoffeeShop = (feedback, coffeeShopId) => {
   return {
-    type: actionTypes.MEMBER_SET_RATING,
-    rating,
+    type: actionTypes.MEMBER_SET_FEEDBACK_COFFEE_SHOP,
+    feedback,
     coffeeShopId,
   };
 };

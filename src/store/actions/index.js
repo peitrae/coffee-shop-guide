@@ -28,7 +28,7 @@ export {
     getCoffeeShopUploadedBy,
     getCoffeeShopUploadedBySuccess,
     deleteCoffeeShop,
-    setRating,
+    setFeedbackCoffeeShop,
     setBookmark,
     setBookmarkSuccess,
     // getBookmarkIds,
