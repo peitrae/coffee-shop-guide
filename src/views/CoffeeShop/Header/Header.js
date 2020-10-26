@@ -26,8 +26,6 @@ const Header = () => {
   const coffeeShop = useSelector((state) => state.coffeeShop.data);
   const { coffeeShop_id, header, name, address, feedback } = coffeeShop;
 
-  console.log(coffeeShop)
-
   useEffect(() => {
     const bookmarked = bookmark.includes(coffeeShop_id);
 
