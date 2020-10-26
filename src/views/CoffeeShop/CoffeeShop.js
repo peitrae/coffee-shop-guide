@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header/Header";
 import Picture from "./Picture/Picture";
 import Information from "./Information/Information";
+import Review from "./Review/Review";
 import classes from "./CoffeeShop.module.css";
 import * as actions from "../../store/actions";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -29,19 +30,20 @@ const CoffeeShop = props => {
   if (!coffeeShopData) return <Spinner />;
 
   return (
-    <React.Fragment>
+    <>
       <div className={classes.CoffeeShop}>
         <div className={classes.MainDiv}>
           <Header />
           <Information />
           <Picture />
+          <Review />
         </div>
         <div className={classes.RightDiv}>
           <SuggestionList />
         </div>
       </div>
       <Footer />
-    </React.Fragment>
+    </>
   );
 };
 

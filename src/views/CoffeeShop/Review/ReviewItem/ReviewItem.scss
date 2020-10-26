@@ -1,0 +1,66 @@
+@import "../../../../assets/styles/GlobalStyles.scss";
+
+.coffeeshop-review-item {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+
+  .review-user {
+    display: flex;
+
+    &-img {
+      width: 36px;
+      height: 36px;
+      background-color: #555555;
+      border-radius: 50%;
+    }
+
+    &-details {
+      display: flex;
+      flex-direction: column;
+      margin-left: 12px;
+
+      .review-user-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: $primary;
+      }
+
+      .review-user-date {
+        font-size: 12px;
+        color: #555555;
+      }
+    }
+  }
+
+  .review-main {
+    display: flex;
+    flex-direction: column;
+
+    &-rating {
+      border-radius: 6px;
+      padding: 4px 6px;
+      border: 1px solid $primary;
+      display: flex;
+      width: fit-content;
+      margin: 8px 0;
+      fill: $primary;
+      color: $primary;
+
+      .rating-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
+
+      .rating-result {
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+
+    &-text {
+      font-size: 14px;
+    }
+  }
+}
