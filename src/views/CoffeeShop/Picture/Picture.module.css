@@ -1,14 +1,13 @@
 .Picture {
-  height: 316px;
   width: 100%;
   padding: 16px;
   box-sizing: border-box;
+  margin-bottom: 16px;
 }
 
 .HeaderText {
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 27px;
+  font-weight: 700;
+  font-size: 20px;
   color: #219653;
   margin-left: 8px;
 }
