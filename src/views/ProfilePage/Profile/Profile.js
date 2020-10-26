@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router";
 
 import { BtnMedium, BtnSmall } from "../../../components/UI/Button/Button";
@@ -8,18 +8,15 @@ import ProfileImg from "../../../assets/logo/defaultProfile.png";
 import classes from "./Profile.module.css";
 import * as actions from "../../../store/actions/member";
 
-const Profile = props => {
-  const {
-    name,
-    email,
-    emailVerified,
-    photoUrl,
-    showEditProfile,
-    showEditPassword,
-    showVerificationHandler
-  } = props;
-
+const Profile = (props) => {
   const dispatch = useDispatch();
+
+  const { showEditProfile, showEditPassword, showVerificationHandler } = props;
+
+  const { name, email, emailVerified, photoUrl } = useSelector(
+    ({ member }) => member
+  );
+
   const toBeOwner = () => dispatch(actions.sendVerification());
 
   const toBeOwnerHandler = () => {
@@ -46,6 +43,9 @@ const Profile = props => {
           </BtnSmall>
           <BtnSmall className={classes.BtnSmall} clicked={showEditPassword}>
             Edit Password
+          </BtnSmall>
+          <BtnSmall className={classes.BtnSmall} clicked={showEditPassword}>
+            Edit Preference
           </BtnSmall>
         </div>
         <div className={classes.DivProfile}>

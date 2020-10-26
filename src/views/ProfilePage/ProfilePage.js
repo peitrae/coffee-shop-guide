@@ -1,73 +1,59 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-import Profile from './Profile/Profile';
-import EditProfile from './EditProfile/EditProfile';
-import EditPassword from './EditPassword/EditPassword';
-import SendVerification from './SendVerification/SendVerification';
-import CoffeeShopList from './CoffeeShopList/CoffeeShopList';
-import BookmarkList from './BookmarkList/BookmarkList';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import Footer from '../../components/UI/Footer/Footer';
-import classes from './ProfilePage.module.css';
+import Profile from "./Profile/Profile";
+import EditProfile from "./EditProfile/EditProfile";
+import EditPassword from "./EditPassword/EditPassword";
+import SendVerification from "./SendVerification/SendVerification";
+import CoffeeShopList from "./CoffeeShopList/CoffeeShopList";
+import BookmarkList from "./BookmarkList/BookmarkList";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import Footer from "../../components/UI/Footer/Footer";
+
+import "./ProfilePage.scss";
 
 const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showEditPassword, setShowEditPassword] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
 
-  const { localId, emailVerified, name, email, photoUrl } = useSelector(
-    (state) => state.member
-  );
+  const { localId, emailVerified } = useSelector((state) => state.member);
 
-  const editProfileHandler = () => setShowEditProfile(true);
+  const showEditProfileHandler = () => setShowEditProfile(!showEditProfile);
 
-  const editProfileCancelHandler = () => {
-    setShowEditProfile(false);
-  };
+  const showEditPasswordHandler = () => setShowEditPassword(!showEditPassword);
 
-  const editPasswordHandler = () => setShowEditPassword(true);
+  const showVerificationHandler = () => setShowVerification(!showVerification);
 
-  const editPasswordCancelHandler = () => setShowEditPassword(false);
-
-  const closeVerificationHandler = () => setShowVerification(false);
-
-  const showVerificationHandler = () => setShowVerification(true);
-
-  if (!localId) return <Spinner />;
+  if (!localId) {
+    return <Spinner />;
+  }
 
   return (
-    <React.Fragment>
-      <div className={classes.ProfilePage}>
+    <>
+      <div className="profile-page">
         {!showEditProfile && !showEditPassword ? (
           <Profile
-            name={name}
-            email={email}
-            photoUrl={photoUrl}
-            emailVerified={emailVerified}
-            showEditProfile={editProfileHandler}
-            showEditPassword={editPasswordHandler}
+            showEditProfileHandler={showEditProfileHandler}
+            showEditPasswordHandler={showEditPasswordHandler}
             showVerificationHandler={showVerificationHandler}
           />
         ) : showEditProfile ? (
-          <EditProfile cancelEditProfile={editProfileCancelHandler} />
+          <EditProfile cancelEditProfile={showEditProfileHandler} />
         ) : showEditPassword ? (
-          <EditPassword
-            photoUrl={photoUrl}
-            cancelEditPassword={editPasswordCancelHandler}
-          />
+          <EditPassword cancelEditPassword={showEditPasswordHandler} />
         ) : null}
         {showVerification ? (
           <SendVerification
             show={showVerification}
-            close={closeVerificationHandler}
+            close={showVerificationHandler}
           />
         ) : null}
-        {emailVerified ? <CoffeeShopList localId={localId} /> : null}
+        {emailVerified ? <CoffeeShopList /> : null}
         <BookmarkList />
       </div>
       <Footer />
-    </React.Fragment>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import TextForm from "../../../components/UI/TextForm/TextForm";
 import { BtnMedium } from "../../../components/UI/Button/Button";
@@ -9,24 +9,25 @@ import classes from "./EditPassword.module.css";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage";
 import * as actions from "../../../store/actions/member";
 
-const EditComponent = props => {
-  const { photoUrl, cancelEditPassword } = props;
-
+const EditComponent = ({ cancelEditPassword }) => {
   const dispatch = useDispatch();
-  const editPassword = password => dispatch(actions.editPassword(password));
+
+  const { photoUrl } = useSelector((state) => state.member);
+
+  const editPassword = (password) => dispatch(actions.editPassword(password));
 
   const [edit, setEdit] = useState({
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const [showError, setShowError] = useState(false);
 
-  const inputChangeHandler = type => event => {
+  const inputChangeHandler = (type) => (event) => {
     setEdit({ ...edit, [type]: event.target.value });
   };
 
-  const submitEditHandler = event => {
+  const submitEditHandler = (event) => {
     event.preventDefault();
     if (edit.password === edit.confirmPassword) {
       editPassword(edit.password);

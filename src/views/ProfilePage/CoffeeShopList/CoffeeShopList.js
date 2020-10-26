@@ -6,24 +6,22 @@ import MiniList from "../../../components/MiniList/MiniList";
 import WarningModal from "./WarningModal/WarningModal";
 import * as actions from "../../../store/actions";
 
-const CoffeeShopList = props => {
+const CoffeeShopList = (props) => {
   const [showWarning, setShowWarning] = useState(false);
   const [deleteSelected, setDeleteSelected] = useState(null);
 
-  const coffeeShopList = useSelector(state => state.member.coffeeShopList);
-
-  const { localId } = props;
+  const { localId, coffeeShopList } = useSelector((state) => state.member);
 
   const dispatch = useDispatch();
 
-  const editCoffeeShopHandler = coffeeShopId =>
+  const editCoffeeShopHandler = (coffeeShopId) =>
     props.history.push(`/update-coffee-shop/${coffeeShopId}`);
 
-  const deleteCoffeeShop = coffeeShopId =>
+  const deleteCoffeeShop = (coffeeShopId) =>
     dispatch(actions.deleteCoffeeShop(coffeeShopId));
 
   useEffect(() => {
-    if(localId) {
+    if (localId) {
       dispatch(actions.getCoffeeShopUploadedBy(localId));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,7 +32,7 @@ const CoffeeShopList = props => {
     setShowWarning(false);
   };
 
-  const deleteCoffeeShopHandler = coffeeShopId => {
+  const deleteCoffeeShopHandler = (coffeeShopId) => {
     setDeleteSelected(coffeeShopId);
     setShowWarning(true);
   };
