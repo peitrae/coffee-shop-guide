@@ -1,40 +1,37 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import SignUp from '../../components/Auth/SignUp/SignUp';
-import { BtnLarge } from '../../components/UI/Button/Button';
-import Preference from './Preference/Preference';
+import SignUp from "../../components/Auth/SignUp/SignUp";
+import { BtnLarge } from "../../components/UI/Button/Button";
+import PreferenceQuestionnaire from "../../components/PreferenceQuestionnaire/PreferenceQuestionnaire";
 import * as actions from "../../store/actions/member";
 
 import "./Homepage.scss";
 
-const Homepage = (props) => {
-  const dispatch = useDispatch()
+const Homepage = ({ history }) => {
+  const dispatch = useDispatch();
 
   const [showPreference, setShowPreference] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
-  const userData = useSelector((state) => state.member);
+  const user = useSelector((state) => state.member);
 
-  const authenticated = userData.token !== null;
+  const authenticated = user.token !== null;
 
-  const preferenceCancelHandler = () => setShowPreference(false);
+  const showPreferenceHandler = () => setShowPreference(!showPreference);
+
+  const showSignUpHandler = () => setShowSignUp(!showSignUp);
 
   const authCancelHandler = () => {
-    setShowSignUp(false);
+    showSignUpHandler();
     dispatch(actions.deleteResponse());
   };
 
   const searchContinueHandler = () => {
-    userData.preference
-      ? props.history.push('/search')
-      : setShowPreference(true);
+    user.preference ? history.push("/search") : showPreferenceHandler();
   };
 
-  let button = <BtnLarge clicked={() => setShowSignUp(true)}>Sign Up</BtnLarge>;
-  if (authenticated) {
-    button = <BtnLarge clicked={searchContinueHandler}>Search</BtnLarge>;
-  }
+  const preferenceSubmitHandler = () => history.push("/search");
 
   return (
     <div className={authenticated ? "homepage-member" : "homepage"}>
@@ -42,12 +39,17 @@ const Homepage = (props) => {
         <SignUp show={showSignUp} close={authCancelHandler} auth={showSignUp} />
       ) : null}
       <h1 className="homepage-header">Find the best coffee shop in Malang</h1>
-      <div className="homepage-btn-search">{button}</div>
+      <div className="homepage-btn-search">
+        {authenticated ? (
+          <BtnLarge clicked={searchContinueHandler}>Search</BtnLarge>
+        ) : (
+          <BtnLarge clicked={showSignUpHandler}>Sign Up</BtnLarge>
+        )}
+      </div>
       {showPreference ? (
-        <Preference
-          show={showPreference}
-          close={preferenceCancelHandler}
-          localId={userData.localId}
+        <PreferenceQuestionnaire
+          closeClickHandler={showPreferenceHandler}
+          onSubmit={preferenceSubmitHandler}
         />
       ) : null}
     </div>

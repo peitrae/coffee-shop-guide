@@ -52,7 +52,7 @@ const Rating = ({
     <Modal classes="feedback-rating" show={true} close={closeClickHandler}>
       <h1 className="feedback-rating-title">Rating</h1>
       {errorMessage ? (
-        <ErrorMessage className="feedback-rating-title">
+        <ErrorMessage className="feedback-rating-error">
           {errorMessage}
         </ErrorMessage>
       ) : null}

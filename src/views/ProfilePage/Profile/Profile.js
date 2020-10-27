@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router";
+import { useHistory } from "react-router";
 
 import { BtnMedium, BtnSmall } from "../../../components/UI/Button/Button";
 import ProfileCard from "../../../components/UI/Card/ProfileCard/ProfileCard";
@@ -8,23 +8,25 @@ import ProfileImg from "../../../assets/logo/defaultProfile.png";
 import classes from "./Profile.module.css";
 import * as actions from "../../../store/actions/member";
 
-const Profile = (props) => {
+const Profile = ({
+  showEditProfile,
+  showEditPassword,
+  showVerificationHandler,
+  showEditPreferenceHandler,
+}) => {
   const dispatch = useDispatch();
-
-  const { showEditProfile, showEditPassword, showVerificationHandler } = props;
+  const history = useHistory();
 
   const { name, email, emailVerified, photoUrl } = useSelector(
     ({ member }) => member
   );
 
-  const toBeOwner = () => dispatch(actions.sendVerification());
-
   const toBeOwnerHandler = () => {
-    toBeOwner();
+    dispatch(actions.sendVerification());
     showVerificationHandler();
   };
 
-  const addCoffeeShop = () => props.history.push("/update-coffee-shop");
+  const addCoffeeShop = () => history.push("/update-coffee-shop");
 
   const image = (
     <img
@@ -44,7 +46,10 @@ const Profile = (props) => {
           <BtnSmall className={classes.BtnSmall} clicked={showEditPassword}>
             Edit Password
           </BtnSmall>
-          <BtnSmall className={classes.BtnSmall} clicked={showEditPassword}>
+          <BtnSmall
+            className={classes.BtnSmall}
+            clicked={showEditPreferenceHandler}
+          >
             Edit Preference
           </BtnSmall>
         </div>
@@ -68,4 +73,4 @@ const Profile = (props) => {
   );
 };
 
-export default withRouter(Profile);
+export default Profile;

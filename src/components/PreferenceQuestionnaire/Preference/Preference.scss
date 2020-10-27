@@ -1,0 +1,59 @@
+@import "../../../assets/styles/GlobalStyles.scss";
+
+.preference-questionnaire {
+  width: 465px;
+  height: 342px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &-title {
+    font-size: 24px;
+    text-align: center;
+    color: $primary;
+    margin: 0;
+  }
+
+  &-error {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 180px;
+    width: 100%;
+
+    .form-question {
+      font-size: 16px;
+      line-height: 19px;
+      text-align: center;
+      color: $black;
+    }
+
+    .form-radio-grp {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+
+      .form-radio {
+        width: 108px;
+        height: 56px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  &-controls {
+    display: flex;
+    justify-content: space-between;
+  }
+}

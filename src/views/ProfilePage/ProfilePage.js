@@ -8,6 +8,7 @@ import SendVerification from "./SendVerification/SendVerification";
 import CoffeeShopList from "./CoffeeShopList/CoffeeShopList";
 import BookmarkList from "./BookmarkList/BookmarkList";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import PreferenceQuestionnaire from "../../components/PreferenceQuestionnaire/PreferenceQuestionnaire";
 import Footer from "../../components/UI/Footer/Footer";
 
 import "./ProfilePage.scss";
@@ -15,6 +16,7 @@ import "./ProfilePage.scss";
 const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showEditPassword, setShowEditPassword] = useState(false);
+  const [showEditPreference, setShowEditPreference] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
 
   const { localId, emailVerified } = useSelector((state) => state.member);
@@ -24,6 +26,9 @@ const ProfilePage = () => {
   const showEditPasswordHandler = () => setShowEditPassword(!showEditPassword);
 
   const showVerificationHandler = () => setShowVerification(!showVerification);
+
+  const showEditPreferenceHandler = () =>
+    setShowEditPreference(!showEditPreference);
 
   if (!localId) {
     return <Spinner />;
@@ -36,6 +41,7 @@ const ProfilePage = () => {
           <Profile
             showEditProfileHandler={showEditProfileHandler}
             showEditPasswordHandler={showEditPasswordHandler}
+            showEditPreferenceHandler={showEditPreferenceHandler}
             showVerificationHandler={showVerificationHandler}
           />
         ) : showEditProfile ? (
@@ -52,6 +58,11 @@ const ProfilePage = () => {
         {emailVerified ? <CoffeeShopList /> : null}
         <BookmarkList />
       </div>
+      {showEditPreference ? (
+        <PreferenceQuestionnaire
+          closeClickHandler={showEditPreferenceHandler}
+        />
+      ) : null}
       <Footer />
     </>
   );
