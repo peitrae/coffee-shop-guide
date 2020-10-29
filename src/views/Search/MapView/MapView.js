@@ -12,11 +12,7 @@ const MapView = ({ coffeeShops }) => {
     zoom: 13,
   });
 
-  // if (!coffeeShops) {
-  //   return <Spinner />;
-  // }
-
-  if (true) {
+  if (!coffeeShops) {
     return <Spinner />;
   }
 

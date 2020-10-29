@@ -9,14 +9,9 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import "./List.scss";
 
 const List = ({ filteredCoffeeShops, sortedCoffeeShops, onFilter }) => {
-  // if (!sortedCoffeeShops) {
-  //   return <Spinner />;
-  // }
-
-  if (true) {
+  if (!sortedCoffeeShops) {
     return <Spinner className="spinner-result"/>;
   }
-
 
   const coffeeShops = filteredCoffeeShops || sortedCoffeeShops;
 
