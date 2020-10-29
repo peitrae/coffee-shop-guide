@@ -2,16 +2,19 @@ import React, { useState } from "react";
 
 import TextForm from "../../../components/UI/TextForm/TextForm";
 import Card from "../../../components//UI/Card/Card";
-import classes from "./Header.module.css";
 import { BtnMedium } from "../../../components/UI/Button/Button";
+import geocode from "../../../utilities/geocode";
 
-const Header = props => {
-  const { state, setState } = props;
+import CursorIcon from "../../../assets/icon/CursorIcon";
+
+import "./Header.scss";
+
+const Header = ({ state, setState }) => {
   const { header, name, address } = state;
 
   const [headerPreview, setHeaderPreview] = useState(header);
 
-  const headerChangeHandler = event => {
+  const headerChangeHandler = (event) => {
     setState({ ...state, header: event.target.files[0] });
     let reader = new FileReader();
     reader.onloadend = () => {
@@ -20,26 +23,34 @@ const Header = props => {
     reader.readAsDataURL(event.target.files[0]);
   };
 
-  const inputChangeHandler = type => event => {
+  const inputChangeHandler = (type) => (event) => {
     setState({ ...state, [type]: event.target.value });
   };
 
+  const openMapsClickHandler = async (e) => {
+    e.preventDefault();
+
+    const { lat, long } = await geocode(address);
+
+    const url = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${long}`;
+    window.open(url, "_blank");
+  };
+
   return (
-    <Card className={classes.Card}>
-      <div>
+    <Card className="add-coffeeshop-header">
+      <div className="header">
         <img
           src={headerPreview}
           alt="Coffee Shop Header"
-          className={classes.ImgHeader}
+          className={"header-img"}
         />
-        <div className={classes.EditHeader}>
-          <label className={classes.EditLabel}>
+        <div className="header-img-edit">
+          <label>
             <input
               id="uploadHeader"
               type="file"
-              name={props.imageId}
               accept="image/*"
-              className={classes.FileInput}
+              className="edit-input"
               onChange={headerChangeHandler}
             />
             <div>
@@ -49,36 +60,29 @@ const Header = props => {
           ;
         </div>
       </div>
-      <div className={classes.Desc}>
-        <div>
-          <table>
-            <tbody>
-              <tr>
-                <th>Name</th>
-                <td>
-                  <TextForm
-                    id="name"
-                    label="Name"
-                    className={"textField-6"}
-                    value={name}
-                    inputHandler={inputChangeHandler("name")}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Address</th>
-                <td>
-                  <TextForm
-                    id="address"
-                    label="Address"
-                    className={"textField-6"}
-                    value={address}
-                    inputHandler={inputChangeHandler("address")}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div className="add-coffeeshop-profile">
+        <div className="add-col">
+          <label className="add-label">Name</label>
+          <TextForm
+            id="name"
+            label="Name"
+            className={"textField-6"}
+            value={name}
+            inputHandler={inputChangeHandler("name")}
+          />
+        </div>
+        <div className="add-col">
+          <label className="add-label">Address</label>
+          <TextForm
+            id="address"
+            label="Address"
+            className={"textField-6"}
+            value={address}
+            inputHandler={inputChangeHandler("address")}
+          />
+          <button className="open-map" onClick={openMapsClickHandler}>
+            <CursorIcon className="open-map-icon" />
+          </button>
         </div>
       </div>
     </Card>
