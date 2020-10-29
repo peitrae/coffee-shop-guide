@@ -65,23 +65,16 @@ const Header = () => {
   };
 
   const ratingAverage = () => {
-    const ratingArr = [];
+    const rating = [];
+    
     for (let key in feedback) {
-      ratingArr.push(feedback[key].rating);
+      rating.push(feedback[key].rating[2]);
     }
 
-    let overallRating = 0;
-    ratingArr.length === 1
-      ? (overallRating =
-          ratingArr[0].reduce((prev, curr) => prev + curr) /
-          ratingArr[0].length)
-      : (overallRating =
-          ratingArr.reduce((prev, curr) => prev[2] + curr[2]) /
-          ratingArr.length);
+    const sum = rating.reduce((a, b) => a + b, 0);
+    const avg = (sum / rating.length) || 0;
 
-    const toScaleTen = overallRating * 2;
-
-    return toScaleTen.toFixed(1);
+    return avg.toFixed(1);
   };
 
   return (

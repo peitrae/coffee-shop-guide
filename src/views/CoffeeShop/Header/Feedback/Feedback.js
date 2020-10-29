@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import moment from "moment";
 
 import * as actions from "../../../../store/actions";
 
@@ -22,7 +23,7 @@ const Feedback = ({ close }) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    if (feedbackCoffeeShop && localId) {
+    if (feedbackCoffeeShop && localId && feedbackCoffeeShop[localId]) {
       setFeedback(feedbackCoffeeShop[localId]);
     }
   }, [feedbackCoffeeShop, localId]);
@@ -48,7 +49,6 @@ const Feedback = ({ close }) => {
     const temp = {...feedback};
     const index = parseInt(event.target.name);
     const choice = parseInt(event.target.value);
-    console.log(index, choice)
     temp.rating[index] = choice;
     setFeedback(temp);
   };
@@ -59,8 +59,9 @@ const Feedback = ({ close }) => {
     setFeedback(temp);
   };
 
-  const submitClickHandler = (event) => {
-    const temp = {...feedback}
+  const submitClickHandler = () => {
+    const date = new Date();
+    const temp = {...feedback, date: moment(date).format()}
     if(temp.review === "") {
       delete temp.review
     }
@@ -72,6 +73,8 @@ const Feedback = ({ close }) => {
       setErrorMessage("Fill all rating");
     }
   };
+
+  
 
   return (
     <>

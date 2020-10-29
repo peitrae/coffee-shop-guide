@@ -64,3 +64,35 @@
     }
   }
 }
+
+.review-main {
+  .rating-5 {
+    border: 1px solid #27ae60;
+    fill: #27ae60;
+    color: #27ae60;
+  }
+
+  .rating-4 {
+    border: 1px solid #2ecc71;
+    fill: #2ecc71;
+    color: #2ecc71;
+  }
+
+  .rating-3 {
+    border: 1px solid #f1c40f;
+    fill: #f1c40f;
+    color: #f1c40f;
+  }
+
+  .rating-2 {
+    border: 1px solid #e67e22;
+    fill: #e67e22;
+    color: #e67e22;
+  }
+
+  .rating-1 {
+    border: 1px solid #e74c3c;
+    fill: #e74c3c;
+    color: #e74c3c;
+  }
+}

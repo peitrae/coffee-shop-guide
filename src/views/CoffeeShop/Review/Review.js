@@ -13,20 +13,12 @@ const Review = () => {
     return null;
   }
 
-  const reviewArr = [];
-  for (let key in review) {
-    reviewArr.push({
-      ...review[key],
-      userId: key,
-    });
-  }
-
   return (
     <Card className="coffeeshop-review">
       <h2 className="coffeeshop-review-title">Review</h2>
       <div className="coffeeshop-review-list">
-        {reviewArr.map((review) => (
-          <ReviewItem userReview={review} />
+      {Object.keys(review).map((key) => (
+          <ReviewItem key={key} userReview={review[key]} />
         ))}
       </div>
     </Card>

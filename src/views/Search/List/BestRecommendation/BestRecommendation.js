@@ -14,7 +14,6 @@ const BestRecommendation = ({ coffeeShop }) => {
     address,
     operationalHours,
     averagePrice,
-    facilities,
     profileMatching,
   } = coffeeShop;
 

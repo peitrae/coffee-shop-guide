@@ -1,22 +1,53 @@
 import { put } from "redux-saga/effects";
 import axios from "axios";
+import moment from "moment";
 import * as actions from "../actions";
 
 const TOKEN = localStorage.getItem("token");
 
 export function* getCoffeeShopData(action) {
-  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}.json`;
+  const coffeeShopUrl = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}.json`;
+  const usersUrl =
+    "https://us-central1-coffee-shop-guide.cloudfunctions.net/getBulkUsersById";
 
   try {
-    const response = yield axios.get(url);
+    const coffeeshop = yield axios.get(coffeeShopUrl);
+
+    const userIds = [];
+    for (let key in coffeeshop.data.feedback) {
+      userIds.push({ uid: key });
+    }
+
+    const users = yield axios.post(usersUrl, userIds);
+
+    const usersObj = {};
+    for (let user of users.data.users) {
+      usersObj[user.uid] = {
+        name: user.displayName,
+        photoURL: user.photoURL,
+      };
+    }
+
+    const feedback = {};
+    for (let key in coffeeshop.data.feedback) {
+      feedback[key] = {
+        name: usersObj[key].name,
+        photoURL: usersObj[key]?.photoURL,
+        rating: coffeeshop.data.feedback[key].rating,
+        review: coffeeshop.data.feedback[key].review,
+        date: moment(coffeeshop.data.feedback[key].date).format('DD MMMM YYYY')
+      };
+    }
+
     yield put(
       actions.getCoffeeShopDataSuccess({
+        ...coffeeshop.data,
         coffeeShop_id: action.coffeeShopId,
-        ...response.data,
+        feedback,
       })
     );
   } catch (error) {
-    console.log(error.response.data.error.message);
+    console.log(error);
   }
 }
 
@@ -41,7 +72,6 @@ export function* setCoffeeShopDataSaga(action) {
 }
 
 export function* getBookmarkSaga(action) {
-
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop.json`;
 
   try {
