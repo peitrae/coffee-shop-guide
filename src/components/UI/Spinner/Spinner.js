@@ -1,16 +1,11 @@
 import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import classes from "./Spinner.module.css";
 
-// const Spinner = () => (
-//   <div className={classes.Spinner}>
-//     <div className={classes.Loader}>Loading...</div>
-//   </div>
-// );
+import "./Spinner.scss";
 
-const Spinner = () => (
-  <div className={classes.Wrapper}>
-    <CircularProgress className={classes.Spinner}/>
+const Spinner = ({className}) => (
+  <div className={`spinner ${className}`}>
+    <CircularProgress className="circular-progress"/>
   </div>
 )
 
