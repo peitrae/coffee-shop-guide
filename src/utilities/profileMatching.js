@@ -1,5 +1,5 @@
-const profileMatching = (preference, coffeeShopList) => {
-  if(!preference || !coffeeShopList) {
+const profileMatching = (preference, coffeeShops) => {
+  if (!preference || !coffeeShops) {
     return null;
   }
 
@@ -10,28 +10,30 @@ const profileMatching = (preference, coffeeShopList) => {
   const coreFactor = [];
   const secondaryFactor = [];
 
-  const checkHasRating = (coffeeShopList) => {
-    coffeeShopList.forEach((coffeeShop) => {
-      coffeeShop.rating
+  const checkHasRating = (coffeeShops) => {
+    coffeeShops.forEach((coffeeShop) => {
+      coffeeShop.feedback
         ? candidateData.push(coffeeShop)
         : noCandidateData.push(coffeeShop);
     });
   };
 
-  checkHasRating(coffeeShopList);
+  checkHasRating(coffeeShops);
 
   preference.forEach((value, index) => {
     value >= 4 ? coreFactorIndex.push(index) : secondaryFactorIndex.push(index);
   });
 
-  const avgCoffeeShopRating = (rating) => {
-    const ratingArr = [];
-    for (let key in rating) ratingArr.push(rating[key]);
+  const avgCoffeeShopRating = (feedback) => {
+    const rating = [];
+    for (let key in feedback) {
+      rating.push(feedback[key].rating);
+    };
 
-    return ratingArr.reduce((prev, curr) => [
-      (prev[0] + curr[0]) / ratingArr.length,
-      (prev[1] + curr[1]) / ratingArr.length,
-      (prev[2] + curr[2]) / ratingArr.length,
+    return rating.reduce((prev, curr) => [
+      (prev[0] + curr[0]) / rating.length,
+      (prev[1] + curr[1]) / rating.length,
+      (prev[2] + curr[2]) / rating.length,
     ]);
   };
 
@@ -44,7 +46,7 @@ const profileMatching = (preference, coffeeShopList) => {
 
   const candidateValue = candidateData.map((candidate) => {
     const priceRange = searchPriceRange(candidate.averagePrice);
-    const avgRating = avgCoffeeShopRating(candidate.rating);
+    const avgRating = avgCoffeeShopRating(candidate.feedback);
     return [...avgRating, priceRange];
   });
 
@@ -116,7 +118,7 @@ const profileMatching = (preference, coffeeShopList) => {
   const injectIndex = total.map((num, index) => [index, num]);
   const sortByValue = injectIndex.sort((a, b) => a[1] - b[1]).reverse();
   const sortedCandidateData = sortByValue.map((value) => {
-    return {...candidateData[value[0]], profileMatching: value[1].toFixed(1)};
+    return { ...candidateData[value[0]], profileMatching: value[1].toFixed(1) };
   });
   const resultProfileMatching = [...sortedCandidateData, ...noCandidateData];
 
