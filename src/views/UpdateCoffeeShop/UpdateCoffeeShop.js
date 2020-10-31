@@ -208,17 +208,24 @@ const UpdateData = (props) => {
     return coffeeShop;
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
+  const populateLocation = async (coffeeShop) => {
+    const location = await geocode(address);
+    return {...coffeeShop, location}
+  }
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
 
     const validated = submitValidation(coffeeShop);
 
     if (validated.error) {
       setError(validated.error);
     } else {
+      const coffeeShop = await populateLocation(validated); 
+
       dispatch(
         actions.setCoffeeShopData(
-          { ...oldCoffeeShop, ...validated },
+          { ...oldCoffeeShop, ...coffeeShop },
           coffeeShopId,
           props.history
         )
