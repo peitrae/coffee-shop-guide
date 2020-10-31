@@ -1,50 +1,35 @@
-import React from 'react';
+import React from "react";
 
-import TextForm from '../../../../components/UI/TextForm/TextForm';
-import { BtnSmall } from '../../../../components/UI/Button/Button';
-import classes from './Facilities.module.css';
+import TextForm from "../../../../components/UI/TextForm/TextForm";
+import { PlainBtn } from "../../../../components/UI/Button/Button";
+import TrashIcon from "../../../../assets/icon/TrashIcon";
 
-const Facilities = (props) => {
-  const {
-    facilities = [""],
-    facilityChangeHandler,
-    addFacilityHandler,
-    deleteHandler,
-  } = props;
+import "./Facilities.scss";
 
-  return (
-    <table>
-      <tbody>
-        {facilities.map((facility, index) => (
-          <tr key={index}>
-            <td>
-              <TextForm
-                id="facilities"
-                label="Facilities"
-                placeholder="Facilities"
-                className={'textField-3'}
-                value={facility}
-                inputHandler={facilityChangeHandler(index)}
-              />
-            </td>
-            <td className={classes.ButtonPaddingHelper}>
-              <BtnSmall
-                btnType="Danger"
-                clicked={() => deleteHandler('facilities', index)}
-              >
-                Delete
-              </BtnSmall>
-            </td>
-          </tr>
-        ))}
-        <tr>
-          <td>
-            <BtnSmall clicked={addFacilityHandler}>Add More</BtnSmall>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  );
-};
+const Facilities = ({
+  facilities = [""],
+  facilityChangeHandler,
+  deleteClickHandler,
+}) => (
+  <div className="facilities-grp">
+    {facilities.map((facility, index) => (
+      <div key={index}>
+        <div className="facility" key={index}>
+          <TextForm
+            id="facilities"
+            label="Facilities"
+            placeholder="Facilities"
+            className={"textField-3"}
+            value={facility}
+            inputHandler={facilityChangeHandler(index)}
+          />
+          <PlainBtn className="delete-btn" onClick={deleteClickHandler(index)}>
+            <TrashIcon />
+          </PlainBtn>
+        </div>
+      </div>
+    ))}
+  </div>
+);
 
 export default Facilities;

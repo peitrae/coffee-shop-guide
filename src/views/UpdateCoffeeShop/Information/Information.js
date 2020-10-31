@@ -1,100 +1,93 @@
-import React from 'react';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import React from "react";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
-import TextForm from '../../../components/UI/TextForm/TextForm';
-import Card from '../../../components//UI/Card/Card';
-import classes from './Information.module.css';
-import Facilities from './Facilities/Facilities';
-import OperationalHours from './OperationalHours/OperationalHours';
+import TextForm from "../../../components/UI/TextForm/TextForm";
+import Card from "../../../components/UI/Card/Card";
+import Facilities from "./Facilities/Facilities";
+import OperationalHours from "./OperationalHours/OperationalHours";
+import { PlainBtn } from "../../../components/UI/Button/Button";
 
-const Information = (props) => {
-  const { state, setState } = props;
-  const { averagePrice, contact, facilities } = state;
+import PlusIcon from "../../../assets/icon/PlusIcon";
 
-  const inputChangeHandler = (type) => (event) => {
-    setState({ ...state, [type]: event.target.value });
-  };
+import "./Information.scss";
 
-  const facilityChangeHandler = (index) => (event) => {
-    const tempEdit = [...state.facilities];
-    tempEdit[index] = event.target.value;
-    setState({ ...state, facilities: tempEdit });
-  };
-
-  const addFacilityHandler = (event) => {
-    event.preventDefault();
-    const tempAdd = [...state.facilities];
-    tempAdd.push('');
-    setState({ ...state, facilities: tempAdd });
-  };
-
-  const deleteHandler = (type, index) => {
-    const tempDelete = [...state[type]];
-    tempDelete.splice(index, 1);
-    setState({ ...state, [type]: tempDelete });
-  };
-
-  return (
-    <Card className={classes.Card}>
-      <h2>Information</h2>
-      <div>
-        <div>
-          <table>
-            <tbody>
-              <tr>
-                <th>Average Price</th>
-                <td className={classes.TablePaddingHelper}>
-                  <TextForm
-                    id="averagePrice"
-                    label={'averagePrice'}
-                    className={'textField-3'}
-                    placeholder="Average Price"
-                    value={averagePrice}
-                    inputHandler={inputChangeHandler('averagePrice')}
-                    type="number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">Rp</InputAdornment>
-                      ),
-                    }}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Contact</th>
-                <td className={classes.TablePaddingHelper}>
-                  <TextForm
-                    id="contact"
-                    label="Contact"
-                    className={'textField-3'}
-                    placeholder="Contact"
-                    value={contact}
-                    inputHandler={inputChangeHandler('contact')}
-                    type="number"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Amenities</th>
-                <td>
-                  <Facilities
-                    facilities={facilities}
-                    facilityChangeHandler={facilityChangeHandler}
-                    addFacilityHandler={addFacilityHandler}
-                  />
-                </td>
-              </tr>
-              <OperationalHours
-                state={state}
-                setState={setState}
-                deleteHandler={deleteHandler}
-              />
-            </tbody>
-          </table>
-        </div>
+const Information = ({
+  averagePrice,
+  contact,
+  facilities,
+  operationalHours,
+  inputChangeHandler,
+  addFacilityClickHandler,
+  facilityChangeHandler,
+  deleteFacilityClickHandler,
+  addDaysClickHandler,
+  deleteDaysClickHandler,
+  dayChangeHandler,
+  timeChangeHandler,
+}) => (
+  <Card className="add-coffeeshop-information">
+    <h2>Information</h2>
+    <div className="content-wrapper">
+      <div className="information-col">
+        <label className="information-col-title">Average Price</label>
+        <TextForm
+          id="averagePrice"
+          label="Average Price"
+          className={"textField-3"}
+          placeholder="Average Price"
+          value={averagePrice}
+          inputHandler={inputChangeHandler("averagePrice")}
+          type="number"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">Rp</InputAdornment>
+            ),
+          }}
+        />
       </div>
-    </Card>
-  );
-};
+      <div className="information-col">
+        <label className="information-col-title">Contact</label>
+        <TextForm
+          id="contact"
+          label="Contact"
+          className={"textField-3"}
+          placeholder="Contact"
+          value={contact}
+          inputHandler={inputChangeHandler("contact")}
+          type="number"
+        />
+      </div>
+      <div className="information-col top-align">
+        <div className="information-col-title">
+          <label>Facilities</label>
+          <PlainBtn className="add-btn" onClick={addFacilityClickHandler}>
+            <PlusIcon />
+          </PlainBtn>
+        </div>
+        <Facilities
+          facilities={facilities}
+          facilityChangeHandler={facilityChangeHandler}
+          deleteClickHandler={deleteFacilityClickHandler}
+        />
+      </div>
+      <div className="information-col top-align">
+        <div className="information-col-title">
+          <label>Operational Hours</label>
+          {operationalHours.length < 7 ? (
+            <PlainBtn className="add-btn" onClick={addDaysClickHandler}>
+              <PlusIcon />
+            </PlainBtn>
+          ) : null}
+        </div>
+        <OperationalHours
+          operationalHours={operationalHours}
+          dayChangeHandler={dayChangeHandler}
+          timeChangeHandler={timeChangeHandler}
+          deleteDaysClickHandler={deleteDaysClickHandler}
+        />
+      </div>
+    </div>
+  </Card>
+);
 
-export default Information;
+export default React.memo(Information);

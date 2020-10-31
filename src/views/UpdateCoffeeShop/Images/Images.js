@@ -8,24 +8,24 @@ import uploadImage from "../../../store/firebase/uploadImage";
 import { CloseButtonWhite } from "../../../components/UI/Button/CloseButton/CloseButton";
 import UploadImage from "../../../components/UI/Button/UploadImage/UploadImage";
 
-const Images = props => {
-  const { images = [], coffeeShopName, setImage, setReadyToSubmit } = props;
+const Images = (props) => {
+  const { images = [], coffeeShopName, setImage, setIsUploading } = props;
 
   const [preview, setPreview] = useState([]);
 
   useEffect(() => setPreview(images), [images]);
 
-  const uploadImageHandler = (edit, index) => event => {
+  const uploadImageHandler = (edit, index) => (event) => {
     const img = event.target.files[0];
     const reference = "coffeeShop/images/" + coffeeShopName;
 
     uploadImage(img, reference)
-      .then(response => {
+      .then((response) => {
         const tempImages = [...images];
         tempImages.push(response);
         setImage(tempImages);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
 
     let reader = new FileReader();
     reader.onloadend = () => {
@@ -38,18 +38,18 @@ const Images = props => {
     reader.readAsDataURL(img);
   };
 
-  const deleteImageHandler = index => event => {
-    event.preventDefault();
-    const tempImages = [...images];
-    tempImages.splice(index, 1);
-    tempImages(tempImages);
-    setPreview(tempImages);
+  const deleteImageHandler = (index) => (e) => {
+    e.preventDefault();
+    const temp = [...images];
+    temp.splice(index, 1);
+    setImage(temp);
+    setPreview(temp);
   };
 
   if (images.length === preview.length) {
-    setReadyToSubmit(true);
+    setIsUploading(false);
   } else {
-    setReadyToSubmit(false);
+    setIsUploading(true);
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import TextForm from "../../../components/UI/TextForm/TextForm";
 import Card from "../../../components//UI/Card/Card";
@@ -9,23 +9,13 @@ import CursorIcon from "../../../assets/icon/CursorIcon";
 
 import "./Header.scss";
 
-const Header = ({ state, setState }) => {
-  const { header, name, address } = state;
-
-  const [headerPreview, setHeaderPreview] = useState(header);
-
-  const headerChangeHandler = (event) => {
-    setState({ ...state, header: event.target.files[0] });
-    let reader = new FileReader();
-    reader.onloadend = () => {
-      setHeaderPreview(reader.result);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-  };
-
-  const inputChangeHandler = (type) => (event) => {
-    setState({ ...state, [type]: event.target.value });
-  };
+const Header = ({
+  header,
+  name,
+  address,
+  headerChangeHandler,
+  inputChangeHandler,
+}) => {
 
   const openMapsClickHandler = async (e) => {
     e.preventDefault();
@@ -39,11 +29,7 @@ const Header = ({ state, setState }) => {
   return (
     <Card className="add-coffeeshop-header">
       <div className="header">
-        <img
-          src={headerPreview}
-          alt="Coffee Shop Header"
-          className={"header-img"}
-        />
+        <img src={header} alt="Coffee Shop Header" className={"header-img"} />
         <div className="header-img-edit">
           <label>
             <input
@@ -69,6 +55,7 @@ const Header = ({ state, setState }) => {
             className={"textField-6"}
             value={name}
             inputHandler={inputChangeHandler("name")}
+            size="small"
           />
         </div>
         <div className="add-col">
@@ -79,6 +66,7 @@ const Header = ({ state, setState }) => {
             className={"textField-6"}
             value={address}
             inputHandler={inputChangeHandler("address")}
+            size="small"
           />
           <button className="open-map" onClick={openMapsClickHandler}>
             <CursorIcon className="open-map-icon" />
@@ -89,4 +77,4 @@ const Header = ({ state, setState }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

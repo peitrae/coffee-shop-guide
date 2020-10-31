@@ -1,0 +1,23 @@
+@import "../../../../assets/styles/GlobalStyles.scss";
+
+.facilities-grp {
+  display: flex;
+  flex-direction: column;
+
+  .facility {
+    display: flex;
+    align-items: center;
+  }
+
+  .delete-btn {
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    fill: $red;
+    margin-left: 12px;
+  }
+
+  .delete-btn:hover {
+    background-color: $redlight;
+  }
+}

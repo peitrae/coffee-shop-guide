@@ -1,0 +1,23 @@
+@import "../../../../assets/styles/GlobalStyles.scss";
+
+.add-hours-grp {
+  width: 100%;
+
+  .add-hours-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .delete-btn {
+      width: 28px;
+      height: 28px;
+      padding: 4px;
+      fill: $red;
+    }
+
+    .delete-btn:hover {
+      background-color: $redlight;
+    }
+  }
+}
