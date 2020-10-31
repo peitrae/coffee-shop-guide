@@ -22,7 +22,7 @@ const MapView = ({ coffeeShops }) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((location) => {
         setConfig({
-           ...position,
+           ...config,
            lat: location.coords.latitude,
            long: location.coords.longitude,
          });
