@@ -12,6 +12,8 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import Footer from "../../components/UI/Footer/Footer";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
+import geocode from "../../utilities/geocode";
+
 const UpdateData = (props) => {
   const dispatch = useDispatch();
 
