@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { isEmpty } from "lodash";
 
 import Card from "../../../components/UI/Card/Card";
 import { BtnMedium, PlainBtn } from "../../../components/UI/Button/Button";
@@ -66,13 +67,13 @@ const Header = () => {
 
   const ratingAverage = () => {
     const rating = [];
-    
+
     for (let key in feedback) {
       rating.push(feedback[key].rating[2]);
     }
 
     const sum = rating.reduce((a, b) => a + b, 0);
-    const avg = (sum / rating.length) || 0;
+    const avg = sum / rating.length || 0;
 
     return avg.toFixed(1);
   };
@@ -121,9 +122,9 @@ const Header = () => {
             <p className="content-address">{address}</p>
           </div>
           <div className="coffeeshop-header-rating">
-            {feedback ? (
+            {isEmpty(feedback) ? null : (
               <div className="content">{ratingAverage()}</div>
-            ) : null}
+            )}
             {isAuthenticated ? (
               <BtnMedium btnType="GreenBorder" clicked={showRatingHandler}>
                 Rate
