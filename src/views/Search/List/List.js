@@ -18,8 +18,8 @@ const List = ({ filteredCoffeeShops, sortedCoffeeShops, onFilter }) => {
   return (
     <div className="search-result-list">
       <Filter coffeeShops={sortedCoffeeShops} onFilter={onFilter} />
-      {coffeeShops ? <BestRecommendation coffeeShop={coffeeShops[0]} /> : null}
-      {coffeeShops ? (
+      {coffeeShops?.length ? <BestRecommendation coffeeShop={coffeeShops[0]} /> : null}
+      {coffeeShops?.length ? (
         coffeeShops
           .slice(1)
           .map((coffeeShop) => (
