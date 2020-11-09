@@ -57,9 +57,13 @@ const Filter = ({ coffeeShops, onFilter }) => {
     const todayHours = date.getHours();
     const todayMinutes = date.getMinutes();
 
-    if (!operationalHours[todayDay]) return false;
+    const todayOperational = operationalHours.find(
+      (item) => todayDay === item.day
+    );
 
-    const { day, open, close } = operationalHours[todayDay];
+    if (!todayOperational) return false;
+
+    const { day, open, close } = todayOperational;
     const openingHours = parseInt(open.slice(0, 2));
     const openingMinutes = parseInt(open.slice(4));
     let closingHours = parseInt(close.slice(0, 2));
@@ -79,6 +83,13 @@ const Filter = ({ coffeeShops, onFilter }) => {
   const withinRadius = (coffeeShops, radius) => {
     const user = { lat: -7.983, long: 112.621 };
 
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        user.lat = location.coords.latitude;
+        user.long = location.coords.longitude;
+      });
+    }
+
     return coffeeShops.filter(({ location }) => {
       if (!location) {
         return false;
@@ -93,24 +104,29 @@ const Filter = ({ coffeeShops, onFilter }) => {
   };
 
   const filterChanged = () => {
-    if (priceChecked)
+    if (priceChecked) {
       coffeeShops = coffeeShops.filter((coffeeShop) =>
         checkPrice(coffeeShop.averagePrice)
       );
-    if (openNowChecked)
+    }
+    if (openNowChecked) {
       coffeeShops = coffeeShops.filter((coffeeShop) =>
         checkIfOpen(coffeeShop.operationalHours)
       );
-    if (wiFiChecked)
+    }
+    if (wiFiChecked) {
       coffeeShops = coffeeShops.filter((coffeeShop) =>
         coffeeShop.facilities?.includes("Wifi")
       );
-    if (creditCardChecked)
+    }
+    if (creditCardChecked) {
       coffeeShops = coffeeShops.filter((coffeeShop) =>
         coffeeShop.facilities?.includes("Credit Card")
       );
+    }
     if (distanceChecked) {
       coffeeShops = withinRadius(coffeeShops, distanceChecked);
+      console.log(coffeeShops);
     }
     onFilter(coffeeShops);
   };
