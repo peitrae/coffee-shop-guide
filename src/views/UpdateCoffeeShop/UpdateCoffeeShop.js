@@ -37,6 +37,7 @@ const UpdateData = (props) => {
       },
     ],
     images: [],
+    uploadedBy: userLocalId
   });
 
   const {
@@ -211,7 +212,10 @@ const UpdateData = (props) => {
   };
 
   const populateLocation = async (coffeeShop) => {
+    console.log("Address", address);
     const location = await geocode(address);
+    
+    console.log("Location", location);
     return {...coffeeShop, location}
   }
 
