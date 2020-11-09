@@ -53,7 +53,7 @@ const Login = (props) => {
         <h1 className={classes.Header}>Login</h1>
           {response && response.error ? (
             <div className={classes.ErrorMessage}>
-              <ErrorMessage message={response.error.message} />
+              <ErrorMessage>{response.error.message}</ErrorMessage>
             </div>
           ) : null}
           <form className={classes.FormLogin} onSubmit={submitHandler} id="form-login">
