@@ -1,5 +1,4 @@
 .coffeeshop-header {
-  height: 379px;
   width: 100%;
   margin-bottom: 16px;
   padding: 0;
@@ -11,7 +10,6 @@
   }
 
   &-content {
-    height: 45%;
     width: 100%;
     padding: 24px;
     box-sizing: border-box;
@@ -33,6 +31,11 @@
         color: #219653;
         margin: 0 8px 8px 0;
         display: inline;
+      }
+
+      &-promo-grp {
+        display: flex;
+        margin: 8px 0;
       }
 
       &-address {

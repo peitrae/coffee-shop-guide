@@ -8,6 +8,7 @@ import { BtnMedium, PlainBtn } from "../../../components/UI/Button/Button";
 import Feedback from "./Feedback/Feedback";
 import Share from "./Share/Share";
 import * as actions from "../../../store/actions";
+import Promo from "../../../components/Promo/Promo"
 
 import ShareIcon from "../../../assets/icon/ShareIcon";
 import BookmarkIcon from "../../../assets/icon/BookmarkIcon";
@@ -25,7 +26,7 @@ const Header = () => {
 
   const { token, bookmark } = useSelector((state) => state.member);
   const coffeeShop = useSelector((state) => state.coffeeShop.data);
-  const { coffeeShop_id, header, name, address, feedback } = coffeeShop;
+  const { coffeeShop_id, header, name, address, feedback, promo } = coffeeShop;
 
   useEffect(() => {
     const bookmarked = bookmark.includes(coffeeShop_id);
@@ -83,7 +84,6 @@ const Header = () => {
       {showRatingQuest ? (
         <Feedback show={showRatingQuest} close={cancelRatingHandler} />
       ) : null}
-
       <Card className="coffeeshop-header">
         <img
           src={header}
@@ -118,6 +118,13 @@ const Header = () => {
                   />
                 ) : null}
               </div>
+            </div>
+            <div className="content-promo-grp">
+              {promo
+                ? Object.keys(promo).map((key) => (
+                    <Promo>{promo[key].value}</Promo>
+                  ))
+                : null}
             </div>
             <p className="content-address">{address}</p>
           </div>
