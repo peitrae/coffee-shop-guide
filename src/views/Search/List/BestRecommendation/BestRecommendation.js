@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import Card from "../../../../components/UI/Card/Card";
 import noImage from "../../../../assets/no-image.png";
+import Promo from "../Promo/Promo";
 
 import "./BestRecommendation.scss";
 
@@ -15,6 +16,7 @@ const BestRecommendation = ({ coffeeShop }) => {
     operationalHours,
     averagePrice,
     profileMatching,
+    promo,
   } = coffeeShop;
 
   const todayHours = operationalHours[new Date().getDay()];
@@ -32,8 +34,10 @@ const BestRecommendation = ({ coffeeShop }) => {
               className="main-coffeeshop-img"
             />
             <div className="main-coffeeshop-desc">
-              <h2 className="name">{name}</h2>
-              <span className="address">{address}</span>
+              <div>
+                <h2 className="name">{name}</h2>
+                <span className="address">{address}</span>
+              </div>
               <div className="details">
                 <div className="details-wrapper">
                   <div className="details-label">Hours:</div>
@@ -46,6 +50,13 @@ const BestRecommendation = ({ coffeeShop }) => {
                 <div className="details-wrapper">
                   <div className="details-label">Average Price:</div>
                   <span className="details-main">{`Rp ${averagePrice}`}</span>
+                </div>
+                <div className="details-promo-grp">
+                  {promo
+                    ? Object.keys(promo).map((key) => (
+                        <Promo>{promo[key].value}</Promo>
+                      ))
+                    : null}
                 </div>
               </div>
             </div>

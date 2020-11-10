@@ -8,8 +8,8 @@
   box-sizing: border-box;
 
   &-img {
-    width: 148px;
-    height: 148px;
+    width: 165px;
+    height: 165px;
     border-radius: 4px;
     object-fit: cover;
   }
@@ -41,6 +41,12 @@
 
       &-main {
         font-weight: 600;
+      }
+
+      &-promo-grp {
+        margin-top: 6px;
+        display: flex;
+        width: 100%;
       }
     }
   }
