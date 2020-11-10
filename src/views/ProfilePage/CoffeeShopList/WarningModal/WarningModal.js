@@ -1,28 +1,28 @@
 import React from "react";
 
 import Modal from "../../../../components/UI/Modal/Modal";
-import { BtnMedium, BtnMediumText } from "../../../../components/UI/Button/Button";
-import classes from "./WarningModal.module.css";
+import { Button } from "../../../../components/UI/Button/Button";
 
-const WarningModal = props => {
+import "./WarningModal.scss";
+
+const WarningModal = ({ message, submitHandler, closeHandler }) => {
   return (
     <Modal
-      show={props.show}
-      close={props.cancelHandler}
-      header={"Warning"}
+      show={true}
+      close={closeHandler}
       small
       danger
+      className="warning-modal"
     >
-      <p className={classes.Desc}>
-        Are you sure want to delete the coffee shop?
-      </p>
-      <div className={classes.BtnGroup}>
-        <BtnMedium btnType="Green" clicked={props.cancelHandler}>
-          Cancel
-        </BtnMedium>
-        <BtnMediumText btnType="DangerText" clicked={props.submitWarningHandler}>
+      <h1 className="warning-modal-header">Delete</h1>
+      <p className="warning-modal-text">{message}</p>
+      <div className="warning-modal-controls">
+        <Button color="danger" onClick={submitHandler}>
           Delete
-        </BtnMediumText>
+        </Button>
+        <Button type="text" color="secondary" onClick={closeHandler}>
+          Cancel
+        </Button>
       </div>
     </Modal>
   );
