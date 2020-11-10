@@ -26,8 +26,6 @@ const Promo = ({ coffeeShop, closeClickHandler }) => {
 
   const promoList = useSelector(({ coffeeShop }) => coffeeShop.promo);
 
-  console.log(promoList);
-
   const showFormClickHandler = () => setShowForm(!showForm);
 
   const promoTextChangeHandler = (e) => setPromo(e.target.value);
