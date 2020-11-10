@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import List from "./List/List";
 import MapView from "./MapView/MapView";
-import Footer from "../../components/UI/Footer/Footer";
 
 import * as actions from "../../store/actions";
 import profileMatching from "../../utilities/profileMatching";
@@ -43,7 +42,6 @@ const Search = () => {
           <MapView coffeeShops={filteredCoffeeShops || sortedCoffeeShops} />
         </div>
       </div>
-      <Footer />
     </>
   );
 };
