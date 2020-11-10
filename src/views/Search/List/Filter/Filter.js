@@ -16,6 +16,7 @@ const Filter = ({ coffeeShops, onFilter }) => {
     priceChecked: false,
     openNowChecked: false,
     wiFiChecked: false,
+    promoChecked: false,
     creditCardChecked: false,
     distanceChecked: false,
   });
@@ -27,8 +28,9 @@ const Filter = ({ coffeeShops, onFilter }) => {
     priceChecked,
     openNowChecked,
     wiFiChecked,
+    promoChecked,
     creditCardChecked,
-    distanceChecked,
+    distanceChecked
   } = filter;
 
   useEffect(() => {
@@ -119,6 +121,9 @@ const Filter = ({ coffeeShops, onFilter }) => {
         coffeeShop.facilities?.includes("Wifi")
       );
     }
+    if (promoChecked) {
+      coffeeShops = coffeeShops.filter((coffeeShop) => coffeeShop.promo);
+    }
     if (creditCardChecked) {
       coffeeShops = coffeeShops.filter((coffeeShop) =>
         coffeeShop.facilities?.includes("Credit Card")
@@ -184,6 +189,7 @@ const Filter = ({ coffeeShops, onFilter }) => {
           label="Price"
           checked={priceChecked}
           ref={priceRef}
+          className="search-filter-checkbox"
         />
         {showPrice ? (
           <PriceGroup
@@ -198,18 +204,28 @@ const Filter = ({ coffeeShops, onFilter }) => {
         changed={() => checkBoxHandleChange("openNowChecked")}
         label="Open Now"
         checked={openNowChecked}
+        className="search-filter-checkbox"
+      />
+      <Checkbox
+        inputId="promo"
+        changed={() => checkBoxHandleChange("promoChecked")}
+        label="Promo"
+        checked={promoChecked}
+        className="search-filter-checkbox"
       />
       <Checkbox
         inputId="wiFi"
         changed={() => checkBoxHandleChange("wiFiChecked")}
         label="Wifi"
         checked={wiFiChecked}
+        className="search-filter-checkbox"
       />
       <Checkbox
         inputId="creditCard"
         changed={() => checkBoxHandleChange("creditCardChecked")}
         label="Credit Card"
         checked={creditCardChecked}
+        className="search-filter-checkbox"
       />
       <div className="search-filter-distance">
         <Checkbox
@@ -218,6 +234,7 @@ const Filter = ({ coffeeShops, onFilter }) => {
           label="Distance"
           checked={distanceChecked}
           ref={distanceRef}
+          className="search-filter-checkbox"
         />
         {showDistance ? (
           <DistanceGroup

@@ -13,6 +13,14 @@
     margin: 0;
   }
 
+  &-checkbox {
+    min-width: fit-content;
+
+    .checkbox-checkmark div{
+      padding: 0 16px;
+    }
+  }
+
   &-distance,
   &-price  {
     position: relative;
