@@ -17,7 +17,7 @@ const Filter = ({ coffeeShops, onFilter }) => {
     openNowChecked: false,
     wiFiChecked: false,
     promoChecked: false,
-    creditCardChecked: false,
+    cashlessChecked: false,
     distanceChecked: false,
   });
 
@@ -29,7 +29,7 @@ const Filter = ({ coffeeShops, onFilter }) => {
     openNowChecked,
     wiFiChecked,
     promoChecked,
-    creditCardChecked,
+    cashlessChecked,
     distanceChecked
   } = filter;
 
@@ -124,9 +124,9 @@ const Filter = ({ coffeeShops, onFilter }) => {
     if (promoChecked) {
       coffeeShops = coffeeShops.filter((coffeeShop) => coffeeShop.promo);
     }
-    if (creditCardChecked) {
+    if (cashlessChecked) {
       coffeeShops = coffeeShops.filter((coffeeShop) =>
-        coffeeShop.facilities?.includes("Credit Card")
+        coffeeShop.facilities?.includes("Cashless")
       );
     }
     if (distanceChecked) {
@@ -221,10 +221,10 @@ const Filter = ({ coffeeShops, onFilter }) => {
         className="search-filter-checkbox"
       />
       <Checkbox
-        inputId="creditCard"
-        changed={() => checkBoxHandleChange("creditCardChecked")}
-        label="Credit Card"
-        checked={creditCardChecked}
+        inputId="cashless"
+        changed={() => checkBoxHandleChange("cashlessChecked")}
+        label="Cashless"
+        checked={cashlessChecked}
         className="search-filter-checkbox"
       />
       <div className="search-filter-distance">
