@@ -2,6 +2,12 @@
 
 .edit-promo {
   padding: 20px;
+  min-height: 120px;
+  width: 282px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   &-title {
     font-size: 16px;
@@ -13,22 +19,6 @@
   &-add {
     margin-top: 8px;
 
-    .edit-promo-input {
-      display: flex;
-
-      .MuiFormControl-root {
-        width: 180px;
-        margin: 0 8px 0 0;
-
-        .MuiInputBase-input {
-          height: 40px;
-          box-sizing: border-box;
-          padding: 6px 8px;
-        }
-      }
-    }
-
-    .edit-promo-input,
     .add-btn {
       width: 242px;
     }

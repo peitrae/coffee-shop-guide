@@ -111,7 +111,9 @@ export function* getCoffeeShopPromoSaga({ coffeeShopId }) {
   try {
     const response = yield axios.get(url);
 
-    yield put(actions.getCoffeeShopPromoSuccess(response.data));
+    yield put(
+      actions.getCoffeeShopPromoSuccess({ coffeeShopId, list: response.data })
+    );
   } catch (error) {
     console.log(error.response.data.error.message);
   }
@@ -119,7 +121,6 @@ export function* getCoffeeShopPromoSaga({ coffeeShopId }) {
 
 export function* deleteCoffeeShopPromoSaga({ promoId, coffeeShopId }) {
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${coffeeShopId}/promo/${promoId}.json`;
-
   try {
     yield axios.delete(url);
 

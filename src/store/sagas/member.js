@@ -183,6 +183,7 @@ export function* getUserDataSaga(action) {
       )
     );
   } catch (error) {
+    console.log("ERROR", error)
     yield put(actions.setResponse(error.response?.data));
   }
 }

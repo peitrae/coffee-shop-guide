@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "../../../../components/UI/Modal/Modal";
 import { Button } from "../../../../components/UI/Button/Button";
-import TextForm from "../../../../components/UI/TextForm/TextForm";
 import PromoItem from "./PromoItem/PromoItem";
+import PromoInput from "./PromoInput/PromoInput";
+import WarningModal from "../WarningModal/WarningModal";
+import Spinner from "../../../../components/UI/Spinner/Spinner";
 import * as actions from "../../../../store/actions";
 
 import useClickOutside from "../../../../hooks/useClickOutside";
@@ -17,62 +19,81 @@ const Promo = ({ coffeeShop, closeClickHandler }) => {
   const promoInputRef = useRef();
   const dispatch = useDispatch();
 
+  const [deletePromoId, setDeletePromoId] = useState(null);
   const [showForm, setShowForm] = useState(false);
-  const [promo, setPromo] = useState("");
+  const [newPromo, setNewPromo] = useState("");
 
   useEffect(() => {
     dispatch(actions.getCoffeeShopPromo(coffeeShopId));
   }, [coffeeShopId, dispatch]);
 
-  const promoList = useSelector(({ coffeeShop }) => coffeeShop.promo);
+  const coffeeShopPromo = useSelector(({ coffeeShop }) => coffeeShop.promo);
 
   const showFormClickHandler = () => setShowForm(!showForm);
 
-  const promoTextChangeHandler = (e) => setPromo(e.target.value);
+  const promoTextChangeHandler = (e) => setNewPromo(e.target.value);
 
-  const deletePromoClickHandler = (promoId) => {
-    dispatch(actions.deleteCoffeeShopPromo(promoId, coffeeShopId));
-  };
+  const showWarningClickHandler = (promoId) => setDeletePromoId(promoId);
+
+  const closeWarningClickHandler = () => setDeletePromoId(null);
 
   const submitPromoClickHandler = () => {
-    dispatch(actions.setCoffeeShopPromo(promo, coffeeShopId));
+    dispatch(actions.setCoffeeShopPromo(newPromo, coffeeShopId));
+    setNewPromo("");
+  };
+
+  const deletePromoHandler = () => {
+    dispatch(actions.deleteCoffeeShopPromo(deletePromoId, coffeeShopId));
+    setDeletePromoId(null);
   };
 
   useClickOutside(promoInputRef, showFormClickHandler);
 
+  if (coffeeShopPromo && coffeeShopPromo.coffeeShopId !== coffeeShopId) {
+    return (
+      <Modal show={true} close={closeClickHandler} className="edit-promo">
+        <Spinner className="edit-promo-spinner" />
+      </Modal>
+    );
+  }
+
   return (
-    <Modal show={true} close={closeClickHandler} className="edit-promo">
-      <h1 className="edit-promo-title">{name}</h1>
-      {promoList
-        ? Object.keys(promoList).map((promoId) => (
-            <PromoItem
-              key={promoId}
-              promoId={promoId}
-              value={promoList[promoId].value}
-              deleteClickHandler={deletePromoClickHandler}
+    <>
+      <Modal show={true} close={closeClickHandler} className="edit-promo">
+        <h1 className="edit-promo-title">{name}</h1>
+        {coffeeShopPromo?.list
+          ? Object.keys(coffeeShopPromo.list).map((promoId) => (
+              <PromoItem
+                key={promoId}
+                promoId={promoId}
+                value={coffeeShopPromo.list[promoId].value}
+                deleteClickHandler={showWarningClickHandler}
+              />
+            ))
+          : null}
+        <div className="edit-promo-add">
+          {showForm ? (
+            <PromoInput
+              ref={promoInputRef}
+              value={newPromo}
+              textChangeHandler={promoTextChangeHandler}
+              submitClickHandler={submitPromoClickHandler}
             />
-          ))
-        : null}
-      <div className="edit-promo-add">
-        {showForm ? (
-          <div className="edit-promo-input" ref={promoInputRef}>
-            <TextForm
-              id="promo"
-              placeholder="Promo"
-              value={promo}
-              inputHandler={promoTextChangeHandler}
-            />
-            <Button className="submit-btn" onClick={submitPromoClickHandler}>
-              Add
+          ) : (
+            <Button className="add-btn" onClick={showFormClickHandler}>
+              Add Promo
             </Button>
-          </div>
-        ) : (
-          <Button className="add-btn" onClick={showFormClickHandler}>
-            Add Promo
-          </Button>
-        )}
-      </div>
-    </Modal>
+          )}
+        </div>
+      </Modal>
+      {deletePromoId ? (
+        <WarningModal
+          message="Are you sure want to delete this promo?"
+          closeHandler={closeWarningClickHandler}
+          submitHandler={deletePromoHandler}
+        />
+      ) : null}
+    </>
   );
 };
 

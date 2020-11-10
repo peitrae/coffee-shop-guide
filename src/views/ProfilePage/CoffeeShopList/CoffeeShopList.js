@@ -11,7 +11,7 @@ const CoffeeShopList = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [showWarning, setShowWarning] = useState(false);
+  const [warning, setWarning] = useState(false);
   const [showPromo, setShowPromo] = useState(false);
   const [deleteSelected, setDeleteSelected] = useState(null);
 
@@ -30,19 +30,19 @@ const CoffeeShopList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [localId]);
 
-  const cancelWarningHandler = () => {
+  const closeWarningClickHandler = () => {
     setDeleteSelected(null);
-    setShowWarning(false);
+    setWarning(null);
   };
 
   const deleteCoffeeShopHandler = (coffeeShopId) => {
     setDeleteSelected(coffeeShopId);
-    setShowWarning(true);
+    setWarning("Are you sure want to delete the coffee shop?");
   };
 
   const deleteWarningHandler = () => {
     deleteCoffeeShop(deleteSelected);
-    setShowWarning(false);
+    setWarning(null);
     setDeleteSelected(null);
   };
 
@@ -59,11 +59,11 @@ const CoffeeShopList = () => {
         deleteHandler={deleteCoffeeShopHandler}
         editPromoClickHandler={showPromoClickHandler}
       />
-      {showWarning ? (
+      {warning ? (
         <WarningModal
-          show={showWarning}
-          cancelHandler={cancelWarningHandler}
-          submitWarningHandler={deleteWarningHandler}
+          message={warning}
+          closeHandler={closeWarningClickHandler}
+          submitHandler={deleteWarningHandler}
         />
       ) : null}
       {showPromo ? (

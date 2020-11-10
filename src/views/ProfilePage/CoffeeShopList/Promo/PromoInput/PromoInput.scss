@@ -1,0 +1,20 @@
+.edit-promo-add {
+  .edit-promo-input {
+    display: flex;
+
+    .MuiFormControl-root {
+      width: 180px;
+      margin: 0 8px 0 0;
+
+      .MuiInputBase-input {
+        height: 40px;
+        box-sizing: border-box;
+        padding: 6px 8px;
+      }
+    }
+  }
+
+  .edit-promo-input {
+    width: 242px;
+  }
+}
