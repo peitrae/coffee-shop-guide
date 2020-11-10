@@ -9,6 +9,10 @@ export {
     setCoffeeShopData,
     getBookmark,
     getBookmarkSuccess,
+    setCoffeeShopPromo,
+    getCoffeeShopPromo,
+    getCoffeeShopPromoSuccess,
+    deleteCoffeeShopPromo
 } from './coffeeShop'
 
 export {

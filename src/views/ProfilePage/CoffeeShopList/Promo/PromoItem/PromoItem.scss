@@ -1,0 +1,25 @@
+@import "../../../../../assets/styles/GlobalStyles.scss";
+
+.edit-promo-item {
+  display: flex;
+  align-items: center;
+  margin: 6px 0;
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
+  padding: 6px 8px;
+
+  .promo-main {
+    width: 180px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $black;
+  }
+
+  .promo-delete {
+    width: 26px;
+    height: 26px;
+    padding: 4px;
+    fill: $red;
+    margin-left: 12px;
+  }
+}

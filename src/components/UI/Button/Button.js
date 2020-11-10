@@ -52,7 +52,7 @@ export const BtnSmall = (props) => {
 export const Button = ({ icon: Icon, children, className, onClick }) => {
   return (
     <button className={`btn btn-solid btn-md ${className}`} onClick={onClick}>
-      {Icon ? (<Icon className="btn-icon"/>) : null}
+      {Icon ? <Icon className="btn-icon" /> : null}
       {children}
     </button>
   );

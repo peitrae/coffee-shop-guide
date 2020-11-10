@@ -11,12 +11,13 @@
     cursor: pointer;
   }
 
-  &-text {
+  &-desc {
     margin-left: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-weight: 600;
+    width: 100%;
 
     .item-name {
       font-size: 16px;
@@ -34,9 +35,17 @@
       color: #464646;
       cursor: pointer;
     }
+
+    .item-controls {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .controls-right button {
+        margin-left: 12px;
+      }
+    }
   }
 
-  &-controls button {
-    margin-right: 12px;
-  }
+  
 }

@@ -25,7 +25,10 @@ import {
 import {
   getCoffeeShopData,
   setCoffeeShopDataSaga,
-  getBookmarkSaga
+  getBookmarkSaga,
+  setCoffeeShopPromoSaga,
+  getCoffeeShopPromoSaga,
+  deleteCoffeeShopPromoSaga
 } from "./coffeeShop";
 
 export function* watchMember() {
@@ -56,7 +59,10 @@ export function* watchCoffeeShop() {
   yield all([
     takeEvery(actionTypes.COFFEE_SHOP_GET_DATA, getCoffeeShopData),
     takeEvery(actionTypes.COFFEE_SHOP_SET_DATA, setCoffeeShopDataSaga),
-    takeEvery(actionTypes.COFFEE_SHOP_GET_BOOKMARK, getBookmarkSaga)
+    takeEvery(actionTypes.COFFEE_SHOP_GET_BOOKMARK, getBookmarkSaga),
+    takeEvery(actionTypes.COFFEE_SHOP_SET_PROMO, setCoffeeShopPromoSaga),
+    takeEvery(actionTypes.COFFEE_SHOP_GET_PROMO, getCoffeeShopPromoSaga),
+    takeEvery(actionTypes.COFFEE_SHOP_DELETE_PROMO, deleteCoffeeShopPromoSaga)
   ]);
 }
 

@@ -7,7 +7,13 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 
 import "./MiniList.scss";
 
-const MiniList = ({ title, list, editHandler, deleteHandler }) => {
+const MiniList = ({
+  title,
+  list,
+  editHandler,
+  deleteHandler,
+  editPromoClickHandler,
+}) => {
   if (list) {
     return (
       <Card className="minilist" shadow>
@@ -18,6 +24,7 @@ const MiniList = ({ title, list, editHandler, deleteHandler }) => {
             coffeeShop={coffeeShop}
             editHandler={editHandler}
             deleteHandler={deleteHandler}
+            editPromoClickHandler={editPromoClickHandler}
           />
         ))}
       </Card>

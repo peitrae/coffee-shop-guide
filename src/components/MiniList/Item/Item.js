@@ -6,7 +6,12 @@ import defaultIco from "../../../assets/no-image.png";
 
 import "./Item.scss";
 
-const Item = ({ coffeeShop, editHandler, deleteHandler }) => {
+const Item = ({
+  coffeeShop,
+  editHandler,
+  deleteHandler,
+  editPromoClickHandler,
+}) => {
   const { id: coffeeShop_id, name, address, images } = coffeeShop;
 
   return (
@@ -18,18 +23,30 @@ const Item = ({ coffeeShop, editHandler, deleteHandler }) => {
           className="minilist-item-img"
         />
       </NavLink>
-      <div className="minilist-item-text">
+      <div className="minilist-item-desc">
         <NavLink to={`/coffee-shop/${coffeeShop_id}`}>
           <h3 className="item-name">{name}</h3>
           <span className="item-address">{address}</span>
         </NavLink>
-        <div>
-          <div className="minilist-item-controls">
+        <div className="item-controls">
+          <div className="controls-left">
+            {editPromoClickHandler ? (
+              <BtnSmall clicked={() => editPromoClickHandler(coffeeShop)}>
+                Edit Promo
+              </BtnSmall>
+            ) : null}
+          </div>
+          <div className="controls-right">
             {editHandler ? (
-              <BtnSmall clicked={() => editHandler(coffeeShop_id)}>Edit</BtnSmall>
+              <BtnSmall clicked={() => editHandler(coffeeShop_id)}>
+                Edit
+              </BtnSmall>
             ) : null}
             {deleteHandler ? (
-              <BtnSmall btnType="Danger" clicked={() => deleteHandler(coffeeShop_id)}>
+              <BtnSmall
+                btnType="Danger"
+                clicked={() => deleteHandler(coffeeShop_id)}
+              >
                 Delete
               </BtnSmall>
             ) : null}

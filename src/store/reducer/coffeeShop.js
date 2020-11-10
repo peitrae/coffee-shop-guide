@@ -5,6 +5,7 @@ const initialState = {
   data: null,
   redirect: null,
   bookmark: [],
+  promo: null,
 };
 
 const getCoffeeShopDataSuccess = (state, action) => {
@@ -26,6 +27,12 @@ const getBookmarkSuccess = (state, action) => {
   });
 };
 
+const getCoffeeShopPromo = (state, action) => {
+  return updateState(state, {
+    promo: action.promo,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.COFFEE_SHOP_GET_DATA_SUCCESS:
@@ -34,6 +41,8 @@ const reducer = (state = initialState, action) => {
       return setCoffeeShopDataSuccess(state, action);
     case actionTypes.COFFEE_SHOP_GET_BOOKMARK_SUCCESS:
       return getBookmarkSuccess(state, action);
+    case actionTypes.COFFEE_SHOP_GET_PROMO_SUCCESS:
+      return getCoffeeShopPromo(state, action);
     default:
       return state;
   }

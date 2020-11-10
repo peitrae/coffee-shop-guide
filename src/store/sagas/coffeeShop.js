@@ -35,7 +35,7 @@ export function* getCoffeeShopData(action) {
         photoURL: usersObj[key]?.photoURL,
         rating: coffeeshop.data.feedback[key].rating,
         review: coffeeshop.data.feedback[key].review,
-        date: moment(coffeeshop.data.feedback[key].date).format('DD MMMM YYYY')
+        date: moment(coffeeshop.data.feedback[key].date).format("DD MMMM YYYY"),
       };
     }
 
@@ -88,6 +88,42 @@ export function* getBookmarkSaga(action) {
     }
 
     yield put(actions.getBookmarkSuccess(coffeeShops));
+  } catch (error) {
+    console.log(error.response.data.error.message);
+  }
+}
+
+export function* setCoffeeShopPromoSaga({ promo, coffeeShopId }) {
+  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${coffeeShopId}/promo.json`;
+
+  try {
+    yield axios.post(url, { value: promo });
+
+    yield put(actions.getCoffeeShopPromo(coffeeShopId));
+  } catch (error) {
+    console.log(error.response.data.error.message);
+  }
+}
+
+export function* getCoffeeShopPromoSaga({ coffeeShopId }) {
+  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${coffeeShopId}/promo.json`;
+
+  try {
+    const response = yield axios.get(url);
+
+    yield put(actions.getCoffeeShopPromoSuccess(response.data));
+  } catch (error) {
+    console.log(error.response.data.error.message);
+  }
+}
+
+export function* deleteCoffeeShopPromoSaga({ promoId, coffeeShopId }) {
+  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${coffeeShopId}/promo/${promoId}.json`;
+
+  try {
+    yield axios.delete(url);
+
+    yield put(actions.getCoffeeShopPromo(coffeeShopId));
   } catch (error) {
     console.log(error.response.data.error.message);
   }
