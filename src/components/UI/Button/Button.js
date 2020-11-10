@@ -49,9 +49,19 @@ export const BtnSmall = (props) => {
   );
 };
 
-export const Button = ({ icon: Icon, children, className, onClick }) => {
+export const Button = ({
+  icon: Icon,
+  type = "solid",
+  color = "primary",
+  children,
+  className = null,
+  onClick,
+}) => {
   return (
-    <button className={`btn btn-solid btn-md ${className}`} onClick={onClick}>
+    <button
+      className={`btn btn-${type} btn-${color} btn-md ${className}`}
+      onClick={onClick}
+    >
       {Icon ? <Icon className="btn-icon" /> : null}
       {children}
     </button>
@@ -59,7 +69,7 @@ export const Button = ({ icon: Icon, children, className, onClick }) => {
 };
 
 export const PlainBtn = forwardRef(({ children, className, onClick }, ref) => (
-  <button ref={ref} className={`btn-plain ${className}`} onClick={onClick}>
+  <button ref={ref} className={`btn-text ${className}`} onClick={onClick}>
     {children}
   </button>
 ));
