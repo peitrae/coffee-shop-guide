@@ -6,6 +6,9 @@
 
   &-map {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
     width: 49%;
     right: 0;

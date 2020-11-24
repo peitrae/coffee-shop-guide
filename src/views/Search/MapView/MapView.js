@@ -13,20 +13,41 @@ const MapView = ({ coffeeShops }) => {
     zoom: 13,
   });
 
+  const [error, setError] = useState(null);
+
   const userMarker = new Icon({
     iconUrl: "/user-marker.svg",
     iconSize: [35, 35],
   });
 
+  const getLocation = (location) => {
+    setConfig({
+      ...config,
+      lat: location.coords.latitude,
+      long: location.coords.longitude,
+    });
+  };
+
+  const getLocationError = (error) => {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        setError("Geolocation is disabled");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        setError("Location information is unavailable");
+        break;
+      case error.TIMEOUT:
+        setError("The request to get user location timed out");
+        break;
+      case error.UNKNOWN_ERROR:
+        setError("An unknown error occurred");
+        break;
+    }
+  };
+
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((location) => {
-        setConfig({
-           ...config,
-           lat: location.coords.latitude,
-           long: location.coords.longitude,
-         });
-      });
+      navigator.geolocation.getCurrentPosition(getLocation, getLocationError);
     }
   }, []);
 
@@ -42,7 +63,9 @@ const MapView = ({ coffeeShops }) => {
     e.target.closePopup();
   };
 
-  return (
+  return error ? (
+    <div>{error}</div>
+  ) : (
     <Map
       center={[config.lat, config.long]}
       zoom={config.zoom}
