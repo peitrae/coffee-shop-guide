@@ -53,13 +53,14 @@ export const Button = ({
   icon: Icon,
   type = "solid",
   color = "primary",
+  size = "md",
   children,
   className = null,
   onClick,
 }) => {
   return (
     <button
-      className={`btn btn-${type} btn-${color} btn-md ${className}`}
+      className={`btn btn-${type} btn-${color} btn-${size} ${className}`}
       onClick={onClick}
     >
       {Icon ? <Icon className="btn-icon" /> : null}
