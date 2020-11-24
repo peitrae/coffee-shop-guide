@@ -50,7 +50,7 @@ const SignUp = ({ show, close }) => {
           <h1 className={classes.Header}>Sign Up</h1>
           {response && response.error ? (
             <div className={classes.ErrorMessage}>
-              <ErrorMessage message={response.error.message} />
+              <ErrorMessage>{response.error.message}</ErrorMessage>
             </div>
           ) : null}
           <form

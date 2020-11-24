@@ -47,7 +47,7 @@ const EditComponent = ({ cancelEditPassword }) => {
 
   return (
     <ProfileCard image={image}>
-      {showError ? <ErrorMessage message={"PASSWORD_NOT_MATCH"} /> : null}
+      {showError ? <ErrorMessage>PASSWORD_NOT_MATCH</ErrorMessage> : null}
       <form className={classes.FormEdit}>
         <div className={classes.TextFormGroup}>
           <TextForm
