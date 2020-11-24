@@ -119,6 +119,18 @@ export function* getCoffeeShopPromoSaga({ coffeeShopId }) {
   }
 }
 
+export function* editCoffeeShopPromoSaga({ promo, promoId, coffeeShopId }) {
+  const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${coffeeShopId}/promo/${promoId}.json`;
+
+  try {
+    yield axios.put(url, { value: promo });
+
+    yield put(actions.getCoffeeShopPromo(coffeeShopId));
+  } catch (error) {
+    console.log(error.response.data.error.message);
+  }
+}
+
 export function* deleteCoffeeShopPromoSaga({ promoId, coffeeShopId }) {
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${coffeeShopId}/promo/${promoId}.json`;
   try {

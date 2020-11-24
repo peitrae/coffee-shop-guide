@@ -3,17 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "../../../../components/UI/Modal/Modal";
 import { Button } from "../../../../components/UI/Button/Button";
-import PromoItem from "./PromoItem/PromoItem";
+import Promo from "./Promo/Promo";
 import PromoInput from "./PromoInput/PromoInput";
 import WarningModal from "../WarningModal/WarningModal";
 import Spinner from "../../../../components/UI/Spinner/Spinner";
 import * as actions from "../../../../store/actions";
+import ErrorMessage from "../../../../components/ErrorMessage/ErrorMessage";
 
 import useClickOutside from "../../../../hooks/useClickOutside";
 
-import "./Promo.scss";
+import "./Promos.scss";
 
-const Promo = ({ coffeeShop, closeClickHandler }) => {
+const Promos = ({ coffeeShop, closeHandler }) => {
   const { id: coffeeShopId, name } = coffeeShop;
 
   const promoInputRef = useRef();
@@ -22,6 +23,7 @@ const Promo = ({ coffeeShop, closeClickHandler }) => {
   const [deletePromoId, setDeletePromoId] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [newPromo, setNewPromo] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     dispatch(actions.getCoffeeShopPromo(coffeeShopId));
@@ -31,20 +33,29 @@ const Promo = ({ coffeeShop, closeClickHandler }) => {
 
   const showFormClickHandler = () => setShowForm(!showForm);
 
-  const promoTextChangeHandler = (e) => setNewPromo(e.target.value);
+  const inputChangeHandler = (e) => setNewPromo(e.target.value);
 
   const showWarningClickHandler = (promoId) => setDeletePromoId(promoId);
 
   const closeWarningClickHandler = () => setDeletePromoId(null);
 
   const submitPromoClickHandler = () => {
-    dispatch(actions.setCoffeeShopPromo(newPromo, coffeeShopId));
-    setNewPromo("");
+    if (newPromo !== "") {
+      dispatch(actions.setCoffeeShopPromo(newPromo, coffeeShopId));
+      setNewPromo("");
+    } else {
+      setError("Promo is empty");
+    }
   };
 
   const deletePromoHandler = () => {
     dispatch(actions.deleteCoffeeShopPromo(deletePromoId, coffeeShopId));
     setDeletePromoId(null);
+  };
+
+  const closeClickHandler = () => {
+    setError(null);
+    closeHandler();
   };
 
   useClickOutside(promoInputRef, showFormClickHandler);
@@ -59,25 +70,30 @@ const Promo = ({ coffeeShop, closeClickHandler }) => {
 
   return (
     <>
-      <Modal show={true} close={closeClickHandler} className="edit-promo">
-        <h1 className="edit-promo-title">{name}</h1>
+      <Modal show={true} close={closeClickHandler} className="owner-promo">
+        <h1 className="owner-promo-title">{name}</h1>
+        {error ? (
+          <ErrorMessage className="owner-promo-error">{error}</ErrorMessage>
+        ) : null}
         {coffeeShopPromo?.list
           ? Object.keys(coffeeShopPromo.list).map((promoId) => (
-              <PromoItem
+              <Promo
                 key={promoId}
                 promoId={promoId}
+                coffeeShopId={coffeeShopId}
                 value={coffeeShopPromo.list[promoId].value}
-                deleteClickHandler={showWarningClickHandler}
+                deleteHandler={showWarningClickHandler}
+                setError={setError}
               />
             ))
           : null}
-        <div className="edit-promo-add">
+        <div className="owner-promo-add">
           {showForm ? (
             <PromoInput
-              ref={promoInputRef}
               value={newPromo}
-              textChangeHandler={promoTextChangeHandler}
+              inputChangeHandler={inputChangeHandler}
               submitClickHandler={submitPromoClickHandler}
+              closeHandler={showFormClickHandler}
             />
           ) : (
             <Button className="add-btn" onClick={showFormClickHandler}>
@@ -97,4 +113,4 @@ const Promo = ({ coffeeShop, closeClickHandler }) => {
   );
 };
 
-export default Promo;
+export default Promos;

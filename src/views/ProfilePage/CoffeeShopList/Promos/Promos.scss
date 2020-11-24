@@ -1,9 +1,9 @@
 @import "../../../../assets/styles/GlobalStyles.scss";
 
-.edit-promo {
+.owner-promo {
   padding: 20px;
   min-height: 120px;
-  width: 282px;
+  width: 300px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -16,11 +16,15 @@
     margin-bottom: 10px;
   }
 
+  &-error {
+    margin-bottom: 8px;
+  }
+
   &-add {
-    margin-top: 8px;
+    width: 100%;
 
     .add-btn {
-      width: 242px;
+      width: 100%;
     }
   }
 }

@@ -53,6 +53,13 @@ export const getCoffeeShopPromoSuccess = (promo) => ({
   promo,
 });
 
+export const editCoffeeShopPromo = (promo, promoId, coffeeShopId) => ({
+  type: actionTypes.COFFEE_SHOP_EDIT_PROMO,
+  promo,
+  promoId,
+  coffeeShopId
+});
+
 export const deleteCoffeeShopPromo = (promoId, coffeeShopId) => ({
   type: actionTypes.COFFEE_SHOP_DELETE_PROMO,
   promoId,

@@ -1,20 +1,20 @@
-.edit-promo-add {
-  .edit-promo-input {
+.owner-promo-add,
+.owner-promo-edit {
+  .promo-input {
     display: flex;
+    width: 100%;
+    
 
     .MuiFormControl-root {
-      width: 180px;
+      width: 100%;
       margin: 0 8px 0 0;
 
       .MuiInputBase-input {
         height: 40px;
         box-sizing: border-box;
         padding: 6px 8px;
+        font-size: 14px;
       }
     }
-  }
-
-  .edit-promo-input {
-    width: 242px;
   }
 }
