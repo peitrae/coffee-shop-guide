@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 
 import MiniList from "../../../components/MiniList/MiniList";
 import WarningModal from "./WarningModal/WarningModal";
-import Promo from "./Promo/Promo";
+import Promos from "./Promos/Promos";
 import * as actions from "../../../store/actions";
 
 const CoffeeShopList = () => {
@@ -48,7 +48,7 @@ const CoffeeShopList = () => {
 
   const showPromoClickHandler = (coffeeShop) => setShowPromo(coffeeShop);
 
-  const closePromoClickHandler = () => setShowPromo(false);
+  const closePromoHandler = () => setShowPromo(false);
 
   return (
     <>
@@ -67,9 +67,9 @@ const CoffeeShopList = () => {
         />
       ) : null}
       {showPromo ? (
-        <Promo
+        <Promos
           coffeeShop={showPromo}
-          closeClickHandler={closePromoClickHandler}
+          closeHandler={closePromoHandler}
         />
       ) : null}
     </>
