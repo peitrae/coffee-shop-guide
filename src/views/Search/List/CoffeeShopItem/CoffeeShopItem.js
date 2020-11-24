@@ -21,8 +21,6 @@ const CoffeeShopItem = ({ coffeeShop }) => {
 
   const todayHours = operationalHours[new Date().getDay()];
 
-  console.log(promo)
-
   return (
     <NavLink to={`/coffee-shop/${id}`}>
       <Card className="coffeeshop-item">
@@ -52,7 +50,7 @@ const CoffeeShopItem = ({ coffeeShop }) => {
             <div className="details-promo-grp">
               {promo
                 ? Object.keys(promo).map((key) => (
-                    <Promo>{promo[key].value}</Promo>
+                    <Promo key={key}>{promo[key].value}</Promo>
                   ))
                 : null}
             </div>
