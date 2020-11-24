@@ -30,7 +30,7 @@ const Filter = ({ coffeeShops, onFilter }) => {
     wiFiChecked,
     promoChecked,
     cashlessChecked,
-    distanceChecked
+    distanceChecked,
   } = filter;
 
   useEffect(() => {
@@ -82,30 +82,29 @@ const Filter = ({ coffeeShops, onFilter }) => {
     return checkDay && checkHours && checkMinutes;
   };
 
-  const withinRadius = (coffeeShops, radius) => {
-    const user = { lat: -7.983, long: 112.621 };
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((location) => {
-        user.lat = location.coords.latitude;
-        user.long = location.coords.longitude;
+  const withinRadius = async (coffeeShops, radius) => {
+    try {
+      const pos = await new Promise((res, rej) => {
+        navigator.geolocation.getCurrentPosition(res, rej);
       });
+
+      return coffeeShops.filter(({ location }) => {
+        if (!location) {
+          return false;
+        }
+
+        return isPointWithinRadius(
+          { latitude: location.lat, longitude: location.long },
+          { latitude: pos.coords.latitude, longitude: pos.coords.longitude },
+          radius
+        );
+      });
+    } catch (error) {
+      return { error };
     }
-
-    return coffeeShops.filter(({ location }) => {
-      if (!location) {
-        return false;
-      }
-
-      return isPointWithinRadius(
-        { latitude: location.lat, longitude: location.long },
-        { latitude: user.lat, longitude: user.long },
-        radius
-      );
-    });
   };
 
-  const filterChanged = () => {
+  const filterChanged = async () => {
     if (priceChecked) {
       coffeeShops = coffeeShops.filter((coffeeShop) =>
         checkPrice(coffeeShop.averagePrice)
@@ -130,8 +129,15 @@ const Filter = ({ coffeeShops, onFilter }) => {
       );
     }
     if (distanceChecked) {
-      coffeeShops = withinRadius(coffeeShops, distanceChecked);
-      console.log(coffeeShops);
+      const coffeeShopWithinRadius = await withinRadius(
+        coffeeShops,
+        distanceChecked
+      );
+      if (coffeeShopWithinRadius.error) {
+        console.log(coffeeShopWithinRadius);
+      } else {
+        coffeeShops = coffeeShopWithinRadius;
+      }
     }
     onFilter(coffeeShops);
   };
