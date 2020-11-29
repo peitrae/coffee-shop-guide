@@ -1,0 +1,24 @@
+@import "../../../assets/styles/GlobalStyles.scss";
+
+.input-field {
+  border-radius: 8px;
+  border: 1px solid #a5a5a5;
+}
+
+.input-field:hover {
+  border: 1px solid #333333;
+}
+
+.input-field:focus {
+  border: 2px solid $primary;
+}
+
+// SIZE
+
+.input-field.sm {
+  padding: 0.4rem 0.7rem;
+}
+
+.input-field.sm:focus {
+  padding: calc(0.4rem - 1px) calc(0.7rem - 1px);
+}

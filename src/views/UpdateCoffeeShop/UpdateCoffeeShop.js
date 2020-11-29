@@ -82,7 +82,7 @@ const UpdateData = (props) => {
     [header]
   );
 
-  const inputChangeHandler = useCallback(
+  const onInputChange = useCallback(
     (type) => (e) => {
       setCoffeeShop({ ...coffeeShop, [type]: e.target.value });
     },
@@ -236,6 +236,7 @@ const UpdateData = (props) => {
   }
 
   const functionContextValue = {
+    onInputChange,
     onSubmitFacility,
     onDeleteFacility,
     onChangeDay,
@@ -254,14 +255,13 @@ const UpdateData = (props) => {
               name={name}
               address={address}
               headerChangeHandler={headerChangeHandler}
-              inputChangeHandler={inputChangeHandler}
+              inputChangeHandler={onInputChange}
             />
             <Information
               averagePrice={averagePrice}
               contact={contact}
               facilities={facilities}
               operationalHours={operationalHours}
-              inputChangeHandler={inputChangeHandler}
             />
             <Images
               images={images}
