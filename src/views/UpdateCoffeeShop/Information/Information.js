@@ -5,9 +5,6 @@ import TextForm from "../../../components/UI/TextForm/TextForm";
 import Card from "../../../components/UI/Card/Card";
 import Facilities from "./Facilities/Facilities";
 import OperationalHours from "./OperationalHours/OperationalHours";
-import { PlainBtn } from "../../../components/UI/Button/Button";
-
-import PlusIcon from "../../../assets/icon/PlusIcon";
 
 import "./Information.scss";
 
@@ -17,10 +14,6 @@ const Information = ({
   facilities,
   operationalHours,
   inputChangeHandler,
-  addDaysClickHandler,
-  deleteDaysClickHandler,
-  dayChangeHandler,
-  timeChangeHandler,
 }) => (
   <Card className="add-coffeeshop-information">
     <h2>Information</h2>
@@ -54,29 +47,7 @@ const Information = ({
           type="number"
         />
       </div>
-      {/* <div className="information-col top-align">
-        <div className="information-col-title">
-          <label>Operational Hours</label>
-          {operationalHours.length < 7 ? (
-            <PlainBtn className="add-btn" onClick={addDaysClickHandler}>
-              <PlusIcon />
-            </PlainBtn>
-          ) : null}
-        </div>
-        <OperationalHours
-          operationalHours={operationalHours}
-          dayChangeHandler={dayChangeHandler}
-          timeChangeHandler={timeChangeHandler}
-          deleteDaysClickHandler={deleteDaysClickHandler}
-        />
-      </div> */}
-      <OperationalHours
-        operationalHours={operationalHours}
-        addDaysClickHandler={addDaysClickHandler}
-        dayChangeHandler={dayChangeHandler}
-        timeChangeHandler={timeChangeHandler}
-        deleteDaysClickHandler={deleteDaysClickHandler}
-      />
+      <OperationalHours operationalHours={operationalHours} />
       <Facilities facilities={facilities} />
     </div>
   </Card>

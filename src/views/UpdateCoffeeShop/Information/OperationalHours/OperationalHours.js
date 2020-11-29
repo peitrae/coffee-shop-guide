@@ -1,41 +1,20 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-} from "@material-ui/pickers";
+import React, { useContext } from "react";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
-import { PlainBtn } from "../../../../components/UI/Button/Button";
-import TrashIcon from "../../../../assets/icon/TrashIcon";
+import { Button } from "../../../../components/UI/Button/Button";
+import { ReactComponent as CloseIcon } from "../../../../assets/svg/close.svg";
+import { FunctionContext } from "../../UpdateCoffeeShop";
+import DayInput from "./DayInput/DayInput";
+import TimePicker from "./TimePicker/TimePicker";
+
+import { ReactComponent as PlusIcon } from "../../../../assets/svg/plus.svg";
 
 import "./OperationalHours.scss";
 
-const useStyles = makeStyles(() => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textFieldDay: {
-    width: 130,
-  },
-  textFieldTimePicker: {
-    width: 155,
-  },
-  menu: {
-    width: 150,
-  },
-}));
-
-const OperationalHours = ({
-  operationalHours,
-  dayChangeHandler,
-  timeChangeHandler,
-  deleteDaysClickHandler,
-}) => {
-  const classesMaterial = useStyles();
+const OperationalHours = ({ operationalHours }) => {
+  const context = useContext(FunctionContext);
+  const { onChangeDay, onChangeTime, onAddDays, onDeleteDay } = context;
 
   const labels = [
     { value: 0, label: "Sunday" },
@@ -69,76 +48,54 @@ const OperationalHours = ({
   };
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <div className="add-hours-grp">
-        {operationalHours.map((valueDay, index) => {
-          const daysLeft = labels.filter(
-            ({ value }) => !choosenDay.includes(value)
-          );
-          const sortedMenuItem = sortingMenuItem(daysLeft, valueDay.day);
-          return (
-            <div className="add-hours-item" key={index}>
-              <TextField
-                id="day"
-                select
-                className={classesMaterial.textFieldDay}
-                value={valueDay.day}
-                onChange={dayChangeHandler(index)}
-                margin="normal"
-                variant="outlined"
-                label="Day"
-                size="small"
-                SelectProps={{
-                  MenuProps: {
-                    className: classesMaterial.menu,
-                  },
-                }}
-              >
-                {sortedMenuItem.map((option) => {
-                  return (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  );
-                })}
-              </TextField>
-              <KeyboardTimePicker
-                margin="normal"
-                id="time-picker"
-                label="Open"
-                value={timePickerGetValue(index, "open")}
-                inputVariant="outlined"
-                onChange={timeChangeHandler(index, "open")}
-                className={classesMaterial.textFieldTimePicker}
-                size="small"
-                KeyboardButtonProps={{
-                  "aria-label": "change time",
-                }}
-              />
-              <KeyboardTimePicker
-                margin="normal"
-                id="time-picker"
-                label="Close"
-                value={timePickerGetValue(index, "close")}
-                inputVariant="outlined"
-                onChange={timeChangeHandler(index, "close")}
-                className={classesMaterial.textFieldTimePicker}
-                size="small"
-                KeyboardButtonProps={{
-                  "aria-label": "change time",
-                }}
-              />
-              <PlainBtn
-                className="delete-btn"
-                onClick={deleteDaysClickHandler(index)}
-              >
-                <TrashIcon />
-              </PlainBtn>
-            </div>
-          );
-        })}
+    <div className="operational-hours">
+      <label className="information-label">Operational Hours</label>
+      <div className="operational-hours-container">
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          {operationalHours.map((valueDay, index) => {
+            const daysLeft = labels.filter(
+              ({ value }) => !choosenDay.includes(value)
+            );
+            const sortedMenuItem = sortingMenuItem(daysLeft, valueDay.day);
+            return (
+              <div className="operational-hours-item" key={index}>
+                <DayInput
+                  value={valueDay.day}
+                  sortedMenuItem={sortedMenuItem}
+                  onChange={onChangeDay(index)}
+                />
+                <TimePicker
+                  label="Open"
+                  value={timePickerGetValue(index, "open")}
+                  onChange={onChangeTime(index, "open")}
+                />
+                <TimePicker
+                  label="Open"
+                  value={timePickerGetValue(index, "close")}
+                  onChange={onChangeTime(index, "close")}
+                />
+                <Button
+                  size="sm"
+                  type="text"
+                  className="delete-button"
+                  onClick={onDeleteDay(index)}
+                  icon={CloseIcon}
+                />
+              </div>
+            );
+          })}
+        </MuiPickersUtilsProvider>
+        <Button
+          size="sm"
+          type="text"
+          className="add-button"
+          onClick={onAddDays}
+          icon={PlusIcon}
+        >
+          Add days
+        </Button>
       </div>
-    </MuiPickersUtilsProvider>
+    </div>
   );
 };
 

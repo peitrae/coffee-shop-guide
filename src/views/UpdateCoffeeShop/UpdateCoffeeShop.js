@@ -14,7 +14,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 import geocode from "../../utilities/geocode";
 
-export const FunctionContext = createContext()
+export const FunctionContext = createContext();
 
 const UpdateData = (props) => {
   const dispatch = useDispatch();
@@ -91,7 +91,7 @@ const UpdateData = (props) => {
   );
 
   const onSubmitFacility = useCallback(
-     (facility) => {
+    (facility) => {
       const temp = [...facilities];
       temp.push(facility);
       setCoffeeShop({ ...coffeeShop, facilities: temp });
@@ -111,7 +111,34 @@ const UpdateData = (props) => {
     [facilities]
   );
 
-  const addDaysClickHandler = useCallback(
+  const onChangeDay = useCallback(
+    (index) => (e) => {
+      let temp = [...operationalHours];
+      temp[index].day = e.target.value;
+      temp = temp.sort((a, b) => a.day - b.day);
+      setCoffeeShop({ ...coffeeShop, operationalHours: temp });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [operationalHours]
+  );
+
+  const onChangeTime = useCallback(
+    (index, type) => (e) => {
+      const temp = [...operationalHours];
+      let toStringHours = e.getHours().toString();
+      let toStringMinutes = e.getMinutes().toString();
+
+      if (toStringHours.length === 1) toStringHours = `0${toStringHours}`;
+      if (toStringMinutes.length === 1) toStringMinutes = `0${toStringMinutes}`;
+
+      temp[index][type] = `${toStringHours}:${toStringMinutes}`;
+      setCoffeeShop({ ...coffeeShop, operationalHours: temp });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [operationalHours]
+  );
+
+  const onAddDays = useCallback(
     (e) => {
       e.preventDefault();
       const temp = [...operationalHours];
@@ -126,38 +153,11 @@ const UpdateData = (props) => {
     [operationalHours]
   );
 
-  const deleteDaysClickHandler = useCallback(
+  const onDeleteDay = useCallback(
     (index) => (e) => {
       e.preventDefault();
       const temp = [...operationalHours];
       temp.splice(index, 1);
-      setCoffeeShop({ ...coffeeShop, operationalHours: temp });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [operationalHours]
-  );
-
-  const dayChangeHandler = useCallback(
-    (index) => (e) => {
-      let temp = [...operationalHours];
-      temp[index].day = e.target.value;
-      temp = temp.sort((a, b) => a.day - b.day);
-      setCoffeeShop({ ...coffeeShop, operationalHours: temp });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [operationalHours]
-  );
-
-  const timeChangeHandler = useCallback(
-    (index, type) => (e) => {
-      const temp = [...operationalHours];
-      let toStringHours = e.getHours().toString();
-      let toStringMinutes = e.getMinutes().toString();
-
-      if (toStringHours.length === 1) toStringHours = `0${toStringHours}`;
-      if (toStringMinutes.length === 1) toStringMinutes = `0${toStringMinutes}`;
-
-      temp[index][type] = `${toStringHours}:${toStringMinutes}`;
       setCoffeeShop({ ...coffeeShop, operationalHours: temp });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -236,9 +236,13 @@ const UpdateData = (props) => {
   }
 
   const functionContextValue = {
-    onSubmitFacility, 
-    onDeleteFacility
-  }
+    onSubmitFacility,
+    onDeleteFacility,
+    onChangeDay,
+    onChangeTime,
+    onAddDays,
+    onDeleteDay,
+  };
 
   return (
     <FunctionContext.Provider value={functionContextValue}>
@@ -258,12 +262,6 @@ const UpdateData = (props) => {
               facilities={facilities}
               operationalHours={operationalHours}
               inputChangeHandler={inputChangeHandler}
-              onSubmitFacility={onSubmitFacility}
-              onDeleteFacility={onDeleteFacility}
-              addDaysClickHandler={addDaysClickHandler}
-              deleteDaysClickHandler={deleteDaysClickHandler}
-              dayChangeHandler={dayChangeHandler}
-              timeChangeHandler={timeChangeHandler}
             />
             <Images
               images={images}
@@ -285,7 +283,7 @@ const UpdateData = (props) => {
         </div>
       </div>
       <Footer />
-    </ FunctionContext.Provider>
+    </FunctionContext.Provider>
   );
 };
 
