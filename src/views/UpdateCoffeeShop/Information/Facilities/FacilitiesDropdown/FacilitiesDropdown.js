@@ -67,7 +67,7 @@ const FacilitiesDropdown = ({ facilities, show, onClose, onSubmit }) => {
             />
             <Button
               size="sm"
-              className="submit-button"
+              className="add-facility-button"
               onClick={onSubmit(facility)}
             >
               Add
