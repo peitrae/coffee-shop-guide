@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
+import { FunctionContext } from "../../UpdateCoffeeShop";
 import { Button } from "../../../../components/UI/Button/Button";
 import FacilitiesDropdown from "./FacilitiesDropdown/FacilitiesDropdown";
 import FacilitiesItem from "./FacilitiesItem/FacilitiesItem";
@@ -8,7 +9,10 @@ import { ReactComponent as PlusIcon } from "../../../../assets/svg/plus.svg";
 
 import "./Facilities.scss";
 
-const Facilities = ({ facilities, onSubmit, onDelete }) => {
+const Facilities = ({ facilities }) => {
+  const context = useContext(FunctionContext);
+  const { onSubmitFacility, onDeleteFacility } = context;
+
   const [showDropdown, setShowDropdown] = useState(false);
 
   const showDropdownHandler = (e) => {
@@ -18,7 +22,7 @@ const Facilities = ({ facilities, onSubmit, onDelete }) => {
 
   const submitClickHandler = (facility) => (e) => {
     e.preventDefault();
-    onSubmit(facility);
+    onSubmitFacility(facility);
     setShowDropdown(false);
   };
 
@@ -28,7 +32,7 @@ const Facilities = ({ facilities, onSubmit, onDelete }) => {
       <div clasName="facilities-container">
         <div className="facilities-list">
           {facilities.map((facility, index) => (
-            <FacilitiesItem onDelete={onDelete(index)}>
+            <FacilitiesItem onDelete={onDeleteFacility(index)}>
               {facility}
             </FacilitiesItem>
           ))}

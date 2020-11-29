@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, createContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./Header/Header";
@@ -13,6 +13,8 @@ import Footer from "../../components/UI/Footer/Footer";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 import geocode from "../../utilities/geocode";
+
+export const FunctionContext = createContext()
 
 const UpdateData = (props) => {
   const dispatch = useDispatch();
@@ -233,8 +235,13 @@ const UpdateData = (props) => {
     return <Spinner />;
   }
 
+  const functionContextValue = {
+    onSubmitFacility, 
+    onDeleteFacility
+  }
+
   return (
-    <>
+    <FunctionContext.Provider value={functionContextValue}>
       <div className={classes.CoffeeShop}>
         <div className={classes.MainDiv}>
           <form>
@@ -278,7 +285,7 @@ const UpdateData = (props) => {
         </div>
       </div>
       <Footer />
-    </>
+    </ FunctionContext.Provider>
   );
 };
 

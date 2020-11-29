@@ -17,9 +17,6 @@ const Information = ({
   facilities,
   operationalHours,
   inputChangeHandler,
-  addFacilityClickHandler,
-  onSubmitFacility,
-  onDeleteFacility,
   addDaysClickHandler,
   deleteDaysClickHandler,
   dayChangeHandler,
@@ -57,7 +54,7 @@ const Information = ({
           type="number"
         />
       </div>
-      <div className="information-col top-align">
+      {/* <div className="information-col top-align">
         <div className="information-col-title">
           <label>Operational Hours</label>
           {operationalHours.length < 7 ? (
@@ -72,13 +69,15 @@ const Information = ({
           timeChangeHandler={timeChangeHandler}
           deleteDaysClickHandler={deleteDaysClickHandler}
         />
-      </div>
-      <Facilities
-        facilities={facilities}
-        addClickHandler={addFacilityClickHandler}
-        onSubmit={onSubmitFacility}
-        onDelete={onDeleteFacility}
+      </div> */}
+      <OperationalHours
+        operationalHours={operationalHours}
+        addDaysClickHandler={addDaysClickHandler}
+        dayChangeHandler={dayChangeHandler}
+        timeChangeHandler={timeChangeHandler}
+        deleteDaysClickHandler={deleteDaysClickHandler}
       />
+      <Facilities facilities={facilities} />
     </div>
   </Card>
 );
