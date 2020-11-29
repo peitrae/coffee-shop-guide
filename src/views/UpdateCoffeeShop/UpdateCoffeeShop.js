@@ -18,7 +18,6 @@ const UpdateData = (props) => {
   const dispatch = useDispatch();
 
   const coffeeShopId = props.match.params.id || null;
-
   const userLocalId = useSelector((state) => state.member.localId);
   const oldCoffeeShop = useSelector((state) => state.coffeeShop.data);
 
@@ -37,7 +36,7 @@ const UpdateData = (props) => {
       },
     ],
     images: [],
-    uploadedBy: userLocalId
+    uploadedBy: userLocalId,
   });
 
   const {
@@ -59,7 +58,7 @@ const UpdateData = (props) => {
     if (coffeeShopId) {
       dispatch(actions.getCoffeeShopData(coffeeShopId));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coffeeShopId]);
 
   useEffect(() => {
@@ -79,7 +78,7 @@ const UpdateData = (props) => {
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [header]
-  ); 
+  );
 
   const inputChangeHandler = useCallback(
     (type) => (e) => {
@@ -87,31 +86,19 @@ const UpdateData = (props) => {
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [name, address, averagePrice, contact]
-  ); 
+  );
 
-  const facilityChangeHandler = useCallback(
-    (index) => (e) => {
-      e.preventDefault();
+  const onSubmitFacility = useCallback(
+     (facility) => {
       const temp = [...facilities];
-      temp[index] = e.target.value;
+      temp.push(facility);
       setCoffeeShop({ ...coffeeShop, facilities: temp });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [facilities]
-  ); 
+  );
 
-  const addFacilityClickHandler = useCallback(
-    (e) => {
-      e.preventDefault();
-      const temp = [...facilities];
-      temp.push("");
-      setCoffeeShop({ ...coffeeShop, facilities: temp });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [facilities]
-  ); 
-
-  const deleteFacilityClickHandler = useCallback(
+  const onDeleteFacility = useCallback(
     (index) => (e) => {
       e.preventDefault();
       const temp = [...facilities];
@@ -120,7 +107,7 @@ const UpdateData = (props) => {
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [facilities]
-  ); 
+  );
 
   const addDaysClickHandler = useCallback(
     (e) => {
@@ -134,8 +121,8 @@ const UpdateData = (props) => {
       setCoffeeShop({ ...coffeeShop, operationalHours: temp });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [operationalHours] 
-  ); 
+    [operationalHours]
+  );
 
   const deleteDaysClickHandler = useCallback(
     (index) => (e) => {
@@ -145,8 +132,8 @@ const UpdateData = (props) => {
       setCoffeeShop({ ...coffeeShop, operationalHours: temp });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [operationalHours] 
-  ); 
+    [operationalHours]
+  );
 
   const dayChangeHandler = useCallback(
     (index) => (e) => {
@@ -157,7 +144,7 @@ const UpdateData = (props) => {
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [operationalHours]
-  ); 
+  );
 
   const timeChangeHandler = useCallback(
     (index, type) => (e) => {
@@ -173,7 +160,7 @@ const UpdateData = (props) => {
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [operationalHours]
-  ); 
+  );
 
   const setImage = (images) => setCoffeeShop({ ...coffeeShop, images: images });
 
@@ -214,10 +201,10 @@ const UpdateData = (props) => {
   const populateLocation = async (coffeeShop) => {
     console.log("Address", address);
     const location = await geocode(address);
-    
+
     console.log("Location", location);
-    return {...coffeeShop, location}
-  }
+    return { ...coffeeShop, location };
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -227,7 +214,7 @@ const UpdateData = (props) => {
     if (validated.error) {
       setError(validated.error);
     } else {
-      const coffeeShop = await populateLocation(validated); 
+      const coffeeShop = await populateLocation(validated);
 
       dispatch(
         actions.setCoffeeShopData(
@@ -264,9 +251,8 @@ const UpdateData = (props) => {
               facilities={facilities}
               operationalHours={operationalHours}
               inputChangeHandler={inputChangeHandler}
-              addFacilityClickHandler={addFacilityClickHandler}
-              facilityChangeHandler={facilityChangeHandler}
-              deleteFacilityClickHandler={deleteFacilityClickHandler}
+              onSubmitFacility={onSubmitFacility}
+              onDeleteFacility={onDeleteFacility}
               addDaysClickHandler={addDaysClickHandler}
               deleteDaysClickHandler={deleteDaysClickHandler}
               dayChangeHandler={dayChangeHandler}

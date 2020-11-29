@@ -1,35 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 
-import TextForm from "../../../../components/UI/TextForm/TextForm";
-import { PlainBtn } from "../../../../components/UI/Button/Button";
-import TrashIcon from "../../../../assets/icon/TrashIcon";
+import { Button } from "../../../../components/UI/Button/Button";
+import FacilitiesDropdown from "./FacilitiesDropdown/FacilitiesDropdown";
+import FacilitiesItem from "./FacilitiesItem/FacilitiesItem";
+
+import { ReactComponent as PlusIcon } from "../../../../assets/svg/plus.svg";
 
 import "./Facilities.scss";
 
-const Facilities = ({
-  facilities = [""],
-  facilityChangeHandler,
-  deleteClickHandler,
-}) => (
-  <div className="facilities-grp">
-    {facilities.map((facility, index) => (
-      <div key={index}>
-        <div className="facility" key={index}>
-          <TextForm
-            id="facilities"
-            label="Facilities"
-            placeholder="Facilities"
-            className={"textField-3"}
-            value={facility}
-            inputHandler={facilityChangeHandler(index)}
+const Facilities = ({ facilities, onSubmit, onDelete }) => {
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const showDropdownHandler = (e) => {
+    e && e.preventDefault();
+    setShowDropdown(!showDropdown);
+  };
+
+  const submitClickHandler = (facility) => (e) => {
+    e.preventDefault();
+    onSubmit(facility);
+    setShowDropdown(false);
+  };
+
+  return (
+    <div className="facilities">
+      <label className="information-label">Facilities</label>
+      <div clasName="facilities-container">
+        <div className="facilities-list">
+          {facilities.map((facility, index) => (
+            <FacilitiesItem onDelete={onDelete(index)}>
+              {facility}
+            </FacilitiesItem>
+          ))}
+        </div>
+        <div className="facilities-add">
+          <FacilitiesDropdown
+            facilities={facilities}
+            show={showDropdown}
+            onSubmit={submitClickHandler}
+            onClose={showDropdownHandler}
           />
-          <PlainBtn className="delete-btn" onClick={deleteClickHandler(index)}>
-            <TrashIcon />
-          </PlainBtn>
+
+          <Button
+            size="sm"
+            type="text"
+            className="add-button"
+            onClick={showDropdownHandler}
+            icon={PlusIcon}
+          >
+            Add facility
+          </Button>
         </div>
       </div>
-    ))}
-  </div>
-);
+    </div>
+  );
+};
 
 export default Facilities;

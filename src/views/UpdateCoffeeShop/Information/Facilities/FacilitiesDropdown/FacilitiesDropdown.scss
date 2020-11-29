@@ -1,0 +1,80 @@
+@import "../../../../../assets/styles/GlobalStyles.scss";
+
+.facilities-dropdown-menu {
+  width: 185px;
+  position: absolute;
+  overflow: hidden;
+
+  display: initial;
+
+  .dropdown-item-container {
+    width: 100%;
+
+    .dropdown-item {
+      border: none;
+      margin: 0;
+      padding-right: 0.4rem;
+      fill: $primary;
+    }
+
+    .dropdown-line {
+      border-top: 1px solid #dfdfdf;
+      margin: 6px 0;
+    }
+
+    .add-facility {
+      width: 100%;
+      display: flex;
+      align-items: center;
+
+      input {
+        font-size: 14px;
+        padding: 0.5rem 0.6rem;
+        border: 1px solid $primary;
+        border-radius: 6px;
+        margin: 0.2rem 0;
+        width: 100%;
+        height: 2rem;
+        box-sizing: border-box;
+      }
+
+      .submit-button {
+        flex-shrink: 0;
+        height: 2rem;
+        margin-left: 6px;
+      }
+    }
+
+    // Primary Transition
+
+    .menu-primary-enter {
+      transform: translateX(-110%);
+    }
+
+    .menu-primary-enter-active {
+      transform: translateX(0%);
+      transition: all 0.5s ease;
+    }
+
+    .menu-primary-exit-active {
+      transform: translateX(-110%);
+      transition: all 0.5s ease;
+    }
+
+    // Secondary transition
+
+    .menu-secondary-enter {
+      transform: translateX(110%);
+    }
+
+    .menu-secondary-enter-active {
+      transform: translateX(0%);
+      transition: all 0.5s ease;
+    }
+
+    .menu-secondary-exit-active {
+      transform: translateX(110%);
+      transition: all 0.5s ease;
+    }
+  }
+}

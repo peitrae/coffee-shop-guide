@@ -18,8 +18,8 @@ const Information = ({
   operationalHours,
   inputChangeHandler,
   addFacilityClickHandler,
-  facilityChangeHandler,
-  deleteFacilityClickHandler,
+  onSubmitFacility,
+  onDeleteFacility,
   addDaysClickHandler,
   deleteDaysClickHandler,
   dayChangeHandler,
@@ -59,19 +59,6 @@ const Information = ({
       </div>
       <div className="information-col top-align">
         <div className="information-col-title">
-          <label>Facilities</label>
-          <PlainBtn className="add-btn" onClick={addFacilityClickHandler}>
-            <PlusIcon />
-          </PlainBtn>
-        </div>
-        <Facilities
-          facilities={facilities}
-          facilityChangeHandler={facilityChangeHandler}
-          deleteClickHandler={deleteFacilityClickHandler}
-        />
-      </div>
-      <div className="information-col top-align">
-        <div className="information-col-title">
           <label>Operational Hours</label>
           {operationalHours.length < 7 ? (
             <PlainBtn className="add-btn" onClick={addDaysClickHandler}>
@@ -86,6 +73,12 @@ const Information = ({
           deleteDaysClickHandler={deleteDaysClickHandler}
         />
       </div>
+      <Facilities
+        facilities={facilities}
+        addClickHandler={addFacilityClickHandler}
+        onSubmit={onSubmitFacility}
+        onDelete={onDeleteFacility}
+      />
     </div>
   </Card>
 );
