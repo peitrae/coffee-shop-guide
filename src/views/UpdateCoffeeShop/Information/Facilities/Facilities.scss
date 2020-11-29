@@ -1,15 +1,6 @@
 @import "../../../../assets/styles/GlobalStyles.scss";
 
-.information-label {
-  color: $black;
-  font-size: 14px;
-  font-weight: 600;
-  width: 200px;
-  flex-shrink: 0;
-  padding: 0.5rem 0;
-}
-
-.facilities {
+.update-coffeeshop .facilities {
   display: flex;
   font-size: 14px;
 

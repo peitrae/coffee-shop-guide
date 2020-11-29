@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header/Header";
 import Information from "./Information/Information";
 import Images from "./Images/Images";
-import { BtnLarge } from "../../components/UI/Button/Button";
+import { Button } from "../../components/UI/Button/Button";
 import HeaderPict from "../../assets/Header.png";
-import classes from "./UpdateCoffeeShop.module.css";
 import * as actions from "../../store/actions";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Footer from "../../components/UI/Footer/Footer";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-
 import geocode from "../../utilities/geocode";
+
+import "./UpdateCoffeeShop.scss";
 
 export const FunctionContext = createContext();
 
@@ -247,8 +247,8 @@ const UpdateData = (props) => {
 
   return (
     <FunctionContext.Provider value={functionContextValue}>
-      <div className={classes.CoffeeShop}>
-        <div className={classes.MainDiv}>
+      <div className="update-coffeeshop">
+        <div className="update-coffeeshop-container">
           <form>
             <Header
               header={headerPreview}
@@ -270,15 +270,15 @@ const UpdateData = (props) => {
               setIsUploading={setIsUploading}
               coffeeShopId={coffeeShopId}
             />
-            {error && <ErrorMessage message={error} />}
-            <div className={classes.BtnSubmit}>
-              <BtnLarge
-                clicked={submitHandler}
-                btnType={isUploading ? "Disabled" : null}
-              >
-                Submit
-              </BtnLarge>
-            </div>
+            {error && <ErrorMessage>{error}</ErrorMessage>}
+            <Button
+              size="lg"
+              className="submit-button"
+              onClick={submitHandler}
+              disabled={isUploading}
+            >
+              Submit
+            </Button>
           </form>
         </div>
       </div>
