@@ -29,10 +29,10 @@ const Facilities = ({ facilities }) => {
   return (
     <div className="facilities">
       <label className="information-label">Facilities</label>
-      <div clasName="facilities-container">
+      <div className="facilities-container">
         <div className="facilities-list">
           {facilities.map((facility, index) => (
-            <FacilitiesItem onDelete={onDeleteFacility(index)}>
+            <FacilitiesItem key={index} onDelete={onDeleteFacility(index)}>
               {facility}
             </FacilitiesItem>
           ))}
