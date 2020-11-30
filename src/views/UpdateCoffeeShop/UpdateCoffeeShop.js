@@ -39,7 +39,6 @@ const UpdateData = (props) => {
       },
     ],
     images: [],
-    uploadedBy: userLocalId,
   });
 
   const {
@@ -171,10 +170,13 @@ const UpdateData = (props) => {
     [operationalHours]
   );
 
-  const onSetImage = useCallback((images) => {
-    setCoffeeShop({ ...coffeeShop, images: images });
+  const onSetImage = useCallback(
+    (images) => {
+      setCoffeeShop({ ...coffeeShop, images: images });
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [images]);
+    [images]
+  );
 
   const submitValidation = (coffeeShop) => {
     if (!name.length) {
@@ -255,7 +257,7 @@ const UpdateData = (props) => {
     onAddDays,
     onDeleteDay,
     onSetImage,
-    setUploading
+    setUploading,
   };
 
   return (
@@ -270,10 +272,7 @@ const UpdateData = (props) => {
               facilities={facilities}
               operationalHours={operationalHours}
             />
-            <Images
-              images={images}
-              coffeeShopName={coffeeShop.name}
-            />
+            <Images images={images} coffeeShopName={coffeeShop.name} />
             {error && <ErrorMessage>{error}</ErrorMessage>}
             <Button
               size="lg"

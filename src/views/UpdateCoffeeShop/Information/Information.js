@@ -25,4 +25,4 @@ const Information = ({
   </Card>
 );
 
-export default React.memo(Information);
+export default Information;

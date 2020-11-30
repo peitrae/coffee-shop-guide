@@ -1,4 +1,4 @@
-import React, { useContext, memo } from "react";
+import React, { useContext } from "react";
 
 import { FunctionContext } from "../../UpdateCoffeeShop";
 
@@ -21,4 +21,4 @@ const Contact = ({ value = "0" }) => {
   );
 };
 
-export default memo(Contact);
+export default Contact;

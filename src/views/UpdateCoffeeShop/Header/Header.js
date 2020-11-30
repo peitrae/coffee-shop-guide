@@ -58,4 +58,4 @@ const Header = ({ header, name, address }) => {
   );
 };
 
-export default React.memo(Header);
+export default Header;

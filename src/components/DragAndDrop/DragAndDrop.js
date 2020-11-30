@@ -2,16 +2,16 @@ import React, { useState, useRef, useEffect } from "react";
 
 import "./DragAndDrop.scss";
 
-const DragAndDrop = ({ className, children, handleDrop}) => {
+const DragAndDrop = ({ className, children, handleDrop }) => {
   const dropRef = useRef();
 
   const [dragging, setDragging] = useState(false);
-  let dragCounter = 0;
+  const [dragCounter, setDragCounter] = useState(false);
 
   const onDragEnter = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    dragCounter++;
+    setDragCounter(dragCounter + 1);
 
     if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
       setDragging(true);
@@ -21,7 +21,7 @@ const DragAndDrop = ({ className, children, handleDrop}) => {
   const onDragLeave = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    dragCounter--;
+    setDragCounter(dragCounter - 1);
 
     if (dragCounter > 0) return;
 
@@ -39,14 +39,14 @@ const DragAndDrop = ({ className, children, handleDrop}) => {
 
     setDragging(false);
     if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      handleDrop(e.dataTransfer.files)
-      e.dataTransfer.clearData()
-      dragCounter = 0 
+      handleDrop(e.dataTransfer.files);
+      e.dataTransfer.clearData();
+      setDragCounter(0);
     }
   };
 
   useEffect(() => {
-    dragCounter = 0;
+    setDragCounter(0);
 
     document.addEventListener("dragenter", onDragEnter);
     document.addEventListener("dragleave", onDragLeave);
@@ -59,6 +59,7 @@ const DragAndDrop = ({ className, children, handleDrop}) => {
       document.removeEventListener("dragover", onDragOver);
       document.removeEventListener("drop", onDrop);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 
 import { FunctionContext } from "../UpdateCoffeeShop";
 import Card from "../../../components/UI/Card/Card";
@@ -50,22 +50,26 @@ const Images = ({ images = [], coffeeShopName }) => {
     setPreview(temp);
   };
 
-  return (
-    <Card className="images">
-      <h2>Images</h2>
-      <div className="images-container">
-        {preview.map((img, index) => (
-          <ImagesItem
-            key={index}
-            image={img}
-            isUploading={images[index]}
-            onUpload={(e) => onUploadImage(e.target.files, index)}
-            onDelete={onDeleteImage(index)}
-          />
-        ))}
-        {preview.length < 4 ? <UploadDnD onUpload={onUploadImage} /> : null}
-      </div>
-    </Card>
+  return useMemo(
+    () => (
+      <Card className="images">
+        <h2>Images</h2>
+        <div className="images-container">
+          {preview.map((img, index) => (
+            <ImagesItem
+              key={index}
+              image={img}
+              isUploading={images[index]}
+              onUpload={(e) => onUploadImage(e.target.files, index)}
+              onDelete={onDeleteImage(index)}
+            />
+          ))}
+          {preview.length < 4 ? <UploadDnD onUpload={onUploadImage} /> : null}
+        </div>
+      </Card>
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [preview]
   );
 };
 

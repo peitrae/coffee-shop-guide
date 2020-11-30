@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
@@ -47,56 +47,60 @@ const OperationalHours = ({ operationalHours }) => {
     return filteredDayList;
   };
 
-  return (
-    <div className="operational-hours">
-      <label className="information-label">Operational Hours</label>
-      <div className="operational-hours-container">
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          {operationalHours.map((valueDay, index) => {
-            const daysLeft = labels.filter(
-              ({ value }) => !choosenDay.includes(value)
-            );
-            const sortedMenuItem = sortingMenuItem(daysLeft, valueDay.day);
-            return (
-              <div className="operational-hours-item" key={index}>
-                <DayInput
-                  value={valueDay.day}
-                  sortedMenuItem={sortedMenuItem}
-                  onChange={onChangeDay(index)}
-                />
-                <TimePicker
-                  label="Open"
-                  value={timePickerGetValue(index, "open")}
-                  onChange={onChangeTime(index, "open")}
-                />
-                <TimePicker
-                  label="Open"
-                  value={timePickerGetValue(index, "close")}
-                  onChange={onChangeTime(index, "close")}
-                />
-                <Button
-                  size="sm"
-                  type="text"
-                  className="delete-button"
-                  onClick={onDeleteDay(index)}
-                  icon={CloseIcon}
-                />
-              </div>
-            );
-          })}
-        </MuiPickersUtilsProvider>
-        <Button
-          size="sm"
-          type="text"
-          className="add-button"
-          onClick={onAddDays}
-          icon={PlusIcon}
-        >
-          Add days
-        </Button>
+  return useMemo(
+    () => (
+      <div className="operational-hours">
+        <label className="information-label">Operational Hours</label>
+        <div className="operational-hours-container">
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            {operationalHours.map((valueDay, index) => {
+              const daysLeft = labels.filter(
+                ({ value }) => !choosenDay.includes(value)
+              );
+              const sortedMenuItem = sortingMenuItem(daysLeft, valueDay.day);
+              return (
+                <div className="operational-hours-item" key={index}>
+                  <DayInput
+                    value={valueDay.day}
+                    sortedMenuItem={sortedMenuItem}
+                    onChange={onChangeDay(index)}
+                  />
+                  <TimePicker
+                    label="Open"
+                    value={timePickerGetValue(index, "open")}
+                    onChange={onChangeTime(index, "open")}
+                  />
+                  <TimePicker
+                    label="Open"
+                    value={timePickerGetValue(index, "close")}
+                    onChange={onChangeTime(index, "close")}
+                  />
+                  <Button
+                    size="sm"
+                    type="text"
+                    className="delete-button"
+                    onClick={onDeleteDay(index)}
+                    icon={CloseIcon}
+                  />
+                </div>
+              );
+            })}
+          </MuiPickersUtilsProvider>
+          <Button
+            size="sm"
+            type="text"
+            className="add-button"
+            onClick={onAddDays}
+            icon={PlusIcon}
+          >
+            Add days
+          </Button>
+        </div>
       </div>
-    </div>
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [operationalHours]
   );
 };
 
-export default React.memo(OperationalHours);
+export default OperationalHours;
