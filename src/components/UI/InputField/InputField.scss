@@ -3,6 +3,7 @@
 .input-field {
   border-radius: 8px;
   border: 1px solid #a5a5a5;
+  box-sizing: border-box;
 }
 
 .input-field:hover {
@@ -16,7 +17,7 @@
 // SIZE
 
 .input-field.sm {
-  padding: 0.4rem 0.7rem;
+  padding: 0.6rem 0.7rem;
 }
 
 .input-field.sm:focus {

@@ -1,21 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import TextForm from "../../../components/UI/TextForm/TextForm";
+import { FunctionContext } from "../UpdateCoffeeShop";
 import Card from "../../../components//UI/Card/Card";
-import { BtnMedium } from "../../../components/UI/Button/Button";
+import { Button } from "../../../components/UI/Button/Button";
+import InputField from "../../../components/UI/InputField/InputField";
+import HeaderImage from "./HeaderImage/HeaderImage";
 import geocode from "../../../utilities/geocode";
 
 import CursorIcon from "../../../assets/icon/CursorIcon";
 
 import "./Header.scss";
 
-const Header = ({
-  header,
-  name,
-  address,
-  headerChangeHandler,
-  inputChangeHandler,
-}) => {
+const Header = ({ header, name, address }) => {
+  const { onInputChange } = useContext(FunctionContext);
 
   const openMapsClickHandler = async (e) => {
     e.preventDefault();
@@ -27,50 +24,34 @@ const Header = ({
   };
 
   return (
-    <Card className="add-coffeeshop-header">
-      <div className="header">
-        <img src={header} alt="Coffee Shop Header" className={"header-img"} />
-        <div className="header-img-edit">
-          <label>
-            <input
-              id="uploadHeader"
-              type="file"
-              accept="image/*"
-              className="edit-input"
-              onChange={headerChangeHandler}
-            />
-            <div>
-              <BtnMedium btnType="WhiteBorder">Edit Header</BtnMedium>
-            </div>
-          </label>
-          ;
-        </div>
-      </div>
-      <div className="add-coffeeshop-profile">
-        <div className="add-col">
-          <label className="add-label">Name</label>
-          <TextForm
-            id="name"
-            label="Name"
-            className={"textField-6"}
+    <Card className="header">
+      <HeaderImage image={header} />
+      <div className="header-main">
+        <div className="header-name">
+          <label className="header-label">Name</label>
+          <InputField
             value={name}
-            inputHandler={inputChangeHandler("name")}
-            size="small"
+            onChange={onInputChange("name")}
+            size="sm"
+            placeholder="Name"
+            className="header-input"
           />
         </div>
-        <div className="add-col">
-          <label className="add-label">Address</label>
-          <TextForm
-            id="address"
-            label="Address"
-            className={"textField-6"}
+        <div className="header-address">
+          <label className="header-label">Address</label>
+          <InputField
             value={address}
-            inputHandler={inputChangeHandler("address")}
-            size="small"
+            onChange={onInputChange("address")}
+            size="sm"
+            placeholder="Address"
+            className="header-input"
           />
-          <button className="open-map" onClick={openMapsClickHandler}>
-            <CursorIcon className="open-map-icon" />
-          </button>
+          <Button
+            size="sm"
+            className="open-map-button"
+            onClick={openMapsClickHandler}
+            icon={CursorIcon}
+          />
         </div>
       </div>
     </Card>

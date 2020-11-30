@@ -1,88 +1,41 @@
 @import "../../../assets/styles/GlobalStyles.scss";
 
-.add-coffeeshop-header {
+.update-coffeeshop .header {
   width: 100%;
   margin-bottom: 16px;
   padding: 0;
 
-  .header {
-    width: 100%;
-    height: 206px;
-    position: relative;
+  &-main {
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
 
-    &-img {
-      width: 100%;
-      height: 100%;
-      border-radius: 4px 4px 0px 0px;
-      display: block;
-      object-fit: cover;
-    }
-
-    &-img-edit {
-      width: 100%;
-      height: 100%;
-      border-radius: 4px;
-      position: absolute;
-      top: 0;
-      opacity: 0;
+    .header-name,
+    .header-address {
       display: flex;
-      justify-content: center;
       align-items: center;
-      background-color: rgba(70, 70, 70, 0.5);
+      width: 100%;
+      margin: 8px 0;
 
-      .edit-input {
-        opacity: 0;
-        width: 111px;
-        height: 36px;
-        cursor: pointer;
+      .header-input {
+        width: 100%;
+        height: 2.3rem;
       }
     }
 
-    &-img-edit:hover {
-      opacity: 1;
-    }
-  }
-}
-
-.add-coffeeshop-profile {
-  height: 45%;
-  width: 100%;
-  padding: 24px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-
-  .add-col {
-    display: flex;
-    align-items: center;
-
-    .add-label {
-      color: $black;
-      font-size: 16px;
-      font-weight: 600;
-      width: 170px;
-      display: flex;
-      align-items: center;
+    .open-map-button {
+      height: 36px;
+      width: 36px;
+      border-radius: 8px;
+      margin-left: 6px;
       flex-shrink: 0;
+
+      svg {
+        margin: 4px 0 0 0;
+        height: 16px;
+        width: 16px;
+        fill: #fff;
+      }
     }
-  }
-
-  .open-map {
-    border: 2px solid $primary;
-    height: 56px;
-    width: 56px;
-    border-radius: 6px;
-    margin: 8px 0 0 8px;
-    flex-shrink: 0;
-    padding: 14px;
-    box-sizing: border-box;
-
-    &-icon {
-      fill: $primary;
-    }
-  }
-
-  .open-map:hover {
-    background-color: $secondary;
   }
 }

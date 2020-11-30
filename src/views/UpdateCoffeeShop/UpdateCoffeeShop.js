@@ -6,11 +6,12 @@ import Information from "./Information/Information";
 import Images from "./Images/Images";
 import { Button } from "../../components/UI/Button/Button";
 import HeaderPict from "../../assets/Header.png";
-import * as actions from "../../store/actions";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Footer from "../../components/UI/Footer/Footer";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import geocode from "../../utilities/geocode";
+import uploadImage from "../../store/firebase/uploadImage";
+import * as actions from "../../store/actions";
 
 import "./UpdateCoffeeShop.scss";
 
@@ -69,18 +70,24 @@ const UpdateData = (props) => {
     }
   }, [coffeeShopId, oldCoffeeShop]);
 
-  const headerChangeHandler = useCallback(
-    (e) => {
-      setCoffeeShop({ ...coffeeShop, header: e.target.files[0] });
-      let reader = new FileReader();
-      reader.onloadend = () => {
-        setHeaderPreview(reader.result);
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [header]
-  );
+  const onHeaderChange = (e) => {
+    const header = e.target.files[0];
+    const reference = "coffeeShop/images/" + name;
+    setIsUploading(true);
+
+    uploadImage(header, reference)
+      .then((response) => {
+        setCoffeeShop({ ...coffeeShop, header: response });
+        setIsUploading(false);
+      })
+      .catch((error) => console.log(error));
+
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      setHeaderPreview(reader.result);
+    };
+    reader.readAsDataURL(header);
+  };
 
   const onInputChange = useCallback(
     (type) => (e) => {
@@ -236,6 +243,7 @@ const UpdateData = (props) => {
   }
 
   const functionContextValue = {
+    onHeaderChange,
     onInputChange,
     onSubmitFacility,
     onDeleteFacility,
@@ -250,13 +258,7 @@ const UpdateData = (props) => {
       <div className="update-coffeeshop">
         <div className="update-coffeeshop-container">
           <form>
-            <Header
-              header={headerPreview}
-              name={name}
-              address={address}
-              headerChangeHandler={headerChangeHandler}
-              inputChangeHandler={onInputChange}
-            />
+            <Header header={headerPreview} name={name} address={address} />
             <Information
               averagePrice={averagePrice}
               contact={contact}
