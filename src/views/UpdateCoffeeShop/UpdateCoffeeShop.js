@@ -54,7 +54,7 @@ const UpdateData = (props) => {
   } = coffeeShop;
 
   const [headerPreview, setHeaderPreview] = useState(header);
-  const [isUploading, setIsUploading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -73,12 +73,12 @@ const UpdateData = (props) => {
   const onHeaderChange = (e) => {
     const header = e.target.files[0];
     const reference = "coffeeShop/images/" + name;
-    setIsUploading(true);
+    setUploading(true);
 
     uploadImage(header, reference)
       .then((response) => {
         setCoffeeShop({ ...coffeeShop, header: response });
-        setIsUploading(false);
+        setUploading(false);
       })
       .catch((error) => console.log(error));
 
@@ -171,7 +171,10 @@ const UpdateData = (props) => {
     [operationalHours]
   );
 
-  const setImage = (images) => setCoffeeShop({ ...coffeeShop, images: images });
+  const onSetImage = useCallback((images) => {
+    setCoffeeShop({ ...coffeeShop, images: images });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [images]);
 
   const submitValidation = (coffeeShop) => {
     if (!name.length) {
@@ -251,6 +254,8 @@ const UpdateData = (props) => {
     onChangeTime,
     onAddDays,
     onDeleteDay,
+    onSetImage,
+    setUploading
   };
 
   return (
@@ -268,16 +273,13 @@ const UpdateData = (props) => {
             <Images
               images={images}
               coffeeShopName={coffeeShop.name}
-              setImage={setImage}
-              setIsUploading={setIsUploading}
-              coffeeShopId={coffeeShopId}
             />
             {error && <ErrorMessage>{error}</ErrorMessage>}
             <Button
               size="lg"
               className="submit-button"
               onClick={submitHandler}
-              disabled={isUploading}
+              disabled={uploading}
             >
               Submit
             </Button>

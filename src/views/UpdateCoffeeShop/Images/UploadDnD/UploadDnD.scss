@@ -1,0 +1,31 @@
+@import "../../../../assets/styles/GlobalStyles.scss";
+
+.upload-dnd {
+  width: 167px;
+  height: 167px;
+  border-radius: 8px;
+  background-color: #a1fac980;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .upload-container {
+    color: $primary;
+    text-align: center;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+      position: absolute;
+      display: none;
+    }
+
+    span {
+      margin-top: 8px
+    }
+  }
+}
