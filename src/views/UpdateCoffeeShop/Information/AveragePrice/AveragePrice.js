@@ -14,6 +14,7 @@ const AveragePrice = ({ value = "0" }) => {
       <label className="information-label">Average Price</label>
       <InputField
         value={value}
+        type="number"
         onChange={onInputChange("averagePrice")}
         placeholder="Rp"
       />

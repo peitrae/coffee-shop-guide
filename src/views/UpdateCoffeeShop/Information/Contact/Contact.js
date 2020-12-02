@@ -15,7 +15,7 @@ const Contact = ({ value = "0" }) => {
       <InputField
         value={value}
         onChange={onInputChange("contact")}
-        placeholder="Rp"
+        placeholder="Contact"
       />
     </div>
   );
