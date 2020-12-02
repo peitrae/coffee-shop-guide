@@ -12,41 +12,11 @@
   &-list {
     display: flex;
     flex-wrap: wrap;
-
-    .list-item {
-      padding: 0.2rem 0.4rem 0.2rem 0.7rem;
-      margin: 0.2rem;
-      border-radius: 8px;
-      background-color: #eeeeee;
-      display: flex;
-      align-items: center;
-
-      .close-button {
-        margin-left: 4px;
-        padding: 5px;
-        height: 18px;
-        width: 18px;
-        border-radius: 50%;
-        fill: #333;
-        background-color: #dddddd;
-        box-shadow: none;
-        display: none;
-      }
-
-      .close-button:hover {
-        fill: #000000;
-        background-color: #bbbbbb;
-      }
-    }
-
-    .list-item:hover {
-      .close-button {
-        display: flex;
-      }
-    }
   }
 
   &-add {
+    position: relative;
+
     .add-button {
       font-family: inherit;
       font-weight: 600;

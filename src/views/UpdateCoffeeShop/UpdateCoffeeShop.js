@@ -30,7 +30,7 @@ const UpdateData = (props) => {
     address: "",
     averagePrice: 0,
     contact: "",
-    facilities: [""],
+    facilities: [],
     operationalHours: [{}],
     images: [],
   });

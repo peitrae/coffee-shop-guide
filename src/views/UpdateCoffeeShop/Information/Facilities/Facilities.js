@@ -16,7 +16,7 @@ const Facilities = ({ facilities }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const showDropdownHandler = (e) => {
-    e && e.preventDefault();
+    e.preventDefault();
     setShowDropdown(!showDropdown);
   };
 
@@ -44,7 +44,6 @@ const Facilities = ({ facilities }) => {
             onSubmit={submitClickHandler}
             onClose={showDropdownHandler}
           />
-
           <Button
             size="sm"
             type="text"

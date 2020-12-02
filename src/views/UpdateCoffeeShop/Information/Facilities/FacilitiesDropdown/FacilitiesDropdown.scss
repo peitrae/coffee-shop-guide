@@ -4,7 +4,7 @@
   width: 185px;
   position: absolute;
   overflow: hidden;
-
+  padding: 0.6rem 0;
   display: initial;
 
   .dropdown-item-container {
@@ -13,7 +13,6 @@
     .dropdown-item {
       border: none;
       margin: 0;
-      padding-right: 0.4rem;
       fill: $primary;
     }
 
@@ -23,9 +22,9 @@
     }
 
     .add-facility {
-      width: 100%;
       display: flex;
       align-items: center;
+      padding: 0 0.7rem;
 
       input {
         font-size: 14px;
@@ -44,38 +43,6 @@
         margin-left: 6px;
         border-radius: 8px;
       }
-    }
-
-    // Primary Transition
-
-    .menu-primary-enter {
-      transform: translateX(-110%);
-    }
-
-    .menu-primary-enter-active {
-      transform: translateX(0%);
-      transition: all 0.5s ease;
-    }
-
-    .menu-primary-exit-active {
-      transform: translateX(-110%);
-      transition: all 0.5s ease;
-    }
-
-    // Secondary transition
-
-    .menu-secondary-enter {
-      transform: translateX(110%);
-    }
-
-    .menu-secondary-enter-active {
-      transform: translateX(0%);
-      transition: all 0.5s ease;
-    }
-
-    .menu-secondary-exit-active {
-      transform: translateX(110%);
-      transition: all 0.5s ease;
     }
   }
 }
