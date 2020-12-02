@@ -2,6 +2,29 @@ import React, { forwardRef } from "react";
 
 import "./Dropdown.scss";
 
+const Dropdown = ({
+  value,
+  children,
+  className,
+  size = "sm",
+  placeholder,
+  onClick,
+}) => {
+  return (
+    <div className={`dropdown ${size} ${className}`}>
+      <input
+        className="dropdown-input"
+        value={value}
+        size={size}
+        placeholder={placeholder}
+        readOnly
+        onClick={onClick}
+      />
+      {children}
+    </div>
+  );
+};
+
 export const DropdownMenu = forwardRef(
   ({ className, children, style }, ref) => (
     <div ref={ref} className={`dropdown-menu ${className}`} style={style}>
@@ -18,10 +41,10 @@ export const DropdownItem = ({
   onClick,
 }) => (
   <button className={`dropdown-item ${className}`} onClick={onClick}>
-    <span className="left-icon">{leftIcon}</span>
+    {leftIcon ? <span className="left-icon">{leftIcon}</span> : null}
     {children}
-    <span className="right-icon">{rightIcon}</span>
+    {rightIcon ? <span className="right-icon">{rightIcon}</span> : null}
   </button>
 );
 
-export default DropdownMenu;
+export default Dropdown;
