@@ -59,7 +59,7 @@ const UpdateData = (props) => {
 
   useEffect(() => {
     if (coffeeShopId && oldCoffeeShop) {
-      setCoffeeShop(oldCoffeeShop);
+      setCoffeeShop({ ...coffeeShop, ...oldCoffeeShop });
     }
   }, [coffeeShopId, oldCoffeeShop]);
 
@@ -90,15 +90,11 @@ const UpdateData = (props) => {
     [name, address, averagePrice, contact]
   );
 
-  const onSubmitFacility = useCallback(
-    (facility) => {
-      const temp = [...facilities];
-      temp.push(facility);
-      setCoffeeShop({ ...coffeeShop, facilities: temp });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [facilities]
-  );
+  const onSubmitFacility = (facility) => {
+    const temp = [...facilities];
+    temp.push(facility);
+    setCoffeeShop({ ...coffeeShop, facilities: temp });
+  };
 
   const onDeleteFacility = useCallback(
     (index) => (e) => {
@@ -161,50 +157,42 @@ const UpdateData = (props) => {
     [images]
   );
 
-  const submitValidation = (coffeeShop) => {
-    if (!name.length) {
-      return {
-        error: "Coffee Shop's name is empty",
-      };
-    }
-
-    if (!address.length) {
-      return {
-        error: "Coffee Shop's address is empty",
-      };
-    }
-
-    coffeeShop.operationalHours = operationalHours.filter((item) => {
-      return item.day !== "";
-    });
-
-    for (let key in coffeeShop) {
-      const IsEmptyArray = !coffeeShop[key].length;
-      const IsInvalidArray =
-        Array.isArray(coffeeShop[key]) && coffeeShop[key][0] === "";
-
-      if (
-        key !== "name" &&
-        key !== "address" &&
-        (IsEmptyArray || IsInvalidArray)
-      ) {
-        delete coffeeShop[key];
-      }
-    }
-
-    return coffeeShop;
-  };
-
-  const populateLocation = async (coffeeShop) => {
-    console.log("Address", address);
-    const location = await geocode(address);
-
-    console.log("Location", location);
-    return { ...coffeeShop, location };
-  };
-
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    const submitValidation = (coffeeShop) => {
+      if (!name.length) {
+        return {
+          error: "Coffee Shop's name is empty",
+        };
+      }
+
+      if (!address.length) {
+        return {
+          error: "Coffee Shop's address is empty",
+        };
+      }
+
+      coffeeShop.operationalHours = operationalHours.filter((item) => {
+        return item.day !== "";
+      });
+
+      for (let key in coffeeShop) {
+        const IsEmptyArray = !coffeeShop[key].length;
+
+        if (key !== "name" && key !== "address" && IsEmptyArray) {
+          delete coffeeShop[key];
+        }
+      }
+
+      return coffeeShop;
+    };
+
+    const populateLocation = async (coffeeShop) => {
+      const location = await geocode(address);
+
+      return { ...coffeeShop, location };
+    };
 
     const validated = submitValidation(coffeeShop);
 
