@@ -41,7 +41,7 @@ const OperationalHoursItem = ({
         size="sm"
         type="text"
         className="delete-button"
-        onClick={onDeleteDay}
+        onClick={onDeleteDay(index)}
         icon={CloseIcon}
       />
     </div>
