@@ -3,13 +3,12 @@ import { isPointWithinRadius } from "geolib";
 
 import Checkbox from "../../../../components/UI/Button/Checkbox/Checkbox";
 import Card from "../../../../components/UI/Card/Card";
-import PriceGroup from "./PriceGroup/PriceGroup";
 import DistanceGroup from "./DistanceGroup/DistanceGroup";
+import Price from "./Price/Price";
 
 import "./Filter.scss";
 
 const Filter = ({ coffeeShops, onFilter }) => {
-  const priceRef = useRef();
   const distanceRef = useRef();
 
   const [filter, setFilter] = useState({
@@ -21,7 +20,6 @@ const Filter = ({ coffeeShops, onFilter }) => {
     distanceChecked: false,
   });
 
-  const [showPrice, setShowPrice] = useState(false);
   const [showDistance, setShowDistance] = useState(false);
 
   const {
@@ -40,13 +38,13 @@ const Filter = ({ coffeeShops, onFilter }) => {
 
   const checkPrice = (averagePrice) => {
     switch (priceChecked) {
-      case "belowTen":
+      case 1:
         return averagePrice < 10000;
-      case "tenTillThirty":
+      case 2:
         return averagePrice >= 10000 && averagePrice < 30000;
-      case "thirtyTillFifty":
+      case 3:
         return averagePrice >= 30000 && averagePrice <= 50000;
-      case "aboveFifty":
+      case 4:
         return averagePrice > 50000;
       default:
         console.log("error");
@@ -145,12 +143,9 @@ const Filter = ({ coffeeShops, onFilter }) => {
   const checkBoxHandleChange = (name) =>
     setFilter({ ...filter, [name]: !filter[name] });
 
-  const priceClickHandler = (priceRange) => {
+  const onClickPrice = (priceRange) => {
     if (priceChecked === priceRange) {
       priceRange = false;
-    }
-    if (showPrice) {
-      showPriceHandler();
     }
     setFilter({ ...filter, priceChecked: priceRange });
   };
@@ -165,16 +160,6 @@ const Filter = ({ coffeeShops, onFilter }) => {
     setFilter({ ...filter, distanceChecked: distance });
   };
 
-  const showPriceHandler = () => setShowPrice(!showPrice);
-
-  const closePriceHandler = (e) => {
-    if (e && priceRef.current.contains(e.target)) {
-      return;
-    }
-
-    setShowPrice(!showPrice);
-  };
-
   const showDistanceHandler = () => setShowDistance(!showDistance);
 
   const closeDistanceHandler = (e) => {
@@ -182,52 +167,32 @@ const Filter = ({ coffeeShops, onFilter }) => {
       return;
     }
 
-    setShowPrice(!showPrice);
+    setShowDistance(!showDistance);
   };
 
   return (
     <Card className="search-filter" shadow>
       <h3 className="search-filter-label">Filter: </h3>
-      <div className="search-filter-price">
-        <Checkbox
-          inputId="priceGroup"
-          changed={showPriceHandler}
-          label="Price"
-          checked={priceChecked}
-          ref={priceRef}
-          className="search-filter-checkbox"
-        />
-        {showPrice ? (
-          <PriceGroup
-            checked={priceChecked}
-            onClick={priceClickHandler}
-            onClickOutside={closePriceHandler}
-          />
-        ) : null}
-      </div>
+      <Price checked={priceChecked} onClickPrice={onClickPrice} />
       <Checkbox
-        inputId="openNow"
         changed={() => checkBoxHandleChange("openNowChecked")}
         label="Open Now"
         checked={openNowChecked}
         className="search-filter-checkbox"
       />
       <Checkbox
-        inputId="promo"
         changed={() => checkBoxHandleChange("promoChecked")}
         label="Promo"
         checked={promoChecked}
         className="search-filter-checkbox"
       />
       <Checkbox
-        inputId="wiFi"
         changed={() => checkBoxHandleChange("wiFiChecked")}
         label="Wifi"
         checked={wiFiChecked}
         className="search-filter-checkbox"
       />
       <Checkbox
-        inputId="cashless"
         changed={() => checkBoxHandleChange("cashlessChecked")}
         label="Cashless"
         checked={cashlessChecked}
