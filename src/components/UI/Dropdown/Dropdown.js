@@ -34,13 +34,14 @@ export const DropdownMenu = forwardRef(
 );
 
 export const DropdownItem = ({
+  id,
   className,
   leftIcon,
   rightIcon,
   children,
   onClick,
 }) => (
-  <button className={`dropdown-item ${className}`} onClick={onClick}>
+  <button id={id} className={`dropdown-item ${className}`} onClick={onClick}>
     {leftIcon ? <span className="left-icon">{leftIcon}</span> : null}
     {children}
     {rightIcon ? <span className="right-icon">{rightIcon}</span> : null}
