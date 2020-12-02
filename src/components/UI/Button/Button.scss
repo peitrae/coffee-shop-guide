@@ -91,6 +91,14 @@
 
 // Text Button
 
+.btn-text.btn-primary {
+  color: $primary;
+}
+
+.btn-text.btn-primary:hover {
+  background-color: $secondary;
+}
+
 .btn-text.btn-secondary {
   color: #666666;
 }
