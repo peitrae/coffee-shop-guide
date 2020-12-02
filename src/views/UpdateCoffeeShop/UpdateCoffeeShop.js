@@ -31,13 +31,7 @@ const UpdateData = (props) => {
     averagePrice: 0,
     contact: "",
     facilities: [""],
-    operationalHours: [
-      {
-        close: "00:00",
-        day: "",
-        open: "00:00",
-      },
-    ],
+    operationalHours: [{}],
     images: [],
   });
 
@@ -117,47 +111,36 @@ const UpdateData = (props) => {
     [facilities]
   );
 
-  const onChangeDay = useCallback(
-    (index) => (e) => {
-      let temp = [...operationalHours];
-      temp[index].day = e.target.value;
-      temp = temp.sort((a, b) => a.day - b.day);
-      setCoffeeShop({ ...coffeeShop, operationalHours: temp });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [operationalHours]
-  );
+  const onChangeDay = (e, day, index) => {
+    e.preventDefault();
 
-  const onChangeTime = useCallback(
-    (index, type) => (e) => {
-      const temp = [...operationalHours];
-      let toStringHours = e.getHours().toString();
-      let toStringMinutes = e.getMinutes().toString();
+    let temp = [...operationalHours];
+    temp[index] = { ...temp[index], day: parseInt(day) };
+    temp = temp.sort((a, b) => a.day - b.day);
 
-      if (toStringHours.length === 1) toStringHours = `0${toStringHours}`;
-      if (toStringMinutes.length === 1) toStringMinutes = `0${toStringMinutes}`;
+    setCoffeeShop({ ...coffeeShop, operationalHours: temp });
+  };
 
-      temp[index][type] = `${toStringHours}:${toStringMinutes}`;
-      setCoffeeShop({ ...coffeeShop, operationalHours: temp });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [operationalHours]
-  );
+  const onSubmitOpen = (open, index) => {
+    let temp = [...operationalHours];
+    temp[index].open = open;
 
-  const onAddDays = useCallback(
-    (e) => {
-      e.preventDefault();
-      const temp = [...operationalHours];
-      temp.push({
-        close: "00:00",
-        day: "",
-        open: "00:00",
-      });
-      setCoffeeShop({ ...coffeeShop, operationalHours: temp });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [operationalHours]
-  );
+    setCoffeeShop({ ...coffeeShop, operationalHours: temp });
+  };
+
+  const onSubmitClose = (close, index) => {
+    let temp = [...operationalHours];
+    temp[index].close = close;
+
+    setCoffeeShop({ ...coffeeShop, operationalHours: temp });
+  };
+
+  const onAddDays = (e) => {
+    e.preventDefault();
+    const temp = [...operationalHours];
+    temp.push({});
+    setCoffeeShop({ ...coffeeShop, operationalHours: temp });
+  };
 
   const onDeleteDay = useCallback(
     (index) => (e) => {
@@ -253,7 +236,8 @@ const UpdateData = (props) => {
     onSubmitFacility,
     onDeleteFacility,
     onChangeDay,
-    onChangeTime,
+    onSubmitOpen,
+    onSubmitClose,
     onAddDays,
     onDeleteDay,
     onSetImage,

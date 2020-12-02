@@ -10,33 +10,6 @@
     flex-direction: column;
   }
 
-  &-item {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px !important;
-
-    .delete-button {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      fill: #333;
-      background-color: #dddddd;
-      margin-top: 8px;
-
-      svg {
-        width: 18px;
-        height: 18px;
-      }
-    }
-
-    .delete-button:hover {
-      fill: #000000;
-      background-color: #bbbbbb;
-    }
-  }
-
   .add-button {
     font-family: inherit;
     font-weight: 600;

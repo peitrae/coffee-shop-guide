@@ -1,0 +1,32 @@
+.update-coffeeshop .operational-hours-item {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+
+  & > input,
+  & > div {
+    margin-right: 12px;
+  }
+
+  .delete-button {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    fill: #333;
+    background-color: #dddddd;
+    transition: fill background .2s ease;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .delete-button:hover {
+    fill: #000000;
+    background-color: #bbbbbb;
+  }
+}
