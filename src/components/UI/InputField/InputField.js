@@ -9,14 +9,24 @@ const InputField = ({
   type = "text",
   size = "sm",
   onChange,
+  rightIcon,
+  rightOnClick,
+  danger
 }) => (
-  <input
-    className={`input-field ${size} ${className}`}
-    value={value}
-    onChange={onChange}
-    type={type}
-    placeholder={placeholder}
-  />
+  <div className={`input-field ${className} ${danger ? "danger" : ""}`}>
+    <input
+      className={size}
+      value={value}
+      onChange={onChange}
+      type={type}
+      placeholder={placeholder}
+    />
+    {rightIcon ? (
+      <button className={`right-icon ${size}`} onClick={rightOnClick}>
+        {rightIcon}
+      </button>
+    ) : null}
+  </div>
 );
 
 export default InputField;
