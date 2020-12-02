@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { isPointWithinRadius } from "geolib";
 
 import Checkbox from "../../../../components/UI/Button/Checkbox/Checkbox";
 import Card from "../../../../components/UI/Card/Card";
-import DistanceGroup from "./DistanceGroup/DistanceGroup";
 import Price from "./Price/Price";
+import Distance from "./Distance/Distance";
 
 import "./Filter.scss";
 
 const Filter = ({ coffeeShops, onFilter }) => {
-  const distanceRef = useRef();
-
   const [filter, setFilter] = useState({
     priceChecked: false,
     openNowChecked: false,
@@ -19,8 +17,6 @@ const Filter = ({ coffeeShops, onFilter }) => {
     cashlessChecked: false,
     distanceChecked: false,
   });
-
-  const [showDistance, setShowDistance] = useState(false);
 
   const {
     priceChecked,
@@ -150,24 +146,12 @@ const Filter = ({ coffeeShops, onFilter }) => {
     setFilter({ ...filter, priceChecked: priceRange });
   };
 
-  const distanceClickHandler = (distance) => {
+  const onClickDistance = (distance) => {
     if (distanceChecked === distance) {
       distance = false;
     }
-    if (showDistance) {
-      showDistanceHandler();
-    }
+
     setFilter({ ...filter, distanceChecked: distance });
-  };
-
-  const showDistanceHandler = () => setShowDistance(!showDistance);
-
-  const closeDistanceHandler = (e) => {
-    if (e && distanceRef.current.contains(e.target)) {
-      return;
-    }
-
-    setShowDistance(!showDistance);
   };
 
   return (
@@ -198,23 +182,7 @@ const Filter = ({ coffeeShops, onFilter }) => {
         checked={cashlessChecked}
         className="search-filter-checkbox"
       />
-      <div className="search-filter-distance">
-        <Checkbox
-          inputId="distanceGrp"
-          changed={showDistanceHandler}
-          label="Distance"
-          checked={distanceChecked}
-          ref={distanceRef}
-          className="search-filter-checkbox"
-        />
-        {showDistance ? (
-          <DistanceGroup
-            onClick={distanceClickHandler}
-            onClickOutside={closeDistanceHandler}
-            checked={distanceChecked}
-          />
-        ) : null}
-      </div>
+      <Distance checked={distanceChecked} onClickDistance={onClickDistance} />
     </Card>
   );
 };
