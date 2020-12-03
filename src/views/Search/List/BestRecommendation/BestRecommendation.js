@@ -54,7 +54,7 @@ const BestRecommendation = ({ coffeeShop }) => {
                 <div className="details-promo-grp">
                   {promo
                     ? Object.keys(promo).map((key) => (
-                        <Promo>{promo[key].value}</Promo>
+                        <Promo key={key}>{promo[key].value}</Promo>
                       ))
                     : null}
                 </div>
