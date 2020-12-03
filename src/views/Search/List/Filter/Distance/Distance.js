@@ -13,7 +13,7 @@ const Distance = ({ checked, onClickDistance }) => {
   const buttonRef = useRef();
   const menuRef = useRef();
 
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
 
   const distanceOptions = {
     1000: "1 Km",

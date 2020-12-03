@@ -39,7 +39,7 @@ const MapView = ({ coffeeShops }) => {
       case error.TIMEOUT:
         setError("The request to get user location timed out");
         break;
-      case error.UNKNOWN_ERROR:
+      default:
         setError("An unknown error occurred");
         break;
     }
@@ -49,6 +49,7 @@ const MapView = ({ coffeeShops }) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getLocation, getLocationError);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!coffeeShops) {
