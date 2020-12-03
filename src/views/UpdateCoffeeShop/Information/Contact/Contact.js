@@ -6,15 +6,15 @@ import InputField from "../../../../components/UI/InputField/InputField";
 
 import "./Contact.scss";
 
-const Contact = ({ value = "0" }) => {
-  const { onInputChange } = useContext(FunctionContext);
+const Contact = ({ value }) => {
+  const { onChangeInput } = useContext(FunctionContext);
 
   return (
     <div className="contact">
       <label className="information-label">Contact</label>
       <InputField
-        value={value}
-        onChange={onInputChange("contact")}
+        value={value || ""}
+        onChange={onChangeInput("contact")}
         placeholder="Contact"
       />
     </div>

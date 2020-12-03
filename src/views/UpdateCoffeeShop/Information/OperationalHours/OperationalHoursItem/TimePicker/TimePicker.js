@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import moment from "moment";
 import {
   TimePicker as MaterialTimePicker,
@@ -8,6 +8,7 @@ import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import DateFnsUtils from "@date-io/date-fns";
 
+import { FunctionContext } from "../../../../UpdateCoffeeShop";
 import InputField from "../../../../../../components/UI/InputField/InputField";
 import { Button } from "../../../../../../components/UI/Button/Button";
 import useClickOutside from "../../../../../../hooks/useClickOutside";
@@ -42,6 +43,7 @@ const materialTheme = createMuiTheme({
 });
 
 const TimePicker = ({ index, value, onSubmit }) => {
+  const { onError } = useContext(FunctionContext);
   const timepickerRef = useRef();
   const date = new Date();
 
@@ -68,10 +70,12 @@ const TimePicker = ({ index, value, onSubmit }) => {
 
     if (regex.test(string)) {
       setInputError(false);
+      onError({ timepicker: false });
     } else {
       setInputError(true);
+      onError({ timepicker: "Your time format is incorrect" });
     }
- 
+
     onSubmit(string, index);
   };
 

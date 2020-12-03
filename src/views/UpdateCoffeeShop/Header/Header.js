@@ -12,7 +12,7 @@ import CursorIcon from "../../../assets/icon/CursorIcon";
 import "./Header.scss";
 
 const Header = ({ header, name, address }) => {
-  const { onInputChange } = useContext(FunctionContext);
+  const { onChangeName, onChangeAddress } = useContext(FunctionContext);
 
   const openMapsClickHandler = async (e) => {
     e.preventDefault();
@@ -30,8 +30,8 @@ const Header = ({ header, name, address }) => {
         <div className="header-name">
           <label className="header-label">Name</label>
           <InputField
-            value={name}
-            onChange={onInputChange("name")}
+            value={name || ""}
+            onChange={onChangeName}
             size="sm"
             placeholder="Name"
             className="header-input"
@@ -40,8 +40,8 @@ const Header = ({ header, name, address }) => {
         <div className="header-address">
           <label className="header-label">Address</label>
           <InputField
-            value={address}
-            onChange={onInputChange("address")}
+            value={address || ""}
+            onChange={onChangeAddress}
             size="sm"
             placeholder="Address"
             className="header-input"

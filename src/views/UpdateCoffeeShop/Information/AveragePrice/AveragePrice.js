@@ -7,7 +7,7 @@ import InputField from "../../../../components/UI/InputField/InputField";
 import "./AveragePrice.scss";
 
 const AveragePrice = ({ value = "0" }) => {
-  const { onInputChange } = useContext(FunctionContext);
+  const { onChangeInput } = useContext(FunctionContext);
 
   return (
     <div className="avg-price">
@@ -15,7 +15,7 @@ const AveragePrice = ({ value = "0" }) => {
       <InputField
         value={value}
         type="number"
-        onChange={onInputChange("averagePrice")}
+        onChange={onChangeInput("averagePrice")}
         placeholder="Rp"
       />
     </div>

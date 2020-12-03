@@ -26,13 +26,14 @@ const UpdateData = (props) => {
 
   const [coffeeShop, setCoffeeShop] = useState({
     header: HeaderPict,
-    name: "",
-    address: "",
+    name: null,
+    address: null,
     averagePrice: 0,
-    contact: "",
+    contact: null,
     facilities: [],
     operationalHours: [{}],
     images: [],
+    uploadedBy: userLocalId,
   });
 
   const {
@@ -48,7 +49,11 @@ const UpdateData = (props) => {
 
   const [headerPreview, setHeaderPreview] = useState(header);
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({
+    name: false,
+    address: false,
+    timepicker: false,
+  });
 
   useEffect(() => {
     if (coffeeShopId) {
@@ -83,12 +88,28 @@ const UpdateData = (props) => {
     reader.readAsDataURL(header);
   };
 
-  const onInputChange = useCallback(
+  const onChangeName = (e) => {
+    setCoffeeShop({ ...coffeeShop, name: e.target.value });
+
+    if (error && !name) {
+      onError({ name: false });
+    }
+  };
+
+  const onChangeAddress = (e) => {
+    setCoffeeShop({ ...coffeeShop, address: e.target.value });
+
+    if (error.address) {
+      onError({ address: false });
+    }
+  };
+
+  const onChangeInput = useCallback(
     (type) => (e) => {
       setCoffeeShop({ ...coffeeShop, [type]: e.target.value });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [name, address, averagePrice, contact]
+    [averagePrice, contact]
   );
 
   const onSubmitFacility = (facility) => {
@@ -158,50 +179,49 @@ const UpdateData = (props) => {
     [images]
   );
 
+  const onError = (message) => {
+    setError({ ...error, ...message });
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const submitValidation = (coffeeShop) => {
-      if (!name.length) {
+    const formValidation = async (coffeeShop) => {
+      if (!coffeeShop.name) {
         return {
-          error: "Coffee Shop's name is empty",
+          error: { name: "Coffee Shop's name is empty" },
         };
-      }
+      } // Show error if name is empty
 
-      if (!address.length) {
+      if (!coffeeShop.address) {
         return {
-          error: "Coffee Shop's address is empty",
+          error: { address: "Coffee Shop's address is empty" },
         };
-      }
-
-      coffeeShop.operationalHours = operationalHours.filter((item) => {
-        return item.day !== "";
-      });
+      } // Show error if address is empty
 
       for (let key in coffeeShop) {
-        const IsEmptyArray = !coffeeShop[key].length;
-
-        if (key !== "name" && key !== "address" && IsEmptyArray) {
+        if (!coffeeShop[key]?.length || !coffeeShop[key]) {
           delete coffeeShop[key];
         }
+      } // Delete unused property in coffeeshop
+
+      try {
+        // Populate coffeeshop with location
+        const location = await geocode(coffeeShop.address);
+
+        return { ...coffeeShop, location };
+      } catch (err) {
+        return {
+          error: { address: err },
+        };
       }
-
-      return coffeeShop;
     };
 
-    const populateLocation = async (coffeeShop) => {
-      const location = await geocode(address);
-
-      return { ...coffeeShop, location };
-    };
-
-    const validated = submitValidation(coffeeShop);
+    const validated = await formValidation(coffeeShop);
 
     if (validated.error) {
-      setError(validated.error);
+      onError(validated.error);
     } else {
-      const coffeeShop = await populateLocation(validated);
-
       dispatch(
         actions.setCoffeeShopData(coffeeShop, coffeeShopId, props.history)
       );
@@ -215,9 +235,15 @@ const UpdateData = (props) => {
     return <Spinner />;
   }
 
+  const checkError = () => {
+    return error.name || error.address || error.timepicker;
+  };
+
   const functionContextValue = {
     onHeaderChange,
-    onInputChange,
+    onChangeName,
+    onChangeAddress,
+    onChangeInput,
     onSubmitFacility,
     onDeleteFacility,
     onChangeDay,
@@ -227,6 +253,7 @@ const UpdateData = (props) => {
     onDeleteDay,
     onSetImage,
     setUploading,
+    onError,
   };
 
   return (
@@ -242,12 +269,12 @@ const UpdateData = (props) => {
               operationalHours={operationalHours}
             />
             <Images images={images} coffeeShopName={coffeeShop.name} />
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {checkError() && <ErrorMessage>{checkError()}</ErrorMessage>}
             <Button
               size="lg"
               className="submit-button"
               onClick={submitHandler}
-              disabled={uploading}
+              disabled={uploading || checkError()}
             >
               Submit
             </Button>
