@@ -59,14 +59,18 @@ export const Button = forwardRef(
       children,
       className = null,
       onClick,
+      disabled,
     },
     ref
   ) => {
     return (
       <button
-        className={`btn btn-${type} btn-${color} btn-${size} ${className}`}
+        className={`btn btn-${type} btn-${
+          disabled ? "disabled" : color
+        } btn-${size} ${className}`}
         onClick={onClick}
         ref={ref}
+        disabled={disabled}
       >
         {Icon ? <Icon className="btn-icon" /> : null}
         {children}

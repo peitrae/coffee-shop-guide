@@ -72,6 +72,12 @@
   color: #fafafa;
 }
 
+.btn-solid.btn-disabled {
+  background: #999999;
+  color: #fafafa;
+  box-shadow: none;
+}
+
 // Outlined
 
 .btn-oulined.btn-primary {
