@@ -76,6 +76,20 @@ const Filter = ({ coffeeShops, onFilter }) => {
     return checkDay && checkHours && checkMinutes;
   };
 
+  const checkCashless = (facilities) => {
+    const cashless = {
+      "Debit/Credit Card": true,
+      OVO: true,
+      Gopay: true,
+    };
+
+    for (let facility of facilities) {
+      if (cashless[facility]) {
+        return true;
+      }
+    }
+  };
+
   const withinRadius = async (coffeeShops, radius) => {
     try {
       const pos = await new Promise((res, rej) => {
@@ -118,9 +132,9 @@ const Filter = ({ coffeeShops, onFilter }) => {
       coffeeShops = coffeeShops.filter((coffeeShop) => coffeeShop.promo);
     }
     if (cashlessChecked) {
-      coffeeShops = coffeeShops.filter((coffeeShop) =>
-        coffeeShop.facilities?.includes("Cashless")
-      );
+      coffeeShops = coffeeShops.filter(({ facilities }) => {
+        return facilities ? checkCashless(facilities) : false;
+      });
     }
     if (distanceChecked) {
       const coffeeShopWithinRadius = await withinRadius(
