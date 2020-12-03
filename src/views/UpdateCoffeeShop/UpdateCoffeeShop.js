@@ -61,7 +61,7 @@ const UpdateData = (props) => {
     if (coffeeShopId && oldCoffeeShop) {
       setCoffeeShop({ ...coffeeShop, ...oldCoffeeShop });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coffeeShopId, oldCoffeeShop]);
 
   const onHeaderChange = (e) => {
@@ -203,11 +203,7 @@ const UpdateData = (props) => {
       const coffeeShop = await populateLocation(validated);
 
       dispatch(
-        actions.setCoffeeShopData(
-          { ...oldCoffeeShop, ...coffeeShop },
-          coffeeShopId,
-          props.history
-        )
+        actions.setCoffeeShopData(coffeeShop, coffeeShopId, props.history)
       );
     }
   };
