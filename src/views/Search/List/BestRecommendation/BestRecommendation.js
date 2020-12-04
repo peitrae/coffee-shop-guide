@@ -16,10 +16,11 @@ const BestRecommendation = ({ coffeeShop }) => {
     operationalHours,
     averagePrice,
     profileMatching,
+    facilities,
     promo,
   } = coffeeShop;
 
-  const todayHours = operationalHours[new Date().getDay()];
+  const todayHours = operationalHours && operationalHours[new Date().getDay()];
 
   return (
     <NavLink to={`/coffee-shop/${id}`}>
@@ -39,17 +40,27 @@ const BestRecommendation = ({ coffeeShop }) => {
                 <span className="address">{address}</span>
               </div>
               <div className="details">
+                {operationalHours ? (
+                  <div className="details-wrapper">
+                    <div className="details-label">Hours:</div>
+                    <span className="details-main">
+                      {todayHours
+                        ? `${todayHours.open} - ${todayHours.close}`
+                        : "Close"}
+                    </span>
+                  </div>
+                ) : null}
+                {facilities ? (
+                  <div className="details-wrapper">
+                    <div className="details-label">Facilities</div>
+                    <span className="details-main">{`: ${facilities.join(
+                      ", "
+                    )}`}</span>
+                  </div>
+                ) : null}
                 <div className="details-wrapper">
-                  <div className="details-label">Hours:</div>
-                  <span className="details-main">
-                    {todayHours
-                      ? `${todayHours.open} - ${todayHours.close}`
-                      : "Close"}
-                  </span>
-                </div>
-                <div className="details-wrapper">
-                  <div className="details-label">Average Price:</div>
-                  <span className="details-main">{`Rp ${averagePrice}`}</span>
+                  <div className="details-label">Average Price</div>
+                  <span className="details-main">{`: Rp ${averagePrice}`}</span>
                 </div>
                 <div className="details-promo-grp">
                   {promo

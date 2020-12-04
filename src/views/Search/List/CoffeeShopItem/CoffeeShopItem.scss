@@ -25,6 +25,10 @@
       font-weight: 600;
       font-size: 14px;
       color: $black;
+      white-space: nowrap;
+      width: 21rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .details {
@@ -33,10 +37,12 @@
 
       &-wrapper {
         display: flex;
+        margin: 0.3rem 0;
       }
 
       &-label {
         width: 108px;
+        flex-shrink: 0;
       }
 
       &-main {
@@ -63,6 +69,4 @@
     align-items: center;
     flex-shrink: 0;
   }
-  
 }
-
