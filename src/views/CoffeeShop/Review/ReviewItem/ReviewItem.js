@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 import SqueareFaceHappyIcon from "../../../../assets/icon/SqueareFaceHappyIcon";
 import SquareFaceSmilingIcon from "../../../../assets/icon/SquareFaceSmilingIcon";
@@ -9,8 +10,8 @@ import ProfileImg from "../../../../assets/logo/defaultProfile.png";
 
 import "./ReviewItem.scss";
 
-const ReviewItem = ({ userReview }) => {
-  const { name, photoURL, rating, review, date = null } = userReview;
+const ReviewItem = ({ value }) => {
+  const { name, photoUrl, rating, review, created_at } = value;
 
   const getRatingIcon = (rating) => {
     if (rating > 0 && rating <= 1) {
@@ -31,12 +32,14 @@ const ReviewItem = ({ userReview }) => {
       <div className="review-user">
         <img
           className="review-user-img"
-          src={photoURL ? photoURL : ProfileImg}
+          src={photoUrl ? photoUrl : ProfileImg}
           alt={name}
         />
         <div className="review-user-details">
           <span className="review-user-name">{name}</span>
-          <span className="review-user-date">{date}</span>
+          <span className="review-user-date">
+            {moment(created_at).format("DD MMMM YYYY")}
+          </span>
         </div>
       </div>
       <div className="review-main">

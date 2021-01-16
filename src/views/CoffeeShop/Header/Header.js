@@ -54,16 +54,17 @@ const Header = () => {
     showShareHandler();
   };
 
-  const bookmarkClickHandler = (id) => {
+  const bookmarkClickHandler = (coffeeShop_id, coffeeShop_ids) => {
+    console.log("Input", coffeeShop_id, coffeeShop_ids )
     if (isBookmarked) {
-      const index = bookmark.indexOf(id);
-      bookmark.splice(index, 1);
+      const index = bookmark.indexOf(coffeeShop_id);
+      coffeeShop_ids.splice(index, 1);
     } else {
-      bookmark.unshift(id);
+      coffeeShop_ids.unshift(coffeeShop_id);
     }
 
     setIsBookmarked(!isBookmarked);
-    dispatch(actions.setBookmark(bookmark));
+    dispatch(actions.setBookmark(coffeeShop_ids));
   };
 
   const ratingAverage = () => {
@@ -96,7 +97,7 @@ const Header = () => {
               <h1 className="content-name">{name}</h1>
               <PlainBtn
                 className="content-control-btn"
-                onClick={() => bookmarkClickHandler(coffeeShop_id)}
+                onClick={() => bookmarkClickHandler(coffeeShop_id, bookmark)}
               >
                 <BookmarkIcon
                   fill={isBookmarked ? "#219653" : "none"}

@@ -61,7 +61,7 @@ const Feedback = ({ close }) => {
 
   const submitClickHandler = () => {
     const date = new Date();
-    const temp = {...feedback, date: moment(date).format()}
+    const temp = {...feedback, created_at: moment(date).format()}
     if(temp.review === "") {
       delete temp.review
     }

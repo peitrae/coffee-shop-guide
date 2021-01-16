@@ -23,7 +23,7 @@ import {
 } from "./allCoffeeShopList";
 
 import {
-  getCoffeeShopData,
+  getCoffeeShop,
   setCoffeeShopDataSaga,
   getBookmarkSaga,
   setCoffeeShopPromoSaga,
@@ -58,7 +58,7 @@ export function* watchAllCoffeeShopList() {
 
 export function* watchCoffeeShop() {
   yield all([
-    takeEvery(actionTypes.COFFEE_SHOP_GET_DATA, getCoffeeShopData),
+    takeEvery(actionTypes.COFFEE_SHOP_GET_DATA, getCoffeeShop),
     takeEvery(actionTypes.COFFEE_SHOP_SET_DATA, setCoffeeShopDataSaga),
     takeEvery(actionTypes.COFFEE_SHOP_GET_BOOKMARK, getBookmarkSaga),
     takeEvery(actionTypes.COFFEE_SHOP_GET_PROMO, getCoffeeShopPromoSaga),

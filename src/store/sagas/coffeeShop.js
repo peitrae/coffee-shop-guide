@@ -5,45 +5,18 @@ import * as actions from "../actions";
 
 const TOKEN = localStorage.getItem("token");
 
-export function* getCoffeeShopData(action) {
-  const coffeeShopUrl = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}.json`;
-  const usersUrl =
-    "https://us-central1-coffee-shop-guide.cloudfunctions.net/getBulkUsersById";
+export function* getCoffeeShop(action) {
+  const urlCoffeeShop = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${action.coffeeShopId}.json`;
+  // const urlUser =
+  //   "https://us-central1-coffee-shop-guide.cloudfunctions.net/getBulkUsersById";
 
   try {
-    const coffeeshop = yield axios.get(coffeeShopUrl);
-
-    const userIds = [];
-    for (let key in coffeeshop.data.feedback) {
-      userIds.push({ uid: key });
-    }
-
-    const users = yield axios.post(usersUrl, userIds);
-
-    const usersObj = {};
-    for (let user of users.data.users) {
-      usersObj[user.uid] = {
-        name: user.displayName,
-        photoURL: user.photoURL,
-      };
-    }
-
-    const feedback = {};
-    for (let key in coffeeshop.data.feedback) {
-      feedback[key] = {
-        name: usersObj[key].name,
-        photoURL: usersObj[key]?.photoURL,
-        rating: coffeeshop.data.feedback[key].rating,
-        review: coffeeshop.data.feedback[key].review,
-        date: moment(coffeeshop.data.feedback[key].date).format("DD MMMM YYYY"),
-      };
-    }
+    const { data: coffeeShop } = yield axios.get(urlCoffeeShop);
 
     yield put(
       actions.getCoffeeShopDataSuccess({
-        ...coffeeshop.data,
+        ...coffeeShop,
         coffeeShop_id: action.coffeeShopId,
-        feedback,
       })
     );
   } catch (error) {
@@ -75,19 +48,19 @@ export function* getBookmarkSaga(action) {
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop.json`;
 
   try {
-    const response = yield axios.get(url);
+    const { data: coffeeShops } = yield axios.get(url);
 
-    const coffeeShops = [];
-    for (let key in response.data) {
+    const bookmarkedCoffeeShops = [];
+    for (let key in coffeeShops) {
       if (action.coffeeShopIds.includes(key)) {
-        coffeeShops.push({
-          ...response.data[key],
+        bookmarkedCoffeeShops.push({
+          ...coffeeShops[key],
           id: key,
         });
       }
     }
 
-    yield put(actions.getBookmarkSuccess(coffeeShops));
+    yield put(actions.getBookmarkSuccess(bookmarkedCoffeeShops));
   } catch (error) {
     console.log(error.response.data.error.message);
   }
@@ -109,10 +82,10 @@ export function* getCoffeeShopPromoSaga({ coffeeShopId }) {
   const url = `https://coffee-shop-guide.firebaseio.com/coffeeshop/${coffeeShopId}/promo.json`;
 
   try {
-    const response = yield axios.get(url);
+    const { data: promos } = yield axios.get(url);
 
     yield put(
-      actions.getCoffeeShopPromoSuccess({ coffeeShopId, list: response.data })
+      actions.getCoffeeShopPromoSuccess({ coffeeShopId, list: promos })
     );
   } catch (error) {
     console.log(error.response.data.error.message);
