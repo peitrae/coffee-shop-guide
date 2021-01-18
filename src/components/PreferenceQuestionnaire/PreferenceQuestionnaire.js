@@ -26,9 +26,10 @@ const PreferenceQuestionnaire = ({ closeClickHandler, onSubmit }) => {
 
   const locationOpts = [
     { label: "1 Km", value: 1 },
-    { label: "5 Km", value: 2 },
-    { label: "10 Km", value: 3 },
-    { label: "> 10 Km", value: 4 },
+    { label: "3 Km", value: 2 },
+    { label: "5 Km", value: 3 },
+    { label: "10 Km", value: 4 },
+    { label: "> 10 Km", value: 5 },
   ];
 
   const priceOpts = [
