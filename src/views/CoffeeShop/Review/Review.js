@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 
 import Card from "../../../components/UI/Card/Card";
