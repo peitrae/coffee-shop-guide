@@ -5,7 +5,7 @@ const geocode = async (address) => {
   
   const json = await response.json();
   if (!json.results.length) {
-    throw "Location information is unavailable. Check your address.";
+    throw Error("Location information is unavailable. Check your address.");
   }
 
   
