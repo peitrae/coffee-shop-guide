@@ -68,7 +68,7 @@ const CoffeeShopItem = ({ coffeeShop }) => {
         </div>
         {profileMatching ? (
           <div className="coffeeshop-item-rating">
-            <span>{profileMatching}</span>
+            <span>{profileMatching.toFixed(1)}</span>
           </div>
         ) : null}
       </Card>

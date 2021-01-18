@@ -73,7 +73,7 @@ const BestRecommendation = ({ coffeeShop }) => {
             </div>
             {profileMatching ? (
               <div className="main-rating">
-                <span>{profileMatching}</span>
+                <span>{profileMatching.toFixed(1)}</span>
               </div>
             ) : null}
           </div>
