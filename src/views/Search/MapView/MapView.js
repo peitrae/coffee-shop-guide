@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 
@@ -6,51 +6,11 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 
 import "./MapView.scss";
 
-const MapView = ({ coffeeShops }) => {
-  const [config, setConfig] = useState({
-    lat: -7.983,
-    long: 112.621,
-    zoom: 13,
-  });
-
-  const [error, setError] = useState(null);
-
+const MapView = ({ userLocation, locationError, coffeeShops }) => {
   const userMarker = new Icon({
     iconUrl: "/user-marker.svg",
     iconSize: [35, 35],
   });
-
-  const getLocation = (location) => {
-    setConfig({
-      ...config,
-      lat: location.coords.latitude,
-      long: location.coords.longitude,
-    });
-  };
-
-  const getLocationError = (error) => {
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
-        setError("Geolocation is disabled");
-        break;
-      case error.POSITION_UNAVAILABLE:
-        setError("Location information is unavailable");
-        break;
-      case error.TIMEOUT:
-        setError("The request to get user location timed out");
-        break;
-      default:
-        setError("An unknown error occurred");
-        break;
-    }
-  };
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getLocation, getLocationError);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   if (!coffeeShops) {
     return <Spinner />;
@@ -64,12 +24,12 @@ const MapView = ({ coffeeShops }) => {
     e.target.closePopup();
   };
 
-  return error ? (
-    <div>{error}</div>
+  return locationError ? (
+    <div>{locationError}</div>
   ) : (
     <Map
-      center={[config.lat, config.long]}
-      zoom={config.zoom}
+      center={[userLocation.lat, userLocation.long]}
+      zoom="13"
       className="mapview"
     >
       <TileLayer
@@ -79,7 +39,7 @@ const MapView = ({ coffeeShops }) => {
       <Marker
         onMouseOver={onMouseOverMarker}
         onMouseOut={onMouseOutMarker}
-        position={[config.lat, config.long]}
+        position={[userLocation.lat, userLocation.long]}
         icon={userMarker}
       >
         <Popup>You</Popup>
