@@ -1,6 +1,5 @@
 import { put } from "redux-saga/effects";
 import axios from "axios";
-import moment from "moment";
 import * as actions from "../actions";
 
 const TOKEN = localStorage.getItem("token");
