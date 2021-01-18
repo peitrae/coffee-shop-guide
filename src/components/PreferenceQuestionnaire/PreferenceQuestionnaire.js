@@ -8,7 +8,7 @@ const PreferenceQuestionnaire = ({ closeClickHandler, onSubmit }) => {
   const dispatch = useDispatch();
 
   const [showQuestion, setShowQuestion] = useState(0);
-  const [preference, setPreference] = useState([0, 0, 0, 0]);
+  const [preference, setPreference] = useState([0, 0]);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const userPreference = useSelector((state) => state.member.preference);
@@ -20,18 +20,15 @@ const PreferenceQuestionnaire = ({ closeClickHandler, onSubmit }) => {
   }, [userPreference]);
 
   const preferenceQuestions = [
-    "How important taste and quality of product of coffee shop for you?",
-    "How important order/delivery process of coffee shop for you?",
-    "How important overall rating of coffee shop for you?",
+    "Location accessibility",
     "What is your coffee shop price range prefeference?",
   ];
 
-  const preferenceOpts = [
-    { label: "Not at all important", value: 1 },
-    { label: "Slightly important", value: 2 },
-    { label: "Important", value: 3 },
-    { label: "Fairly important", value: 4 },
-    { label: "Very important", value: 5 },
+  const locationOpts = [
+    { label: "1 Km", value: 1 },
+    { label: "5 Km", value: 2 },
+    { label: "10 Km", value: 3 },
+    { label: "> 10 Km", value: 4 },
   ];
 
   const priceOpts = [
@@ -66,7 +63,7 @@ const PreferenceQuestionnaire = ({ closeClickHandler, onSubmit }) => {
   return (
     <Preference
       question={preferenceQuestions[showQuestion]}
-      label={showQuestion < 3 ? preferenceOpts : priceOpts}
+      label={showQuestion === 0 ? locationOpts : priceOpts}
       checked={preference[showQuestion]}
       errorMessage={errorMessage}
       showQuestion={showQuestion}

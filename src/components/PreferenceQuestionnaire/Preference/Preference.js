@@ -52,12 +52,12 @@ const Questionnaire = (props) => {
         </div>
       </form>
       <div className="preference-questionnaire-controls">
-        {showQuestion < 1 ? (
+        {showQuestion === 0 ? (
           <BtnMediumText clicked={closePreferenceHandler}>Cancel</BtnMediumText>
         ) : (
           <BtnMediumText clicked={prevQuestionHandler}>Back</BtnMediumText>
         )}
-        {showQuestion < 3 ? (
+        {showQuestion === 0 ? (
           <BtnMediumText clicked={nextQuestionHandler}>Next</BtnMediumText>
         ) : (
           <BtnMediumText clicked={submitClickHandler}>Submit</BtnMediumText>
