@@ -12,24 +12,16 @@ import {
   authCheckStateSaga,
   getUserDataSaga,
   sendVerificationSaga,
-  getCoffeeShopUploadedBySaga,
-  deleteCoffeeShopSaga,
-  setFeedbackCoffeeShopSaga,
-  setBookmarkSaga
+  setBookmarkSaga,
 } from "./member";
 
 import {
-  getAllCoffeeShopListSaga
-} from "./allCoffeeShopList";
-
-import {
   getCoffeeShop,
+  addCoffeeShopReview,
+  getCoffeeShopReviews,
+
   setCoffeeShopDataSaga,
   getBookmarkSaga,
-  setCoffeeShopPromoSaga,
-  getCoffeeShopPromoSaga,
-  editCoffeeShopPromoSaga,
-  deleteCoffeeShopPromoSaga
 } from "./coffeeShop";
 
 export function* watchMember() {
@@ -43,29 +35,17 @@ export function* watchMember() {
     takeEvery(actionTypes.MEMBER_EDIT_PROFILE, editProfileSaga),
     takeEvery(actionTypes.MEMBER_EDIT_PASSWORD, editPasswordSaga),
     takeEvery(actionTypes.MEMBER_SEND_VERIFICATION, sendVerificationSaga),
-    takeEvery(actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY, getCoffeeShopUploadedBySaga),
-    takeEvery(actionTypes.MEMBER_DELETE_COFFEE_SHOP, deleteCoffeeShopSaga),
-    takeEvery(actionTypes.MEMBER_SET_FEEDBACK_COFFEE_SHOP, setFeedbackCoffeeShopSaga),
-    takeEvery(actionTypes.MEMBER_SET_BOOKMARK, setBookmarkSaga)
-  ]);
-}
-
-export function* watchAllCoffeeShopList() {
-  yield all([
-    takeEvery(actionTypes.ALL_COFFEE_SHOP_LIST_GET_DATA, getAllCoffeeShopListSaga)
+    takeEvery(actionTypes.MEMBER_SET_BOOKMARK, setBookmarkSaga),
   ]);
 }
 
 export function* watchCoffeeShop() {
   yield all([
-    takeEvery(actionTypes.COFFEE_SHOP_GET_DATA, getCoffeeShop),
-    takeEvery(actionTypes.COFFEE_SHOP_SET_DATA, setCoffeeShopDataSaga),
+    takeEvery(actionTypes.COFFEE_SHOP_GET, getCoffeeShop),
+    takeEvery(actionTypes.COFFEE_SHOP_ADD_REVIEW, addCoffeeShopReview),
+    takeEvery(actionTypes.COFFEE_SHOP_GET_REVIEWS, getCoffeeShopReviews),
+
+    takeEvery(actionTypes.COFFEE_SHOP_ADD, setCoffeeShopDataSaga),
     takeEvery(actionTypes.COFFEE_SHOP_GET_BOOKMARK, getBookmarkSaga),
-    takeEvery(actionTypes.COFFEE_SHOP_GET_PROMO, getCoffeeShopPromoSaga),
-    takeEvery(actionTypes.COFFEE_SHOP_SET_PROMO, setCoffeeShopPromoSaga),
-    takeEvery(actionTypes.COFFEE_SHOP_EDIT_PROMO, editCoffeeShopPromoSaga),
-    takeEvery(actionTypes.COFFEE_SHOP_DELETE_PROMO, deleteCoffeeShopPromoSaga)
   ]);
 }
-
-

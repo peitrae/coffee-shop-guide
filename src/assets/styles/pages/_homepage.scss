@@ -1,0 +1,33 @@
+.navbar--transparent {
+  box-shadow: none;
+  background: none;
+}
+
+.homepage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--guest {
+    background: url("/background.jpg") center no-repeat;
+    background-size: cover;
+  }
+
+  &--member {
+    background: url("/background-member.jpg") center no-repeat;
+    background-size: cover;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__text {
+    font-size: 36px;
+    color: #fff;
+  }
+}

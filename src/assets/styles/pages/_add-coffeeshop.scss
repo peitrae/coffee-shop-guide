@@ -1,0 +1,193 @@
+@import "../config/main";
+
+.add-coffeeshop {
+  top: 92px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    max-width: 756px;
+    width: 80%;
+  }
+
+  &__title {
+    color: $primary;
+    font-size: 24px;
+    margin: 0 0 16px 0;
+  }
+
+  &__label {
+    color: $black;
+    font-size: 14px;
+    font-weight: 600;
+    width: 200px;
+    flex-shrink: 0;
+    padding: 0.5rem 0;
+  }
+
+  &__btn-submit {
+    margin: 0 auto;
+  }
+
+  .header__input-grp,
+  .information,
+  .images {
+    padding: 24px;
+  }
+
+  .header {
+    &__img-grp {
+      width: 100%;
+      height: 206px;
+      position: relative;
+    }
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px 6px 0px 0px;
+      object-fit: cover;
+    }
+
+    &__btn-edit {
+      background-color: rgba(70, 70, 70, 0.6);
+      transition: background 0.15s ease;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 1.5rem;
+    }
+
+    &__btn-edit:hover {
+      background-color: rgba(100, 100, 100, 0.6);
+    }
+
+    &__input-grp {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__btn-map {
+      height: 32px;
+      width: 32px;
+      padding: 6px;
+
+      svg {
+        margin-left: 3px;
+      }
+    }
+  }
+
+  .information,
+  .images {
+    padding: 24px;
+  }
+
+  .facilities {
+    &__list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__item {
+      padding: 0.2rem 0.7rem;
+      margin: 0.2rem;
+      border-radius: 8px;
+      background-color: #eeeeee;
+      display: flex;
+      align-items: center;
+    }
+
+    &__item:hover {
+      .facilities__btn-delete {
+        display: flex;
+      }
+    }
+
+    &__btn-delete {
+      padding: 5px;
+      height: 18px;
+      width: 18px;
+      display: none;
+    }
+
+    &__btn-delete:hover {
+      fill: #000000;
+      background-color: #bbbbbb;
+    }
+
+    &__add {
+      position: relative;
+    }
+
+    .add-facilities__menu {
+      width: 185px;
+      position: absolute;
+      padding: 0.6rem 0;
+    }
+
+    .add-facilities__item {
+      border: none;
+      margin: 0;
+      fill: $primary;
+    }
+
+    .add-facilities__input-grp {
+      display: flex;
+      padding: 0 0.7rem;
+    }
+  }
+
+  .operational-hours {
+    &__item {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .input-time {
+      position: relative;
+    }
+
+    .input-time__timepicker {
+      top: 0;
+      position: absolute;
+      z-index: 100;
+    }
+
+    &__btn-delete:hover {
+      fill: #000000;
+      background-color: #bbbbbb;
+    }
+  }
+
+  .images {
+    &__item,
+    &__add {
+      width: 167px;
+      height: 167px;
+      position: relative;
+      border-radius: 8px;
+    }
+
+    &__preview {
+      border-radius: inherit;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &__btn-delete {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+
+    &__add {
+      background-color: $secondary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

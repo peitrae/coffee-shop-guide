@@ -113,35 +113,6 @@ export const sendVerificationSuccess = () => {
   };
 };
 
-export const getCoffeeShopUploadedBy = (localId) => {
-  return {
-    type: actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY,
-    localId,
-  };
-};
-
-export const getCoffeeShopUploadedBySuccess = (coffeeShopList) => {
-  return {
-    type: actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY_SUCCESS,
-    coffeeShopList,
-  };
-};
-
-export const deleteCoffeeShop = (coffeeShopId) => {
-  return {
-    type: actionTypes.MEMBER_DELETE_COFFEE_SHOP,
-    coffeeShopId,
-  };
-};
-
-export const setFeedbackCoffeeShop = (feedback, coffeeShopId) => {
-  return {
-    type: actionTypes.MEMBER_SET_FEEDBACK_COFFEE_SHOP,
-    feedback,
-    coffeeShopId,
-  };
-};
-
 export const setBookmark = (coffeeShopIds) => {
   return {
     type: actionTypes.MEMBER_SET_BOOKMARK,
@@ -155,19 +126,6 @@ export const setBookmarkSuccess = (coffeeShopIds) => {
     coffeeShopIds,
   };
 };
-
-// export const getBookmarkIds = () => {
-//   return {
-//     type: actionTypes.MEMBER_GET_BOOKMARK_IDS,
-//   };
-// };
-
-// export const getBookmarkIdsSuccess = (bookmark) => {
-//   return {
-//     type: actionTypes.MEMBER_GET_BOOKMARK_IDS_SUCCESS,
-//     bookmark,
-//   };
-// };
 
 export const setResponse = (response) => {
   return {

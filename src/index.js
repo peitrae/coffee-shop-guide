@@ -4,14 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
+import "./assets/styles/index.scss";
 
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import memberReducer from "./store/reducer/member";
-import allCoffeeShopListReducer from "./store/reducer/allCoffeeShopList";
 import coffeeShopReducer from "./store/reducer/coffeeShop";
-import { watchMember, watchAllCoffeeShopList, watchCoffeeShop } from "./store/sagas/index";
+import { watchMember, watchCoffeeShop } from "./store/sagas/index";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -20,8 +20,7 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   member: memberReducer,
-  allCoffeeShopList: allCoffeeShopListReducer,
-  coffeeShop: coffeeShopReducer
+  coffeeShop: coffeeShopReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -32,7 +31,6 @@ const store = createStore(
 );
 
 sagaMiddleware.run(watchMember);
-sagaMiddleware.run(watchAllCoffeeShopList);
 sagaMiddleware.run(watchCoffeeShop);
 
 const app = (

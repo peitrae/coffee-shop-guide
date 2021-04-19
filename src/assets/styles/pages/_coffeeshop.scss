@@ -1,0 +1,352 @@
+@import "../config/main";
+
+.coffeeshop {
+  top: 92px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    width: 756px;
+  }
+
+  .main {
+    padding: 0;
+
+    &__img {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px 8px 0px 0px;
+      object-fit: cover;
+    }
+
+    &__grid {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 6fr 1fr;
+      column-gap: 32px;
+    }
+
+    &__grid-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &__name {
+      font-size: 1.75rem;
+      color: $primary;
+      margin: 0 12px 0px 0;
+      display: block;
+    }
+
+    &__address {
+      font-weight: 600;
+      color: $black;
+      margin: 0;
+    }
+
+    &__promo-list {
+      display: flex;
+      margin: 6px 0 24px 0;
+    }
+
+    &__share {
+      position: relative;
+    }
+
+    &__overall-rating {
+      background: $primary;
+      border-radius: 8px;
+      width: 108px;
+      height: 56px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+
+  .share-bbx {
+    width: 275px;
+    padding: 16px 12px;
+
+    &__title {
+      margin: 0 0 12px 0;
+      color: $primary;
+    }
+
+    &__btn {
+      width: 100%;
+      background-color: $primary;
+    }
+
+    &__btn--blue {
+      background-color: #264876;
+    }
+  }
+
+  .add-review {
+    width: 380px;
+    height: 320px;
+    padding: 32px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__title {
+      text-align: center;
+      margin: 0;
+      color: $primary;
+    }
+
+    &__error {
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 180px;
+      width: 100%;
+    }
+
+    &__question {
+      text-align: center;
+      color: $black;
+    }
+
+    &__radio-grp {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__btn-radio {
+      height: 48px;
+      width: 48px;
+      cursor: pointer;
+    }
+
+    &__controls {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__icon {
+      fill: #666666;
+    }
+
+    &__icon--pleased:hover,
+    &__btn-radio--active .add-review__icon--pleased {
+      fill: $pleased;
+    }
+
+    &__icon--satisfied:hover,
+    &__btn-radio--active .add-review__icon--satisfied {
+      fill: $satisfied;
+    }
+
+    &__icon--doubt:hover,
+    &__btn-radio--active .add-review__icon--doubt {
+      fill: $doubt;
+    }
+
+    &__icon--disappointed:hover,
+    &__btn-radio--active .add-review__icon--disappointed {
+      fill: $disappointed;
+    }
+
+    &__icon--upset:hover,
+    &__btn-radio--active .add-review__icon--upset {
+      fill: $upset;
+    }
+  }
+
+  .information {
+    padding: 24px;
+
+    &__title {
+      font-size: 22px;
+      color: $primary;
+      margin: 0 0 12px 0;
+    }
+
+    &__grid {
+      display: grid;
+      column-gap: 32px;
+      justify-content: start;
+    }
+
+    &__grid-opening {
+      grid-column: 1 / 2;
+    }
+
+    &__grid-others {
+      grid-column: 2 / 3;
+    }
+
+    &__item {
+      display: flex;
+      margin-bottom: 6px;
+    }
+
+    &__label {
+      font-weight: 600;
+      width: 120px;
+      color: $black;
+    }
+
+    &__label--opening {
+      width: 140px;
+    }
+
+    &__day {
+      width: 100px;
+    }
+  }
+
+  .images {
+    padding: 24px;
+
+    &__title {
+      font-size: 22px;
+      color: $primary;
+      margin: 0 0 12px 0;
+    }
+
+    &__img {
+      width: 170px;
+      height: 170px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+  }
+
+  .review {
+    padding: 24px;
+
+    .review-item {
+      display: flex;
+      flex-direction: column;
+
+      &__header {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &__desc {
+        display: flex;
+        align-items: center;
+      }
+
+      &__img {
+        width: 36px;
+        height: 36px;
+        background-color: #555555;
+        border-radius: 50%;
+      }
+
+      &__name {
+        font-size: 14px;
+        font-weight: 600;
+        color: $primary;
+      }
+
+      &__date {
+        font-size: 12px;
+        color: #555555;
+      }
+
+      &__text {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .emotion-rating {
+    border-radius: 6px;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    &__score {
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  .emotion-rating--pleased {
+    border: 1px solid $pleased;
+
+    .emotion-rating__icon {
+      fill: $pleased;
+    }
+
+    .emotion-rating__score {
+      color: $pleased;
+    }
+  }
+
+  .emotion-rating--satisfied {
+    border: 1px solid $satisfied;
+
+    .emotion-rating__icon {
+      fill: $satisfied;
+    }
+
+    .emotion-rating__score {
+      color: $satisfied;
+    }
+  }
+
+  .emotion-rating--doubt {
+    border: 1px solid $doubt;
+
+    .emotion-rating__icon {
+      fill: $doubt;
+    }
+
+    .emotion-rating__score {
+      color: $doubt;
+    }
+  }
+
+  .emotion-rating--disappointed {
+    border: 1px solid $disappointed;
+
+    .emotion-rating__icon {
+      fill: $disappointed;
+    }
+
+    .emotion-rating__score {
+      color: $disappointed;
+    }
+  }
+
+  .emotion-rating--upset {
+    border: 1px solid $upset;
+
+    .emotion-rating__icon {
+      fill: $upset;
+    }
+
+    .emotion-rating__score {
+      color: $upset;
+    }
+  }
+}
