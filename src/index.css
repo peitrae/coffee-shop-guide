@@ -1,37 +1,6 @@
-html, 
-body, 
-#root {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #F3F3F3;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-h1 {
-  font-weight: bold;
-  font-size: 21px;
-  margin: 0;
-  margin-bottom: 9px;
-  color: #464646;
-}
-
-h2 {
-  margin: 0;
-  font-weight: bold;
-  font-size: 21px;
-
-  /* Primary Color */
-  color: #219653;
 }
 
 a {

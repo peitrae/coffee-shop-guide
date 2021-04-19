@@ -1,0 +1,206 @@
+@import "../config/main";
+
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  top: 108px;
+
+  .profile {
+    height: 528px;
+    min-width: 368px;
+
+    &__header {
+      width: 100%;
+      height: 25%;
+      background: $primary;
+      border-radius: 4px 4px 0 0;
+
+      .profile__image,
+      .edit-image {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .profile__image--main,
+      .edit-image {
+        position: relative;
+        top: 45%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    &__body {
+      height: 75%;
+      padding: 36px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__actions {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__text {
+      display: block;
+      text-align: center;
+    }
+
+    &__text--primary {
+      font-weight: 600;
+      font-size: 20px;
+      color: $primary;
+      margin-bottom: 8px;
+    }
+
+    &__text--secondary {
+      color: #9d9d9d;
+      font-size: 12px;
+    }
+  }
+
+  .edit-image {
+    &__backdrop {
+      border-radius: 50%;
+    }
+
+    &__backdrop--only-show-hover {
+      opacity: 0;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &__btn {
+      font-weight: 600;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: #fafafa;
+    }
+
+    &__label {
+      cursor: pointer;
+    }
+  }
+
+  .profile-edit {
+    &__error {
+      top: 30%;
+      position: absolute;
+    }
+
+    &__form {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    &__input {
+      width: 100%;
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__btn {
+      width: 96px;
+    }
+  }
+
+  .warning-modal {
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+    padding: 24px;
+
+    &__title {
+      font-size: 18px;
+      font-weight: 600;
+      color: $black;
+    }
+
+    &__text {
+      font-size: 14px;
+      color: $black;
+      margin: 16px 0 32px 0;
+    }
+
+    &__actions {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .promos {
+    padding: 24px;
+    min-height: 120px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: $primary;
+      margin-bottom: 10px;
+    }
+
+    &__footer,
+    &__btn-add {
+      width: 100%;
+    }
+
+    .promo-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      border: 1px solid #d6d6d6;
+      border-radius: 6px;
+      padding: 6px 8px;
+
+      &__content {
+        width: 180px;
+        font-size: 14px;
+        font-weight: 600;
+        color: $black;
+      }
+
+      &__btn {
+        width: 26px;
+        height: 26px;
+        padding: 4px;
+        flex-shrink: 0;
+      }
+
+      &__btn--edit {
+        padding: 5px 4px 4px 4px;
+        fill: #666666;
+      }
+
+      &__btn--delete {
+        fill: $red;
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ const CursorIcon = ({ id, className }) => (
       viewBox="0 0 477.883 477.883"
       width="100%"
       height="100%"
+      fill="#fff"
     >
       <g>
         <g>

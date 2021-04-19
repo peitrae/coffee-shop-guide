@@ -1,0 +1,186 @@
+@import "../config/main";
+
+.search {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  top: 68px;
+  width: 100%;
+  height: calc(100% - 68px);
+
+  &__panel-list {
+    margin: 0 24px;
+    grid-column: 1 / 2;
+  }
+
+  &__panel-map {
+    grid-column: 2 / 3;
+  }
+
+  &__empty {
+    height: 185px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__map {
+    width: 50%;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(77, 77, 77, 0.12),
+      0 1px 2px rgba(77, 77, 77, 0.24);
+  }
+}
+
+.search-filter {
+  padding: 0 24px;
+  height: 60px;
+  margin: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__label {
+    font-weight: 600;
+    font-size: 16px;
+    color: $black;
+    margin: 0;
+  }
+
+  &__distance,
+  &__price {
+    position: relative;
+  }
+
+  &__btn {
+    width: fit-content;
+    min-width: 66px;
+    padding: 0 1rem;
+    box-shadow: 0px 2px 2px rgba(156, 39, 176, 0.2);
+    height: 30px;
+  }
+
+  &__menu {
+    top: 110%;
+  }
+
+  &__menu--right {
+    right: 0;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__item--active {
+    font-weight: 600;
+  }
+
+  .search-filter__btn.search-filter__btn--active {
+    background-color: $primary;
+    color: #fff;
+  }
+}
+
+.search-item {
+  margin-bottom: 12px;
+  cursor: pointer;
+  display: flex;
+  padding: 20px 24px;
+  position: relative;
+
+  &--best {
+    flex-direction: column;
+  }
+
+  &__accent {
+    width: 8px;
+    height: 100%;
+    background-color: $primary;
+    border-radius: 4px 0px 0px 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__title {
+    margin: 0 0 12px 0;
+    color: $black;
+    font-size: 20px;
+  }
+
+  &__img {
+    border-radius: 6px;
+    object-fit: cover;
+    width: 165px;
+    height: 165px;
+  }
+
+  &__img--best {
+    width: 200px;
+    height: 200px;
+  }
+
+  &__body {
+    width: 100%;
+    margin: 0 12px 0 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 24px;
+    color: $primary;
+  }
+
+  &__address,
+  &__information-value {
+    color: $black;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  &__address--item {
+    white-space: nowrap;
+    width: 21rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__information-item {
+    line-height: 22px;
+    display: flex;
+  }
+
+  &__information-label {
+    font-size: 14px;
+    color: $black;
+    width: 108px;
+  }
+
+  &__promo-grp {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &__rating {
+    height: 36px;
+    width: 72px;
+    line-height: 36px;
+    text-align: center;
+    background: $secondary;
+    border-radius: 4px;
+    color: $primary;
+    font-weight: 600;
+  }
+}

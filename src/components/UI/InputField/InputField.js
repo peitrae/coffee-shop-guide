@@ -1,28 +1,40 @@
 import React from "react";
 
-import "./InputField.scss";
-
 const InputField = ({
   className,
+  id,
+  name,
   value,
   placeholder,
   type = "text",
-  size = "sm",
+  size = "md",
   onChange,
   rightIcon,
   rightOnClick,
-  danger
+  danger,
+  disabled,
 }) => (
-  <div className={`input-field ${className} ${danger ? "danger" : ""}`}>
+  <div
+    className={`input-field ${className} 
+      input-field--${size} 
+      ${danger ? "danger" : ""} 
+      ${rightIcon ? "input-field--has-right-icon" : ""}
+      ${disabled ? "input-field--disabled" : ""}`}
+  >
     <input
-      className={size}
+      id={id}
+      name={name}
+      className={`input-field__input ${size}`}
       value={value}
       onChange={onChange}
       type={type}
       placeholder={placeholder}
     />
     {rightIcon ? (
-      <button className={`right-icon ${size}`} onClick={rightOnClick}>
+      <button
+        className={`input-field__right-icon ${size}`}
+        onClick={rightOnClick}
+      >
         {rightIcon}
       </button>
     ) : null}

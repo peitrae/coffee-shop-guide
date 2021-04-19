@@ -1,0 +1,21 @@
+@import "../config/main";
+
+.spinner {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--primary {
+    .circular-progress {
+      color: $primary !important;
+    }
+  }
+
+  &--white {
+    .circular-progress {
+      color: #fff !important;
+    }
+  }
+}

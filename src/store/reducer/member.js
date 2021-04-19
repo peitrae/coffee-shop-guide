@@ -1,5 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateState } from "../../utilities/updateState";
+import { updateState } from "../../utils/updateState";
 
 const initialState = {
   localId: null,
@@ -9,10 +9,10 @@ const initialState = {
   photoUrl: null,
   preference: null,
   emailSent: null,
-  coffeeShopList: null,
   emailVerified: null,
   bookmark: [],
   response: null,
+  error: null,
 };
 
 const authSuccess = (state, action) => {
@@ -51,17 +51,9 @@ const sendVerificationSuccess = (state) => {
   return updateState(state, { emailSent: true });
 };
 
-const getCoffeeShopUploadedBySuccess = (state, action) => {
-  return updateState(state, { coffeeShopList: action.coffeeShopList });
-};
-
 const setBookmarkSuccess = (state, action) => {
   return updateState(state, { bookmark: action.coffeeShopIds });
 };
-
-// const getBookmarkIdsSuccess = (state, action) => {
-//   return updateState(state, { bookmark: action.bookmark });
-// };
 
 const setResponse = (state, action) => {
   return updateState(state, { response: action.response });
@@ -83,12 +75,8 @@ const reducer = (state = initialState, action) => {
       return editProfileSuccess(state, action);
     case actionTypes.MEMBER_SEND_VERIFICATION_SUCCESS:
       return sendVerificationSuccess(state);
-    case actionTypes.MEMBER_GET_COFFEE_SHOP_UPLOADED_BY_SUCCESS:
-      return getCoffeeShopUploadedBySuccess(state, action);
     case actionTypes.MEMBER_SET_BOOKMARK_SUCCESS:
       return setBookmarkSuccess(state, action);
-    // case actionTypes.MEMBER_GET_BOOKMARK_IDS_SUCCESS:
-    //   return getBookmarkIdsSuccess(state, action);
     case actionTypes.MEMBER_SET_RESPONSE:
       return setResponse(state, action);
     case actionTypes.MEMBER_DELETE_RESPONSE:

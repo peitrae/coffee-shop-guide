@@ -1,22 +1,49 @@
 import * as actionTypes from "./actionTypes";
 
-export const getCoffeeShopData = (coffeeShopId) => {
-  return {
-    type: actionTypes.COFFEE_SHOP_GET_DATA,
-    coffeeShopId,
-  };
-};
+export const getCoffeeShop = (coffeeShopId) => ({
+  type: actionTypes.COFFEE_SHOP_GET,
+  coffeeShopId,
+});
 
-export const getCoffeeShopDataSuccess = (data) => {
+export const setCoffeeShop = (coffeeShop) => ({
+  type: actionTypes.COFFEE_SHOP_SET,
+  coffeeShop,
+});
+
+export const setCoffeeShopLoading = (loading) => ({
+  type: actionTypes.COFFEE_SHOP_SET_LOADING,
+  loading,
+});
+
+export const addCoffeeShopReview = (review, coffeeShopId) => ({
+  type: actionTypes.COFFEE_SHOP_ADD_REVIEW,
+  review,
+  coffeeShopId,
+});
+
+export const getCoffeeShopReviews = (coffeeShopId) => ({
+  type: actionTypes.COFFEE_SHOP_GET_REVIEWS,
+  coffeeShopId,
+});
+
+export const setCoffeeShopReviews = (reviews) => ({
+  type: actionTypes.COFFEE_SHOP_SET_REVIEWS,
+  reviews,
+});
+
+// ========================
+
+export const getCoffeeShopSuccess = (coffeeShop) => {
   return {
     type: actionTypes.COFFEE_SHOP_GET_DATA_SUCCESS,
-    data,
+    coffeeShop,
+    loading: false,
   };
 };
 
-export const setCoffeeShopData = (coffeeShopData, coffeeShopId, history) => {
+export const addCoffeeShop = (coffeeShopData, coffeeShopId, history) => {
   return {
-    type: actionTypes.COFFEE_SHOP_SET_DATA,
+    type: actionTypes.COFFEE_SHOP_ADD,
     coffeeShopData,
     coffeeShopId,
     history,
@@ -36,33 +63,3 @@ export const getBookmarkSuccess = (coffeeShops) => {
     coffeeShops,
   };
 };
-
-export const setCoffeeShopPromo = (promo, coffeeShopId) => ({
-  type: actionTypes.COFFEE_SHOP_SET_PROMO,
-  promo,
-  coffeeShopId,
-});
-
-export const getCoffeeShopPromo = (coffeeShopId) => ({
-  type: actionTypes.COFFEE_SHOP_GET_PROMO,
-  coffeeShopId,
-});
-
-export const getCoffeeShopPromoSuccess = (promo) => ({
-  type: actionTypes.COFFEE_SHOP_GET_PROMO_SUCCESS,
-  promo,
-});
-
-export const editCoffeeShopPromo = (promo, promoId, coffeeShopId) => ({
-  type: actionTypes.COFFEE_SHOP_EDIT_PROMO,
-  promo,
-  promoId,
-  coffeeShopId
-});
-
-export const deleteCoffeeShopPromo = (promoId, coffeeShopId) => ({
-  type: actionTypes.COFFEE_SHOP_DELETE_PROMO,
-  promoId,
-  coffeeShopId
-});
-
