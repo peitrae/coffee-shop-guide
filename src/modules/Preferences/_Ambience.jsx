@@ -14,8 +14,9 @@ const Ambience = ({
 	handleSubmit,
 	handleBack,
 	handleClose,
+	error: parentError,
 }) => {
-	const [error, setError] = useState(null);
+	const [error, setError] = useState(parentError);
 
 	const handleClickSubmit = () => {
 		for (let key in values) {

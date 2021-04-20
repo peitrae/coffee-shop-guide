@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { Price, Location, Service, Ambience } from '../Preferences';
+import Modal from '../../components/UI/Modal';
+import Spinner from '../../components/UI/Spinner';
+import savePreferences from '../../utils/api/savePreferences';
+import * as actions from '../../store/actions/member';
 
 const AddPreference = ({ handleClose }) => {
+	const dispatch = useDispatch();
+	const history = useHistory();
+
+	const [state, setState] = useState({
+		loading: false,
+		error: null,
+	});
 	const [showPreference, setShowPreference] = useState(0);
 	const [preferences, setPreferences] = useState({
 		price: null,
@@ -102,9 +115,22 @@ const AddPreference = ({ handleClose }) => {
 
 	const handleBackQuestion = () => setShowPreference(showPreference - 1);
 
-	const handleSubmitPreference = () => {
-		console.log('Submit', preferences);
+	const handleSubmitPreference = async () => {
+		setState({ ...state, loading: true });
+		try {
+			const response = await savePreferences(preferences);
+
+			actions.setPreferenceSuccess(preferences);
+			dispatch(actions.setPreferenceSuccess(response.data));
+
+			setState({ ...state, loading: false });
+			history.push('/search');
+		} catch (e) {
+			setState({ ...state, error: e.message });
+		}
 	};
+
+	console.log(state.loading);
 
 	const preferenceComponents = [
 		<Price
@@ -141,12 +167,21 @@ const AddPreference = ({ handleClose }) => {
 			question={labels.ambience.question}
 			labels={labels.ambience.indicators}
 			values={preferences.ambience}
+			error={state.error}
 			handlePreferenceClicked={handleAmbienceOptClicked}
 			handleSubmit={handleSubmitPreference}
 			handleBack={handleBackQuestion}
 			handleClose={handleClose}
 		/>,
 	];
+
+	if (state.loading) {
+		return (
+			<Modal className="preferences">
+				<Spinner className="preferences__loading" />
+			</Modal>
+		);
+	}
 
 	return preferenceComponents[showPreference];
 };
