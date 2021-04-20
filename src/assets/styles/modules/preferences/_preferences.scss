@@ -1,0 +1,62 @@
+@import './../../config/main';
+
+.preferences {
+	width: 500px;
+	min-height: 350px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 56px;
+
+	&__title {
+		color: $primary;
+		text-align: center;
+		margin: 0;
+	}
+
+  &__question {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin: 16px 0;
+  }
+  
+	&__form {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		width: 100%;
+		margin: 12px 0 48px 0;
+	}
+
+	&_item {
+		margin: 8px 0;
+	}
+
+	.preferences-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.preferences-item__input {
+		padding: 12px;
+		width: 38px;
+	}
+
+	&__controls {
+		display: flex;
+		justify-content: space-between;
+	}
+
+  &__loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
