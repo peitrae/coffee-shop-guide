@@ -13,7 +13,7 @@ import * as actions from '../../../../store/actions';
 const Header = () => {
 	const dispatch = useDispatch();
 
-	const [showAddFeedback, setShowAddFeedback] = useState(true);
+	const [showAddFeedback, setShowAddFeedback] = useState(false);
 	const [isBookmarked, setIsBookmarked] = useState(false);
 
 	const { bookmark } = useSelector(({ member }) => member);
