@@ -8,18 +8,18 @@ const PreferenceItem = ({
 	isDanger,
 	value,
 	className,
-	handlePreferenceClicked,
+	handleOptionClicked,
 }) => {
 	const handleItemClick = (e) => {
 		e.preventDefault();
 		const value = +e.target.innerText;
 
-		handlePreferenceClicked(id, value);
+		handleOptionClicked(id, value);
 	};
 
 	return (
 		<div className={`preferences-item ${className}`}>
-			<label htmlFor={id}>{label}</label>
+			<label htmlFor={id} className="preferences-item__label">{label}</label>
 			<ButtonGroup
 				className="preferences-item__button-group"
 				isDanger={isDanger}

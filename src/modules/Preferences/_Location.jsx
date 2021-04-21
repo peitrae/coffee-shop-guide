@@ -10,22 +10,39 @@ const Location = ({
 	question,
 	values,
 	labels,
-	handlePreferenceClicked,
+	handleOptionClicked,
 	handleNext,
+	handleSubmit,
 	handleBack,
 	handleClose,
 }) => {
 	const [error, setError] = useState(null);
 
-	const handleClickNext = () => {
+	const validate = () => {
 		for (let key in values) {
 			if (values[key] === null) {
 				setError('Silahkan isi pilihan berikut');
-				return;
+				return false;
 			}
 		}
 
-		handleNext();
+		return true;
+	};
+
+	const handleClickNext = () => {
+		const isValidated = validate();
+
+		if (isValidated) {
+			handleNext();
+		}
+	};
+
+	const handleClickSubmit = () => {
+		const isValidated = validate();
+
+		if (isValidated) {
+			handleSubmit();
+		}
 	};
 
 	return (
@@ -42,17 +59,29 @@ const Location = ({
 						value={values[key]}
 						isDanger={error && values[key] === null}
 						className="preferences_item"
-						handlePreferenceClicked={handlePreferenceClicked}
+						handleOptionClicked={handleOptionClicked}
 					/>
 				))}
 			</form>
 			<div className="preferences__controls">
-				<Button type="text" size="sm" onClick={handleBack}>
-					Kembali
-				</Button>
-				<Button type="text" size="sm" onClick={handleClickNext}>
-					Selanjutnya
-				</Button>
+				{handleBack ? (
+					<Button type="text" size="sm" onClick={handleBack}>
+						Kembali
+					</Button>
+				) : handleClose ? (
+					<Button type="text" size="sm" onClick={handleClose}>
+						Tutup
+					</Button>
+				) : null}
+				{handleNext ? (
+					<Button type="text" size="sm" onClick={handleClickNext}>
+						Selanjutnya
+					</Button>
+				) : handleSubmit ? (
+					<Button type="text" size="sm" onClick={handleClickSubmit}>
+						Kirim
+					</Button>
+				) : null}
 			</div>
 		</Modal>
 	);
