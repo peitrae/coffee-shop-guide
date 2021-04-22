@@ -123,7 +123,7 @@ const EditPreferences = ({ preferences, handleClose }) => {
 			question={labels.location.question}
 			labels={labels.location.indicators}
 			values={editedPreferences.location}
-			handlePreferenceClicked={handleLocationOptClicked}
+			handleOptionClicked={handleLocationOptClicked}
 			handleNext={handleNextQuestion}
 			handleBack={handleBackQuestion}
 			handleClose={handleClose}
@@ -133,7 +133,7 @@ const EditPreferences = ({ preferences, handleClose }) => {
 			question={labels.service.question}
 			labels={labels.service.indicators}
 			values={editedPreferences.service}
-			handlePreferenceClicked={handleServiceOptClicked}
+			handleOptionClicked={handleServiceOptClicked}
 			handleNext={handleNextQuestion}
 			handleBack={handleBackQuestion}
 			handleClose={handleClose}
@@ -144,7 +144,7 @@ const EditPreferences = ({ preferences, handleClose }) => {
 			labels={labels.ambience.indicators}
 			values={editedPreferences.ambience}
 			error={state.error}
-			handlePreferenceClicked={handleAmbienceOptClicked}
+			handleOptionClicked={handleAmbienceOptClicked}
 			handleSubmit={handleSubmitPreference}
 			handleBack={handleBackQuestion}
 			handleClose={handleClose}
