@@ -23,6 +23,8 @@ const ErrorMessage = ({ children, className }) => {
 				return 'Please login again';
 			case 'Request failed with status code 404':
 				return 'Terjadi gangguan koneksi. Mohon coba lagi';
+			case 'Network Error':
+				return 'Terjadi gangguan koneksi. Mohon coba lagi';
 			default:
 				return message;
 		}

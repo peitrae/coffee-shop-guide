@@ -39,6 +39,7 @@ const AddReview = ({ coffeeShopId, handleClose }) => {
 			},
 		},
 		review: null,
+		created_at: new Date(),
 	});
 
 	const labels = {

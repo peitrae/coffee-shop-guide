@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { isEmpty } from 'lodash';
 
 import Card from '../../../../components/UI/Card';
 import { Button } from '../../../../components/UI/Button';
@@ -23,7 +22,7 @@ const Header = () => {
 		header,
 		name,
 		address,
-		reviews,
+		feedback,
 		promo,
 	} = coffeeShop;
 
@@ -49,17 +48,41 @@ const Header = () => {
 		dispatch(actions.setBookmark(coffeeShopIds));
 	};
 
-	const ratingAverage = (reviews) => {
-		const rating = [];
+	const getRatingAvg = (coffeeShopFeedback) => {
+		let userAmount = 0;
+		let totalEachCoffeeShop = 0;
 
-		for (let key in reviews) {
-			rating.push(reviews[key].rating[2]);
+		for (let user in coffeeShopFeedback) {
+			userAmount++;
+
+			const {
+				location: { accessibility, comfortability, parking, traffic },
+				service: { attentiveness, friendliness, promotion, responsiveness },
+				ambience: { cleanliness, design, lightning, music, temperature },
+			} = coffeeShopFeedback[user].rating;
+
+			const totalEachUser =
+				(accessibility +
+					comfortability +
+					parking +
+					traffic +
+					attentiveness +
+					friendliness +
+					promotion +
+					responsiveness +
+					cleanliness +
+					design +
+					lightning +
+					music +
+					temperature) /
+				13;
+
+			totalEachCoffeeShop += totalEachUser;
 		}
 
-		const sum = rating.reduce((a, b) => a + b, 0);
-		const avg = sum / rating.length || 0;
+		const ratingAvg = (totalEachCoffeeShop / userAmount).toFixed(2);
 
-		return avg.toFixed(1);
+		return ratingAvg;
 	};
 
 	return (
@@ -80,11 +103,11 @@ const Header = () => {
 						<p className="main__address">{address}</p>
 					</div>
 					<div className="main__grid-item">
-						{!isEmpty(reviews) ? (
+						{feedback && (
 							<div className="main__overall-rating margin-b-16">
-								{ratingAverage(reviews)}
+								{getRatingAvg(feedback)}
 							</div>
-						) : null}
+						)}
 						<Button
 							className="width-100"
 							type="outlined"
