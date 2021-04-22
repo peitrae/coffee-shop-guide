@@ -4,10 +4,9 @@ import { isEmpty } from 'lodash';
 
 import Card from '../../../../components/UI/Card';
 import { Button } from '../../../../components/UI/Button';
-import { AddFeedback } from '../../../../modules/CoffeeShop';
+import { AddFeedback, Share } from '../../../../modules/CoffeeShop';
 import PromoList from './components/PromoList';
 import BookmarkButton from './components/BookmarkButton';
-import Share from './components/Share';
 import * as actions from '../../../../store/actions';
 
 const Header = () => {
@@ -97,7 +96,10 @@ const Header = () => {
 				</div>
 			</Card>
 			{showAddFeedback && (
-				<AddFeedback coffeeShopId={coffeeShopId} handleClose={() => setShowAddFeedback(false)} />
+				<AddFeedback
+					coffeeShopId={coffeeShopId}
+					handleClose={() => setShowAddFeedback(false)}
+				/>
 			)}
 		</>
 	);
