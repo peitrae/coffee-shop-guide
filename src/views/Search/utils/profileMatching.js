@@ -1,5 +1,4 @@
 const profileMatching = (preference, coffeeShops) => {
-
 	if (!preference || !coffeeShops) {
 		return null;
 	}
@@ -65,16 +64,15 @@ const profileMatching = (preference, coffeeShops) => {
 
 		const getAmbienceAvg = (ambience) => {
 			return ambience.reduce((accumulator, currentValue) => ({
-				attentiveness:
-					(accumulator.attentiveness + currentValue.attentiveness) /
+				cleanliness:
+					(accumulator.cleanliness + currentValue.cleanliness) /
 					ambience.length,
-				friendliness:
-					(accumulator.friendliness + currentValue.friendliness) /
-					ambience.length,
-				promotion:
-					(accumulator.promotion + currentValue.promotion) / ambience.length,
-				responsiveness:
-					(accumulator.responsiveness + currentValue.responsiveness) /
+				design: (accumulator.design + currentValue.design) / ambience.length,
+				lightning:
+					(accumulator.lightning + currentValue.lightning) / ambience.length,
+				music: (accumulator.music + currentValue.music) / ambience.length,
+				temperature:
+					(accumulator.temperature + currentValue.temperature) /
 					ambience.length,
 			}));
 		};
@@ -188,7 +186,7 @@ const profileMatching = (preference, coffeeShops) => {
 				responsiveness: getWeightingItem(candidate.service.responsiveness),
 			},
 			ambience: {
-				cleanliness: getWeightingItem(candidate.ambience.cleanlines),
+				cleanliness: getWeightingItem(candidate.ambience.cleanliness),
 				design: getWeightingItem(candidate.ambience.design),
 				lightning: getWeightingItem(candidate.ambience.lightning),
 				music: getWeightingItem(candidate.ambience.music),
@@ -256,7 +254,7 @@ const profileMatching = (preference, coffeeShops) => {
 		.reverse();
 
 	// // DEBUG
-  
+
 	console.log('preference', preference);
 	console.log('coffeeShops', coffeeShops);
 	// // console.log("expectedValue", expectedValue);
