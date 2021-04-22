@@ -130,8 +130,6 @@ const AddPreference = ({ handleClose }) => {
 		}
 	};
 
-	console.log(state.loading);
-
 	const preferenceComponents = [
 		<Price
 			title={labels.price.title}
@@ -147,7 +145,7 @@ const AddPreference = ({ handleClose }) => {
 			question={labels.location.question}
 			labels={labels.location.indicators}
 			values={preferences.location}
-			handlePreferenceClicked={handleLocationOptClicked}
+			handleOptionClicked={handleLocationOptClicked}
 			handleNext={handleNextQuestion}
 			handleBack={handleBackQuestion}
 			handleClose={handleClose}
@@ -157,7 +155,7 @@ const AddPreference = ({ handleClose }) => {
 			question={labels.service.question}
 			labels={labels.service.indicators}
 			values={preferences.service}
-			handlePreferenceClicked={handleServiceOptClicked}
+			handleOptionClicked={handleServiceOptClicked}
 			handleNext={handleNextQuestion}
 			handleBack={handleBackQuestion}
 			handleClose={handleClose}
@@ -168,7 +166,7 @@ const AddPreference = ({ handleClose }) => {
 			labels={labels.ambience.indicators}
 			values={preferences.ambience}
 			error={state.error}
-			handlePreferenceClicked={handleAmbienceOptClicked}
+			handleOptionClicked={handleAmbienceOptClicked}
 			handleSubmit={handleSubmitPreference}
 			handleBack={handleBackQuestion}
 			handleClose={handleClose}
