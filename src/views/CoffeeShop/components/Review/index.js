@@ -16,7 +16,7 @@ const Loading = () => (
 
 const Error = ({ message, handleTryAgain }) => (
 	<Card className="review">
-		<h2 className="review__title">Review</h2>
+		<h2 className="h2 c-primary margin-b-16">Review</h2>
 		<div className="review__error">
 			<ErrorMessage>{message}</ErrorMessage>
 			<Button size="sm" onClick={handleTryAgain}>
