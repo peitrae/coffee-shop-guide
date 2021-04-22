@@ -103,11 +103,11 @@ const Header = () => {
 						<p className="main__address">{address}</p>
 					</div>
 					<div className="main__grid-item">
-						{coffeeShop.feedback ? (
+						{feedback && (
 							<div className="main__overall-rating margin-b-16">
 								{getRatingAvg(feedback)}
 							</div>
-						) : null}
+						)}
 						<Button
 							className="width-100"
 							type="outlined"
