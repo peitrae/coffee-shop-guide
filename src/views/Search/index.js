@@ -77,8 +77,8 @@ const Search = () => {
   };
 
   const sortedCoffeeShops = useMemo(() => {
-    return profileMatching(userPreference, userLocation, unsortedCoffeeShop);
-  }, [unsortedCoffeeShop, userPreference, userLocation]);
+    return profileMatching(userPreference, unsortedCoffeeShop);
+  }, [unsortedCoffeeShop, userPreference]);
 
   const list = filteredCoffeeShops || sortedCoffeeShops;
 
