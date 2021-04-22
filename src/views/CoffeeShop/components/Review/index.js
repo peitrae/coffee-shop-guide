@@ -59,8 +59,6 @@ const Review = () => {
 	} else if (feedback && state.loading) {
 		return <Loading />;
 	} else if (state.error) {
-		console.log(state.error);
-
 		return <Error message={state.error} handleTryAgain={fetchReviews} />;
 	}
 
