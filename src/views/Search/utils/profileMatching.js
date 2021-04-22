@@ -255,15 +255,12 @@ const profileMatching = (preference, coffeeShops) => {
 
 	// // DEBUG
 
-	console.log('preference', preference);
-	console.log('coffeeShops', coffeeShops);
-	// // console.log("expectedValue", expectedValue);
-	// // console.log("candidates", candidates);
-	// // console.log("candidateAspects: ", { name: candidateAspects.data.name, distance: candidateAspects.distance,  averagePrice: candidateAspects.averagePrice, taste});
-	console.log('candidateAspects', candidateAspects);
-	console.log('gap', gap);
-	console.log('weighting', weighting);
-	console.log('result', result);
+	// console.log('preference', preference);
+	// console.log('coffeeShops', coffeeShops);
+	// console.log('candidateAspects', candidateAspects);
+	// console.log('gap', gap);
+	// console.log('weighting', weighting);
+	// console.log('result', result);
 	// console.log("sortedResult", sortedResult);
 
 	return [...sortedResult, ...notCandidates];
