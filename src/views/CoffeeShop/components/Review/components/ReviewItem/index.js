@@ -5,7 +5,7 @@ import ProfileImg from "../../../../../../assets/logo/defaultProfile.png";
 import EmotionRating from "./components/EmotionRating";
 
 const ReviewItem = ({ value }) => {
-  const { name, photoUrl, rating, review_text, created_at } = value;
+  const { name, photoURL, rating, review, created_at } = value;
  
   return (
     <div className="row review-item margin-b-12">
@@ -13,7 +13,7 @@ const ReviewItem = ({ value }) => {
         <div className="review-item__desc">
           <img
             className="review-item__img margin-r-12"
-            src={photoUrl ? photoUrl : ProfileImg}
+            src={photoURL ? photoURL : ProfileImg}
             alt={name}
           />
           <div className="row">
@@ -23,9 +23,9 @@ const ReviewItem = ({ value }) => {
             </span>
           </div>
         </div>
-        <EmotionRating rating={rating[2]} />
+        <EmotionRating rating={rating} />
       </div>
-      <div className="review-item__text">{review_text}</div>
+      <div className="review-item__text">{review}</div>
     </div>
   );
 };
