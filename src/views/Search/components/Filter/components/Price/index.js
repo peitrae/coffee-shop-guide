@@ -12,10 +12,10 @@ const Price = ({ checked, handlePriceItemClick }) => {
   const menuRef = useRef();
 
   const prices = {
-    1: "< 10K",
-    2: "10K - 30K",
-    3: "30K - 50K",
-    4: "> 50K",
+    1: "3K - 18K",
+    2: "18K - 33K",
+    3: "33K - 48K",
+    4: "> 48K",
   };
 
   const [showMenu, setShowMenu] = useState(false);
