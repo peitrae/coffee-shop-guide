@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import Card from "../../../../components/UI/Card";
 import Price from "./components/Price";
-import Radius from "./components/Radius";
 
 import filterPrice from "./utils/filterPrice";
 import filterOpen from "./utils/filterOpen";
@@ -69,14 +68,6 @@ const Filter = ({ coffeeShops, handleSetFilteredCoffeShops }) => {
     setFilter({ ...filter, priceChecked: priceRange });
   };
 
-  const handleRadiusItemClick = (radius) => {
-    if (radiusChecked === radius) {
-      radius = false;
-    }
-
-    setFilter({ ...filter, radiusChecked: radius });
-  };
-
   return (
     <Card className="search-filter" shadow={true}>
       <h3 className="search-filter__label">Filter: </h3>
@@ -108,10 +99,6 @@ const Filter = ({ coffeeShops, handleSetFilteredCoffeShops }) => {
       >
         Cashless
       </FilterButton>
-      <Radius
-        checked={radiusChecked}
-        handleRadiusItemClick={handleRadiusItemClick}
-      />
     </Card>
   );
 };
