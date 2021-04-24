@@ -93,51 +93,49 @@ const profileMatching = (preference, coffeeShops) => {
 		return candidateData;
 	};
 
-	const getGap = (candidates) => {
+	const getGap = (target, candidates) => {
 		return candidates.map((candidate) => ({
 			id: candidate.id,
-			averagePrice: candidate.averagePrice - preference.price,
+			averagePrice: candidate.averagePrice - target.price,
 			location: {
 				accessibility: Math.floor(
-					candidate.location.accessibility - preference.location.accessibility
+					candidate.location.accessibility - target.location.accessibility
 				),
 				comfortability: Math.floor(
-					candidate.location.comfortability - preference.location.comfortability
+					candidate.location.comfortability - target.location.comfortability
 				),
 				parking: Math.floor(
-					candidate.location.parking - preference.location.parking
+					candidate.location.parking - target.location.parking
 				),
 				traffic: Math.floor(
-					candidate.location.traffic - preference.location.traffic
+					candidate.location.traffic - target.location.traffic
 				),
 			},
 			service: {
 				attentiveness: Math.floor(
-					candidate.service.attentiveness - preference.service.attentiveness
+					candidate.service.attentiveness - target.service.attentiveness
 				),
 				friendliness: Math.floor(
-					candidate.service.friendliness - preference.service.friendliness
+					candidate.service.friendliness - target.service.friendliness
 				),
 				promotion: Math.floor(
-					candidate.service.promotion - preference.service.promotion
+					candidate.service.promotion - target.service.promotion
 				),
 				responsiveness: Math.floor(
-					candidate.service.responsiveness - preference.service.responsiveness
+					candidate.service.responsiveness - target.service.responsiveness
 				),
 			},
 			ambience: {
 				cleanliness: Math.floor(
-					candidate.ambience.cleanliness - preference.ambience.cleanliness
+					candidate.ambience.cleanliness - target.ambience.cleanliness
 				),
-				design: Math.floor(
-					candidate.ambience.design - preference.ambience.design
-				),
+				design: Math.floor(candidate.ambience.design - target.ambience.design),
 				lightning: Math.floor(
-					candidate.ambience.lightning - preference.ambience.lightning
+					candidate.ambience.lightning - target.ambience.lightning
 				),
-				music: Math.floor(candidate.ambience.music - preference.ambience.music),
+				music: Math.floor(candidate.ambience.music - target.ambience.music),
 				temperature: Math.floor(
-					candidate.ambience.temperature - preference.ambience.temperature
+					candidate.ambience.temperature - target.ambience.temperature
 				),
 			},
 			data: candidate.data,
@@ -246,7 +244,7 @@ const profileMatching = (preference, coffeeShops) => {
 	});
 
 	const candidateAspects = getCandidateAspects(candidates);
-	const gap = getGap(candidateAspects);
+	const gap = getGap(preference, candidateAspects);
 	const weighting = getWeighting(gap);
 	const result = getProfileMatching(weighting);
 	const sortedResult = result
