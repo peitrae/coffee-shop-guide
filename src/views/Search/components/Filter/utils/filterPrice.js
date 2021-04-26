@@ -9,8 +9,7 @@ const filterPrice = (coffeeShops, price) => {
         return averagePrice > 33000 && averagePrice <= 48000;
       case 4:
         return averagePrice > 48000;
-      default:
-        return averagePrice;
+      default: return null;
     }
   });
 };

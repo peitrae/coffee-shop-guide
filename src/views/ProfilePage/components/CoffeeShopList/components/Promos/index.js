@@ -39,11 +39,11 @@ const Promos = ({
   const handleClose = () => {
     setError(null);
     handleClosePromos();
-  };
+};
 
   const handleAddPromo = async (promo) => {
     if (promo === "") {
-      return setError("Promo is empty");
+      return setError("Promo yang anda masukkan kosong");
     }
 
     setLoading(true);
@@ -61,7 +61,7 @@ const Promos = ({
 
   const handleEditPromo = async (promo, promoId) => {
     if (promo === "") {
-      return setError("Promo is empty");
+      return setError("Promo yang anda masukkan kosong");
     }
 
     setLoading(true);

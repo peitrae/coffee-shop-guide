@@ -236,7 +236,7 @@ const profileMatching = (preference, coffeeShops) => {
 	const notCandidates = [];
 
 	coffeeShops.forEach((coffeeShop) => {
-		if (coffeeShop.feedback) {
+		if (coffeeShop.feedback && coffeeShop.averagePrice) {
 			candidates.push(coffeeShop);
 		} else {
 			notCandidates.push(coffeeShop);
@@ -253,13 +253,13 @@ const profileMatching = (preference, coffeeShops) => {
 
 	// // DEBUG
 
-	// console.log('preference', preference);
-	// console.log('coffeeShops', coffeeShops);
-	// console.log('candidateAspects', candidateAspects);
-	// console.log('gap', gap);
-	// console.log('weighting', weighting);
-	// console.log('result', result);
-	// console.log("sortedResult", sortedResult);
+	console.log('preference', preference);
+	console.log('coffeeShops', coffeeShops);
+	console.log('candidateAspects', candidateAspects);
+	console.log('gap', gap);
+	console.log('weighting', weighting);
+	console.log('result', result);
+	console.log("sortedResult", sortedResult);
 
 	return [...sortedResult, ...notCandidates];
 };
