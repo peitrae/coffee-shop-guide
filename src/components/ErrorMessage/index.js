@@ -4,23 +4,23 @@ const ErrorMessage = ({ children, className }) => {
 	const checkErrorMessage = (message) => {
 		switch (message) {
 			case 'INVALID_EMAIL':
-				return 'Invalid Email';
+				return 'Email salah';
 			case 'WEAK_PASSWORD : Password should be at least 6 characters':
-				return 'Password should be at least 6 characters';
+				return 'Password harus terdiri dari minimal 6 karakter';
 			case 'MISSING_EMAIL':
-				return 'Email is empty';
+				return 'Email salah';
 			case 'INVALID_PASSWORD':
-				return 'Invalid Password';
+				return 'Password salah';
 			case 'MISSING_PASSWORD':
-				return 'Password is empty';
+				return 'Password salah';
 			case 'EMAIL_NOT_FOUND':
-				return 'Email not found';
+				return 'Email tidak terdaftar';
 			case 'EMAIL_EXISTS':
-				return 'The email address is already in use by another account';
+				return 'Email telah digunakan oleh pengguna lain';
 			case 'PASSWORD_NOT_MATCH':
-				return 'Password not match';
+				return 'Password tidak sama';
 			case 'CREDENTIAL_TOO_OLD_LOGIN_AGAIN':
-				return 'Please login again';
+				return 'Autentikasi telah usang. Silahkan melakukan login kembali';
 			case 'Request failed with status code 404':
 				return 'Terjadi gangguan koneksi. Mohon coba lagi';
 			case 'Network Error':
