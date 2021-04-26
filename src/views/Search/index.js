@@ -49,24 +49,24 @@ const Search = () => {
   const setLocationError = (error) => {
     switch (error.code) {
       case error.PERMISSION_DENIED:
-        setUserLocation({ ...userLocation, error: "Geolocation is disabled" });
+        setUserLocation({ ...userLocation, error: "Geolocation tidak tersedia. Mohon aktifkan geolocation pada peramban" });
         break;
       case error.POSITION_UNAVAILABLE:
         setUserLocation({
           ...userLocation,
-          error: "Location information is unavailable",
+          error: "Informasi lokasi tidak tersedia",
         });
         break;
       case error.TIMEOUT:
         setUserLocation({
           ...userLocation,
-          error: "The request to get user location timed out",
+          error: "Permintaan lokasi terlalu lama",
         });
         break;
       default:
         setUserLocation({
           ...userLocation,
-          error: "An unknown error occurred",
+          error: "Terjadi kegagalan pada permintaan lokasi",
         });
         break;
     }
