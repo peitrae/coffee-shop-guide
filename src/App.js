@@ -7,6 +7,7 @@ import Search from "./views/Search";
 import ProfilePage from "./views/ProfilePage";
 import CoffeeShop from "./views/CoffeeShop";
 import AddCoffeeShop from "./views/AddCoffeeShop";
+import UpdateCoffeeShop from "./views/UpdateCoffeeShop";
 import Spinner from "./components/UI/Spinner";
 import * as actions from "./store/actions/member";
 
@@ -29,7 +30,7 @@ const App = () => {
           <Route path="/search" exact component={Search} />
           <Route path="/coffee-shop/:id" exact component={CoffeeShop} />
           <Route path="/add-coffeeshop" exact component={AddCoffeeShop} />
-          <Route path="/add-coffeeshop/:id" exact component={AddCoffeeShop} />
+          <Route path="/update-coffeeshop/:id" exact component={UpdateCoffeeShop} />
           <Route path="/profile" exact component={ProfilePage} />
         </Fragment>
       );

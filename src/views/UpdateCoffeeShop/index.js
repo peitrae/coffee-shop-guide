@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router';
 
 import Navbar from '../../components/UI/Navbar';
 import { Button } from '../../components/UI/Button';
@@ -9,18 +9,22 @@ import Spinner from '../../components/UI/Spinner';
 import Footer from '../../components/UI/Footer';
 import ErrorMessage from '../../components/ErrorMessage';
 import {
-	Header as AddHeader,
-	Information as AddInformation,
-	Images as AddImages,
+	Header as UpdateHeader,
+	Information as UpdateInformation,
+	Images as UpdateImages,
 } from '../../modules/AddCoffeeShop';
 
+import * as actions from '../../store/actions';
 import validate from '../../modules/AddCoffeeShop/utils/validate';
-import addCoffeeShop from '../../modules/AddCoffeeShop/utils/addCoffeeShop';
+import changeCoffeeShop from '../../modules/AddCoffeeShop/utils/changeCoffeeShop';
 
-const AddCoffeeShop = () => {
+const UpdateCoffeeShop = () => {
+	const dispatch = useDispatch();
+	const { id: coffeeShopId } = useParams();
 	const history = useHistory();
 
 	const localId = useSelector(({ member }) => member.localId);
+	const oldCoffeeShop = useSelector(({ coffeeShop }) => coffeeShop.data);
 
 	const [coffeeShop, setCoffeeShop] = useState({
 		header: HeaderPict,
@@ -56,6 +60,20 @@ const AddCoffeeShop = () => {
 		timepicker: false,
 	});
 
+	useEffect(() => {
+		if (coffeeShopId) {
+			dispatch(actions.getCoffeeShop(coffeeShopId));
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [coffeeShopId]);
+
+	useEffect(() => {
+		if (coffeeShopId && oldCoffeeShop) {
+			setCoffeeShop({ ...coffeeShop, ...oldCoffeeShop });
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [coffeeShopId, oldCoffeeShop]);
+
 	const updateUploading = (state) => setUploading({ ...uploading, ...state });
 
 	const updateCoffeeShop = (state) => {
@@ -72,16 +90,20 @@ const AddCoffeeShop = () => {
 		if (validationError) {
 			updateError(validationError);
 		} else {
-			const newCoffeeShopId = await addCoffeeShop(validatedCoffeeShop);
+			const newCoffeeShopId = await changeCoffeeShop(
+				coffeeShopId,
+				validatedCoffeeShop
+			);
 
 			history.push(`/coffee-shop/${newCoffeeShopId}`);
+			// actions.addCoffeeShop(validatedCoffeeShop, coffeeShopId, history)
 		}
 	};
 
 	const isError = error.name || error.address || error.timepicker;
 	const isUploading = uploading.header || uploading.images;
 
-	if (!localId) {
+	if (!oldCoffeeShop) {
 		return <Spinner />;
 	}
 
@@ -91,7 +113,7 @@ const AddCoffeeShop = () => {
 			<div className="add-coffeeshop">
 				<div className="add-coffeeshop__container">
 					<form>
-						<AddHeader
+						<UpdateHeader
 							header={header}
 							isHeaderUploading={uploading.header}
 							name={name}
@@ -101,7 +123,7 @@ const AddCoffeeShop = () => {
 							updateError={updateError}
 							updateUploading={updateUploading}
 						/>
-						<AddInformation
+						<UpdateInformation
 							averagePrice={averagePrice}
 							contact={contact}
 							facilities={facilities}
@@ -109,7 +131,7 @@ const AddCoffeeShop = () => {
 							updateCoffeeShop={updateCoffeeShop}
 							updateError={updateError}
 						/>
-						<AddImages
+						<UpdateImages
 							images={images}
 							localId={localId}
 							updateCoffeeShop={updateCoffeeShop}
@@ -134,4 +156,4 @@ const AddCoffeeShop = () => {
 	);
 };
 
-export default AddCoffeeShop;
+export default UpdateCoffeeShop;

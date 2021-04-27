@@ -37,7 +37,7 @@ const CoffeeShopList = () => {
   }, []);
 
   const handleEditCoffeeShop = (coffeeShopId) => {
-    history.push(`/add-coffeeshop/${coffeeShopId}`);
+    history.push(`/update-coffeeshop/${coffeeShopId}`);
   };
 
   const handleCloseWarning = () => {
