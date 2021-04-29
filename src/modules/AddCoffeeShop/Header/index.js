@@ -20,24 +20,6 @@ const Header = ({
 }) => {
 	const [headerPreview, setHeaderPreview] = useState(null);
 
-	const handleOpenMap = async (e) => {
-		e.preventDefault();
-		if (!address || address === '') {
-			return;
-		}
-
-		try {
-			const { lat, long } = await geocode(address);
-			const url = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${long}`;
-			window.open(url, '_blank');
-		} catch (error) {
-			updateError({
-				address:
-					'Lokasi tidak ditemukan, silahkan cek kembali alamat kedai kopi.',
-			});
-		}
-	};
-
 	const handleHeaderChange = (e) => {
 		const header = e.target.files[0];
 		const reference = `coffeeShop/images/${coffeeShopId}`;
@@ -85,7 +67,6 @@ const Header = ({
 				address={address}
 				handleNameChange={handleNameChange}
 				handleAddressChange={handleAddressChange}
-				handleOpenMap={handleOpenMap}
 			/>
 		</Card>
 	);
