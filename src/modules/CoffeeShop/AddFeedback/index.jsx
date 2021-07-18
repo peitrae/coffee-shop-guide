@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Location, Service, Ambience } from '../../Preferences';
 import Modal from '../../../components/UI/Modal';
@@ -10,6 +10,9 @@ import saveReview from '../../../utils/api/saveReview';
 
 const AddReview = ({ coffeeShopId, handleClose }) => {
 	const dispatch = useDispatch();
+
+	const userId = useSelector((state) => state.member.localId);
+	const oldFeedback = useSelector((state) => state.coffeeShop.data.feedback);
 
 	const [state, setState] = useState({
 		loading: false,
@@ -41,6 +44,12 @@ const AddReview = ({ coffeeShopId, handleClose }) => {
 		review: null,
 		created_at: new Date(),
 	});
+
+	useEffect(() => {
+		if (oldFeedback && oldFeedback[userId]) {
+			setFeedback({ ...feedback, ...oldFeedback[userId] });
+		}
+	}, [oldFeedback, userId]);
 
 	const labels = {
 		location: {
@@ -130,7 +139,7 @@ const AddReview = ({ coffeeShopId, handleClose }) => {
 		try {
 			await saveReview(feedback, coffeeShopId);
 			setState({ ...state, loading: false });
-			dispatch(actions.getCoffeeShopReviews(coffeeShopId));
+      dispatch(actions.getCoffeeShop(coffeeShopId));
 			handleClose();
 		} catch (error) {
 			setState({ loading: false, error: error.message });

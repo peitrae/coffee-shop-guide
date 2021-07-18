@@ -39,15 +39,15 @@ const Homepage = ({ history }) => {
 			>
 				<div className="homepage__container">
 					<span className="homepage__text margin-b-16">
-						Find the best coffee shop in Malang
+						Temukan kedai kopi terbaik untukmu di Kota Malang
 					</span>
 					{authenticated ? (
 						<Button size="lg" onClick={handleSearch}>
-							Search
+							Cari
 						</Button>
 					) : (
 						<Button size="lg" onClick={() => setShowSignUp(true)}>
-							Sign Up
+							Daftar
 						</Button>
 					)}
 				</div>

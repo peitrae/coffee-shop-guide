@@ -84,7 +84,7 @@ const EditProfile = ({ handleClose, profile }) => {
               <InputField
                 value={edit.name}
                 onChange={handleChangeInput("name")}
-                placeholder="Name"
+                placeholder="Nama"
                 className="profile-edit__input margin-b-12"
               />
               <InputField
@@ -100,14 +100,14 @@ const EditProfile = ({ handleClose, profile }) => {
                 className="profile-edit__btn margin-r-12"
                 onClick={handleClose}
               >
-                Back
+                Kembali
               </Button>
               <Button
                 onClick={handleSubmit}
                 className="profile-edit__btn"
                 disabled={imageUploading}
               >
-                Submit
+                Simpan
               </Button>
             </div>
           </>

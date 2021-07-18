@@ -36,10 +36,10 @@ const ProfileMenu = ({ handleClose }) => {
           className="profile-menu__link"
           onClick={handleClose}
         >
-          Profile
+          Profil
         </NavLink>
         <button className="profile-menu__link" onClick={handleLogout}>
-          Logout
+          Keluar
         </button>
       </div>
     </BubbleBox>

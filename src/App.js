@@ -19,7 +19,7 @@ const App = () => {
   const isAuthenticated = useSelector((state) => state.member.token !== null);
 
   useEffect(() => {
-    dispatch(actions.authCheckState());
+    dispatch(actions.checkAuth());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

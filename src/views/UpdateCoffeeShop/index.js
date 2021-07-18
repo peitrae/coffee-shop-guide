@@ -146,7 +146,7 @@ const UpdateCoffeeShop = () => {
 							onClick={handleSubmit}
 							disabled={isUploading || isError}
 						>
-							Submit
+							Simpan
 						</Button>
 					</form>
 				</div>

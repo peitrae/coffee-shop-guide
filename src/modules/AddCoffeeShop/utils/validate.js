@@ -34,8 +34,7 @@ const validate = async (coffeeShop) => {
 	} catch (err) {
 		return {
 			validationError: {
-				address:
-					'Lokasi tidak ditemukan, silahkan cek kembali alamat kedai kopi.',
+				address: err.message,
 			},
 		};
 	}

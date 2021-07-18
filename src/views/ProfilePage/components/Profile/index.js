@@ -30,13 +30,13 @@ const Profile = ({
       <div className="profile__body">
         <div className="profile__actions">
           <Button size="sm" type="text" onClick={handleShowEditProfile}>
-            Edit Profile
+            Perbaharui Profil
           </Button>
           <Button size="sm" type="text" onClick={handleShowEditPassword}>
-            Edit Password
+            Perbaharui Password
           </Button>
           <Button size="sm" type="text" onClick={handleShowEditPreference}>
-            Edit Preference
+            Perbaharui Preferensi
           </Button>
         </div>
         <div>
@@ -47,9 +47,9 @@ const Profile = ({
         </div>
         <div>
           {emailVerified ? (
-            <Button onClick={handleAddCoffeeShop}>Add Coffee Shop</Button>
+            <Button onClick={handleAddCoffeeShop}>Tambah Kedai Kopi</Button>
           ) : (
-            <Button onClick={handleShowVerification}>Verification</Button>
+            <Button onClick={handleShowVerification}>Verifikasi</Button>
           )}
         </div>
       </div>

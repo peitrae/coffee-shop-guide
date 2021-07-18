@@ -18,7 +18,7 @@ export {
   login,
   authSuccess,
   logout,
-  authCheckState,
+  checkAuth,
   editProfile,
   editProfileSuccess,
   editPassword,

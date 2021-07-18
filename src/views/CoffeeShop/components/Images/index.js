@@ -12,7 +12,7 @@ const Images = () => {
 
   return (
     <Card className="images margin-b-16">
-      <h2 className="images__title">Images</h2>
+      <h2 className="images__title">Gambar</h2>
       <div className="col">
         {images.map((img, index) => (
           <img

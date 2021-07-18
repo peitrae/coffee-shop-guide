@@ -19,7 +19,7 @@ const AddPromo = ({ value, handleChangeInput, handleSubmit, handleClose }) => {
         className="margin-r-6"
       />
       <Button size="sm" onClick={handleSubmit}>
-        Submit
+        Simpan
       </Button>
     </div>
   );

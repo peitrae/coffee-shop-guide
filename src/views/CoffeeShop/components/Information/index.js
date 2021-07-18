@@ -15,7 +15,7 @@ const Information = () => {
 
   return (
     <Card className="information margin-b-16">
-      <h2 className="information__title">Information</h2>
+      <h2 className="information__title">Informasi</h2>
       <div className="information__grid">
         <div className="information__grid-opening">
           {operationalHours ? (

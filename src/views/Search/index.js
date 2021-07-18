@@ -17,8 +17,8 @@ const Search = () => {
   const [unsortedCoffeeShop, setUnsortedCoffeeShops] = useState(null);
   const [filteredCoffeeShops, setFilteredCoffeeShops] = useState(null);
   const [userLocation, setUserLocation] = useState({
-    lat: -7.983,
-    long: 112.621,
+    lat: null,
+    long: null,
     error: null,
   });
 
@@ -49,24 +49,12 @@ const Search = () => {
   const setLocationError = (error) => {
     switch (error.code) {
       case error.PERMISSION_DENIED:
-        setUserLocation({ ...userLocation, error: "Geolocation tidak tersedia. Mohon aktifkan geolocation pada peramban" });
-        break;
-      case error.POSITION_UNAVAILABLE:
-        setUserLocation({
-          ...userLocation,
-          error: "Informasi lokasi tidak tersedia",
-        });
-        break;
-      case error.TIMEOUT:
-        setUserLocation({
-          ...userLocation,
-          error: "Permintaan lokasi terlalu lama",
-        });
+        setUserLocation({ ...userLocation, error: "Informasi lokasi tidak tersedia" });
         break;
       default:
         setUserLocation({
           ...userLocation,
-          error: "Terjadi kegagalan pada permintaan lokasi",
+          error: "Informasi lokasi tidak tersedia",
         });
         break;
     }

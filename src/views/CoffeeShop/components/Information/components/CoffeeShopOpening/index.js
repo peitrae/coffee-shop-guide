@@ -3,18 +3,18 @@ import React from "react";
 const CoffeeShopOpening = ({
   operationalHours,
   day = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    "Minggu",
+    "Senin",
+    "Selasa",
+    "Rabu",
+    "Kamis",
+    "Jumat",
+    "Sabtu",
   ],
 }) => (
   <div className="col">
     <div className="information__label information__label--opening">
-      Opening Hours:
+      Jam Buka:
     </div>
     <div>
       {operationalHours.map((item) => (

@@ -4,7 +4,6 @@ import Card from '../../../components/UI/Card';
 import HeaderImageGroup from './HeaderImageGroup';
 import HeaderInputGroup from './HeaderInputGroup';
 
-import geocode from '../../../utils/geocode';
 import uploadImage from '../../../store/firebase/uploadImage';
 
 const Header = ({

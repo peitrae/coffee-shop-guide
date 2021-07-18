@@ -56,10 +56,10 @@ const AddPreference = ({ handleClose }) => {
 			question:
 				'Dalam skala 1 sampai 5, berapa nilai lokasi kedai kopi yang menjadi preferensi kamu.',
 			indicators: {
-				accessibility: 'Accessibility',
-				traffic: 'Traffic',
-				parking: 'Parking Lot',
-				comfortability: 'Comfortability',
+				accessibility: 'Aksebilitas',
+				traffic: 'Kemacetan',
+				parking: 'Parkir',
+				comfortability: 'Kenyamanan',
 			},
 		},
 		service: {
@@ -67,10 +67,10 @@ const AddPreference = ({ handleClose }) => {
 			question:
 				'Dalam skala 1 sampai 5, berapa nilai pelayanan kedai kopi yang menjadi preferensi kamu.',
 			indicators: {
-				attentiveness: 'Attentiveness',
-				promotion: 'Promotion',
-				responsiveness: 'Responsiveness',
-				friendliness: 'Friendliness',
+				attentiveness: 'Perhatian Pelayan',
+				promotion: 'Kesesuaian Promo',
+				responsiveness: 'Ketanggapan Pelayan',
+				friendliness: 'Keramahan Pelayan',
 			},
 		},
 		ambience: {
@@ -78,11 +78,11 @@ const AddPreference = ({ handleClose }) => {
 			question:
 				'Dalam skala 1 sampai 5, berapa nilai suasana kedai kopi yang menjadi preferensi kamu.',
 			indicators: {
-				design: 'Design and layout',
-				lightning: 'Lightning',
-				music: 'Music',
-				cleanliness: 'Cleanliness',
-				temperature: 'Temperature',
+				design: 'Desain dan layout',
+				lightning: 'Pencahayaan',
+				music: 'Musik',
+				cleanliness: 'Kebersihan',
+				temperature: 'Temperatur',
 			},
 		},
 	};

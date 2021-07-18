@@ -46,7 +46,7 @@ const Price = ({ checked, handlePriceItemClick }) => {
         onClick={handleShowMenuToggle}
         ref={buttonRef}
       >
-        {checked ? prices[checked] : "Price"}
+        {checked ? prices[checked] : "Harga"}
       </Button>
       {showMenu ? (
         <DropdownMenu className="search-filter__menu" ref={menuRef}>

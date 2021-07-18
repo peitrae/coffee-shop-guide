@@ -36,16 +36,16 @@ const Header = () => {
 		}
 	}, [bookmark, coffeeShopId]);
 
-	const handleBookmark = (coffeeShopId, coffeeShopIds) => {
+	const bookmarkClickHandler = (coffeeShop_id, coffeeShop_ids) => {
 		if (isBookmarked) {
-			const index = bookmark.indexOf(coffeeShopId);
-			coffeeShopIds.splice(index, 1);
+			const index = bookmark.indexOf(coffeeShop_id);
+			coffeeShop_ids.splice(index, 1);
 		} else {
-			coffeeShopIds.unshift(coffeeShopId);
+			coffeeShop_ids.unshift(coffeeShop_id);
 		}
 
 		setIsBookmarked(!isBookmarked);
-		dispatch(actions.setBookmark(coffeeShopIds));
+		dispatch(actions.setBookmark(coffeeShop_ids));
 	};
 
 	const getRatingAvg = (coffeeShopFeedback) => {
@@ -95,7 +95,9 @@ const Header = () => {
 							<h1 className="main__name">{name}</h1>
 							<BookmarkButton
 								isBookmarked={isBookmarked}
-								handleBookmark={() => handleBookmark(coffeeShopId, bookmark)}
+								handleBookmark={() =>
+									bookmarkClickHandler(coffeeShopId, bookmark)
+								}
 							/>
 							<Share />
 						</div>
@@ -113,7 +115,7 @@ const Header = () => {
 							type="outlined"
 							onClick={() => setShowAddFeedback(true)}
 						>
-							Rate
+							Nilai
 						</Button>
 					</div>
 				</div>

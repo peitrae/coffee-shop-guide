@@ -60,7 +60,7 @@ const CoffeeShopItem = ({ coffeeShop }) => {
             {averagePrice ? (
               <div className="search-item__information-item">
                 <div className="search-item__information-label">
-                  Average Price
+                  Harga rata - rata
                 </div>
                 <span className="search-item__information-value">{`: Rp ${averagePrice}`}</span>
               </div>

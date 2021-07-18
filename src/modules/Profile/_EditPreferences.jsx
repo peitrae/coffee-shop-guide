@@ -15,7 +15,30 @@ const EditPreferences = ({ preferences, handleClose }) => {
 		error: null,
 	});
 	const [showPreference, setShowPreference] = useState(0);
-	const [editedPreferences, setEditedPreferences] = useState(preferences);
+	const [editedPreferences, setEditedPreferences] = useState(
+		preferences || {
+			price: null,
+			location: {
+				accessibility: null,
+				traffic: null,
+				parking: null,
+				comfortability: null,
+			},
+			service: {
+				attentiveness: null,
+				promotion: null,
+				responsiveness: null,
+				friendliness: null,
+			},
+			ambience: {
+				design: null,
+				lightning: null,
+				music: null,
+				cleanliness: null,
+				temperature: null,
+			},
+		}
+	);
 
 	const labels = {
 		price: {
@@ -33,10 +56,10 @@ const EditPreferences = ({ preferences, handleClose }) => {
 			question:
 				'Dalam skala 1 sampai 5, berapa nilai lokasi kedai kopi yang menjadi preferensi kamu.',
 			indicators: {
-				accessibility: 'Accessibility',
-				traffic: 'Traffic',
-				parking: 'Parking Lot',
-				comfortability: 'Comfortability',
+				accessibility: 'Aksebilitas',
+				traffic: 'Kemacetan',
+				parking: 'Parkir',
+				comfortability: 'Kenyamanan',
 			},
 		},
 		service: {
@@ -44,10 +67,10 @@ const EditPreferences = ({ preferences, handleClose }) => {
 			question:
 				'Dalam skala 1 sampai 5, berapa nilai pelayanan kedai kopi yang menjadi preferensi kamu.',
 			indicators: {
-				attentiveness: 'Attentiveness',
-				promotion: 'Promotion',
-				responsiveness: 'Responsiveness',
-				friendliness: 'Friendliness',
+				attentiveness: 'Perhatian Pelayan',
+				promotion: 'Kesesuaian Promo',
+				responsiveness: 'Ketanggapan Pelayan',
+				friendliness: 'Keramahan Pelayan',
 			},
 		},
 		ambience: {
@@ -55,11 +78,11 @@ const EditPreferences = ({ preferences, handleClose }) => {
 			question:
 				'Dalam skala 1 sampai 5, berapa nilai suasana kedai kopi yang menjadi preferensi kamu.',
 			indicators: {
-				design: 'Design and layout',
-				lightning: 'Lightning',
-				music: 'Music',
-				cleanliness: 'Cleanliness',
-				temperature: 'Temperature',
+				design: 'Desain dan layout',
+				lightning: 'Pencahayaan',
+				music: 'Musik',
+				cleanliness: 'Kebersihan',
+				temperature: 'Temperatur',
 			},
 		},
 	};

@@ -79,7 +79,7 @@ const Filter = ({ coffeeShops, handleSetFilteredCoffeShops }) => {
         active={openNowChecked}
         onClick={() => handleFilterClick("openNowChecked")}
       >
-        Open Now
+        Buka
       </FilterButton>
       <FilterButton
         active={promoChecked}

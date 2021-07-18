@@ -1,23 +1,23 @@
-import axios from "axios";
+import axios from 'axios';
 
 const getCoffeeShops = async (
-  url = `${process.env.REACT_APP_DB}/coffeeshop.json`
+	url = `${process.env.REACT_APP_DB}/coffeeshop.json`
 ) => {
-  try {
-    const { data } = await axios.get(url);
+	try {
+		const { data } = await axios.get(url);
 
-    const unsortedCoffeeShop = [];
-    for (let key in data) {
-      unsortedCoffeeShop.push({
-        ...data[key],
-        id: key,
-      });
-    }
+		const coffeeShops = [];
+		for (let key in data) {
+			coffeeShops.push({
+				...data[key],
+				id: key,
+			});
+		}
 
-    return unsortedCoffeeShop;
-  } catch (error) {
-    console.log(error.response?.data.error.message);
-  }
+		return coffeeShops;
+	} catch (error) {
+		console.log(error.response?.data.error.message);
+	}
 };
 
 export default getCoffeeShops;

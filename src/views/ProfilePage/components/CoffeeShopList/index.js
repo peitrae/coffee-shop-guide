@@ -47,7 +47,7 @@ const CoffeeShopList = () => {
 
   const handleShowWarning = (coffeeShopId) => {
     setDeleteCoffeeShopById(coffeeShopId);
-    setWarning("Are you sure want to delete the coffee shop?");
+    setWarning("Apakah anda yakin ingin menghapus kedai kopi ini?");
   };
 
   const handleDeleteCoffeeShop = async () => {
@@ -75,7 +75,7 @@ const CoffeeShopList = () => {
   return (
     <>
       <MiniList
-        title="Your Page"
+        title="Kedai Kopi"
         list={coffeeShops}
         loading={loading}
         handleEdit={handleEditCoffeeShop}

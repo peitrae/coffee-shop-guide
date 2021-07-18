@@ -119,13 +119,13 @@ const Promos = ({
             className="promos__btn-add"
             onClick={() => setShowAddPromo(true)}
           >
-            Add Promo
+            Tambah Promo
           </Button>
         )}
       </Modal>
       {deletePromoId ? (
         <WarningModal
-          message="Are you sure want to delete this promo?"
+          message="Apakah anda yakin ingin menghapus promo ini?"
           handleClose={handleCloseWarning}
           handleSubmit={handleDeletePromo}
         />

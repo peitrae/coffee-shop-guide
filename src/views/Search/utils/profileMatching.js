@@ -253,7 +253,7 @@ const profileMatching = (preference, coffeeShops) => {
 
 	// // DEBUG
 
-	console.log('preference', preference);
+	// console.log('preference', preference);
 	console.log('coffeeShops', coffeeShops);
 	console.log('candidateAspects', candidateAspects);
 	console.log('gap', gap);

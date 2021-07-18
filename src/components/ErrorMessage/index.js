@@ -6,13 +6,13 @@ const ErrorMessage = ({ children, className }) => {
 			case 'INVALID_EMAIL':
 				return 'Email salah';
 			case 'WEAK_PASSWORD : Password should be at least 6 characters':
-				return 'Password harus terdiri dari minimal 6 karakter';
+				return 'Password harus terdiri minimal dari 6 karakter';
 			case 'MISSING_EMAIL':
-				return 'Email salah';
+				return 'Email kosong';
 			case 'INVALID_PASSWORD':
 				return 'Password salah';
 			case 'MISSING_PASSWORD':
-				return 'Password salah';
+				return 'Password kosong';
 			case 'EMAIL_NOT_FOUND':
 				return 'Email tidak terdaftar';
 			case 'EMAIL_EXISTS':

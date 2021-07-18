@@ -24,7 +24,7 @@ const EditImage = ({ value, uploading, handleChange }) => (
           />
           <button className="edit-image__btn">
             <label className="edit-image__label" htmlFor="image__input">
-              Edit
+              Ubah
             </label>
           </button>
         </>
